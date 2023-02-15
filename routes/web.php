@@ -101,14 +101,17 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'secretary', 'middleware' => 'is_secretary', 'as' => 'secretary.'], function () {
-        Route::get('/pageSix', [\App\Http\Controllers\Secretary\DashboardController::class, 'pageSix'])->name('pageSix');
-        Route::get('/pageOne', [\App\Http\Controllers\Secretary\DashboardController::class, 'pageOne'])->name('pageOne');
-        Route::get('/pageTwo', [\App\Http\Controllers\Secretary\DashboardController::class, 'pageTwo'])->name('pageTwo');
-        Route::get('/pageFour', [\App\Http\Controllers\Secretary\DashboardController::class, 'pageFour'])->name('pageFour');
-        Route::get('/pageFive', [\App\Http\Controllers\Secretary\DashboardController::class, 'pageFive'])->name('pageFive');
         Route::get('/dashboard', [\App\Http\Controllers\Secretary\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/pageThree', [\App\Http\Controllers\Secretary\DashboardController::class, 'pageThree'])->name('pageThree');
-        Route::get('/pageSeven', [\App\Http\Controllers\Secretary\DashboardController::class, 'pageSeven'])->name('pageSeven');
+        Route::get('/schools', [\App\Http\Controllers\Secretary\DashboardController::class, 'schools'])->name('schools');
+        Route::get('/uploads', [\App\Http\Controllers\Secretary\DashboardController::class, 'uploads'])->name('uploads');
+        Route::get('/reports', [\App\Http\Controllers\Secretary\DashboardController::class, 'reports'])->name('reports');
+        Route::get('/account_office', [\App\Http\Controllers\Secretary\DashboardController::class, 'account_office'])->name('account_office');
+        Route::get('/invoice_school', [\App\Http\Controllers\Secretary\DashboardController::class, 'invoice_school'])->name('invoice_school');
+        Route::get('/invoice_create', [\App\Http\Controllers\Secretary\DashboardController::class, 'invoice_create'])->name('invoice_create');
+        Route::get('/invoice_incoming', [\App\Http\Controllers\Secretary\DashboardController::class, 'invoice_incoming'])->name('invoice_incoming');
+        Route::get('/invoice_pending', [\App\Http\Controllers\Secretary\DashboardController::class, 'invoice_pending'])->name('invoice_pending');
+        Route::get('/invoice_reports', [\App\Http\Controllers\Secretary\DashboardController::class, 'invoice_reports'])->name('invoice_reports');
+
     });
 
 

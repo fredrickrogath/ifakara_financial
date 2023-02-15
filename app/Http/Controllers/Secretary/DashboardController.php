@@ -34,37 +34,47 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageOne(SecretaryService $secretaryService){
+    public function schools(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
         return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageTwo(SecretaryService $secretaryService){
+    public function uploads(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
         return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageThree(SecretaryService $secretaryService){
+    public function reports(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
         return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageFour(SecretaryService $secretaryService){
+    public function account_office(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
         return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageFive(SecretaryService $secretaryService){
+    public function invoice_school(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
         return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageSix(SecretaryService $secretaryService){
+    public function invoice_create(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
         return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageSeven(SecretaryService $secretaryService){
+    public function invoice_incoming(SecretaryService $secretaryService){
+        $this->authorize('authorizeSecretary', \App\Models\User::class);
+        return Inertia::render('Dashboard', $secretaryService->dashboardData());
+    }
+
+    public function invoice_pending(SecretaryService $secretaryService){
+        $this->authorize('authorizeSecretary', \App\Models\User::class);
+        return Inertia::render('Dashboard', $secretaryService->dashboardData());
+    }
+
+    public function invoice_reports(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
         return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
