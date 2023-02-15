@@ -34,38 +34,38 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageOne(){
+    public function pageOne(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageTwo(){
+    public function pageTwo(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageThree(){
+    public function pageThree(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageFour(){
+    public function pageFour(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageFive(){
+    public function pageFive(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageSix(){
+    public function pageSix(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 
-    public function pageSeven(){
+    public function pageSeven(SecretaryService $secretaryService){
         $this->authorize('authorizeSecretary', \App\Models\User::class);
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $secretaryService->dashboardData());
     }
 }
