@@ -59,37 +59,18 @@ Route::middleware([
 
     /*
     |--------------------------------------------------------------------------
-    | ROUTES FOR THE HEAD
-    |--------------------------------------------------------------------------
-    */
-
-    Route::group(['prefix' => 'head', 'middleware' => 'is_head', 'as' => 'head.'], function () {
-        Route::get('/pageSix', [\App\Http\Controllers\Head\DashboardController::class, 'pageSix'])->name('pageSix');
-        Route::get('/pageOne', [\App\Http\Controllers\Head\DashboardController::class, 'pageOne'])->name('pageOne');
-        Route::get('/pageTwo', [\App\Http\Controllers\Head\DashboardController::class, 'pageTwo'])->name('pageTwo');
-        Route::get('/pageFour', [\App\Http\Controllers\Head\DashboardController::class, 'pageFour'])->name('pageFour');
-        Route::get('/pageFive', [\App\Http\Controllers\Head\DashboardController::class, 'pageFive'])->name('pageFive');
-        Route::get('/dashboard', [\App\Http\Controllers\Head\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/pageThree', [\App\Http\Controllers\Head\DashboardController::class, 'pageThree'])->name('pageThree');
-        Route::get('/pageSeven', [\App\Http\Controllers\Head\DashboardController::class, 'pageSeven'])->name('pageSeven');
-    });
-
-
-    /*
-    |--------------------------------------------------------------------------
     | ROUTES FOR THE BISHOP
     |--------------------------------------------------------------------------
     */
 
     Route::group(['prefix' => 'bishop', 'middleware' => 'is_bishop', 'as' => 'bishop.'], function () {
-        Route::get('/pageSix', [\App\Http\Controllers\Bishop\DashboardController::class, 'pageSix'])->name('pageSix');
-        Route::get('/pageOne', [\App\Http\Controllers\Bishop\DashboardController::class, 'pageOne'])->name('pageOne');
-        Route::get('/pageTwo', [\App\Http\Controllers\Bishop\DashboardController::class, 'pageTwo'])->name('pageTwo');
-        Route::get('/pageFour', [\App\Http\Controllers\Bishop\DashboardController::class, 'pageFour'])->name('pageFour');
-        Route::get('/pageFive', [\App\Http\Controllers\Bishop\DashboardController::class, 'pageFive'])->name('pageFive');
         Route::get('/dashboard', [\App\Http\Controllers\Bishop\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/pageThree', [\App\Http\Controllers\Bishop\DashboardController::class, 'pageThree'])->name('pageThree');
-        Route::get('/pageSeven', [\App\Http\Controllers\Bishop\DashboardController::class, 'pageSeven'])->name('pageSeven');
+        Route::get('/schools', [\App\Http\Controllers\Bishop\DashboardController::class, 'schools'])->name('schools');
+        Route::get('/documents', [\App\Http\Controllers\Bishop\DashboardController::class, 'documents'])->name('documents');
+        Route::get('/uploads', [\App\Http\Controllers\Bishop\DashboardController::class, 'uploads'])->name('uploads');
+        Route::get('/invoices', [\App\Http\Controllers\Bishop\DashboardController::class, 'invoices'])->name('invoices');
+        // Route::get('/account', [\App\Http\Controllers\Bishop\DashboardController::class, 'account'])->name('account');
+        Route::get('/internal_office', [\App\Http\Controllers\Bishop\DashboardController::class, 'internal_office'])->name('internal_office');
     });
 
 

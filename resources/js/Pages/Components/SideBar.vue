@@ -1,106 +1,188 @@
 <template>
-    <v-card
-        :dark="isDark"
-        class="pa-12"
-        flat
-        max-width="200px"
-        style="position: fixed"
-        v-if="$vuetify.breakpoint.smAndUp"
-    >
-        <v-card width="256">
-            <v-navigation-drawer floating permanent>
-                <v-list dense rounded class="text-center">
-                    <v-list-item
-                        v-for="(myRoute, i) in routes"
-                        :key="myRoute.title"
-                        link
-                        class="border-r-4 border-indigo-500"
-                        :class="
-                            route().current(myRoute.route)
-                                ? 'bg-indigo-100 dark:bg-gray-900'
-                                : 'bg-gray-50 dark:bg-slate-900'
-                        "
-                        :style="[
-                            isDark && route().current(myRoute.route)
-                                ? { 'background-color': '#6366F1' }
-                                : isDark
-                                ? { background: '#1e1e1e' }
-                                : {},
-                        ]"
-                    >
+    <div>
+        <!-- Head Office -->
+        <div v-if="$page.props.role == 'head'" class="max-w-2xl mx-auto"></div>
+
+        <!-- Academic -->
+        <div
+            v-if="$page.props.role == 'academic'"
+            class="max-w-2xl mx-auto"
+        ></div>
+
+        <!-- Procurement -->
+        <div
+            v-if="$page.props.role == 'procurement'"
+            class="max-w-2xl mx-auto"
+        ></div>
+
+        <!-- Accountant -->
+        <div v-if="$page.props.role == 'bishop'" class="max-w-2xl mx-auto">
+            <div id="sidebar-menu">
+                <ul id="side-menu">
+                    <li class="menu-title">Navigation</li>
+
+                    <li>
                         <my-custom-link
-                            :href="route(myRoute.route)"
-                            :active="route().current(myRoute.route)"
-                        >
-                            <v-list-item-icon>
-                                <v-icon>{{ myRoute.icon }}</v-icon>
-                            </v-list-item-icon>
+                                :href="route('bishop.dashboard')"
+                                :active="route().current('bishop.dashboard')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Dashboard </span>
+                            </my-custom-link>
+                       
+                    </li>
 
-                            <v-list-item-content>
-                                <v-list-item-title class="py-1 font-bold">{{
-                                    myRoute.title
-                                }}</v-list-item-title>
-                            </v-list-item-content>
-                        </my-custom-link>
-                    </v-list-item>
-                </v-list>
-            </v-navigation-drawer>
-        </v-card>
+                    <li class="menu-title mt-2">Apps</li>
 
-        <div class="h-2"></div>
+                    <!-- <li>
+        <a href="apps-calendar.html">
+            <i data-feather="calendar"></i>
+            <span> Calendar </span>
+        </a>
+    </li>
 
-        <v-card elevation="12">
-            <pie-chart3-d></pie-chart3-d>
-        </v-card>
-    </v-card>
+    <li>
+        <a href="apps-chat.html">
+            <i data-feather="message-square"></i>
+            <span> Chat </span>
+        </a>
+    </li> -->
 
-    <!-- <v-expansion-panels style="position: fixed" v-else :dark="isDark">
-        <v-expansion-panel>
-            <v-expansion-panel-header> SideBar </v-expansion-panel-header>
-            <v-expansion-panel-content>
-                <v-card :dark="isDark" class="pa-12" flat>
-                    <v-card elevation="12" width="256">
-                        <v-navigation-drawer floating permanent>
-                            <v-list dense rounded class="text-center">
-                                <v-list-item
-                                    v-for="item in items"
-                                    :key="item.title"
-                                    link
-                                >
-                                    <v-list-item-icon>
-                                        <v-icon>{{ item.icon }}</v-icon>
-                                    </v-list-item-icon>
+                    <li>
+                        <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                            <i data-feather="shopping-cart"></i>
+                            <span> Secretary </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarEcommerce">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <my-custom-link
+                                :href="route('bishop.documents')"
+                                :active="route().current('bishop.documents')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Documents </span>
+                            </my-custom-link>
+                                   
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                :href="route('bishop.uploads')"
+                                :active="route().current('bishop.uploads')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Uploads </span>
+                            </my-custom-link>
+                                </li>
+                                <li>
+                                    <my-custom-link
+                                :href="route('bishop.invoices')"
+                                :active="route().current('bishop.invoices')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Invoices </span>
+                            </my-custom-link>
+                                </li>
+                                <li>
+                                
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
 
-                                    <v-list-item-content>
-                                        <v-list-item-title class="font-bold">{{
-                                            item.title
-                                        }}</v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </v-list>
-                        </v-navigation-drawer>
-                    </v-card>
-                </v-card>
-            </v-expansion-panel-content>
-        </v-expansion-panel>
-    </v-expansion-panels> -->
+                    <li>
+                        <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                            <i data-feather="shopping-cart"></i>
+                            <span> Account </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarEcommerce">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <my-custom-link
+                                :href="route('bishop.schools')"
+                                :active="route().current('bishop.schools')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> School </span>
+                            </my-custom-link>
+                                   
+                                </li>
+                                <li>
+                                
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- <li>
+                        <div class="collapse" id="sidebarCrm">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <my-custom-link
+                                :href="route('bishop.account')"
+                                :active="route().current('bishop.account')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Account </span>
+                            </my-custom-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </li> -->
+
+                    <li>
+                            <my-custom-link
+                                :href="route('bishop.internal_office')"
+                                :active="route().current('bishop.internal_office')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Internal Office </span>
+                            </my-custom-link>
+                    </li>
+
+                    <!-- <li>
+        <a href="apps-social-feed.html">
+            <span class="badge bg-pink float-end">Hot</span>
+            <i data-feather="rss"></i>
+            <span> Social Feed </span>
+        </a>
+    </li> -->
+
+                    <!-- <li>
+                            <my-custom-link
+                                :href="route('bishop.uploads')"
+                                :active="route().current('bishop.uploads')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Uploads </span>
+                            </my-custom-link>
+                    </li>
+
+                    <li>
+                            <my-custom-link
+                                :href="route('bishop.reports')"
+                                :active="route().current('bishop.reports')"
+                            >
+                            <i data-feather="activity"></i>
+                            <span> Reports </span>
+                            </my-custom-link>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
 </template>
-
-<script setup>
-import { useDark, useToggle } from "@vueuse/core";
-
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
-</script>
 
 <script>
 import MyCustomLink from "@/Jetstream/MyCustomLink";
-import PieChart3D from '../Components/Charts/GoogleCharts/PieChart3D.vue';
+// import PieChart3D from "../Components/Charts/GoogleCharts/PieChart3D.vue";
 
 export default {
     components: {
         MyCustomLink,
-        PieChart3D,
+        // PieChart3D,
     },
 
     mounted() {
@@ -110,6 +192,8 @@ export default {
     data() {
         return {
             routes: [],
+
+            isDropdownOpen: false,
         };
     },
 
@@ -118,6 +202,10 @@ export default {
             this.$store.getters["getRoutes"].forEach((route) => {
                 this.routes.push(route);
             });
+            // this.$page.props.routes.forEach((route) => {
+            //     this.routes.push(route);
+            // });
+            // console.log(this.routes);
         },
 
         // select: function (path) {
