@@ -11,7 +11,7 @@
                             :href="route('internal_auditor.dashboard')"
                             :active="route().current('internal_auditor.dashboard')"
                         >
-                            <v-icon>mdi-view-dashboard-outline</v-icon>
+                            <v-icon>mdi-view-dashboard</v-icon>
                             <span> Dashboard </span>
                         </my-custom-link>
                     </li>
@@ -23,7 +23,7 @@
                             :href="route('internal_auditor.schools')"
                             :active="route().current('internal_auditor.schools')"
                         >
-                           <v-icon>mdi-school-outline</v-icon>
+                           <v-icon>mdi-school</v-icon>
                             <span> Schools </span>
                         </my-custom-link>
                     </li>
@@ -33,7 +33,7 @@
                             :href="route('internal_auditor.staffs')"
                             :active="route().current('internal_auditor.staffs')"
                         >
-                        <v-icon>mdi-account-group-outline</v-icon>
+                        <v-icon>mdi-account-group</v-icon>
                             <span> Staff </span>
                         </my-custom-link>
                     </li>
@@ -43,7 +43,7 @@
                             :href="route('internal_auditor.reports')"
                             :active="route().current('internal_auditor.reports')"
                         >
-                        <v-icon>mdi-chart-line</v-icon>
+                        <v-icon>mdi-poll</v-icon>
                             <span> Reports </span>
                         </my-custom-link>
                     </li>
@@ -62,7 +62,7 @@
                             :href="route('accountant.dashboard')"
                             :active="route().current('accountant.dashboard')"
                         >
-                            <i data-feather="activity"></i>
+                        <v-icon>mdi-view-dashboard</v-icon>
                             <span> Dashboard </span>
                         </my-custom-link>
                     </li>
@@ -71,7 +71,7 @@
 
                     <li>
                         <a href="#sidebarCrm" data-bs-toggle="collapse">
-                            <i data-feather="users"></i>
+                            <v-icon size="20">mdi-cash</v-icon>
                             <span> Invoices </span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -84,8 +84,8 @@
                                             route().current('accountant.invoice_school')
                                         "
                                     >
-                                        <i data-feather="activity"></i>
-                                        <span> Schools </span>
+                                    <v-icon size="20">mdi-school</v-icon>
+                                        <span class="mx-1"> Schools </span>
                                     </my-custom-link>
                                 </li>
 
@@ -96,8 +96,8 @@
                                             route().current('accountant.invoice_create')
                                         "
                                     >
-                                        <i data-feather="activity"></i>
-                                        <span> Create </span>
+                                        <v-icon size="20">mdi-pencil</v-icon>
+                                        <span class="mx-1"> Create </span>
                                     </my-custom-link>
                                 </li>
 
@@ -108,8 +108,8 @@
                                             route().current('accountant.invoice_incoming')
                                         "
                                     >
-                                        <i data-feather="activity"></i>
-                                        <span> Incoming </span>
+                                        <v-icon size="20">mdi-inbox-arrow-down</v-icon>
+                                        <span class="mx-1"> Incoming </span>
                                     </my-custom-link>
                                 </li>
 
@@ -120,8 +120,8 @@
                                             route().current('accountant.invoice_pending')
                                         "
                                     >
-                                        <i data-feather="activity"></i>
-                                        <span> Pending </span>
+                                        <v-icon size="20">mdi-account-clock</v-icon>
+                                        <span class="mx-1"> Pending </span>
                                     </my-custom-link>
                                 </li>
 
@@ -132,8 +132,8 @@
                                             route().current('accountant.invoice_reports')
                                         "
                                     >
-                                        <i data-feather="activity"></i>
-                                        <span> Reports </span>
+                                    <v-icon size="20">mdi-poll</v-icon>
+                                        <span class="mx-1"> Reports </span>
                                     </my-custom-link>
                                 </li>
                             </ul>
@@ -229,9 +229,9 @@
 
                     <li>
                         <a href="#sidebarEcommerce" data-bs-toggle="collapse">
-                            <v-icon>mdi-view-dashboard</v-icon>
+                            <v-icon size="22">mdi-account-tie</v-icon>
                             <span> Secretary </span>
-                            <span class="menu-arrow"></span>account-tie
+                            <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarEcommerce">
                             <ul class="nav-second-level">
@@ -242,7 +242,7 @@
                                             route().current('bishop.documents')
                                         "
                                     >
-                                    <v-icon>mdi-view-dashboard</v-icon>
+                                    <v-icon size="20">mdi-file-document</v-icon>
                                         <span> Documents </span>
                                     </my-custom-link>
                                 </li>
@@ -253,7 +253,7 @@
                                             route().current('bishop.uploads')
                                         "
                                     >
-                                    <v-icon>mdi-view-dashboard</v-icon>
+                                    <v-icon size="20">mdi-upload</v-icon>
                                         <span> Uploads </span>
                                     </my-custom-link>
                                 </li>
@@ -264,7 +264,7 @@
                                             route().current('bishop.invoices')
                                         "
                                     >
-                                    <v-icon>mdi-view-dashboard</v-icon>
+                                    <v-icon size="20">mdi-cash</v-icon>
                                         <span> Invoices </span>
                                     </my-custom-link>
                                 </li>
@@ -275,7 +275,7 @@
 
                     <li>
                         <a href="#sidebarCrm" data-bs-toggle="collapse">
-                            <v-icon>mdi-view-dashboard</v-icon>
+                            <v-icon>mdi-account-box</v-icon>
                             <span> Account </span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -288,7 +288,7 @@
                                             route().current('bishop.schools')
                                         "
                                     >
-                                    <v-icon>mdi-view-dashboard</v-icon>
+                                    <v-icon size="20">mdi-school</v-icon>
                                         <span> Schools </span>
                                     </my-custom-link>
                                 </li>
@@ -301,7 +301,7 @@
                             :href="route('bishop.internal_office')"
                             :active="route().current('bishop.internal_office')"
                         >
-                        <v-icon>mdi-view-dashboard</v-icon>
+                        <v-icon size="22">mdi-account-tie</v-icon>
                             <span> Internal Office </span>
                         </my-custom-link>
                     </li>
