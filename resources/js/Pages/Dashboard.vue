@@ -40,8 +40,15 @@
                             <uploads v-if="route().current('bishop.uploads')"></uploads>
                             <invoices v-if="route().current('bishop.invoices')"></invoices>
                             <internal-office v-if="route().current('bishop.internal_office')"></internal-office>
-                            <!-- <uploads v-if="route().current('bishop.uploads')"></uploads>
-                            <successful v-if="route().current('bishop.invoice.successful')"></successful> -->
+
+
+
+                            <secretary-home-page
+                                v-if="route().current('secretary.dashboard')"
+                            ></secretary-home-page>
+                            <secretary-schools v-if="route().current('secretary.schools')"></secretary-schools>
+                            <secretary-uploads v-if="route().current('secretary.uploads')"></secretary-uploads>
+                            <secretary-reports v-if="route().current('secretary.reports')"></secretary-reports>
                         </div>
                         <!-- container -->
                     </div>
@@ -130,6 +137,12 @@ import Invoices from "./Modules/BishopModule/Invoices.vue";
 import Schools from "./Modules/BishopModule/Schools.vue";
 import Uploads from "./Modules/BishopModule/Uploads.vue";
 
+
+import SecretaryHomePage from "./Modules/SecretaryModule/HomePage.vue";
+import SecretarySchools from "./Modules/SecretaryModule/Schools.vue";
+import SecretaryUploads from "./Modules/SecretaryModule/Uploads.vue";
+import SecretaryReports from "./Modules/SecretaryModule/Reports.vue";
+
 export default {
     components: {
         AppLayout,
@@ -144,6 +157,12 @@ export default {
         Invoices,
         Schools,
         Uploads,
+
+
+        SecretaryHomePage,
+        SecretarySchools,
+        SecretaryUploads,
+        SecretaryReports,
 
     },
 

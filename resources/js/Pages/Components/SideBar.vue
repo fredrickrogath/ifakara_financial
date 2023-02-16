@@ -63,94 +63,12 @@
                     </li>
 
                     <li>
-                        <a href="#sidebarEcommerce" data-bs-toggle="collapse">
-                            <i data-feather="shopping-cart"></i>
-                            <span> Invoices </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarEcommerce">
-                            <ul class="nav-second-level">
-                                <li>
-                                    <my-custom-link
-                                        :href="route('secretary.invoice_school')"
-                                        :active="
-                                            route().current('secretary.invoice_school')
-                                        "
-                                    >
-                                        <i data-feather="activity"></i>
-                                        <span> School </span>
-                                    </my-custom-link>
-                                </li>
-                                <li></li>
-
-                                <li>
-                                    <my-custom-link
-                                        :href="route('secretary.invoice_create')"
-                                        :active="
-                                            route().current('secretary.invoice_create')
-                                        "
-                                    >
-                                        <i data-feather="activity"></i>
-                                        <span> Create </span>
-                                    </my-custom-link>
-                                </li>
-
-                                <li>
-                                    <my-custom-link
-                                        :href="route('secretary.invoice_incoming')"
-                                        :active="
-                                            route().current('secretary.invoice_incoming')
-                                        "
-                                    >
-                                        <i data-feather="activity"></i>
-                                        <span> Incoming </span>
-                                    </my-custom-link>
-                                </li>
-
-                                <li>
-                                    <my-custom-link
-                                        :href="route('secretary.invoice_pending')"
-                                        :active="
-                                            route().current('secretary.invoice_pending')
-                                        "
-                                    >
-                                        <i data-feather="activity"></i>
-                                        <span> Pending </span>
-                                    </my-custom-link>
-                                </li>
-
-                                <li>
-                                    <my-custom-link
-                                        :href="route('secretary.invoice_reports')"
-                                        :active="
-                                            route().current('secretary.invoice_reports')
-                                        "
-                                    >
-                                        <i data-feather="activity"></i>
-                                        <span> Reports </span>
-                                    </my-custom-link>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li>
                         <my-custom-link
                             :href="route('secretary.reports')"
                             :active="route().current('secretary.reports')"
                         >
                             <i data-feather="activity"></i>
                             <span> Reports </span>
-                        </my-custom-link>
-                    </li>
-
-                    <li>
-                        <my-custom-link
-                            :href="route('secretary.account_office')"
-                            :active="route().current('secretary.account_office')"
-                        >
-                            <i data-feather="activity"></i>
-                            <span> Account Office </span>
                         </my-custom-link>
                     </li>
                 </ul>
