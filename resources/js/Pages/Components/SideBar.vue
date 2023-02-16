@@ -3,11 +3,97 @@
         <!-- Head Office -->
         <div v-if="$page.props.role == 'head'" class="max-w-2xl mx-auto"></div>
 
-        <!-- Academic -->
-        <div
-            v-if="$page.props.role == 'academic'"
-            class="max-w-2xl mx-auto"
-        ></div>
+        <!-- Accountant -->
+        <div v-if="$page.props.role == 'accountant'" class="max-w-2xl mx-auto">
+            <div id="sidebar-menu">
+                <ul id="side-menu">
+                    <li class="menu-title">Navigation</li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('accountant.dashboard')"
+                            :active="route().current('accountant.dashboard')"
+                        >
+                            <i data-feather="activity"></i>
+                            <span> Dashboard </span>
+                        </my-custom-link>
+                    </li>
+
+                    <li class="menu-title mt-2">Apps</li>
+
+                    <li>
+                        <a href="#sidebarCrm" data-bs-toggle="collapse">
+                            <i data-feather="users"></i>
+                            <span> Invoices </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarCrm">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <my-custom-link
+                                        :href="route('accountant.invoice_school')"
+                                        :active="
+                                            route().current('accountant.invoice_school')
+                                        "
+                                    >
+                                        <i data-feather="activity"></i>
+                                        <span> Schools </span>
+                                    </my-custom-link>
+                                </li>
+
+                                <li>
+                                    <my-custom-link
+                                        :href="route('accountant.invoice_create')"
+                                        :active="
+                                            route().current('accountant.invoice_create')
+                                        "
+                                    >
+                                        <i data-feather="activity"></i>
+                                        <span> Create </span>
+                                    </my-custom-link>
+                                </li>
+
+                                <li>
+                                    <my-custom-link
+                                        :href="route('accountant.invoice_incoming')"
+                                        :active="
+                                            route().current('accountant.invoice_incoming')
+                                        "
+                                    >
+                                        <i data-feather="activity"></i>
+                                        <span> Incoming </span>
+                                    </my-custom-link>
+                                </li>
+
+                                <li>
+                                    <my-custom-link
+                                        :href="route('accountant.invoice_pending')"
+                                        :active="
+                                            route().current('accountant.invoice_pending')
+                                        "
+                                    >
+                                        <i data-feather="activity"></i>
+                                        <span> Pending </span>
+                                    </my-custom-link>
+                                </li>
+
+                                <li>
+                                    <my-custom-link
+                                        :href="route('accountant.invoice_reports')"
+                                        :active="
+                                            route().current('accountant.invoice_reports')
+                                        "
+                                    >
+                                        <i data-feather="activity"></i>
+                                        <span> Reports </span>
+                                    </my-custom-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <!-- Secretary -->
         <div v-if="$page.props.role == 'secretary'" class="max-w-2xl mx-auto">
@@ -75,7 +161,7 @@
             </div>
         </div>
 
-        <!-- Accountant -->
+        <!-- Bishop -->
         <div v-if="$page.props.role == 'bishop'" class="max-w-2xl mx-auto">
             <div id="sidebar-menu">
                 <ul id="side-menu">

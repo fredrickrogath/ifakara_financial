@@ -32,6 +32,8 @@
                     <div class="content">
                         <!-- Start Content-->
                         <div class="container-fluid">
+
+                            <!-- Bishop -->
                             <home-page
                                 v-if="route().current('bishop.dashboard')"
                             ></home-page>
@@ -43,12 +45,23 @@
 
 
 
+                            <!-- Secretary -->
                             <secretary-home-page
                                 v-if="route().current('secretary.dashboard')"
                             ></secretary-home-page>
                             <secretary-schools v-if="route().current('secretary.schools')"></secretary-schools>
                             <secretary-uploads v-if="route().current('secretary.uploads')"></secretary-uploads>
                             <secretary-reports v-if="route().current('secretary.reports')"></secretary-reports>
+
+                            <!-- Accountant -->
+                            <accountant-home-page
+                                v-if="route().current('accountant.dashboard')"
+                            ></accountant-home-page>
+                            <accountant-invoice-school v-if="route().current('accountant.invoice_school')"></accountant-invoice-school>
+                            <accountant-invoice-create v-if="route().current('accountant.invoice_create')"></accountant-invoice-create>
+                            <accountant-invoice-incoming v-if="route().current('accountant.invoice_incoming')"></accountant-invoice-incoming>
+                            <accountant-invoice-pending v-if="route().current('accountant.invoice_pending')"></accountant-invoice-pending>
+                            <accountant-invoice-reports v-if="route().current('accountant.invoice_reports')"></accountant-invoice-reports>
                         </div>
                         <!-- container -->
                     </div>
@@ -143,6 +156,14 @@ import SecretarySchools from "./Modules/SecretaryModule/Schools.vue";
 import SecretaryUploads from "./Modules/SecretaryModule/Uploads.vue";
 import SecretaryReports from "./Modules/SecretaryModule/Reports.vue";
 
+
+import AccountantHomePage from "./Modules/AccountantMainModule/HomePage.vue";
+import AccountantInvoiceCreate from "./Modules/AccountantMainModule/InvoiceCreate.vue";
+import AccountantInvoiceIncoming from "./Modules/AccountantMainModule/InvoiceIncoming.vue";
+import AccountantInvoicePending from "./Modules/AccountantMainModule/InvoicePending.vue";
+import AccountantInvoiceReports from "./Modules/AccountantMainModule/InvoiceReports.vue";
+import AccountantInvoiceSchool from "./Modules/AccountantMainModule/InvoiceSchool.vue";
+
 export default {
     components: {
         AppLayout,
@@ -163,6 +184,14 @@ export default {
         SecretarySchools,
         SecretaryUploads,
         SecretaryReports,
+
+
+        AccountantHomePage,
+        AccountantInvoiceCreate,
+        AccountantInvoiceIncoming,
+        AccountantInvoicePending,
+        AccountantInvoiceReports,
+        AccountantInvoiceSchool,
 
     },
 
