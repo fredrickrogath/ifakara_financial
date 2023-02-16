@@ -23,13 +23,13 @@
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
-                            <!-- <div class="flex-shrink-0 flex items-center">
-                                <inertia-link :href="route('head.dashboard')">
+                            <div class="flex-shrink-0 flex items-center">
+                                <inertia-link :href="route($page.props.role + '.dashboard')">
                                     <jet-application-mark
                                         class="block h-9 w-auto"
                                     />
                                 </inertia-link>
-                            </div> -->
+                            </div>
 
                             <!-- Navigation Links -->
                             <!-- <div
