@@ -8,6 +8,7 @@ class BishopService
         return [
             $prefix = 'bishop',
             'posts' => \App\Models\Post::all(),
+            'role' => 'bishop',
             'routes'=> [
                 0 => [
                   'title' => 'Home BISHOP',

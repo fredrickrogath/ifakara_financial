@@ -34,38 +34,18 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $internalAuditorService->dashboardData());
     }
 
-    public function pageOne(){
+    public function schools(InternalAuditorService $internalAuditorService){
         $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $internalAuditorService->dashboardData());
     }
 
-    public function pageTwo(){
+    public function staffs(InternalAuditorService $internalAuditorService){
         $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $internalAuditorService->dashboardData());
     }
 
-    public function pageThree(){
+    public function reports(InternalAuditorService $internalAuditorService){
         $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageFour(){
-        $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageFive(){
-        $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSix(){
-        $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSeven(){
-        $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $internalAuditorService->dashboardData());
     }
 }

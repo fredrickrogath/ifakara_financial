@@ -7,6 +7,7 @@ class InternalAuditorService
     public function dashboardData(){
         return [
             $prefix = 'internal_auditor',
+            'role' => 'internal_auditor',
             'posts' => \App\Models\Post::all(),
             'routes'=> [
                 0 => [

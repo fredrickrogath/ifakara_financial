@@ -34,38 +34,28 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 
-    public function pageOne(){
+    public function schools(BishopService $bishopService){
         $this->authorize('authorizeBishop', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 
-    public function pageTwo(){
+    public function documents(BishopService $bishopService){
         $this->authorize('authorizeBishop', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 
-    public function pageThree(){
+    public function uploads(BishopService $bishopService){
         $this->authorize('authorizeBishop', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 
-    public function pageFour(){
+    public function invoices(BishopService $bishopService){
         $this->authorize('authorizeBishop', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 
-    public function pageFive(){
+    public function internal_office(BishopService $bishopService){
         $this->authorize('authorizeBishop', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSix(){
-        $this->authorize('authorizeBishop', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSeven(){
-        $this->authorize('authorizeBishop', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 }
