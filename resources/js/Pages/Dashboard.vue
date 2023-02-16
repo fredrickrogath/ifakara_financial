@@ -62,6 +62,18 @@
                             <accountant-invoice-incoming v-if="route().current('accountant.invoice_incoming')"></accountant-invoice-incoming>
                             <accountant-invoice-pending v-if="route().current('accountant.invoice_pending')"></accountant-invoice-pending>
                             <accountant-invoice-reports v-if="route().current('accountant.invoice_reports')"></accountant-invoice-reports>
+
+
+
+                            <!-- Internal Auditor -->
+                            <internal-auditor-home-page
+                                v-if="route().current('internal_auditor.dashboard')"
+                            ></internal-auditor-home-page>
+                            <internal-auditor-schools v-if="route().current('internal_auditor.schools')"></internal-auditor-schools>
+                            <internal-auditor-staffs v-if="route().current('internal_auditor.staffs')"></internal-auditor-staffs>
+                            <internal-auditor-reports v-if="route().current('internal_auditor.reports')"></internal-auditor-reports>
+                            <!-- <accountant-invoice-pending v-if="route().current('internal_auditor.invoice_pending')"></accountant-invoice-pending>
+                            <accountant-invoice-reports v-if="route().current('internal_auditor.invoice_reports')"></accountant-invoice-reports> -->
                         </div>
                         <!-- container -->
                     </div>
@@ -164,6 +176,12 @@ import AccountantInvoicePending from "./Modules/AccountantMainModule/InvoicePend
 import AccountantInvoiceReports from "./Modules/AccountantMainModule/InvoiceReports.vue";
 import AccountantInvoiceSchool from "./Modules/AccountantMainModule/InvoiceSchool.vue";
 
+
+import InternalAuditorHomePage from "./Modules/InternalAuditorModule/HomePage.vue";
+import InternalAuditorSchools from "./Modules/InternalAuditorModule/Schools.vue";
+import InternalAuditorStaffs from "./Modules/InternalAuditorModule/Staffs.vue";
+import InternalAuditorReports from "./Modules/InternalAuditorModule/Reports.vue";
+
 export default {
     components: {
         AppLayout,
@@ -192,6 +210,13 @@ export default {
         AccountantInvoicePending,
         AccountantInvoiceReports,
         AccountantInvoiceSchool,
+
+
+        InternalAuditorHomePage,
+        InternalAuditorSchools,
+        InternalAuditorStaffs,
+        InternalAuditorReports,
+
 
     },
 

@@ -1,7 +1,55 @@
 <template>
     <div>
-        <!-- Head Office -->
-        <div v-if="$page.props.role == 'head'" class="max-w-2xl mx-auto"></div>
+        <!-- Internal auditor -->
+        <div v-if="$page.props.role == 'internal_auditor'" class="max-w-2xl mx-auto">
+            <div id="sidebar-menu">
+                <ul id="side-menu">
+                    <li class="menu-title">Navigation</li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('internal_auditor.dashboard')"
+                            :active="route().current('internal_auditor.dashboard')"
+                        >
+                            <i data-feather="activity"></i>
+                            <span> Dashboard </span>
+                        </my-custom-link>
+                    </li>
+
+                    <li class="menu-title mt-2">Apps</li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('internal_auditor.schools')"
+                            :active="route().current('internal_auditor.schools')"
+                        >
+                            <i data-feather="activity"></i>
+                            <span> Schools </span>
+                        </my-custom-link>
+                    </li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('internal_auditor.staffs')"
+                            :active="route().current('internal_auditor.staffs')"
+                        >
+                            <i data-feather="activity"></i>
+                            <span> Staff </span>
+                        </my-custom-link>
+                    </li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('internal_auditor.reports')"
+                            :active="route().current('internal_auditor.reports')"
+                        >
+                            <i data-feather="activity"></i>
+                            <span> Reports </span>
+                        </my-custom-link>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <!-- Accountant -->
         <div v-if="$page.props.role == 'accountant'" class="max-w-2xl mx-auto">
