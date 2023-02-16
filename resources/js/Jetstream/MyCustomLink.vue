@@ -11,8 +11,8 @@
         computed: {
             classes() {
                 return this.active
-                            ? 'flex'
-                            : 'flex'
+                            ? 'text-info'
+                            : ''
             }
         }
     }

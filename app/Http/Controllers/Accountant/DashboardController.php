@@ -34,38 +34,28 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageOne(){
+    public function invoice_school(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageTwo(){
+    public function invoice_create(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageThree(){
+    public function invoice_incoming(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageFour(){
+    public function invoice_pending(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 
-    public function pageFive(){
+    public function invoice_reports(AccountantService $accountantService){
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSix(){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSeven(){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
 }

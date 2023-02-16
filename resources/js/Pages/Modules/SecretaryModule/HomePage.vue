@@ -1,12 +1,12 @@
 <template>
-    <post-card></post-card>
+    <div class="text-center">
+        Secretary dashboard
+    </div>
 </template>
 
 <script>
-import PostCard from "../../Components/PostCard.vue";
 
 export default {
-    components: { PostCard },
 
     mounted() {
         // Receiving broadicasting

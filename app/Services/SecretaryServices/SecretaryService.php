@@ -8,6 +8,7 @@ class SecretaryService
         return [
             $prefix = 'secretary',
             'posts' => \App\Models\Post::all(),
+            'role' => 'secretary',
             'routes'=> [
                 0 => [
                   'title' => 'Home sectry',
