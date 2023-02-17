@@ -30,6 +30,13 @@
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+
+         <!-- Footable js -->
+        <script src="assets/libs/footable/footable.all.min.js"></script>
+
+        <!-- Init js -->
+        <script src="assets/js/pages/foo-tables.init.js"></script>
     </head>
     <body class="font-sans antialiased">
         @inertia
@@ -46,6 +53,12 @@
  
          <!-- Dashboar 1 init js-->
          <script src="assets/js/pages/dashboard-1.init.js"></script>
+
+         <!-- Footable js -->
+        <script src="assets/libs/footable/footable.all.min.js"></script>
+
+        <!-- Init js -->
+        <script src="assets/js/pages/foo-tables.init.js"></script>
  
          <!-- App js-->
          <script src="assets/js/app.min.js"></script>

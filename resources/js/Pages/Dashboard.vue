@@ -1,15 +1,15 @@
 <template>
 
     <!-- Begin page -->
-    <div>
+    <!-- <div> -->
         <app-layout>
-            <div id="wrapper">
+            <div id="wrapper" class="pt-2">
                 <!-- Topbar Start -->
                 <!-- <top-bar></top-bar> -->
                 <!-- end Topbar -->
 
                 <!-- ========== Left Sidebar Start ========== -->
-                <div class="left-side-menu">
+                <div class="left-side-menu pt-0">
                     <div class="h-100" data-simplebar>
 
                         <!--- Sidemenu -->
@@ -28,7 +28,7 @@
                 <!-- Start Page Content here -->
                 <!-- ============================================================== -->
 
-                <div class="content-page">
+                <div class="content-page mt-0 pt-0">
                     <div class="content">
                         <!-- Start Content-->
                         <div class="container-fluid">
@@ -62,6 +62,7 @@
                             <accountant-invoice-incoming v-if="route().current('accountant.invoice_incoming')"></accountant-invoice-incoming>
                             <accountant-invoice-pending v-if="route().current('accountant.invoice_pending')"></accountant-invoice-pending>
                             <accountant-invoice-reports v-if="route().current('accountant.invoice_reports')"></accountant-invoice-reports>
+                            <accountant-charts-of-accounts v-if="route().current('accountant.invoice_reports')"></accountant-charts-of-accounts>
 
 
 
@@ -115,7 +116,7 @@
             <!-- Right bar overlay-->
             <div class="rightbar-overlay"></div>
         </app-layout>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script setup>
@@ -175,6 +176,7 @@ import AccountantInvoiceIncoming from "./Modules/AccountantMainModule/InvoiceInc
 import AccountantInvoicePending from "./Modules/AccountantMainModule/InvoicePending.vue";
 import AccountantInvoiceReports from "./Modules/AccountantMainModule/InvoiceReports.vue";
 import AccountantInvoiceSchool from "./Modules/AccountantMainModule/InvoiceSchool.vue";
+import AccountantChartsOfAccounts from "./Modules/AccountantMainModule/ChartsOfAccounts.vue";
 
 
 import InternalAuditorHomePage from "./Modules/InternalAuditorModule/HomePage.vue";
@@ -210,6 +212,7 @@ export default {
         AccountantInvoicePending,
         AccountantInvoiceReports,
         AccountantInvoiceSchool,
+        AccountantChartsOfAccounts,
 
 
         InternalAuditorHomePage,
