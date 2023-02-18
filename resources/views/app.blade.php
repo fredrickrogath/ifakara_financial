@@ -59,16 +59,6 @@
 
         <!-- Init js -->
         <script src="assets/js/pages/foo-tables.init.js"></script>
-
-        <!-- Third Party js-->
-        {{-- <script src="assets/libs/apexcharts/apexcharts.min.js"></script> --}}
-
-        <!-- Plugins js-->
-        {{-- <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script> --}}
-
-        <!-- Dashboard init js -->
-        {{-- <script src="assets/js/pages/ecommerce-dashboard.init.js"></script> --}}
  
          <!-- App js-->
          <script src="assets/js/app.min.js"></script>
