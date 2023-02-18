@@ -59,7 +59,7 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody v-for="index in 100" key="index">
+                                <tbody v-for="index in 9" key="index">
                                     <tr>
                                         <td>hu6y8jj9</td>
                                         <td>Boudreaux</td>

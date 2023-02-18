@@ -131,7 +131,7 @@ Route::middleware([
         Route::get('/invoice_pending', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_pending'])->name('invoice_pending');
         Route::get('/invoice_reports', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_reports'])->name('invoice_reports');
         Route::get('/charts_of_accounts', [\App\Http\Controllers\Accountant\DashboardController::class, 'charts_of_accounts'])->name('charts_of_accounts');
-    //     Route::get('/pageOne', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageOne'])->name('pageOne');
+        Route::get('/invoices', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoices'])->name('invoices');
     //     Route::get('/pageTwo', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageTwo'])->name('pageTwo');
     //     Route::get('/pageFour', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageFour'])->name('pageFour');
     //     Route::get('/pageFive', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageFive'])->name('pageFive');
