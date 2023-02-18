@@ -30,6 +30,13 @@
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+
+         <!-- Footable js -->
+        <script src="assets/libs/footable/footable.all.min.js"></script>
+
+        <!-- Init js -->
+        <script src="assets/js/pages/foo-tables.init.js"></script>
     </head>
     <body class="font-sans antialiased">
         @inertia
@@ -46,6 +53,22 @@
  
          <!-- Dashboar 1 init js-->
          <script src="assets/js/pages/dashboard-1.init.js"></script>
+
+         <!-- Footable js -->
+        <script src="assets/libs/footable/footable.all.min.js"></script>
+
+        <!-- Init js -->
+        <script src="assets/js/pages/foo-tables.init.js"></script>
+
+        <!-- Third Party js-->
+        {{-- <script src="assets/libs/apexcharts/apexcharts.min.js"></script> --}}
+
+        <!-- Plugins js-->
+        {{-- <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script> --}}
+
+        <!-- Dashboard init js -->
+        {{-- <script src="assets/js/pages/ecommerce-dashboard.init.js"></script> --}}
  
          <!-- App js-->
          <script src="assets/js/app.min.js"></script>
