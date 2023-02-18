@@ -61,7 +61,7 @@
                                 </thead>
                                 <tbody v-for="index in 100" key="index">
                                     <tr>
-                                        <td>Isidra</td>
+                                        <td>hu6y8jj9</td>
                                         <td>Boudreaux</td>
                                         <td>Traffic Court Referee</td>
                                         <td>Traffic Court</td>
@@ -72,6 +72,9 @@
                                                 class="badge label-table bg-success"
                                                 >Active</span
                                             >
+                                        </td>
+                                        <td>
+                                            
                                         </td>
                                     </tr>
                                 </tbody>
