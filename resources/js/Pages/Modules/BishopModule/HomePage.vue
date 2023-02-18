@@ -2,7 +2,7 @@
     <div class="pt-3">
         <div class="row">
             <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern">
+                <div class="card bg-pattern shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
@@ -33,7 +33,7 @@
 
             <div class="col-md-3 col-xl-3">
                 <div class="card bg-pattern">
-                    <div class="card-body">
+                    <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-success rounded">
@@ -63,7 +63,7 @@
 
             <div class="col-md-3 col-xl-3">
                 <div class="card bg-pattern">
-                    <div class="card-body">
+                    <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-primary rounded">
@@ -93,7 +93,7 @@
 
             <div class="col-md-3 col-xl-3">
                 <div class="card bg-pattern">
-                    <div class="card-body">
+                    <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-info rounded">
@@ -198,8 +198,8 @@
             <div class="col-xl-6 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title mb-3">
-                            Recently Transaction History
+                        <h4 class="header-title mb-1">
+                            Recently Finance Reports
                         </h4>
 
                         <div class="table-responsive">
@@ -208,10 +208,14 @@
                             >
                                 <thead>
                                     <tr>
-                                        <th class="border-top-0">Name</th>
-                                        <th class="border-top-0">Card</th>
-                                        <th class="border-top-0">Date</th>
-                                        <th class="border-top-0">Amount</th>
+                                        <th class="border-top-0">Identity</th>
+                                        <th class="border-top-0">
+                                            Departiment
+                                        </th>
+                                        <th class="border-top-0">Title</th>
+                                        <th class="border-top-0">Published</th>
+                                        <th class="border-top-0">View</th>
+                                        <th class="border-top-0">Download</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -222,18 +226,22 @@
                                                 alt="user-pic"
                                                 class="rounded-circle avatar-sm bx-shadow-lg"
                                             />
-                                            <!-- <span class="ms-2">Imelda J. Stanberry</span> -->
                                         </td>
                                         <td>
-                                            <img
-                                                src="assets/images/cards/visa.png"
-                                                alt="user-card"
-                                                height="24"
-                                            />
-                                            <!-- <span class="ms-2">**** 3256</span> -->
+                                            <span class="text-center"
+                                                >Finance</span
+                                            >
                                         </td>
+                                        <td>Finacial report of ...</td>
                                         <td>27.03.2018</td>
-                                        <td>$345.98</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -242,18 +250,24 @@
                                                 alt="user-pic"
                                                 class="rounded-circle avatar-sm bx-shadow-lg"
                                             />
-                                            <!-- <span class="ms-2">Francisca S. Lobb</span> -->
                                         </td>
                                         <td>
-                                            <img
-                                                src="assets/images/cards/master.png"
-                                                alt="user-card"
-                                                height="24"
-                                            />
-                                            <!-- <span class="ms-2">**** 8451</span> -->
+                                            <span class="text-center"
+                                                >Procurement</span
+                                            >
                                         </td>
+
+                                        <td>Finacial report of ...</td>
+
                                         <td>28.03.2018</td>
-                                        <td>$1,250</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -262,18 +276,22 @@
                                                 alt="user-pic"
                                                 class="rounded-circle avatar-sm bx-shadow-lg"
                                             />
-                                            <!-- <span class="ms-2">James A. Wert</span> -->
                                         </td>
                                         <td>
-                                            <img
-                                                src="assets/images/cards/amazon.png"
-                                                alt="user-card"
-                                                height="24"
-                                            />
-                                            <!-- <span class="ms-2">**** 2258</span> -->
+                                            <span class="text-center"
+                                                >Procurement</span
+                                            >
                                         </td>
+                                        <td>Finacial report of ...</td>
                                         <td>28.03.2018</td>
-                                        <td>$145</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -282,18 +300,22 @@
                                                 alt="user-pic"
                                                 class="rounded-circle avatar-sm bx-shadow-lg"
                                             />
-                                            <!-- <span class="ms-2">Dolores J. Pooley</span> -->
                                         </td>
                                         <td>
-                                            <img
-                                                src="assets/images/cards/american-express.png"
-                                                alt="user-card"
-                                                height="24"
-                                            />
-                                            <!-- <span class="ms-2">**** 6950</span> -->
+                                            <span class="text-center"
+                                                >Finance</span
+                                            >
                                         </td>
+                                        <td>Finacial report of ...</td>
                                         <td>29.03.2018</td>
-                                        <td>$2,005.89</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -302,18 +324,22 @@
                                                 alt="user-pic"
                                                 class="rounded-circle avatar-sm bx-shadow-lg"
                                             />
-                                            <!-- <span class="ms-2">Karen I. McCluskey</span> -->
                                         </td>
                                         <td>
-                                            <img
-                                                src="assets/images/cards/discover.png"
-                                                alt="user-card"
-                                                height="24"
-                                            />
-                                            <!-- <span class="ms-2">**** 0021</span> -->
+                                            <span class="text-center"
+                                                >Account</span
+                                            >
                                         </td>
+                                        <td>Finacial report of ...</td>
                                         <td>31.03.2018</td>
-                                        <td>$24.95</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -322,18 +348,22 @@
                                                 alt="user-pic"
                                                 class="rounded-circle avatar-sm bx-shadow-lg"
                                             />
-                                            <!-- <span class="ms-2">Francisca S. Lobb</span> -->
                                         </td>
                                         <td>
-                                            <img
-                                                src="assets/images/cards/master.png"
-                                                alt="user-card"
-                                                height="24"
-                                            />
-                                            <!-- <span class="ms-2">**** 8451</span> -->
+                                            <span class="text-center"
+                                                >Finance</span
+                                            >
                                         </td>
+                                        <td>Finacial report of ...</td>
                                         <td>28.03.2018</td>
-                                        <td>$1,250</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -342,18 +372,22 @@
                                                 alt="user-pic"
                                                 class="rounded-circle avatar-sm bx-shadow-lg"
                                             />
-                                            <!-- <span class="ms-2">James A. Wert</span> -->
                                         </td>
                                         <td>
-                                            <img
-                                                src="assets/images/cards/amazon.png"
-                                                alt="user-card"
-                                                height="24"
-                                            />
-                                            <!-- <span class="ms-2">**** 2258</span> -->
+                                            <span class="text-center"
+                                                >Procurement</span
+                                            >
                                         </td>
+                                        <td>Finacial report of ...</td>
                                         <td>28.03.2018</td>
-                                        <td>$145</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
