@@ -63,7 +63,7 @@
                             <accountant-invoice-incoming v-if="route().current('accountant.invoice_incoming')"></accountant-invoice-incoming>
                             <accountant-invoice-pending v-if="route().current('accountant.invoice_pending')"></accountant-invoice-pending>
                             <accountant-invoice-reports v-if="route().current('accountant.invoice_reports')"></accountant-invoice-reports>
-                            <accountant-charts-of-accounts v-if="route().current('accountant.invoice_reports')"></accountant-charts-of-accounts>
+                            <accountant-charts-of-accounts v-if="route().current('accountant.charts_of_accounts')"></accountant-charts-of-accounts>
 
 
 

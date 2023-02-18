@@ -1,8 +1,8 @@
 <template>
-    <div class="pt-1">
+   <div class="pt-3">
         <div class="row">
             <div class="col-md-3 col-xl-3">
-                <div class="card">
+                <div class="card bg-pattern">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
@@ -32,7 +32,7 @@
             <!-- end col -->
 
             <div class="col-md-3 col-xl-3">
-                <div class="card">
+                <div class="card bg-pattern">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
@@ -62,7 +62,7 @@
             <!-- end col -->
 
             <div class="col-md-3 col-xl-3">
-                <div class="card">
+                <div class="card bg-pattern">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
@@ -92,7 +92,7 @@
             <!-- end col -->
 
             <div class="col-md-3 col-xl-3">
-                <div class="card">
+                <div class="card bg-pattern">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
