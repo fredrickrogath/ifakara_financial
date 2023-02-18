@@ -11,7 +11,10 @@ class HomeController extends Controller
     public function DetermineUserRole(){
 
         if (auth()->user()->role == \App\Models\User::is_head) {
+
             return redirect()->route('head.dashboard');
+            //return redirect()->route('bishop.dashboard');
+
         } elseif (auth()->user()->role == \App\Models\User::is_bishop) {
             return redirect()->route('bishop.dashboard');
         } elseif (auth()->user()->role == \App\Models\User::is_academic) {
