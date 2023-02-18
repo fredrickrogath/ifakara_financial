@@ -11,7 +11,7 @@
             ]"
         >
             <nav
-                class="border-b border-gray-100 dark:border-gray-700 sticky top-0 z-50"
+                class="border-b border-gray-100 sticky top-0 z-50 fixed-top"
                 :style="[
                     isDark
                         ? { 'background-color': '#1e1e1e' }
@@ -24,7 +24,11 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
-                                <inertia-link :href="route($page.props.role + '.dashboard')">
+                                <inertia-link
+                                    :href="
+                                        route($page.props.role + '.dashboard')
+                                    "
+                                >
                                     <jet-application-mark
                                         class="block h-9 w-auto"
                                     />
@@ -70,8 +74,7 @@
 
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
-                            >
-                            </div>
+                            ></div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -564,7 +567,7 @@
             </header> -->
 
             <!-- Page Content -->
-            <main class="py-0">
+            <main class="py-4">
                 <slot></slot>
             </main>
 
@@ -574,12 +577,11 @@
     </div>
 </template>
 
-<!-- For dark mode triggering in tailwind -->
 <script setup>
 import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark();
-const toggleDark = useToggle(isDark);
+// const toggleDark = useToggle(isDark);
 </script>
 
 <script>
@@ -608,9 +610,7 @@ export default {
         }
     },
 
-    // mounted() {console.log(this.$store.getters["areRoutesLoaded"])
-    //     console.log(this.$store.getters["getRoutes"][0].title)
-    // },
+    mounted() {},
 
     data() {
         return {
