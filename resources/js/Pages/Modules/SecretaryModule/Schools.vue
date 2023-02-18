@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center">
+    <div class="text-center pt-5">
         Secretary schools
     </div>
 </template>

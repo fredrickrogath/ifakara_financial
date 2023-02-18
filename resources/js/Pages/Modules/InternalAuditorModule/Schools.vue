@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center">
+    <div class="text-center pt-5">
         Internal auditor schools
     </div>
 </template>
