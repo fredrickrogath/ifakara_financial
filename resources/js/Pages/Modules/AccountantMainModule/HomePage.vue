@@ -73,6 +73,9 @@
                                                 >Active</span
                                             >
                                         </td>
+                                        <td>
+                                            
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
