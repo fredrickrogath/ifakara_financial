@@ -139,6 +139,16 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('accountant.charts_of_accounts')"
+                            :active="route().current('accountant.charts_of_accounts')"
+                        >
+                        <v-icon size="22">mdi-finance</v-icon>
+                            <span> Charts Of Accounts </span>
+                        </my-custom-link>
+                    </li>
                 </ul>
             </div>
         </div>
