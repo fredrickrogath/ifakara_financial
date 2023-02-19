@@ -146,7 +146,7 @@
                                                 </inertia-link>
                                             </p>
 
-                                            <p class="text-dark-50">
+                                            <!-- <p class="text-dark-50">
                                                 Don't have an account?
 
                                                 <inertia-link
@@ -155,7 +155,7 @@
                                                 >
                                                     Sign Up
                                                 </inertia-link>
-                                            </p>
+                                            </p> -->
                                         </div>
                                         <!-- end col -->
                                     </div>
