@@ -36,6 +36,11 @@ Route::get('/', function () {
     | END OF FAKE DATE GENERATING ROUTE
     |--------------------------------------------------------------------------
     */
+    if (Auth::check()) {
+        return redirect('/dashboard');
+    } else {
+        return redirect('/login');
+    }
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -124,7 +129,6 @@ Route::middleware([
 
     Route::group(['prefix' => 'accountant', 'middleware' => 'is_accountant', 'as' => 'accountant.'], function () {
         Route::get('/dashboard', [\App\Http\Controllers\Accountant\DashboardController::class, 'dashboard'])->name('dashboard');
-        // Route::get('/account_office', [\App\Http\Controllers\Accountant\DashboardController::class, 'account_office'])->name('account_office');
         Route::get('/invoice_school', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_school'])->name('invoice_school');
         Route::get('/invoice_create', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_create'])->name('invoice_create');
         Route::get('/invoice_incoming', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_incoming'])->name('invoice_incoming');
@@ -132,10 +136,10 @@ Route::middleware([
         Route::get('/invoice_reports', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_reports'])->name('invoice_reports');
         Route::get('/charts_of_accounts', [\App\Http\Controllers\Accountant\DashboardController::class, 'charts_of_accounts'])->name('charts_of_accounts');
         Route::get('/invoices', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoices'])->name('invoices');
-    //     Route::get('/pageTwo', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageTwo'])->name('pageTwo');
-    //     Route::get('/pageFour', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageFour'])->name('pageFour');
-    //     Route::get('/pageFive', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageFive'])->name('pageFive');
-    //     Route::get('/pageThree', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageThree'])->name('pageThree');
+        Route::get('/accepeted_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'accepeted_requisitions'])->name('accepeted_requisitions');
+        Route::get('/rejected_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'rejected_requisitions'])->name('rejected_requisitions');
+        Route::get('/starred_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'starred_requisitions'])->name('starred_requisitions');
+        Route::get('/deleted_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'deleted_requisitions'])->name('deleted_requisitions');
     //     Route::get('/pageSeven', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageSeven'])->name('pageSeven');
     });
 

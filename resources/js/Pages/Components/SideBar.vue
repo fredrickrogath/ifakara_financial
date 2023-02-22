@@ -47,6 +47,30 @@
 
                     <li>
                         <my-custom-link
+                            :href="route('accountant.invoice_create')"
+                            :active="
+                                route().current('accountant.invoice_create')
+                            "
+                        >
+                            <v-icon size="20">mdi-pencil</v-icon>
+                            <span class="mx-1"> Parish </span>
+                        </my-custom-link>
+                    </li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('accountant.invoice_incoming')"
+                            :active="
+                                route().current('accountant.invoice_incoming')
+                            "
+                        >
+                            <v-icon size="20">mdi-inbox-arrow-down</v-icon>
+                            <span class="mx-1"> Health Institute </span>
+                        </my-custom-link>
+                    </li>
+
+                    <li>
+                        <my-custom-link
                             :href="route('internal_auditor.reports')"
                             :active="
                                 route().current('internal_auditor.reports')
@@ -71,7 +95,14 @@
                             :href="route('accountant.dashboard')"
                             :active="route().current('accountant.dashboard')"
                         >
-                            <v-icon>mdi-view-dashboard</v-icon>
+                            <v-icon
+                                :class="[
+                                    route().current('accountant.dashboard')
+                                        ? 'text-warning'
+                                        : '',
+                                ]"
+                                >mdi-view-dashboard</v-icon
+                            >
                             <span> Dashboard </span>
                         </my-custom-link>
                     </li>
@@ -81,11 +112,15 @@
                     <li>
                         <my-custom-link
                             :href="route('accountant.invoices')"
-                            :active="
-                                route().current('accountant.invoices')
-                            "
+                            :active="route().current('accountant.invoices')"
                         >
-                            <v-icon size="20">mdi-cash</v-icon>
+                            <v-icon size="20"
+                            :class="[
+                                    route().current('accountant.invoices')
+                                        ? 'text-warning'
+                                        : '',
+                                ]"
+                            >mdi-cash-multiple</v-icon>
                             <span class="mx-1"> Invoices </span>
                         </my-custom-link>
                     </li>
@@ -97,7 +132,13 @@
                                 route().current('accountant.invoice_school')
                             "
                         >
-                            <v-icon size="20">mdi-school</v-icon>
+                            <v-icon size="20"
+                            :class="[
+                                    route().current('accountant.invoice_school')
+                                        ? 'text-warning'
+                                        : '',
+                                ]"
+                            >mdi-school</v-icon>
                             <span class="mx-1"> Schools </span>
                         </my-custom-link>
                     </li>
@@ -109,8 +150,14 @@
                                 route().current('accountant.invoice_create')
                             "
                         >
-                            <v-icon size="20">mdi-pencil</v-icon>
-                            <span class="mx-1"> Create </span>
+                            <v-icon size="20"
+                            :class="[
+                                    route().current('accountant.invoice_create')
+                                        ? 'text-warning'
+                                        : '',
+                                ]"
+                            >mdi-pencil</v-icon>
+                            <span class="mx-1"> Parish </span>
                         </my-custom-link>
                     </li>
 
@@ -121,12 +168,18 @@
                                 route().current('accountant.invoice_incoming')
                             "
                         >
-                            <v-icon size="20">mdi-inbox-arrow-down</v-icon>
-                            <span class="mx-1"> Incoming </span>
+                            <v-icon size="20"
+                            :class="[
+                                    route().current('accountant.invoice_incoming')
+                                        ? 'text-warning'
+                                        : '',
+                                ]"
+                            >mdi-inbox-arrow-down</v-icon>
+                            <span class="mx-1"> Health Institute </span>
                         </my-custom-link>
                     </li>
 
-                    <li>
+                    <!-- <li>
                         <my-custom-link
                             :href="route('accountant.invoice_pending')"
                             :active="
@@ -136,7 +189,7 @@
                             <v-icon size="20">mdi-account-clock</v-icon>
                             <span class="mx-1"> Pending </span>
                         </my-custom-link>
-                    </li>
+                    </li> -->
 
                     <li>
                         <my-custom-link
@@ -145,7 +198,13 @@
                                 route().current('accountant.invoice_reports')
                             "
                         >
-                            <v-icon size="20">mdi-poll</v-icon>
+                            <v-icon size="20"
+                            :class="[
+                                    route().current('accountant.invoice_reports')
+                                        ? 'text-warning'
+                                        : '',
+                                ]"
+                            >mdi-poll</v-icon>
                             <span class="mx-1"> Reports </span>
                         </my-custom-link>
                     </li>
@@ -157,7 +216,13 @@
                                 route().current('accountant.charts_of_accounts')
                             "
                         >
-                            <v-icon size="22">mdi-finance</v-icon>
+                            <v-icon size="23"
+                            :class="[
+                                    route().current('accountant.charts_of_accounts')
+                                        ? 'text-warning'
+                                        : '',
+                                ]"
+                            >mdi-finance</v-icon>
                             <span> Charts Of Accounts </span>
                         </my-custom-link>
                     </li>
@@ -292,7 +357,42 @@
                                         <span> Invoices </span>
                                     </my-custom-link>
                                 </li>
-                                <li></li>
+
+                                <li>
+                                    <my-custom-link
+                                        :href="route('bishop.schools')"
+                                        :active="
+                                            route().current('bishop.schools')
+                                        "
+                                    >
+                                        <v-icon size="20">mdi-school</v-icon>
+                                        <span> Schools </span>
+                                    </my-custom-link>
+                                </li>
+
+                                <li>
+                                    <my-custom-link
+                                        :href="route('bishop.schools')"
+                                        :active="
+                                            route().current('bishop.schools')
+                                        "
+                                    >
+                                        <v-icon size="20">mdi-school</v-icon>
+                                        <span> Diocese </span>
+                                    </my-custom-link>
+                                </li>
+
+                                <li>
+                                    <my-custom-link
+                                        :href="route('bishop.schools')"
+                                        :active="
+                                            route().current('bishop.schools')
+                                        "
+                                    >
+                                        <v-icon size="20">mdi-school</v-icon>
+                                        <span> Health Institute </span>
+                                    </my-custom-link>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -316,6 +416,30 @@
                                         <span> Schools </span>
                                     </my-custom-link>
                                 </li>
+
+                                <li>
+                                    <my-custom-link
+                                        :href="route('bishop.schools')"
+                                        :active="
+                                            route().current('bishop.schools')
+                                        "
+                                    >
+                                        <v-icon size="20">mdi-school</v-icon>
+                                        <span> Diocese </span>
+                                    </my-custom-link>
+                                </li>
+
+                                <li>
+                                    <my-custom-link
+                                        :href="route('bishop.schools')"
+                                        :active="
+                                            route().current('bishop.schools')
+                                        "
+                                    >
+                                        <v-icon size="20">mdi-school</v-icon>
+                                        <span> Health Institute </span>
+                                    </my-custom-link>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -326,7 +450,17 @@
                             :active="route().current('bishop.internal_office')"
                         >
                             <v-icon size="22">mdi-account-tie</v-icon>
-                            <span> Internal Office </span>
+                            <span> Internal Auditor </span>
+                        </my-custom-link>
+                    </li>
+
+                    <li>
+                        <my-custom-link
+                            :href="route('bishop.internal_office')"
+                            :active="route().current('bishop.internal_office')"
+                        >
+                            <v-icon size="22">mdi-account-tie</v-icon>
+                            <span> Procurement </span>
                         </my-custom-link>
                     </li>
                 </ul>

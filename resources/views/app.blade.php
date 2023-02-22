@@ -1,66 +1,113 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>ICD | FINANCIAL</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <title>ICD | FINANCIAL</title>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Plugins css -->
-        <link href="assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
-        
-        <!-- App css -->
-        <link href="assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-        <link href="assets/css/config/default/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        <link href="assets/css/config/default/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
-        <link href="assets/css/config/default/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+    <!-- Plugins css -->
+    <link href="assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
 
-        <!-- icons -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App css -->
+    <link href="assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css"
+        id="bs-default-stylesheet" />
+    <link href="assets/css/config/default/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
-        <!-- Scripts -->
-        @routes
-        <script src="{{ mix('js/app.js') }}" defer></script>
+    <link href="assets/css/config/default/bootstrap-dark.min.css" rel="stylesheet" type="text/css"
+        id="bs-dark-stylesheet" />
+    <link href="assets/css/config/default/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
 
+    <!-- icons -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
-         <!-- Footable js -->
-        <script src="assets/libs/footable/footable.all.min.js"></script>
-
-        <!-- Init js -->
-        <script src="assets/js/pages/foo-tables.init.js"></script>
-    </head>
-    <body class="font-sans antialiased">
-        @inertia
+    <!-- Scripts -->
+    @routes
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
 
-         <!-- Vendor js -->
-         <script src="assets/js/vendor.min.js"></script>
+    <!-- Footable js -->
+    <script src="assets/libs/footable/footable.all.min.js"></script>
 
-         <!-- Plugins js-->
-         <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
-         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
- 
-         <script src="assets/libs/selectize/js/standalone/selectize.min.js"></script>
- 
-         <!-- Dashboar 1 init js-->
-         <script src="assets/js/pages/dashboard-1.init.js"></script>
+    <!-- Init js -->
+    <script src="assets/js/pages/foo-tables.init.js"></script>
 
-         <!-- Footable js -->
-        <script src="assets/libs/footable/footable.all.min.js"></script>
+    <style>
+        .btn:hover {
+            color: #fff !important;
+            text-decoration: none;
+        }
 
-        <!-- Init js -->
-        <script src="assets/js/pages/foo-tables.init.js"></script>
- 
-         <!-- App js-->
-         <script src="assets/js/app.min.js"></script>
-    </body>
+        .btn:focus {
+            color: #fff !important;
+            text-decoration: none;
+        }
+
+        /* .form-control-light {
+            background-color: #fff !important;
+            border-color: #f7b84b !important;
+        } */
+
+        /* body {
+            zoom: 90%;
+            transform: scale(0.9);
+            transform-origin: 0 0;
+        } */
+
+        html,
+        body {
+            width: 106%;
+            height: 106%;
+            /* zoom: 100%; */
+            transform: scale(0.95);
+            transform-origin: 0 0;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased">
+    @inertia
+
+
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- Plugins js-->
+    <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <script src="assets/libs/selectize/js/standalone/selectize.min.js"></script>
+
+    <!-- Dashboar 1 init js-->
+    <script src="assets/js/pages/dashboard-1.init.js"></script>
+
+    <!-- Footable js -->
+    <script src="assets/libs/footable/footable.all.min.js"></script>
+
+    <!-- Init js -->
+    <script src="assets/js/pages/foo-tables.init.js"></script>
+
+    <!-- Third Party js-->
+    {{-- <script src="assets/libs/apexcharts/apexcharts.min.js"></script> --}}
+
+    <!-- Plugins js-->
+    {{-- <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script> --}}
+
+    <!-- Dashboard init js -->
+    <script src="assets/js/pages/ecommerce-dashboard.init.js"></script>
+
+    <!-- App js-->
+    <script src="assets/js/app.min.js"></script>
+</body>
+
 </html>

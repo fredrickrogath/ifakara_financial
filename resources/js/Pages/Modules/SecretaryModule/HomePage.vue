@@ -409,7 +409,7 @@ export default {
         let recaptchaScript = document.createElement("script");
         recaptchaScript.setAttribute(
             "src",
-            "assets/js/pages/ecommerce-dashboard.init.js"
+            "assets/js/pages/foo-tables.init.js"
         );
         document.head.appendChild(recaptchaScript);
 
