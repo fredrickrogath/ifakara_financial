@@ -68,4 +68,24 @@ class DashboardController extends Controller
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
+
+    public function accepeted_requisitions(AccountantService $accountantService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
+    }
+
+    public function rejected_requisitions(AccountantService $accountantService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
+    }
+
+    public function starred_requisitions(AccountantService $accountantService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
+    }
+
+    public function deleted_requisitions(AccountantService $accountantService){
+        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $accountantService->dashboardData());
+    }
 }

@@ -3,7 +3,7 @@
         <jet-banner />
 
         <div
-            class="min-h-screen shadow-xl"
+            class="min-h-screen"
             :style="[
                 isDark
                     ? { 'background-color': '#1e1e1e' }

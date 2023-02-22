@@ -11,7 +11,7 @@
         computed: {
             classes() {
                 return this.active
-                            ? 'text-info'
+                            ? 'text-warning'
                             : ''
             }
         }

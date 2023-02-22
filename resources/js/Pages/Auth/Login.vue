@@ -145,17 +145,6 @@
                                                     Forgot your password?
                                                 </inertia-link>
                                             </p>
-
-                                            <p class="text-dark-50">
-                                                Don't have an account?
-
-                                                <inertia-link
-                                                    :href="route('register')"
-                                                    class="ml-4 text-dark text-sm text-gray-700"
-                                                >
-                                                    Sign Up
-                                                </inertia-link>
-                                            </p>
                                         </div>
                                         <!-- end col -->
                                     </div>
