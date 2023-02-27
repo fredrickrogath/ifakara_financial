@@ -85,7 +85,7 @@ Route::middleware([
     | ROUTES FOR THE ACADEMIC
     |--------------------------------------------------------------------------
     */
-
+    
     Route::group(['prefix' => 'academic', 'middleware' => 'is_academic', 'as' => 'academic.'], function () {
         Route::get('/pageSix', [\App\Http\Controllers\Academic\DashboardController::class, 'pageSix'])->name('pageSix');
         Route::get('/pageOne', [\App\Http\Controllers\Academic\DashboardController::class, 'pageOne'])->name('pageOne');

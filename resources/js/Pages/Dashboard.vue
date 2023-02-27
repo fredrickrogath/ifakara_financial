@@ -43,8 +43,6 @@
                             <invoices v-if="route().current('bishop.invoices')"></invoices>
                             <internal-office v-if="route().current('bishop.internal_office')"></internal-office>
 
-
-
                             <!-- Secretary -->
                             <secretary-home-page
                                 v-if="route().current('secretary.dashboard')"
@@ -119,13 +117,6 @@
         </app-layout>
     <!-- </div> -->
 </template>
-
-<script setup>
-import { useDark, useToggle } from "@vueuse/core";
-
-const isDark = useDark();
-// const toggleDark = useToggle(isDark);
-</script>
 
 <script>
 //end of inertiajs progress

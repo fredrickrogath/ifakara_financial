@@ -88,4 +88,25 @@ class DashboardController extends Controller
         $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return Inertia::render('Dashboard', $accountantService->dashboardData());
     }
+
+    public function getLegerEntries(Request $request){
+        \App\Models\Entry::create([
+            'charts_of_accounts_id' => 1,
+            'from' => 'School Account',
+            'amount' => $request->amount
+
+        ]);
+
+        event(new \App\Events\NewPostPublished('created'));
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => 'fredrick']);
+    }
+
+    public function getLegerEntries1(){
+        // \App\Models\Entry::with('chartOfAccount')->orderBy('created_at', 'desc')->get();
+
+        // event(new \App\Events\NewPostPublished('created'));
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' =>  \App\Models\Entry::with('chartOfAccount')->orderBy('created_at', 'desc')->get()]);
+    }
 }
