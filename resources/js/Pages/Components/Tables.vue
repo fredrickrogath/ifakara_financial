@@ -41,7 +41,7 @@
             </template>
 
             <template v-slot:item.amount="{ item }">
-                <span class="text-gray-600">{{ item.amount }}</span>
+                <span class="text-gray-600">{{ formattedPrice(item.amount)   }}</span>
             </template>
 
             <template v-slot:item.chart_of_account.description="{ item }">
@@ -142,6 +142,13 @@ export default {
     },
 
     methods: {
+        formattedPrice(amount) {
+            return amount.toLocaleString("sw-TZ", {
+                style: "currency",
+                currency: "Tsh",
+            });
+        },
+
         formattedDate(date) {
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },

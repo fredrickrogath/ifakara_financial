@@ -57,7 +57,14 @@
                                         v-else
                                         >{{
                                             item[header.value] !== null
-                                                ? item[header.value]
+                                                ?
+                                                  header.value == "level1" ||
+                                                  header.value == "level2" ||
+                                                  header.value == "level3"
+                                                    ? formattedPrice(
+                                                          item[header.value]
+                                                      )
+                                                    : item[header.value]
                                                 : "Empty"
                                         }}</span
                                     >
@@ -140,9 +147,17 @@ export default {
         };
     },
     methods: {
+        formattedPrice(amount) {
+            return amount.toLocaleString("sw-TZ", {
+                style: "currency",
+                currency: "Tsh",
+            });
+        },
+        
         formattedDate(date) {
             return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
+
         getChartOfAccounts() {
             // console.log("Loading next page");
             axios.get("/accountant/getChartOfAccounts").then((response) => {
