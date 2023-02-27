@@ -342,7 +342,7 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-0 mt-0">
+                        <div class="inbox-rightbar pt-1">
 
                             <div class="mt-0 pt-0">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
