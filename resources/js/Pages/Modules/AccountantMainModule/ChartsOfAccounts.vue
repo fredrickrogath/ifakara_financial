@@ -1,94 +1,93 @@
 <template>
-    <div>
+    <div data-app>
         <spinner v-if="showLoader"></spinner>
-    <div v-else class="h-screen card">
-        
-        <!-- <v-card elevation=""> -->
-        <v-card-title>
-            Chart Of Accounts
-            <v-spacer></v-spacer>
-            <v-text-field
-                v-model="search"
-                append-icon="mdi-magnify"
-                label="Search"
-                single-line
-                hide-details
-            ></v-text-field>
+        <div v-else class="h-screen card">
+            <!-- <v-card elevation=""> -->
+            <v-card-title>
+                Chart Of Accounts
+                <v-spacer></v-spacer>
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line
+                    hide-details
+                ></v-text-field>
 
-            <v-icon class="mx-2 pt-2 px-1" size="22" @click="">
-                mdi-pen-plus
-        </v-icon>
-        </v-card-title>
+                <v-icon class="mx-2 pt-2 px-1" size="22" @click="">
+                    mdi-pen-plus
+                </v-icon>
+            </v-card-title>
 
-        <v-data-table
-            :headers="headers"
-            :items="chartOfAccounts"
-            item-key="name"
-            :search="search"
-            class="elevation-1"
-        >
-            <template v-slot:body="{ items, headers }">
-                <tbody>
-                    <tr v-for="(item, idx, k) in items" :key="idx">
-                        <td v-for="(header, key) in headers" :key="key">
-                            <v-edit-dialog
-                                :return-value.sync="item[header.value]"
-                                @save="save"
-                                @cancel="cancel"
-                                @open="open"
-                                @close="close"
-                                large
-                            >
-                                <!-- header.value hello -->
-                                <span
-                                    class="text-gray-600"
-                                    v-if="header.value == 'created_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
+            <v-data-table
+                :headers="headers"
+                :items="chartOfAccounts"
+                item-key="name"
+                :search="search"
+                class="elevation-1"
+            >
+                <template v-slot:body="{ items, headers }">
+                    <tbody>
+                        <tr v-for="(item, idx, k) in items" :key="idx">
+                            <td v-for="(header, key) in headers" :key="key">
+                                <v-edit-dialog
+                                    :return-value.sync="item[header.value]"
+                                    @save="save"
+                                    @cancel="cancel"
+                                    @open="open"
+                                    @close="close"
+                                    large
                                 >
-                                <span
-                                    class="text-gray-600"
-                                    :class="
-                                        item[header.value] == null &&
-                                        header.value !== 'action'
-                                            ? 'bg-gray-100 italic rounded px-1'
-                                            : ''
-                                    "
-                                    v-else
-                                    >{{
-                                        item[header.value] !== null
-                                            ? item[header.value]
-                                            : "Empty"
-                                    }}</span
-                                >
+                                    <!-- header.value hello -->
+                                    <span
+                                        class="text-gray-600"
+                                        v-if="header.value == 'created_at'"
+                                        >{{
+                                            formattedDate(item[header.value])
+                                        }}</span
+                                    >
+                                    <span
+                                        class="text-gray-600"
+                                        :class="
+                                            item[header.value] == null &&
+                                            header.value !== 'action'
+                                                ? 'bg-gray-100 italic rounded px-1'
+                                                : ''
+                                        "
+                                        v-else
+                                        >{{
+                                            item[header.value] !== null
+                                                ? item[header.value]
+                                                : "Empty"
+                                        }}</span
+                                    >
 
-                                <v-icon
-                                    v-if="header.value == 'action'"
-                                    size="22"
-                                    @click=""
-                                >
-                                    mdi-delete
-                                </v-icon>
+                                    <v-icon
+                                        v-if="header.value == 'action'"
+                                        size="22"
+                                        @click=""
+                                    >
+                                        mdi-delete
+                                    </v-icon>
 
-                                <template
-                                    v-slot:input
-                                    v-if="header.value !== 'action'"
-                                >
-                                    <v-text-field
-                                        v-model="item[header.value]"
-                                        label="Edit"
-                                        single-line
-                                    ></v-text-field>
-                                </template>
-                            </v-edit-dialog>
-                        </td>
-                    </tr>
-                </tbody>
-            </template>
-        </v-data-table>
-        <!-- </v-card> -->
-    </div>
+                                    <template
+                                        v-slot:input
+                                        v-if="header.value !== 'action'"
+                                    >
+                                        <v-text-field
+                                            v-model="item[header.value]"
+                                            label="Edit"
+                                            single-line
+                                        ></v-text-field>
+                                    </template>
+                                </v-edit-dialog>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-data-table>
+            <!-- </v-card> -->
+        </div>
     </div>
 </template>
 
@@ -99,7 +98,7 @@ export default {
     components: {
         Spinner,
     },
-    
+
     mounted() {
         this.showLoader = true;
 
