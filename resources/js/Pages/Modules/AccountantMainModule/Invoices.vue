@@ -346,7 +346,7 @@
 
                             <div class="mt-0 pt-0">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
-                                <transition name="fade">
+                                <!-- <transition name="fade"> -->
                                     <entries
                                         v-if="getCurrentTab == 'entries'"
                                     ></entries>
@@ -365,7 +365,7 @@
                                     <rejected-requisitions
                                         v-if="getCurrentTab == 'rejected'"
                                     ></rejected-requisitions>
-                                </transition>
+                                <!-- </transition> -->
                             </div>
                             <!-- end .mt-3-->
                         </div>
@@ -434,7 +434,7 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active,
+/* .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.5s;
 }
@@ -450,5 +450,5 @@ export default {
 .slide-enter,
 .slide-leave-to {
     transform: translateX(-100%);
-}
+} */
 </style>
