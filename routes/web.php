@@ -141,6 +141,8 @@ Route::middleware([
         Route::get('/starred_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'starred_requisitions'])->name('starred_requisitions');
         Route::get('/deleted_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'deleted_requisitions'])->name('deleted_requisitions');
     //     Route::get('/pageSeven', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageSeven'])->name('pageSeven');
+
+    Route::get('/getChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getChartOfAccounts'])->name('getChartOfAccounts');
     });
 
 
