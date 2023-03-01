@@ -85,7 +85,7 @@ Route::middleware([
     | ROUTES FOR THE ACADEMIC
     |--------------------------------------------------------------------------
     */
-
+    
     Route::group(['prefix' => 'academic', 'middleware' => 'is_academic', 'as' => 'academic.'], function () {
         Route::get('/pageSix', [\App\Http\Controllers\Academic\DashboardController::class, 'pageSix'])->name('pageSix');
         Route::get('/pageOne', [\App\Http\Controllers\Academic\DashboardController::class, 'pageOne'])->name('pageOne');
@@ -141,6 +141,11 @@ Route::middleware([
         Route::get('/starred_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'starred_requisitions'])->name('starred_requisitions');
         Route::get('/deleted_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'deleted_requisitions'])->name('deleted_requisitions');
     //     Route::get('/pageSeven', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageSeven'])->name('pageSeven');
+
+        Route::get('/getChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getChartOfAccounts'])->name('getChartOfAccounts');
+        Route::post('/addChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'addChartOfAccounts'])->name('addChartOfAccounts');
+        Route::post('/updateChartOfAccount', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'updateChartOfAccount'])->name('updateChartOfAccount');
+        Route::post('/deleteChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'deleteChartOfAccounts'])->name('deleteChartOfAccounts');
     });
 
 

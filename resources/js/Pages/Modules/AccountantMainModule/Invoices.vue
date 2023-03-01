@@ -96,7 +96,7 @@
 
                         <div class="d-flex justify-content-between my-1 mt-2">
                             <button type="button" class="btn btn-success waves-effect waves-light">Submit</button>
-                            <button type="button" class="btn btn-danger waves-effect waves-light">Cancel</button>
+                            <button @click="dialog = false" type="button" class="btn btn-danger waves-effect waves-light">Cancel</button>
                         </div>
                     </form>
                     </div>
@@ -113,42 +113,138 @@
                     <div class="card-body">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
-                            <div class="btn-group d-block mb-2 mx-2">
+                            <div class="btn-group dropend d-block mb-2 mx-2">
                                 <button
                                     type="button"
-                                    class="btn btn-outline-warning text-warning w-100 waves-effect waves-light dropdown-toggle"
+                                    class="bg-gray-200 py-1 w-100 waves-effect waves-light dropdown-toggle"
                                     data-bs-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
-                                    <i class="mdi mdi-plus"></i> Create New
+                                    Select Entry Type
                                 </button>
+
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#"
-                                    @click="dialog = true, dialogForm = 'Sales'"
-                                        ><i class="mdi mdi-cart me-1"></i>
+                                    <!-- <a
+                                        class="dropdown-item"
+                                        href="#"
+                                        @click="
+                                            (dialog = true),
+                                                (dialogForm = 'Sales')
+                                        "
+                                    >
+                                        <v-icon size="18" class="me-1"
+                                            >mdi-cart</v-icon
+                                        >
                                         Sales</a
                                     >
                                     <a
                                         class="dropdown-item"
                                         href="#"
-                                        @click="dialog = true, dialogForm = 'Expenses'"
-                                        ><v-icon size="14" class="me-1"
+                                        @click="
+                                            getSpecificLegerEntries();
+                                            setLegerEntry(
+                                                'Income Entry Selected'
+                                            );
+                                        "
+                                        ><v-icon size="16" class="me-1"
                                             >mdi-cash-multiple</v-icon
                                         >
-                                        Expenses</a
+                                        Income</a
                                     >
-                                    <a class="dropdown-item" href="#"
-                                    @click="dialog = true, dialogForm = 'Loans'"
+                                    <a
+                                        class="dropdown-item"
+                                        href="#"
+                                        @click="
+                                            (dialog = true),
+                                                (dialogForm = 'Loans')
+                                        "
+                                    >
+                                        <v-icon size="18" class="me-1"
+                                            >mdi-scale-balance</v-icon
+                                        >
+                                        Loans</a
+                                    > -->
+                                </div>
+                            </div>
+
+                            <div class="btn-group d-block mb-0 mx-2">
+                                <button
+                                    type="button"
+                                    class="bg-gray-200 py-1 w-100 waves-effect waves-light dropdown-toggle"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    Entry Not Selected
+                                </button>
+
+                                <div class="dropdown-menu">
+                                    <!-- <a
+                                        v-for="item in legerEntriesListener"
+                                        :key="item.id"
+                                        class="dropdown-item"
+                                        href="#"
+                                        @click="
+                                            (dialog = true),
+                                                (dialogForm = item.name)
+                                        "
+                                        ><i class="mdi mdi-cart me-1"></i>
+                                        {{ item.name }}</a
+                                    >
+                                    <a
+                                        v-if="legerEntriesListener == null"
+                                        class="dropdown-item"
+                                        href="#"
+                                    >
+                                        Please Select Entry</a
+                                    > -->
+                                    <!-- <a
+                                        class="dropdown-item"
+                                        href="#"
+                                        @click="
+                                            (dialog = true),
+                                                (dialogForm = 'Loans')
+                                        "
                                     >
                                         <v-icon size="14" class="me-1"
                                             >mdi-scale-balance</v-icon
                                         >
                                         Loans</a
-                                    >
+                                    > -->
                                 </div>
                             </div>
-                            <div class="mail-list mt-3">
+
+                            <hr class="bg-gray-100 mb-1" />
+
+                            <div class="mail-list">
+                                <span class="text-center pl-3 mx-auto"
+                                    >From Leger Entry</span
+                                >
+
+                                <a
+                                    @click="setTab('entries')"
+                                    href="#"
+                                    class="list-group-item border-0 mt-1"
+                                    :class="[
+                                        getCurrentTab == 'entries'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >All Entries
+                                </a>
+                            </div>
+
+                            <hr class="bg-gray-100 mb-1 mt-0" />
+
+                            <div class="mail-list mt-2 mb-3">
+                                <span class="text-center pl-3 mx-auto"
+                                    >From Procurement</span
+                                >
+
                                 <a
                                     @click="setTab('home')"
                                     href="#"
@@ -159,9 +255,9 @@
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                        class="mdi mdi-form-select font-18 align-middle me-2"
                                     ></i
-                                    >Requisitions
+                                    >All Requisitions
                                 </a>
                                 <a
                                     @click="setTab('accepted')"
@@ -173,7 +269,7 @@
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-check-bold font-18 align-middle me-2 pb-1"
+                                        class="mdi mdi-check-bold font-18 align-middle me-2"
                                     ></i
                                     >Accepted Requisitions</a
                                 >
@@ -187,7 +283,7 @@
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-alert-circle font-18 align-middle me-2 pb-1"
+                                        class="mdi mdi-alert-circle font-18 align-middle me-2"
                                     ></i
                                     >Rejected Requisitions</a
                                 >
@@ -201,7 +297,7 @@
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-star font-18 align-middle me-2 pb-1"
+                                        class="mdi mdi-star font-18 align-middle me-2"
                                     ></i
                                     >Starred Requisitions</a
                                 >
@@ -215,13 +311,13 @@
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-delete font-18 align-middle me-2 pb-1"
+                                        class="mdi mdi-delete font-18 align-middle me-2"
                                     ></i
                                     >Deleted Requisitions</a
                                 >
                             </div>
 
-                            <div class="mt-2 ml-3">
+                            <div class="ml-3">
                                 <h5>
                                     <span
                                         class="badge rounded-pill p-1 px-2 badge-soft-secondary"
@@ -246,49 +342,14 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar">
-                            <div
-                                class="d-md-flex justify-content-between align-items-center"
-                            >
-                                <form class="search-bar">
-                                    <div class="position-relative">
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-light"
-                                            placeholder="Search files..."
-                                        />
-                                        <span class="mdi mdi-magnify"></span>
-                                    </div>
-                                </form>
-                                <div class="mt-2 mt-md-0">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i
-                                            class="mdi mdi-format-list-bulleted"
-                                        ></i>
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i class="mdi mdi-view-grid"></i>
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-sm btn-white"
-                                    >
-                                        <i
-                                            class="mdi mdi-information-outline"
-                                        ></i>
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="inbox-rightbar pt-1">
 
-                            <div class="mt-3">
+                            <div class="mt-0 pt-0">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
-                                <transition name="fade">
+                                <!-- <transition name="fade"> -->
+                                    <entries
+                                        v-if="getCurrentTab == 'entries'"
+                                    ></entries>
                                     <requisitions
                                         v-if="getCurrentTab == 'home'"
                                     ></requisitions>
@@ -304,7 +365,7 @@
                                     <rejected-requisitions
                                         v-if="getCurrentTab == 'rejected'"
                                     ></rejected-requisitions>
-                                </transition>
+                                <!-- </transition> -->
                             </div>
                             <!-- end .mt-3-->
                         </div>
@@ -328,6 +389,8 @@ import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 
+import Entries from "./Invoices/Entries.vue";
+
 export default {
     components: {
         Requisitions,
@@ -335,6 +398,8 @@ export default {
         DeletedRequisitions,
         StarredRequisitions,
         RejectedRequisitions,
+
+        Entries,
     },
 
     mounted() {
@@ -369,7 +434,7 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active,
+/* .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.5s;
 }
@@ -385,5 +450,5 @@ export default {
 .slide-enter,
 .slide-leave-to {
     transform: translateX(-100%);
-}
+} */
 </style>

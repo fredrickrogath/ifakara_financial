@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
+    Route::post('/getLegerEntries', [\App\Http\Controllers\Accountant\DashboardController::class, 'getLegerEntries'])->name('getLegerEntries');
+    Route::get('/getLegerEntries1', [\App\Http\Controllers\Accountant\DashboardController::class, 'getLegerEntries1'])->name('getLegerEntries1');
+    // Route::post('/getLegerEntries', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getLegerEntries'])->name('getLegerEntries');
+});
