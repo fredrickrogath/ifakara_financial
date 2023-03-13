@@ -1,5 +1,5 @@
 <template>
-    <div data-app class="">
+    <div data-app>
         <v-row justify="center">
             <v-dialog v-model="dialog" scrollable width="auto">
                 <v-card>
@@ -106,11 +106,11 @@
 
         <!-- End of Right modal content -->
 
-        <div class="row">
+        <div class="row px-0 pt-3">
             <!-- Right Sidebar -->
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
+            <div class="col-12 px-1">
+                <div class="card h-screen">
+                    <div class="card-body pt-1">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
                             <div class="btn-group dropend d-block mb-2 mx-2">
@@ -347,7 +347,7 @@
                             <div class="mt-0 pt-0">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
-                                    <entries
+                                    <!-- <entries
                                         v-if="getCurrentTab == 'entries'"
                                     ></entries>
                                     <requisitions
@@ -364,7 +364,33 @@
                                     ></starred-requisitions>
                                     <rejected-requisitions
                                         v-if="getCurrentTab == 'rejected'"
-                                    ></rejected-requisitions>
+                                    ></rejected-requisitions> -->
+
+                                    <div v-show="getInvoiceView">
+                                    <view-invoice></view-invoice>
+                                </div>
+
+                                <div v-show="!getInvoiceView">
+                                    <entries
+                                    v-show="getCurrentTab == 'entries'"
+                                ></entries>
+                                <requisitions
+                                    v-show="getCurrentTab == 'home'"
+                                ></requisitions>
+                                <accepted-requisitions
+                                    v-show="getCurrentTab == 'accepted'"
+                                ></accepted-requisitions>
+                                <!-- <deleted-requisitions
+                                    v-show="getCurrentTab == 'deleted'"
+                                ></deleted-requisitions> -->
+                                <starred-requisitions
+                                    v-show="getCurrentTab == 'starred'"
+                                ></starred-requisitions>
+                                <rejected-requisitions
+                                    v-show="getCurrentTab == 'rejected'"
+                                ></rejected-requisitions>
+                                </div>
+
                                 <!-- </transition> -->
                             </div>
                             <!-- end .mt-3-->
@@ -385,9 +411,10 @@
 <script>
 import Requisitions from "./Invoices/Requisitions.vue";
 import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
-import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
+// import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
+import ViewInvoice from "./Invoices/ViewInvoice.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
@@ -395,10 +422,10 @@ export default {
     components: {
         Requisitions,
         AcceptedRequisitions,
-        DeletedRequisitions,
+        // DeletedRequisitions,
         StarredRequisitions,
         RejectedRequisitions,
-
+        ViewInvoice,
         Entries,
     },
 
@@ -417,8 +444,16 @@ export default {
     },
     computed: {
         //Add computed properties
+        // getCurrentTab() {
+        //     return this.$store.getters["invoice/getTab"];
+        // },
+
         getCurrentTab() {
-            return this.$store.getters["invoice/getTab"];
+            return this.$store.getters["AccountantInvoiceModule/getTab"];
+        },
+
+        getInvoiceView() {
+            return this.$store.getters["AccountantInvoiceModule/getInvoiceView"];
         },
     },
     watch: {
@@ -426,9 +461,13 @@ export default {
     },
     methods: {
         //Add methods...
+        // setTab(tab) {
+        //     this.$store.dispatch("invoice/setTab", tab);
+        // },
+
         setTab(tab) {
-            this.$store.dispatch("invoice/setTab", tab);
-        },
+            this.$store.dispatch("AccountantInvoiceModule/setTab", tab);
+        }, 
     },
 };
 </script>
