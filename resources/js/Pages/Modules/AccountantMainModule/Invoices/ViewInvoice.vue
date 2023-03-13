@@ -14,7 +14,7 @@
                         class="btn btn-success text-white btn-sm waves-effect waves-light"
                         v-if="!this.invoice.status_from_financial"
                     >
-                        Submit to financial
+                        Verify
                     </button>
 
                     <button
@@ -22,7 +22,7 @@
                         class="btn btn-danger text-white btn-sm waves-effect waves-light"
                         v-else
                     >
-                        Unsubmit to financial
+                        Unverify
                     </button>
                 </div>
             </form>
@@ -44,14 +44,13 @@
                         <div class="col-md-4 offset-md-2">
                             <div class="mt-3 float-end">
                                 <p>
-                                    <strong> Invoice id :</strong
+                                    <strong> Invoice id :  </strong
                                     ><span>{{ getInvoiceId }}</span>
                                 </p>
                                 <p>
                                     <strong>Invoice Date : </strong>
                                     <span class="float-end">
-                                        &nbsp;&nbsp;&nbsp;&nbsp; Jan 17,
-                                        2016</span
+                                        &nbsp;&nbsp;&nbsp;&nbsp;  {{ formattedDate(this.invoice.created_at) }}</span
                                     >
                                 </p>
                                 <p>
@@ -202,6 +201,7 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
     mounted() {
         this.showLoader = true;
@@ -234,6 +234,11 @@ export default {
                 "AccountantInvoiceModule/setInvoiceView",
                 null
             );
+        },
+
+        formattedDate(date) {
+            return moment(date).format("MMMM Do YYYY");
+            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         formattedPrice(amount) {
