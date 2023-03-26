@@ -56,9 +56,20 @@
                                 <p>
                                     <strong>Invoice Status : </strong>
                                     <span class="float-end"
-                                        ><span class="badge bg-danger"
+                                        >
+                                        <span
+                                        v-if="!this.invoice.status_from_financial"
+                                        class="badge bg-danger"
                                             >Unpaid</span
-                                        ></span
+                                        >
+
+                                        <span
+                                        v-else
+                                        class="badge bg-success"
+                                            >Paid</span
+                                        >
+                                        
+                                        </span
                                     >
                                 </p>
                             </div>

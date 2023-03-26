@@ -3,14 +3,14 @@
     <!-- Begin page -->
     <!-- <div> -->
         <app-layout>
-            <div id="wrapper" class="pt-2 bg-gray-100">
+            <div id="wrapper" class="mt-0 pt-0">
                 <!-- Topbar Start -->
                 <!-- <top-bar></top-bar> -->
                 <!-- end Topbar -->
 
                 <!-- ========== Left Sidebar Start ========== -->
-                <div class="left-side-menu pt-0">
-                    <div class="h-100" data-simplebar>
+                <div class="left-side-menu pt-0 -mt-2">
+                    <div class="h-screen" data-simplebar>
 
                         <!--- Sidemenu -->
 
@@ -28,10 +28,10 @@
                 <!-- Start Page Content here -->
                 <!-- ============================================================== -->
 
-                <div class="content-page mt-0 pt-0 px-0 bg-white">
+                <div class="content-page mt-0 pt-0 px-0 bg-gray-100">
                     <div class="content">
                         <!-- Start Content-->
-                        <div class="container-fluid">
+                        <div class="ml-1 mt-11">
 
                             <!-- Bishop -->
                             <home-page

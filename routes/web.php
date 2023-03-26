@@ -106,6 +106,11 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'secretary', 'middleware' => 'is_secretary', 'as' => 'secretary.'], function () {
+        
+        Route::post('/dispatch-secretary-event', function () {
+            event(new \App\Events\NewPostPublished('data'));
+        });
+        
         Route::get('/dashboard', [\App\Http\Controllers\Secretary\DashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/schools', [\App\Http\Controllers\Secretary\DashboardController::class, 'schools'])->name('schools');
         Route::get('/uploads', [\App\Http\Controllers\Secretary\DashboardController::class, 'uploads'])->name('uploads');
