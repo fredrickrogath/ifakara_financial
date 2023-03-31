@@ -57,7 +57,7 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students
+                Students {{ getSchoolId }}
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -94,7 +94,7 @@
                                 <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
-                                    @click=" setInvoiceView(items[idx]['id'])"
+                                    @click="setInvoiceView(items[idx]['id'])"
                                 >
                                     mdi-eye
                                 </v-icon>
@@ -149,23 +149,18 @@
                                     v-else-if="header.value == 'last_name'"
                                     >{{ item[header.value] }}</span
                                 >
-                                
 
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'gender'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'from'"
                                 >
-                                    {{
-                                        item[header.value]
-                                    }}
+                                    {{ item[header.value] }}
                                 </span>
 
                                 <!-- <span 
@@ -220,10 +215,17 @@ export default {
         this.getStudents();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        // window.Echo.channel("Student").listen(
+        //     "StudentEvent",
+        //     (e) => {
+        //         // console.log('abc');
+        //         this.getStudents();
+        //     }
+        // );
+
+        window.Echo.channel("Student").listen(
+            "Api\\Secretary\\StudentEvent",
             (e) => {
-                // console.log('abc');
                 this.getStudents();
             }
         );
@@ -260,12 +262,35 @@ export default {
             students: [],
 
             idForAction: null,
+
+            schoolId: null,
         };
     },
 
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        getSchoolId() {
+            this.schoolId =
+                this.$store.getters["SecratarySchoolModule/getSchoolId"];
+            return this.$store.getters["SecratarySchoolModule/getSchoolId"];
+        },
+
+        // getSchoolId() {
+        //     return this.$store.getters["SecratarySchoolModule/getSchoolId"];
+        // },
+    },
+
+    watch: {
+        schoolId(newVal, oldVal) {
+            if (newVal !== null) {
+                this.getStudents();
+            }
+            console.log(
+                `The message has changed from "${oldVal}" to "${newVal}"`
+            );
         },
     },
 
@@ -292,24 +317,31 @@ export default {
         //     }, 0);
         // },
 
-        department(role){
-            if (role == 3){
-                return 'Academic'
-            }
-            else if (role == 5){
-                return 'Accountant'
-            }
-            else if (role == 6){
-                return 'Procurement'
+        department(role) {
+            if (role == 3) {
+                return "Academic";
+            } else if (role == 5) {
+                return "Accountant";
+            } else if (role == 6) {
+                return "Procurement";
             }
         },
 
-        getStudents() {
-            axios.get("http://127.0.0.1:8000/api/secretary/getStudents").then((response) => {
-                this.students = response.data.data;
-                this.showLoader = false;
-                // console.log(response.data.data)
-            });
+        async getStudents() {
+            axios
+                .post("http://127.0.0.1:8000/api/secretary/getSchoolStudents", {
+                    school_id: this.getSchoolId,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    this.showLoader = false;
+                    this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    // console.log(this.schoolId)
+                    // console.log(response.data.data);
+                });
+            // handle response here
         },
 
         async updateTools(id, column, data) {
@@ -340,7 +372,7 @@ export default {
             // handle response here
         },
 
-        async starredInvoice(id,data ,column) {
+        async starredInvoice(id, data, column) {
             axios
                 .post("/accountant/starredInvoice", {
                     id: id,

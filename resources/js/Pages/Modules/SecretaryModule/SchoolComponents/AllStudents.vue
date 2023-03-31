@@ -225,13 +225,20 @@ export default {
         this.getStudents();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        window.Echo.channel("Student").listen(
+            "StudentEvent",
             (e) => {
-                // console.log('abc');
+                console.log('abc');
                 this.getStudents();
             }
         );
+
+        // window.Echo.channel("Student").listen(
+        //     "Api\\Secretary\\StudentEvent",
+        //     (e) => {
+        //         this.getStudents();
+        //     }
+        // );
     },
 
     data() {

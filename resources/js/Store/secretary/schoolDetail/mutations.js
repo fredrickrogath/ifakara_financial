@@ -7,6 +7,10 @@ export default {
         state.addStudent = !state.addStudent;
     },
 
+    setAddStaff(state) {
+        state.addStaff = !state.addStaff;
+    },
+    
     setAddSchool(state) {
         state.addSchool = !state.addSchool;
     },

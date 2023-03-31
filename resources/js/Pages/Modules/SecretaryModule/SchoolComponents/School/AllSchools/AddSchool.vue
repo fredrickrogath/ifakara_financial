@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="h-screen">
-                        <div class="bg-white">
+                        <!-- <div class="bg-white">
                             <div class="d-flex justify-content-between">
                                 <span> School Registration </span>
                                 <span>
@@ -23,7 +23,18 @@
                             </div>
                         </div>
 
-                        <hr class="bg-gray-200 mb-2 mt-2" />
+                        <hr class="bg-gray-200 mb-2 mt-2" /> -->
+
+                        <div class="mt-0 pt-0 mb-1">
+                            <v-icon
+                                class="ml-1 pr-0 mr-0"
+                                size="22"
+                                @click="setAddSchool()"
+                            >
+                                mdi-keyboard-backspace
+                            </v-icon>
+
+                        </div>
 
                         <div class="">
                             <form @submit.prevent="addSchool">
@@ -38,7 +49,7 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="name"
                                             />
                                         </div>
@@ -52,10 +63,15 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="location"
                                             />
                                         </div>
+                                    </div>
+                                    <!-- end col -->
+
+
+                                    <div class="col-lg-6">
 
                                         <div class="mb-3">
                                             <label
@@ -66,7 +82,7 @@
                                             <input
                                                 type="email"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="email"
                                             />
                                         </div>
@@ -80,25 +96,31 @@
                                             <input
                                                 type="text"
                                                 id="simpleinput"
-                                                class="form-control"
+                                                class="form-control form-control-sm"
                                                 v-model="mobile"
                                             />
                                         </div>
 
-                                        <div class="col-md-6">
+                                        
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row-->
+
+                                <div class="col-md-6">
                                             <div
                                                 class="button-list mb-1 mb-sm-0"
                                             >
                                                 <button
                                                     v-if="!showLoader"
-                                                    class="btn btn-primary text-white"
+                                                    class="btn btn-sm btn-primary text-white"
                                                     type="submit"
                                                 >
                                                     Submit
                                                 </button>
                                                 <button
                                                     v-else
-                                                    class="btn btn-primary"
+                                                    class="btn btn-sm btn-primary"
                                                     type="button"
                                                     disabled
                                                 >
@@ -111,10 +133,6 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row-->
                             </form>
                         </div>
                         <!-- end card-body -->

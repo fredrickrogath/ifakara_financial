@@ -172,12 +172,12 @@
                                     {{ item[header.value] }}
                                 </span>
 
-                                <span
+                                <!-- <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'mobile'"
                                 >
                                     {{ item[header.value] }}
-                                </span>
+                                </span> -->
 
                                 <span
                                     class="text-gray-600"
@@ -263,10 +263,10 @@ export default {
                     text: "Email",
                     value: "email",
                 },
-                {
-                    text: "Mobile",
-                    value: "mobile",
-                },
+                // {
+                //     text: "Mobile",
+                //     value: "mobile",
+                // },
                 {
                     text: "Location",
                     value: "location",

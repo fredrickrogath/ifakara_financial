@@ -9,6 +9,10 @@ export default {
         context.commit("setAddStudent");
     },
 
+    setAddStaff(context){
+        context.commit("setAddStaff");
+    },
+
     setAddSchool(context){
         context.commit("setAddSchool");
     },

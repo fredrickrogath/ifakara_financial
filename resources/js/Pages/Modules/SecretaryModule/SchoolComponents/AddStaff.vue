@@ -230,7 +230,7 @@ export default {
 
     methods: {
         async initialize() {
-            this.getDepartments();
+            // this.getDepartments();
             // this.getSellers();
         },
 
@@ -334,13 +334,13 @@ export default {
                 });
         },
         // identifier
-        async getDepartments() {
-            axios.get("http://127.0.0.1:8000/api/secretary/getDepartments").then((response) => {
-                this.identifierOptions = response.data.data;
-                // this.showLoader = false;
-                // console.log(response.data.data);
-            });
-        },
+        // async getDepartments() {
+        //     axios.get("http://127.0.0.1:8000/api/secretary/getDepartments").then((response) => {
+        //         this.identifierOptions = response.data.data;
+        //         // this.showLoader = false;
+        //         // console.log(response.data.data);
+        //     });
+        // },
 
         // async getSellers() {
         //     axios.get("/procurement/getSellers").then((response) => {

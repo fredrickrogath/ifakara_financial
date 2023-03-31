@@ -68,8 +68,22 @@
                 ></v-text-field>
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <v-icon class="ml-5 pr-0 pt-3 mr-0" size="22" @click="">
+                    <v-icon
+                        v-if="!getAddStaff"
+                        class="ml-5 pr-0 pt-3 mr-0"
+                        size="22"
+                        @click="setAddStaff()"
+                    >
                         mdi-pen-plus
+                    </v-icon>
+
+                    <v-icon
+                        v-else
+                        class="ml-4 px-1 mt-1 mr-0 py-1"
+                        size="22"
+                        @click="setAddStaff()"
+                    >
+                        mdi-check
                     </v-icon>
                 </div>
             </v-card-title>
@@ -207,10 +221,17 @@ export default {
         this.getStaffs();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         // console.log('abc');
+        //         this.getStaffs();
+        //     }
+        // );
+
+        window.Echo.channel("school-staff-trigger-from-financial-secretary").listen(
+            "Api\\Secretary\\SchoolEvent",
             (e) => {
-                // console.log('abc');
                 this.getStaffs();
             }
         );
@@ -258,6 +279,12 @@ export default {
                 this.$store.getters["SecratarySchoolModule/getSchoolId"];
             return this.$store.getters["SecratarySchoolModule/getSchoolId"];
         },
+
+        getAddStaff() {
+            return this.$store.getters[
+                "SecretarySchoolDetailModule/getAddStaff"
+            ];
+        },
     },
 
     watch: {
@@ -304,6 +331,10 @@ export default {
             }
         },
 
+        setAddStaff() {
+            this.$store.dispatch("SecretarySchoolDetailModule/setAddStaff");
+        },
+
         // getStaffs() {
         //     axios.get("http://127.0.0.1:8000/api/secretary/getStaffs").then((response) => {
         //         this.students = response.data.data;
@@ -323,7 +354,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -367,7 +398,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

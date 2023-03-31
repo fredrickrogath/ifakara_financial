@@ -2,13 +2,17 @@
     <!-- <v-col>
         <v-row> -->
     <div>
-
         <!-- <v-col sm="12" md="12" lass="mt-0 pt-0 bg-info"> -->
-            <!-- <v-card flat :dark="isDark"> -->
-            <!-- <v-card elevation="0" data-app> -->
-
-            <all-school-staffs v-show="getCurrentSchoolDetailTab == 'allStaffs'"></all-school-staffs>
-            <all-school-students v-show="getCurrentSchoolDetailTab == 'allStudents'"></all-school-students>
+        <!-- <v-card flat :dark="isDark"> -->
+        <!-- <v-card elevation="0" data-app> -->
+        <!-- {{ getAddStudent }} -->
+        <add-staff v-if="getCurrentSchoolDetailTab == 'allStaffs' && getAddStaff"></add-staff>
+        <all-school-staffs
+            v-show="getCurrentSchoolDetailTab == 'allStaffs' && !getAddStaff"
+        ></all-school-staffs>
+        <all-school-students
+            v-show="getCurrentSchoolDetailTab == 'allStudents'"
+        ></all-school-students>
         <!-- </v-col> -->
     </div>
     <!-- </v-row>
@@ -21,6 +25,9 @@ import Spinner from "../../../.././Components/SpinnerLoader.vue";
 
 import AllSchoolStaffs from "./AllStaffs.vue";
 import AllSchoolStudents from "./AllStudents.vue";
+
+import AddStaff from ".././School/School/AddStaff.vue";
+import AddStudent from ".././School/School/AddStudent.vue";
 export default {
     components: {
         Spinner,
@@ -28,6 +35,8 @@ export default {
         AllSchoolStaffs,
         AllSchoolStudents,
 
+        AddStaff,
+        AddStudent,
     },
 
     props: {
@@ -103,31 +112,39 @@ export default {
         getCurrentSchoolDetailTab() {
             return this.$store.getters["SecretarySchoolDetailModule/getTab"];
         },
+
+        getAddStudent() {
+            return this.$store.getters[
+                "SecretarySchoolDetailModule/getAddStudent"
+            ];
+        },
+
+        getAddStaff() {
+            return this.$store.getters[
+                "SecretarySchoolDetailModule/getAddStaff"
+            ];
+        },
     },
 
     methods: {
         // async setIdForAction(id) {
         //     this.idForAction = id;
         // },
-
         // formattedPrice(amount) {
         //     return amount.toLocaleString("sw-TZ", {
         //         style: "currency",
         //         currency: "Tsh",
         //     });
         // },
-
         // formattedDate(date) {
         //     return moment(date).format("MMMM Do YYYY");
         //     // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         // },
-
         // // totalPrice(item) {
         // //     return item.reduce((total, item) => {
         // //         return total + item.tool.price * item.count;
         // //     }, 0);
         // // },
-
         // department(role){
         //     if (role == 3){
         //         return 'Academic'
@@ -139,7 +156,6 @@ export default {
         //         return 'Procurement'
         //     }
         // },
-
         // getSchools() {
         //     axios.get("http://127.0.0.1:8000/api/secretary/getStaffs").then((response) => {
         //         this.students = response.data.data;
@@ -147,7 +163,6 @@ export default {
         //         // console.log(response.data.data)
         //     });
         // },
-
         // async updateTools(id, column, data) {
         //     axios
         //         .post("/accountant/updateTools", {
@@ -163,7 +178,6 @@ export default {
         //         });
         //     // handle response here
         // },
-
         // async deleteInvoice() {
         //     axios
         //         .post("/accountant/deleteInvoice", {
@@ -175,7 +189,6 @@ export default {
         //         });
         //     // handle response here
         // },
-
         // async starredInvoice(id,data ,column) {
         //     axios
         //         .post("/accountant/starredInvoice", {
@@ -191,11 +204,6 @@ export default {
         //         });
         //     // handle response here
         // },
-
-        setSchoolView(id) {
-            this.$store.dispatch("SecratarySchoolModule/setSchoolView", id);
-        },
-
         // save(id, column, data) {
         //     this.updateTools(id, data, column);
         //     // console.log(id + " , " +data);

@@ -10,6 +10,7 @@ export default {
         return {
             tab: 'allStaffs',
             addStudent: false,
+            addStaff: false,
             addSchool: false,
 
             setSchoolView: false,

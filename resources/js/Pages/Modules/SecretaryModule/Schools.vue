@@ -335,7 +335,7 @@
                                 >
                                     <a
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 pt-0"
                                     @click="setTab('allSchools')"
                                     :class="[
                                         getCurrentTab == 'allSchools'
@@ -350,7 +350,7 @@
 
                                 <a
                                     href="#"
-                                    class="list-group-item border-0 mt-1"
+                                    class="list-group-item border-0 pt-1"
                                     @click="setTab('allStaffs')"
                                     :class="[
                                         getCurrentTab == 'allStaffs'
@@ -362,19 +362,24 @@
                                     ></i
                                     >All Staffs
                                 </a>
+                                
+                                
                                 <a
                                     href="#"
-                                    class="list-group-item border-0"
-                                    @click="setTab('allStudents')"
+                                    class="list-group-item border-0 pt-1"
+                                    @click="setTab('permissions')"
                                     :class="[
-                                        getCurrentTab == 'allStudents'
+                                        getCurrentTab == 'permissions'
                                             ? 'text-warning'
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                        class="mdi mdi-lock font-19 align-middle me-2 pb-1"
                                     ></i
-                                    >All Students</a
+                                    >Permissions <i
+                                        class="mdi mdi-bell inline-block animate-shake shake text-red-400 font-19 align-middle me-2 pb-1 px-2"
+                                    ></i
+                                    ></a
                                 >
                                 </div>
                             </div>
@@ -436,6 +441,7 @@
                                     <all-students
                                         v-show="getCurrentTab == 'allStudents'"
                                     ></all-students>
+                                    <permissions v-show="getCurrentTab == 'permissions'"></permissions>
                                 </div>
                                 <!-- <requisitions
                                     v-if="getCurrentTab == 'home'"
@@ -483,6 +489,7 @@ import AllSchools from "./SchoolComponents/School/AllSchools.vue";
 // import AllSchoolStaffs from "./SchoolComponents/School/AllStaffs.vue";
 import OpenSchool from "./SchoolComponents/School/OpenSchool.vue";
 import AddSchool from "./SchoolComponents/School/AllSchools/AddSchool.vue";
+import Permissions from "./SchoolComponents/School/School/Permissions.vue";
 
 // import Entries from "./Invoices/Entries.vue";
 
@@ -503,6 +510,7 @@ export default {
         // AllSchoolStaffs,
         OpenSchool,
         AddSchool,
+        Permissions,
         // Entries,
 
         Select2,
@@ -711,8 +719,16 @@ export default {
         opacity: 0;
     }
 }
-/* .slide-enter,
-.slide-leave-to {
-    transform: translateX(-100%);
-} */
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px) rotate(-5deg); }
+    50% { transform: translateX(4px) rotate(5deg); }
+    75% { transform: translateX(-4px) rotate(-5deg); }
+    100% { transform: translateX(0); }
+  }
+  
+  .shake {
+    animation: shake 0.5s infinite;
+  }
 </style>

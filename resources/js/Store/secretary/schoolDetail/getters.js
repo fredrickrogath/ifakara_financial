@@ -7,6 +7,10 @@ export default {
         return state.addStudent;
     },
 
+    getAddStaff(state){
+        return state.addStaff;
+    },
+
     getAddSchool(state){
         return state.addSchool;
     },
