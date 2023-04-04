@@ -51,7 +51,7 @@
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
-                                <!-- <v-icon
+                                <v-icon
                                     v-if="header.value == 'delete'"
                                     size="22"
                                     type="button"
@@ -60,22 +60,15 @@
                                     @click="setIdForAction(items[idx]['id'])"
                                 >
                                     mdi-delete
-                                </v-icon> -->
-
-                                <v-icon
-                                    v-if="header.value == 'permission'"
-                                    size="22"
-                                    @click="setSchoolView(items[idx]['id'])"
-                                >
-                                    mdi-lock
                                 </v-icon>
 
                                 <v-icon
-                                    v-if="header.value == 'permission'"
+                                    v-if="header.value == 'financial_secreatary_permission'"
                                     size="22"
-                                    @click="setSchoolView(items[idx]['id'])"
+                                    :color="!item[header.value].financial_secreatary_permission ? 'bg-red-400' : 'bg-green-400'"
+                                    @click="alterPermission(items[idx]['id'], items[idx].object.id, items[idx].object_type, item[header.value].financial_secreatary_permission)"
                                 >
-                                    mdi-lock-open-variant
+                                    {{!item[header.value].financial_secreatary_permission ? 'mdi-lock' : 'mdi-lock-open-variant'}}
                                 </v-icon>
                                 
                                 <v-icon
@@ -85,20 +78,22 @@
                                         item[header.value] ? 'text-warning' : ''
                                     "
                                     @click="
-                                        starredInvoice(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
+                                        // starredInvoice(
+                                        //     items[idx]['id'],
+                                        //     item[header.value],
+                                        //     header.value
+                                        // );
+                                         setCommentView(items[idx]['id']);
                                     "
                                 >
                                     mdi-chat-processing
                                 </v-icon>
-
                                 <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'from_role'"
-                                    >{{ item[header.value] }}</span
+                                    >{{ item[header.value] }}
+                                    
+                                    </span
                                 >
 
                                 <span
@@ -137,12 +132,12 @@
                                     {{ item[header.value] }}
                                 </span> -->
 
-                                <span
+                                <!-- <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'location'"
                                 >
                                     {{ item[header.value] }}
-                                </span>
+                                </span> -->
 
                                 <!-- <span
                                     class="text-gray-600"
@@ -194,10 +189,16 @@ export default {
         this.getSchoolPermissions();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        window.Echo.channel("academic-trigger-student-permission").listen(
+            "Api\\Secretary\\Student\\PermissionEvent",
             (e) => {
-                // console.log('abc');
+                this.getSchoolPermissions();
+            }
+        );
+
+        window.Echo.channel("academic-trigger-add-student").listen(
+            "Academic\\StudentEvent",
+            (e) => {
                 this.getSchoolPermissions();
             }
         );
@@ -230,7 +231,7 @@ export default {
                     value: "object",
                 },
                 { text: "Date", value: "created_at" },
-                { text: "Action", value: "permission" },
+                { text: "Action", value: "financial_secreatary_permission" },
                 { text: "Action", value: "comment" },
             ],
             students: [],
@@ -282,31 +283,38 @@ export default {
             }
         },
 
+        setCommentView(id) {
+            this.$store.dispatch("SecratarySchoolModule/setNotificationId", id);
+            this.$store.dispatch("SecratarySchoolModule/setCommentView");
+        },
+
         getSchoolPermissions() {
             axios
                 .get("http://127.0.0.1:8000/api/secretary/getSchoolPermissions")
                 .then((response) => {
                     this.students = response.data.data;
                     this.showLoader = false;
-                    console.log(response.data.data)
+                    // console.log(response.data.data)
                 });
         },
 
-        // async updateTools(id, column, data) {
-        //     axios
-        //         .post("/accountant/updateTools", {
-        //             id: id,
-        //             data: data,
-        //             column: column,
-        //         })
-        //         .then((response) => {
-        //             // this.students = response.data.data;
-        //             // this.amount = "";
-        //             // this.narration = "";
-        //             // console.log(response.data.data);
-        //         });
-        //     // handle response here
-        // },
+        async alterPermission(id, object_id, object_type, permission) {console.log(id, object_id, object_type, permission)
+            axios
+                .post("http://127.0.0.1:8000/api/secretary/alterPermission", {
+                    id: id,
+                    object_id: object_id,
+                    object_type: object_type,
+                    permission: permission,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    // this.getSchoolPermissions();
+                    console.log(response.data.data);
+                });
+            // handle response here
+        },
 
         // async deleteInvoice() {
         //     axios

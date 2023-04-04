@@ -14,6 +14,9 @@ export default {
             setSchoolView: false,
             schoolId: null,
 
+            setCommentView: false,
+            notificationId: null,
+
             // SNACKBAR
             snackBarState: false,
             snackBarMessage: 'Successfully submited',

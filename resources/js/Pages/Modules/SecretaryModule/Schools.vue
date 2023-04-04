@@ -426,6 +426,7 @@
 
                                 <div v-show="getSchoolView && !getAddStudent">
                                     <open-school></open-school>
+                                    
                                 </div>
                                 <div
                                     v-show="!getAddStudent && !getSchoolView"
@@ -441,7 +442,8 @@
                                     <all-students
                                         v-show="getCurrentTab == 'allStudents'"
                                     ></all-students>
-                                    <permissions v-show="getCurrentTab == 'permissions'"></permissions>
+                                    <permissions v-show="getCurrentTab == 'permissions' && !getCommentView"></permissions>
+                                    <Comments v-show="getCommentView && getCurrentTab == 'permissions'"></Comments>
                                 </div>
                                 <!-- <requisitions
                                     v-if="getCurrentTab == 'home'"
@@ -490,6 +492,7 @@ import AllSchools from "./SchoolComponents/School/AllSchools.vue";
 import OpenSchool from "./SchoolComponents/School/OpenSchool.vue";
 import AddSchool from "./SchoolComponents/School/AllSchools/AddSchool.vue";
 import Permissions from "./SchoolComponents/School/School/Permissions.vue";
+import Comments from "./SchoolComponents/Comments.vue";
 
 // import Entries from "./Invoices/Entries.vue";
 
@@ -511,6 +514,7 @@ export default {
         OpenSchool,
         AddSchool,
         Permissions,
+        Comments,
         // Entries,
 
         Select2,
@@ -581,6 +585,10 @@ export default {
 
         getAddSchool() {
             return this.$store.getters["SecretarySchoolDetailModule/getAddSchool"];
+        },
+
+        getCommentView() {
+            return this.$store.getters["SecratarySchoolModule/getCommentView"];
         },
     },
     watch: {

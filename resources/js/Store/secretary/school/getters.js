@@ -21,6 +21,14 @@ export default {
 
     getSchoolId(state){
         return state.schoolId;
+    },
+
+    getCommentView(state){
+        return state.setCommentView;
+    },
+
+    getNotificationId(state){
+        return state.notificationId;
     }
     
     // finalCounter2(_, getters){

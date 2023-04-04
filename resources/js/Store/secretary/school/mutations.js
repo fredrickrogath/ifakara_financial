@@ -15,4 +15,12 @@ export default {
         state.setSchoolView = !state.setSchoolView;
         state.schoolId = id;
     },
+
+    setCommentView(state){
+        state.setCommentView = !state.setCommentView;
+    },
+
+    setNotificationId(state, id){
+        state.notificationId = id;
+    },
 };

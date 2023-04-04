@@ -84,6 +84,10 @@
 <body class="font-sans antialiased">
     @inertia
 
+<script>
+	const el = document.getElementById('messages')
+	el.scrollTop = el.scrollHeight
+</script>
 
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
