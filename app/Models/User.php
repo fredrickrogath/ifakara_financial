@@ -87,7 +87,7 @@ class User extends Authenticatable
     
     public const is_accountant = 5;
 
-    // public const is_procurement = 6;
+    public const is_procurement = 6;
 
     // public const is_accountant_main = 7;
 

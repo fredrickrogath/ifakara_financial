@@ -27,6 +27,7 @@
             >
                 <div
                     class="chat-message"
+                    ref="messagesContainer"
                     v-for="comment in comments"
                     :key="comment.id"
                 >
@@ -61,7 +62,11 @@
                                     >{{ comment.body }}</span
                                 >
                                 <h6 class="pl-2 text-gray-500">
-                                    {{ comment.from_role == 3 ? 'Academic' : 'Head'  }}
+                                    {{
+                                        comment.from_role == 3
+                                            ? "Academic"
+                                            : "Head"
+                                    }}
                                 </h6>
                             </div>
                         </div>
@@ -124,6 +129,17 @@ export default {
                 this.getComments();
             }
         );
+
+        // scroll to the bottom of messages container
+        // this.$nextTick(() => {
+        //     const messagesContainer = this.$refs.messagesContainer;
+        //     messagesContainer.scrollTo({
+        //         top: messagesContainer.scrollHeight,
+        //         behavior: "smooth",
+        //     });
+        // });
+
+        // console.log(this.$refs.messagesContainer);
     },
 
     data() {
@@ -162,6 +178,11 @@ export default {
             this.$store.dispatch("SecratarySchoolModule/setCommentView");
         },
 
+        scrollToBottom() {
+            this.$refs.messagesContainer.scrollTop =
+                this.$refs.messagesContainer.scrollHeight;
+        },
+
         async getComments() {
             axios
                 .post("http://127.0.0.1:8000/api/secretary/getComments", {
@@ -169,6 +190,15 @@ export default {
                 })
                 .then((response) => {
                     this.comments = response.data.data;
+
+                    // scroll to the bottom of messages container
+                    // this.$nextTick(() => {
+                    //     const messagesContainer = this.$refs.messagesContainer;
+                    //     messagesContainer.scrollTo({
+                    //         top: messagesContainer.scrollHeight,
+                    //         behavior: "smooth",
+                    //     });
+                    // });
                     // this.amount = "";
                     // this.narration = "";
                     // this.getSchoolPermissions();

@@ -377,8 +377,9 @@
                                         class="mdi mdi-lock font-19 align-middle me-2 pb-1"
                                     ></i
                                     >Permissions <i
-                                        class="mdi mdi-bell inline-block animate-shake shake text-red-400 font-19 align-middle me-2 pb-1 px-2"
-                                    ></i
+                                    v-if="permissionCount > 0"
+                                        class="mdi mdi-bell inline-block animate-shake shake text-red-500 font-17 align-middle me-2 pb-1 px-2"
+                                    > {{ permissionCount }} </i
                                     ></a
                                 >
                                 </div>
@@ -521,11 +522,13 @@ export default {
     },
 
     mounted() {
+        this.getSchoolPermissionsNotifications();
+
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        window.Echo.channel("academic-trigger-student-permission").listen(
+            "Api\\Secretary\\Student\\PermissionEvent",
             (e) => {
-                // console.log(e);
+                this.getSchoolPermissionsNotifications();
             }
         );
     },
@@ -545,6 +548,7 @@ export default {
             name: "",
             price: "",
             count: "",
+            permissionCount: 0,
             narration: "",
 
             myValue: "",
@@ -593,9 +597,9 @@ export default {
     },
     watch: {
         //Add watchers...
-        student() {
-            this.getStudents();
-        },
+        // student() {
+        //     this.getStudents();
+        // },
     },
     methods: {
         //Add methods...
@@ -648,12 +652,12 @@ export default {
         //     this.selectedLegerEntry = entry;
         // },
 
-        // getStudents() {
-        //     axios.get("/accountant/searchStudent").then((response) => {
-        //         this.students = response.data.data;
-        //         // console.log(response.data);
-        //     });
-        // },
+        getSchoolPermissionsNotifications() {
+            axios.get("http://127.0.0.1:8000/api/secretary/getSchoolPermissionsNotifications").then((response) => {
+                this.permissionCount = response.data.data;
+                // console.log(response.data.data);
+            });
+        },
 
         // async submitForm() {
         //     axios

@@ -34,38 +34,28 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageOne(){
+    public function tools(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageTwo(){
+    public function tools_view(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageThree(){
+    public function invoice(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageFour(){
+    public function uploads(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 
-    public function pageFive(){
+    public function reports(ProcurementService $procurementService){
         $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSix(){
-        $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
-    }
-
-    public function pageSeven(){
-        $this->authorize('authorizeProcurement', \App\Models\User::class); 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', $procurementService->dashboardData());
     }
 }

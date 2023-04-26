@@ -2,9 +2,7 @@
     <div>
         <jet-banner />
 
-        <div
-            class="min-h-screen bg-white"
-        >
+        <div class="min-h-screen bg-white">
             <nav
                 class="border-b border-gray-100 sticky top-0 z-50 fixed-top bg-white"
             >
@@ -14,32 +12,46 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
-                                <inertia-link
-                                    :href="
-                                        route($page.props.role + '.dashboard')
-                                    "
-                                >
-                                    <jet-application-mark
-                                        class="block h-9 w-auto"
-                                    />
-                                </inertia-link>
+                                <jet-application-mark
+                                    class="block h-9 w-auto"
+                                />
                             </div>
 
                             <!-- Navigation Links -->
-                            <!-- <div
-                                class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+                            <div
+                                class="hidden space-x-8 sm:-my-px  my-auto sm:ml-10 sm:flex"
+                                v-if="route().current('procurement.dashboard')"
                             >
-                                <jet-nav-link
-                                    :href="route('head.dashboard')"
-                                    :active="
-                                        route().current('head.dashboard') ||
-                                        route().current('head.*')
-                                    "
+                            <a
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    @click="setSchoolDashboards()"
+                                    :class="[
+                                        getSchoolDashboards
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-view-dashboard font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Schools details</a
                                 >
-                                    Dashboard
-                                </jet-nav-link>
-                            </div> -->
+                                <!-- <span> hello </span> -->
+                            </div>
 
+                            <div
+                                class="hidden space-x-8 sm:-my-px  my-auto sm:ml-10 sm:flex"
+                                v-if="route().current('procurement.dashboard')"
+                            >
+                            <a v-show="getViewSchoolDashboard"
+                                    href="#"
+                                    class="list-group-item border-0 font-medium bg-warning text-white mt-1 py-0"
+                                    @click="setViewSchoolDashboard()"
+                                    >Back</a
+                                >
+                                <!-- <span> hello </span> -->
+                            </div>
+                            
                             <!-- <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
@@ -341,11 +353,6 @@
                     <div
                         v-if="show"
                         class="absolute w-full bg-white dark:bg-gray-900 z-10"
-                        :style="[
-                            isDark
-                                ? { 'background-color': '#1e1e1e' }
-                                : { background: '#FFF' },
-                        ]"
                     >
                         <div
                             :class="{
@@ -568,9 +575,9 @@
 </template>
 
 <script setup>
-import { useDark, useToggle } from "@vueuse/core";
+// import { useDark, useToggle } from "@vueuse/core";
 
-const isDark = useDark();
+// const isDark = useDark();
 // const toggleDark = useToggle(isDark);
 </script>
 
@@ -610,6 +617,15 @@ export default {
     },
 
     methods: {
+        setSchoolDashboards() {
+            this.$store.dispatch("ProcurementToolModule/setSchoolDashboards");
+        },
+
+        setViewSchoolDashboard(id) {
+            // this.setSchoolId(id);
+            this.$store.dispatch("ProcurementToolModule/setViewSchoolDashboard");
+        },
+
         switchToTeam(team) {
             this.$inertia.put(
                 route("current-team.update"),
@@ -646,6 +662,16 @@ export default {
     computed: {
         showTopBarComputed() {
             return this.$store.getters["showTopBar"];
+        },
+
+        getSchoolDashboards() {
+            return this.$store.getters["ProcurementToolModule/getSchoolDashboards"];
+        },
+
+        getViewSchoolDashboard() {
+            return this.$store.getters[
+                "ProcurementToolModule/getViewSchoolDashboard"
+            ];
         },
     },
 };

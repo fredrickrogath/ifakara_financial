@@ -7,7 +7,8 @@ class ProcurementService
     public function dashboardData(){
         return [
             $prefix = 'procurement',
-            'posts' => \App\Models\Post::all(),
+            'role' => 'procurement',
+            // 'posts' => \App\Models\Post::all(),
             'routes'=> [
                 0 => [
                   'title' => 'Home procmnt',

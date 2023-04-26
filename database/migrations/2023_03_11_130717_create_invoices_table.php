@@ -15,11 +15,13 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('from');
             $table->integer('invoice_no');
+            $table->foreignId('seller_id')->constrained('sellers')->onDelete('cascade')->onUpdate('cascade');
             $table->string('narration');
             $table->boolean('status')->default(false);
+            $table->boolean('status_from_financial')->default(false);
             $table->boolean('starred')->default(false);
+            $table->boolean('status_from_financial_bishop')->default(false);
             $table->softDeletes('deleted_at');
             $table->timestamps();
         });
