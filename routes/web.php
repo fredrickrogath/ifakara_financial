@@ -106,6 +106,11 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'secretary', 'middleware' => 'is_secretary', 'as' => 'secretary.'], function () {
+        
+        Route::post('/dispatch-secretary-event', function () {
+            event(new \App\Events\NewPostPublished('data'));
+        });
+        
         Route::get('/dashboard', [\App\Http\Controllers\Secretary\DashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/schools', [\App\Http\Controllers\Secretary\DashboardController::class, 'schools'])->name('schools');
         Route::get('/uploads', [\App\Http\Controllers\Secretary\DashboardController::class, 'uploads'])->name('uploads');
@@ -149,7 +154,6 @@ Route::middleware([
     });
 
 
-
     /*
     |--------------------------------------------------------------------------
     | ROUTES FOR THE PROCUREMENT
@@ -157,36 +161,79 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'procurement', 'middleware' => 'is_procurement', 'as' => 'procurement.'], function () {
-        Route::get('/pageSix', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageSix'])->name('pageSix');
-        Route::get('/pageOne', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageOne'])->name('pageOne');
-        Route::get('/pageTwo', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageTwo'])->name('pageTwo');
-        Route::get('/pageFour', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageFour'])->name('pageFour');
-        Route::get('/pageFive', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageFive'])->name('pageFive');
+
+        /*
+        |--------------------------------------------------------------------------
+        | NAVIGATIONS
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/dashboard', [\App\Http\Controllers\Procurement\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/pageThree', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageThree'])->name('pageThree');
-        Route::get('/pageSeven', [\App\Http\Controllers\Procurement\DashboardController::class, 'pageSeven'])->name('pageSeven');
+        Route::get('/tools', [\App\Http\Controllers\Procurement\DashboardController::class, 'tools'])->name('tools');
+        Route::get('/invoice', [\App\Http\Controllers\Procurement\DashboardController::class, 'invoice'])->name('invoice');
+        Route::get('/uploads', [\App\Http\Controllers\Procurement\DashboardController::class, 'uploads'])->name('uploads');
+        Route::get('/reports', [\App\Http\Controllers\Procurement\DashboardController::class, 'reports'])->name('reports');
+
+        /*
+        |--------------------------------------------------------------------------
+        | TOOLS
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post('/add_tool', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'add_tool'])->name('add_tool');
+        Route::post('/addBrokenTool', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'addBrokenTool'])->name('addBrokenTool');
+        Route::get('/get_tools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'get_tools'])->name('get_tools');
+        Route::get('/getBrokenTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getBrokenTools'])->name('getBrokenTools');
+        Route::get('/getStarredTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getStarredTools'])->name('getStarredTools');
+        Route::get('/getTrashedTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getTrashedTools'])->name('getTrashedTools');
+        Route::post('/updateTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'updateTools'])->name('updateTools');
+        Route::post('/deleteTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'deleteTools'])->name('deleteTools');
+        Route::post('/restoreTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'restoreTools'])->name('restoreTools');
+        Route::post('/permanentDeleteTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'permanentDeleteTools'])->name('permanentDeleteTools');
+        Route::post('/starredTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'starredTools'])->name('starredTools');
+        Route::get('/headDashboardGetTools', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'headDashboardGetTools'])->name('headDashboardGetTools');
+
+        Route::get('/getSellersList', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'getSellersList'])->name('getSellersList');
+        Route::post('/addSeller', [\App\Http\Controllers\Procurement\Tools\ToolsController::class, 'addSeller'])->name('addSeller');
+
+        /*
+        |--------------------------------------------------------------------------
+        | INVOICES
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/getTools', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getTools'])->name('getTools');
+        Route::get('/getSellers', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getSellers'])->name('getSellers');
+        Route::post('/addInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'addInvoice'])->name('addInvoice');
+        Route::get('/getInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getInvoices'])->name('getInvoices');
+        Route::post('/getInvoiceView', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getInvoiceView'])->name('getInvoiceView');
+        Route::get('/getStarredInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getStarredInvoices'])->name('getStarredInvoices');
+        Route::get('/getTrashedInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'getTrashedInvoices'])->name('getTrashedInvoices');
+        Route::post('/updateInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'updateInvoice'])->name('updateInvoice');
+        Route::post('/restoreInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'restoreInvoice'])->name('restoreInvoice');
+        Route::post('/permanentDeleteInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'permanentDeleteInvoice'])->name('permanentDeleteInvoice');
+        Route::post('/starredInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'starredInvoice'])->name('starredInvoice');
+        Route::post('/deleteInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'deleteInvoice'])->name('deleteInvoice');
+        Route::post('/starredInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'starredInvoices'])->name('starredInvoices');
+        Route::post('/submitInvoice', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'submitInvoice'])->name('submitInvoice');
+        Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Procurement\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | UPLOADS
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post('/upload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'upload'])->name('upload');
+        Route::get('/getUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getUploads'])->name('getUploads');
+        Route::get('/getNewUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getNewUploads'])->name('getNewUploads');
+        Route::get('/getTrashedUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'getTrashedUploads'])->name('getTrashedUploads');
+        Route::post('/restoreUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
+        Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
+        Route::post('/deleteUpload', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
+        Route::get('/headDashboardGetUploads', [\App\Http\Controllers\Procurement\Upload\UploadController::class, 'headDashboardGetUploads'])->name('headDashboardGetUploads');
     });
-
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | ROUTES FOR THE ACOUNTANT MAIN
-    |--------------------------------------------------------------------------
-    */
-
-    // Route::group(['prefix' => 'accountant_main', 'middleware' => 'is_accountant_main', 'as' => 'accountant_main.'], function () {
-    //     Route::get('/pageSix', [\App\Http\Controllers\AccountantMain\DashboardController::class, 'pageSix'])->name('pageSix');
-    //     Route::get('/pageOne', [\App\Http\Controllers\AccountantMain\DashboardController::class, 'pageOne'])->name('pageOne');
-    //     Route::get('/pageTwo', [\App\Http\Controllers\AccountantMain\DashboardController::class, 'pageTwo'])->name('pageTwo');
-    //     Route::get('/pageFour', [\App\Http\Controllers\AccountantMain\DashboardController::class, 'pageFour'])->name('pageFour');
-    //     Route::get('/pageFive', [\App\Http\Controllers\AccountantMain\DashboardController::class, 'pageFive'])->name('pageFive');
-    //     Route::get('/dashboard', [\App\Http\Controllers\AccountantMain\DashboardController::class, 'dashboard'])->name('dashboard');
-    //     Route::get('/pageThree', [\App\Http\Controllers\AccountantMain\DashboardController::class, 'pageThree'])->name('pageThree');
-    //     Route::get('/pageSeven', [\App\Http\Controllers\AccountantMain\DashboardController::class, 'pageSeven'])->name('pageSeven');
-    // });
-
-
 
     /*
     |--------------------------------------------------------------------------

@@ -14,6 +14,29 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+    {{-- Template --}}
+
+    <!-- Plugins css -->
+    <link href="assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="assets/css/config/default/bootstrap.min.css" rel="stylesheet" type="text/css"
+        id="bs-default-stylesheet" />
+    <link href="assets/css/config/default/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
+    {{-- <link href="assets/css/config/default/bootstrap-dark.min.css" rel="stylesheet" type="text/css"
+        id="bs-dark-stylesheet" /> --}}
+    {{-- <link href="assets/css/config/default/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" /> --}}
+
+    <!-- icons -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    {{-- End of template --}}
+
+
+
+    
     <!-- Plugins css -->
     <link href="assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
@@ -83,8 +106,6 @@
 
 <body class="font-sans antialiased">
     @inertia
-
-
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
 

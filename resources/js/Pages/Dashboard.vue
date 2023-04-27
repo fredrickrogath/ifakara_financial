@@ -3,14 +3,14 @@
     <!-- Begin page -->
     <!-- <div> -->
         <app-layout>
-            <div id="wrapper" class="pt-2 bg-gray-100">
+            <div id="wrapper" class="mt-0 pt-0">
                 <!-- Topbar Start -->
                 <!-- <top-bar></top-bar> -->
                 <!-- end Topbar -->
 
                 <!-- ========== Left Sidebar Start ========== -->
-                <div class="left-side-menu pt-0">
-                    <div class="h-100" data-simplebar>
+                <div class="left-side-menu pt-0 -mt-2">
+                    <div class="h-screen" data-simplebar>
 
                         <!--- Sidemenu -->
 
@@ -28,17 +28,17 @@
                 <!-- Start Page Content here -->
                 <!-- ============================================================== -->
 
-                <div class="content-page mt-0 pt-0 px-0 bg-white">
+                <div class="content-page mt-0 pt-0 px-0 bg-gray-100">
                     <div class="content">
                         <!-- Start Content-->
-                        <div class="container-fluid">
+                        <div class="ml-1 mt-11">
 
                             <!-- Bishop -->
                             <home-page
                                 v-if="route().current('bishop.dashboard')"
                             ></home-page>
                             <schools v-if="route().current('bishop.schools')"></schools>
-                            <documents v-if="route().current('bishop.documents')"></documents>
+                            <!-- <documents v-if="route().current('bishop.documents')"></documents> -->
                             <uploads v-if="route().current('bishop.uploads')"></uploads>
                             <invoices v-if="route().current('bishop.invoices')"></invoices>
                             <internal-office v-if="route().current('bishop.internal_office')"></internal-office>
@@ -74,6 +74,14 @@
                             <internal-auditor-reports v-if="route().current('internal_auditor.reports')"></internal-auditor-reports>
                             <!-- <accountant-invoice-pending v-if="route().current('internal_auditor.invoice_pending')"></accountant-invoice-pending>
                             <accountant-invoice-reports v-if="route().current('internal_auditor.invoice_reports')"></accountant-invoice-reports> -->
+
+
+                            <procurement-dashboard v-if="route().current('procurement.dashboard')"></procurement-dashboard>
+                            <procurement-invoice v-if="route().current('procurement.invoice')"></procurement-invoice>
+                            <procurement-reports v-if="route().current('procurement.reports')"></procurement-reports>
+                            <procurement-tools v-if="route().current('procurement.tools')"></procurement-tools>
+                            <procurement-tools-view v-if="route().current('procurement.tools_view')"></procurement-tools-view>
+                            <procurement-uplaods v-if="route().current('procurement.uploads')"></procurement-uplaods>
                         </div>
                         <!-- container -->
                     </div>
@@ -149,7 +157,7 @@ import TopBar from "./Components/TopBar.vue";
 //PAGES
 
 import HomePage from "./Modules/BishopModule/HomePage.vue";
-import Documents from "./Modules/BishopModule/Documents.vue";
+// import Documents from "./Modules/BishopModule/Documents.vue";
 import InternalOffice from "./Modules/BishopModule/InternalOffice.vue";
 import Invoices from "./Modules/BishopModule/Invoices.vue";
 import Schools from "./Modules/BishopModule/Schools.vue";
@@ -177,6 +185,14 @@ import InternalAuditorSchools from "./Modules/InternalAuditorModule/Schools.vue"
 import InternalAuditorStaffs from "./Modules/InternalAuditorModule/Staffs.vue";
 import InternalAuditorReports from "./Modules/InternalAuditorModule/Reports.vue";
 
+
+import ProcurementDashboard from "./Modules/ProcurementModule/HomePage.vue";
+import ProcurementInvoice from "./Modules/ProcurementModule/Invoice.vue";
+import ProcurementReports from "./Modules/ProcurementModule/Reports.vue";
+import ProcurementTools from "./Modules/ProcurementModule/Tools.vue";
+import ProcurementToolsView from "./Modules/ProcurementModule/ToolsView.vue";
+import ProcurementUplaods from "./Modules/ProcurementModule/Uploads.vue";
+
 export default {
     components: {
         AppLayout,
@@ -186,7 +202,7 @@ export default {
 
         // MY PAGES
         HomePage,
-        Documents,
+        // Documents,
         InternalOffice,
         Invoices,
         Schools,
@@ -214,6 +230,13 @@ export default {
         InternalAuditorStaffs,
         InternalAuditorReports,
 
+
+        ProcurementDashboard,
+        ProcurementInvoice,
+        ProcurementReports,
+        ProcurementTools,
+        ProcurementToolsView,
+        ProcurementUplaods,
 
     },
 

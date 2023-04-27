@@ -24,4 +24,7 @@ Route::group(['prefix' => 'accountant', 'as' => 'accountant.'], function () {
     Route::get('/getLegerEntries1', [\App\Http\Controllers\Accountant\DashboardController::class, 'getLegerEntries1'])->name('getLegerEntries1');
 
     Route::post('/invoiceFromSchool', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'invoiceFromSchool'])->name('invoiceFromSchool');
+
 });
+
+Route::post('/registerSchool', [\App\Http\Controllers\School\SchoolRegistationController::class, 'registerSchool'])->name('registerSchool');

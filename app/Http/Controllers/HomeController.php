@@ -16,6 +16,8 @@ class HomeController extends Controller
             return redirect()->route('secretary.dashboard');
         } elseif (auth()->user()->role == \App\Models\User::is_accountant) {
             return redirect()->route('accountant.dashboard');
+        } elseif (auth()->user()->role == \App\Models\User::is_procurement) {
+            return redirect()->route('procurement.dashboard');
         } elseif (auth()->user()->role == \App\Models\User::is_internal_auditor) {
             return redirect()->route('internal_auditor.dashboard');
         } else {
