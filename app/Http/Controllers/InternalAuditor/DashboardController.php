@@ -34,15 +34,15 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $internalAuditorService->dashboardData());
     }
 
-    public function schools(InternalAuditorService $internalAuditorService){
+    public function audits(InternalAuditorService $internalAuditorService){
         $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
         return Inertia::render('Dashboard', $internalAuditorService->dashboardData());
     }
 
-    public function staffs(InternalAuditorService $internalAuditorService){
-        $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
-        return Inertia::render('Dashboard', $internalAuditorService->dashboardData());
-    }
+    // public function staffs(InternalAuditorService $internalAuditorService){
+    //     $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 
+    //     return Inertia::render('Dashboard', $internalAuditorService->dashboardData());
+    // }
 
     public function reports(InternalAuditorService $internalAuditorService){
         $this->authorize('authorizeInternalAuditor', \App\Models\User::class); 

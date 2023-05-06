@@ -1,94 +1,136 @@
 <template>
-
     <!-- Begin page -->
     <!-- <div> -->
-        <app-layout>
-            <div id="wrapper" class="mt-0 pt-0">
-                <!-- Topbar Start -->
-                <!-- <top-bar></top-bar> -->
-                <!-- end Topbar -->
+    <app-layout>
+        <div id="wrapper" class="mt-0 pt-0">
+            <!-- Topbar Start -->
+            <!-- <top-bar></top-bar> -->
+            <!-- end Topbar -->
 
-                <!-- ========== Left Sidebar Start ========== -->
-                <div class="left-side-menu pt-0 -mt-2">
-                    <div class="h-screen" data-simplebar>
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="left-side-menu pt-0 -mt-2">
+                <div class="bg-gray-100" data-simplebar>
+                    <!--- Sidemenu -->
 
-                        <!--- Sidemenu -->
+                    <side-bar></side-bar>
 
-                        <side-bar></side-bar>
+                    <!-- End Sidebar -->
 
-                        <!-- End Sidebar -->
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <!-- Sidebar -left -->
+                    <div class="clearfix"></div>
                 </div>
-                <!-- Left Sidebar End -->
+                <!-- Sidebar -left -->
+            </div>
+            <!-- Left Sidebar End -->
 
-                <!-- ============================================================== -->
-                <!-- Start Page Content here -->
-                <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
 
-                <div class="content-page mt-0 pt-0 px-0 bg-gray-100">
-                    <div class="content">
-                        <!-- Start Content-->
-                        <div class="ml-1 mt-11">
+            <div class="content-page mt-0 pt-0 px-0 bg-gray-100">
+                <div class="content">
+                    <!-- Start Content-->
+                    <div class="ml-1 mt-11">
+                        <!-- Bishop -->
+                        <home-page
+                            v-if="route().current('bishop.dashboard')"
+                        ></home-page>
+                        <schools
+                            v-if="route().current('bishop.schools')"
+                        ></schools>
+                        <!-- <documents v-if="route().current('bishop.documents')"></documents> -->
+                        <uploads
+                            v-if="route().current('bishop.uploads')"
+                        ></uploads>
+                        <invoices
+                            v-if="route().current('bishop.invoices')"
+                        ></invoices>
+                        <internal-office
+                            v-if="route().current('bishop.internal_office')"
+                        ></internal-office>
 
-                            <!-- Bishop -->
-                            <home-page
-                                v-if="route().current('bishop.dashboard')"
-                            ></home-page>
-                            <schools v-if="route().current('bishop.schools')"></schools>
-                            <!-- <documents v-if="route().current('bishop.documents')"></documents> -->
-                            <uploads v-if="route().current('bishop.uploads')"></uploads>
-                            <invoices v-if="route().current('bishop.invoices')"></invoices>
-                            <internal-office v-if="route().current('bishop.internal_office')"></internal-office>
+                        <!-- Secretary -->
+                        <secretary-home-page
+                            v-if="route().current('secretary.dashboard')"
+                        ></secretary-home-page>
+                        <secretary-schools
+                            v-if="route().current('secretary.schools')"
+                        ></secretary-schools>
+                        <secretary-uploads
+                            v-if="route().current('secretary.uploads')"
+                        ></secretary-uploads>
+                        <secretary-reports
+                            v-if="route().current('secretary.reports')"
+                        ></secretary-reports>
 
-                            <!-- Secretary -->
-                            <secretary-home-page
-                                v-if="route().current('secretary.dashboard')"
-                            ></secretary-home-page>
-                            <secretary-schools v-if="route().current('secretary.schools')"></secretary-schools>
-                            <secretary-uploads v-if="route().current('secretary.uploads')"></secretary-uploads>
-                            <secretary-reports v-if="route().current('secretary.reports')"></secretary-reports>
+                        <!-- Accountant -->
+                        <accountant-home-page
+                            v-if="route().current('accountant.dashboard')"
+                        ></accountant-home-page>
+                        <accountant-invoices
+                            v-if="route().current('accountant.invoices')"
+                        ></accountant-invoices>
+                        <accountant-invoice-school
+                            v-if="route().current('accountant.invoice_school')"
+                        ></accountant-invoice-school>
+                        <accountant-invoice-create
+                            v-if="route().current('accountant.invoice_create')"
+                        ></accountant-invoice-create>
+                        <accountant-invoice-incoming
+                            v-if="
+                                route().current('accountant.invoice_incoming')
+                            "
+                        ></accountant-invoice-incoming>
+                        <accountant-invoice-pending
+                            v-if="route().current('accountant.invoice_pending')"
+                        ></accountant-invoice-pending>
+                        <accountant-invoice-reports
+                            v-if="route().current('accountant.invoice_reports')"
+                        ></accountant-invoice-reports>
+                        <accountant-charts-of-accounts
+                            v-if="
+                                route().current('accountant.charts_of_accounts')
+                            "
+                        ></accountant-charts-of-accounts>
 
-                            <!-- Accountant -->
-                            <accountant-home-page
-                                v-if="route().current('accountant.dashboard')"
-                            ></accountant-home-page>
-                            <accountant-invoices v-if="route().current('accountant.invoices')"></accountant-invoices>
-                            <accountant-invoice-school v-if="route().current('accountant.invoice_school')"></accountant-invoice-school>
-                            <accountant-invoice-create v-if="route().current('accountant.invoice_create')"></accountant-invoice-create>
-                            <accountant-invoice-incoming v-if="route().current('accountant.invoice_incoming')"></accountant-invoice-incoming>
-                            <accountant-invoice-pending v-if="route().current('accountant.invoice_pending')"></accountant-invoice-pending>
-                            <accountant-invoice-reports v-if="route().current('accountant.invoice_reports')"></accountant-invoice-reports>
-                            <accountant-charts-of-accounts v-if="route().current('accountant.charts_of_accounts')"></accountant-charts-of-accounts>
-
-
-
-                            <!-- Internal Auditor -->
-                            <internal-auditor-home-page
-                                v-if="route().current('internal_auditor.dashboard')"
-                            ></internal-auditor-home-page>
-                            <internal-auditor-schools v-if="route().current('internal_auditor.schools')"></internal-auditor-schools>
-                            <internal-auditor-staffs v-if="route().current('internal_auditor.staffs')"></internal-auditor-staffs>
-                            <internal-auditor-reports v-if="route().current('internal_auditor.reports')"></internal-auditor-reports>
-                            <!-- <accountant-invoice-pending v-if="route().current('internal_auditor.invoice_pending')"></accountant-invoice-pending>
+                        <!-- Internal Auditor -->
+                        <internal-auditor-home-page
+                            v-if="route().current('internal_auditor.dashboard')"
+                        ></internal-auditor-home-page>
+                        <internal-auditor-audits
+                            v-if="route().current('internal_auditor.audits')"
+                        ></internal-auditor-audits>
+                        <!-- <internal-auditor-staffs v-if="route().current('internal_auditor.staffs')"></internal-auditor-staffs> -->
+                        <internal-auditor-reports
+                            v-if="route().current('internal_auditor.reports')"
+                        ></internal-auditor-reports>
+                        <!-- <accountant-invoice-pending v-if="route().current('internal_auditor.invoice_pending')"></accountant-invoice-pending>
                             <accountant-invoice-reports v-if="route().current('internal_auditor.invoice_reports')"></accountant-invoice-reports> -->
 
-
-                            <procurement-dashboard v-if="route().current('procurement.dashboard')"></procurement-dashboard>
-                            <procurement-invoice v-if="route().current('procurement.invoice')"></procurement-invoice>
-                            <procurement-reports v-if="route().current('procurement.reports')"></procurement-reports>
-                            <procurement-tools v-if="route().current('procurement.tools')"></procurement-tools>
-                            <procurement-tools-view v-if="route().current('procurement.tools_view')"></procurement-tools-view>
-                            <procurement-uplaods v-if="route().current('procurement.uploads')"></procurement-uplaods>
-                        </div>
-                        <!-- container -->
+                        <procurement-dashboard
+                            v-if="route().current('procurement.dashboard')"
+                        ></procurement-dashboard>
+                        <procurement-invoice
+                            v-if="route().current('procurement.invoice')"
+                        ></procurement-invoice>
+                        <procurement-reports
+                            v-if="route().current('procurement.reports')"
+                        ></procurement-reports>
+                        <procurement-tools
+                            v-if="route().current('procurement.tools')"
+                        ></procurement-tools>
+                        <procurement-tools-view
+                            v-if="route().current('procurement.tools_view')"
+                        ></procurement-tools-view>
+                        <procurement-uplaods
+                            v-if="route().current('procurement.uploads')"
+                        ></procurement-uplaods>
                     </div>
-                    <!-- content -->
+                    <!-- container -->
+                </div>
+                <!-- content -->
 
-                    <!-- Footer Start -->
-                    <!-- <footer class="footer">
+                <!-- Footer Start -->
+                <!-- <footer class="footer">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6">
@@ -111,18 +153,18 @@
                             </div>
                         </div>
                     </footer> -->
-                    <!-- end Footer -->
-                </div>
-
-                <!-- ============================================================== -->
-                <!-- End Page content -->
-                <!-- ============================================================== -->
+                <!-- end Footer -->
             </div>
-            <!-- END wrapper -->
 
-            <!-- Right bar overlay-->
-            <div class="rightbar-overlay"></div>
-        </app-layout>
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+    </app-layout>
     <!-- </div> -->
 </template>
 
@@ -163,12 +205,10 @@ import Invoices from "./Modules/BishopModule/Invoices.vue";
 import Schools from "./Modules/BishopModule/Schools.vue";
 import Uploads from "./Modules/BishopModule/Uploads.vue";
 
-
 import SecretaryHomePage from "./Modules/SecretaryModule/HomePage.vue";
 import SecretarySchools from "./Modules/SecretaryModule/Schools.vue";
 import SecretaryUploads from "./Modules/SecretaryModule/Uploads.vue";
 import SecretaryReports from "./Modules/SecretaryModule/Reports.vue";
-
 
 import AccountantHomePage from "./Modules/AccountantMainModule/HomePage.vue";
 import AccountantInvoiceCreate from "./Modules/AccountantMainModule/InvoiceCreate.vue";
@@ -179,12 +219,10 @@ import AccountantInvoiceSchool from "./Modules/AccountantMainModule/InvoiceSchoo
 import AccountantInvoices from "./Modules/AccountantMainModule/Invoices.vue";
 import AccountantChartsOfAccounts from "./Modules/AccountantMainModule/ChartsOfAccounts.vue";
 
-
 import InternalAuditorHomePage from "./Modules/InternalAuditorModule/HomePage.vue";
-import InternalAuditorSchools from "./Modules/InternalAuditorModule/Schools.vue";
-import InternalAuditorStaffs from "./Modules/InternalAuditorModule/Staffs.vue";
+import InternalAuditorAudits from "./Modules/InternalAuditorModule/Audit.vue";
+// import InternalAuditorStaffs from "./Modules/InternalAuditorModule/Staffs.vue";
 import InternalAuditorReports from "./Modules/InternalAuditorModule/Reports.vue";
-
 
 import ProcurementDashboard from "./Modules/ProcurementModule/HomePage.vue";
 import ProcurementInvoice from "./Modules/ProcurementModule/Invoice.vue";
@@ -208,12 +246,10 @@ export default {
         Schools,
         Uploads,
 
-
         SecretaryHomePage,
         SecretarySchools,
         SecretaryUploads,
         SecretaryReports,
-
 
         AccountantHomePage,
         AccountantInvoiceCreate,
@@ -224,12 +260,10 @@ export default {
         AccountantChartsOfAccounts,
         AccountantInvoices,
 
-
         InternalAuditorHomePage,
-        InternalAuditorSchools,
-        InternalAuditorStaffs,
+        InternalAuditorAudits,
+        // InternalAuditorStaffs,
         InternalAuditorReports,
-
 
         ProcurementDashboard,
         ProcurementInvoice,
@@ -237,7 +271,6 @@ export default {
         ProcurementTools,
         ProcurementToolsView,
         ProcurementUplaods,
-
     },
 
     mounted() {

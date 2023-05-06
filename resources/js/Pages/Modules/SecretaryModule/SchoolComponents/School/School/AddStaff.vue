@@ -70,7 +70,7 @@
                                             <label
                                                 for="gender"
                                                 class="form-label"
-                                                >Select Class
+                                                >Select Department
                                             </label>
                                             <select
                                                 class="form-select form-select-sm"
