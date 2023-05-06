@@ -18,7 +18,7 @@
                                         <div class="text-end">
                                             <h4 class="my-1">
                                                 <span data-plugin="counterup">
-                                                    {{ totalTools }}
+                                                    {{ totalTools? totalTools : 0 }}
                                                 </span>
                                             </h4>
                                             <p
@@ -58,7 +58,7 @@
                                             <p
                                                 class="text-muted mb-1 text-truncate"
                                             >
-                                                {{ newToolTitle }}
+                                                {{ newToolTitle? newToolTitle : 'please wait' }}
                                             </p>
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                             <p
                                                 class="text-muted mb-1 text-truncate"
                                             >
-                                                {{ brokenToolTitle }}
+                                                {{ brokenToolTitle? brokenToolTitle : 'please wait' }}
                                             </p>
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@
                                                 <span data-plugin="counterup">
                                                     <!-- {{ totalUploads }} -->
                                                     <!-- 0 -->
-                                                    {{ getSchoolId }}
+                                                    {{ getSchoolId? getSchoolId: 0 }}
                                                 </span>
                                             </h4>
                                             <p

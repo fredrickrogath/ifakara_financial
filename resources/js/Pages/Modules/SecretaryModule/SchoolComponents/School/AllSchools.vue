@@ -68,7 +68,6 @@
                 ></v-text-field>
 
                 <div class="d-flex justify-content-between align-items-center">
-
                     <v-icon
                         v-if="!getAddSchool"
                         class="ml-5 pr-0 pt-3 mr-0"
@@ -167,6 +166,20 @@
 
                                 <span
                                     class="text-gray-600"
+                                    v-else-if="header.value == 'logo_path'"
+                                >
+                                    <!-- {{ item[header.value] }} -->
+                                    <!-- {{ formatName(items[idx]['name']) }} -->
+
+                                    <img
+                                        class="h-8 w-8 rounded-full object-cover"
+                                        :src="'https://ui-avatars.com/api/?name=' + formatName(items[idx]['name']) + '&color=7F9CF5&background=EBF4FF'"
+                                        :alt="items[idx]['name']"
+                                    />
+                                </span>
+
+                                <span
+                                    class="text-gray-600"
                                     v-else-if="header.value == 'email'"
                                 >
                                     {{ item[header.value] }}
@@ -254,6 +267,10 @@ export default {
             search: "",
             headers: [
                 {
+                    text: "Logo",
+                    value: "logo_path",
+                },
+                {
                     text: "Name",
                     align: "start",
                     sortable: false,
@@ -263,20 +280,20 @@ export default {
                     text: "Email",
                     value: "email",
                 },
-                // {
-                //     text: "Mobile",
-                //     value: "mobile",
-                // },
                 {
                     text: "Location",
                     value: "location",
                 },
-                // { text: "Date", value: "created_at" },
+                { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
             ],
             students: [],
 
             idForAction: null,
+
+            // schoolName: "",
+
+            formattedName: "",
         };
     },
 
@@ -303,8 +320,8 @@ export default {
         },
 
         formattedDate(date) {
-            return moment(date).format("MMMM Do YYYY");
-            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         // totalPrice(item) {
@@ -321,6 +338,16 @@ export default {
             } else if (role == 6) {
                 return "Procurement";
             }
+        },
+
+        formatName(name) {
+            const nameArr = name.split(" ");
+            const formattedNameArr = nameArr.map((name) => {
+                return name.charAt(0).toUpperCase() + name.slice(1);
+            });
+            const formattedName = formattedNameArr.join("+");
+            // this.formattedName = formattedName;
+            return formattedName;
         },
 
         getSchools() {
@@ -384,7 +411,7 @@ export default {
         setAddSchool() {
             this.$store.dispatch("SecretarySchoolDetailModule/setAddSchool");
         },
-        
+
         // save(id, column, data) {
         //     this.updateTools(id, data, column);
         //     // console.log(id + " , " +data);

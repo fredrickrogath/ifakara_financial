@@ -16,6 +16,9 @@ import Procurementinvoice from '../Store/Procurement/invoice/index';
 import Procurementtool from '../Store/Procurement/tool/index';
 import ProcurementUpload from '../Store/Procurement/Upload/index';
 
+import InternalAuditorSchoolDetails from '../Store/internal_auditor/schoolDetail/index';
+import InternalAuditorSchool from '../Store/internal_auditor/school/index';
+
 Vue.use(Vuex);
 
 const counterModule = invoiceModules;
@@ -31,6 +34,10 @@ const ProcurementInvoiceModule = Procurementinvoice;
 const ProcurementToolModule = Procurementtool;
 
 const ProcurementUploadModule = ProcurementUpload;
+
+const InternalAuditorSchoolDetailsModule = InternalAuditorSchoolDetails;
+
+const InternalAuditorSchoolModule = InternalAuditorSchool;
 
 const store = new Vuex.Store({
     plugins: [createPersistedState()],
@@ -48,6 +55,10 @@ const store = new Vuex.Store({
         ProcurementToolModule: ProcurementToolModule,
 
         ProcurementUploadModule: ProcurementUploadModule,
+
+        InternalAuditorSchoolDetailsModule: InternalAuditorSchoolDetailsModule,
+
+        InternalAuditorSchoolModule: InternalAuditorSchoolModule,
     },
     state: {
         posts: [],

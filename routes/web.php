@@ -243,7 +243,7 @@ Route::middleware([
 
     Route::group(['prefix' => 'internal_auditor', 'middleware' => 'is_internal_auditor', 'as' => 'internal_auditor.'], function () {
         Route::get('/dashboard', [\App\Http\Controllers\InternalAuditor\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/schools', [\App\Http\Controllers\InternalAuditor\DashboardController::class, 'schools'])->name('schools');
+        Route::get('/audits', [\App\Http\Controllers\InternalAuditor\DashboardController::class, 'audits'])->name('audits');
         Route::get('/staffs', [\App\Http\Controllers\InternalAuditor\DashboardController::class, 'staffs'])->name('staffs');
         Route::get('/reports', [\App\Http\Controllers\InternalAuditor\DashboardController::class, 'reports'])->name('reports');
         // Route::get('/pageFour', [\App\Http\Controllers\InternalAuditor\DashboardController::class, 'pageFour'])->name('pageFour');
