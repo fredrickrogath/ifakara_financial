@@ -223,9 +223,17 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("Student").listen(
+        // window.Echo.channel("Student").listen(
+        //     "Api\\Secretary\\StudentEvent",
+        //     (e) => {
+        //         this.getStudents();
+        //     }
+        // );
+
+        window.Echo.channel("school-student-trigger-from-financial-secretary." + this.getSchoolId).listen(
             "Api\\Secretary\\StudentEvent",
             (e) => {
+                console.log(e);
                 this.getStudents();
             }
         );

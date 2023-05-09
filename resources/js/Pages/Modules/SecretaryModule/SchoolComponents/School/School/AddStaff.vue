@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="h-screen">
-                        <div class="mt-0 pt-0">
+                        <div class="d-flex justify-content-between mt-0 pt-0">
                             <v-icon
                                 class="ml-1 pb-1 pr-0 mr-0"
                                 size="22"
@@ -16,6 +16,10 @@
                             >
                                 mdi-keyboard-backspace
                             </v-icon>
+
+                            <div>
+                                School : {{ getSchoolId }}
+                            </div>
                         </div>
                         <div class="">
                             <form @submit.prevent="addStaff">

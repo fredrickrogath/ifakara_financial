@@ -8,6 +8,10 @@ use App\Services\AccountantServices\InvoiceServices\ChatOfAccountService;
 
 class ChatOfAccountController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     //
     public function getChartOfAccounts(ChatOfAccountService $chatOfAccountService){
         return response()->json(['data' => $chatOfAccountService->getChartOfAccounts()]);

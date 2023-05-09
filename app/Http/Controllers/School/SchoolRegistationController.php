@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class SchoolRegistationController extends Controller
 {
+    public function __construct(){
+        $this->middleware('check_screen_size');
+    }
+    
     //
     public function registerSchool(Request $request){
 

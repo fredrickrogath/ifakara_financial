@@ -184,8 +184,6 @@
             </v-data-table>
         </v-col>
     </div>
-    <!-- </v-row>
-    </v-col> -->
 </template>
 
 <script>
@@ -229,9 +227,10 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("school-staff-trigger-from-financial-secretary").listen(
-            "Api\\Secretary\\SchoolEvent",
+        window.Echo.channel("school-staff-trigger-from-financial-secretary." + this.getSchoolId).listen(
+            "Api\\Secretary\\StaffEvent",
             (e) => {
+                console.log(e);
                 this.getStaffs();
             }
         );

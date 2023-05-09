@@ -196,12 +196,12 @@ export default {
             }
         );
 
-        window.Echo.channel("academic-trigger-add-student").listen(
-            "Academic\\StudentEvent",
-            (e) => {
-                this.getSchoolPermissions();
-            }
-        );
+        // window.Echo.channel("academic-trigger-add-student").listen(
+        //     "Academic\\StudentEvent",
+        //     (e) => {
+        //         this.getSchoolPermissions();
+        //     }
+        // );
     },
 
     data() {
@@ -294,11 +294,12 @@ export default {
                 .then((response) => {
                     this.students = response.data.data;
                     this.showLoader = false;
-                    // console.log(response.data.data)
+                    console.log(response.data.data)
                 });
         },
 
-        async alterPermission(id, object_id, object_type, permission) {console.log(id, object_id, object_type, permission)
+        async alterPermission(id, object_id, object_type, permission) {
+            // console.log(id, object_id, object_type, permission)
             axios
                 .post("http://127.0.0.1:8000/api/secretary/alterPermission", {
                     id: id,
@@ -311,7 +312,7 @@ export default {
                     // this.amount = "";
                     // this.narration = "";
                     // this.getSchoolPermissions();
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

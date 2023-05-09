@@ -71,9 +71,7 @@
 
                     <div
                         class="d-flex justify-content-between align-items-center"
-                    ><jet-application-mark
-                                    class="block h-9 w-auto"
-                                />
+                    >
                         <v-icon
                             v-if="!getAddSchool"
                             class="ml-5 pr-0 pt-3 mr-0"
