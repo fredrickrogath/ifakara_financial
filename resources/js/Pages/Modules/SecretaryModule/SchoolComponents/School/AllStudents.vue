@@ -286,6 +286,10 @@ export default {
             return this.$store.getters["SecratarySchoolModule/getSchoolId"];
         },
 
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
+
         // getSchoolId() {
         //     return this.$store.getters["SecratarySchoolModule/getSchoolId"];
         // },
@@ -337,7 +341,7 @@ export default {
 
         async getStudents() {
             axios
-                .post("http://127.0.0.1:8000/api/secretary/getSchoolStudents", {
+                .post(this.getMainUrl + "secretary/getSchoolStudents", {
                     school_id: this.getSchoolId,
                 })
                 .then((response) => {

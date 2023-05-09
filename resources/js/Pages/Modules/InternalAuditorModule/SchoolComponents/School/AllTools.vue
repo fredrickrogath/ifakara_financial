@@ -268,13 +268,17 @@ export default {
 
             idForAction: null,
 
-            url: "http://127.0.0.1:8000/api",
+            // url: "http://127.0.0.1:8000/api",
         };
     },
 
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
     },
 
@@ -308,7 +312,7 @@ export default {
         },
 
         getTools() {
-            axios.post(this.url + "/procurement/getToolsForInternalAuditor", {
+            axios.post(this.getMainUrl + "procurement/getToolsForInternalAuditor", {
                 school_id: 1,
                 }).then((response) => {
                 this.tools = response.data.data;

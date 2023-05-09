@@ -594,6 +594,10 @@ export default {
         getCommentView() {
             return this.$store.getters["SecratarySchoolModule/getCommentView"];
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
     watch: {
         //Add watchers...
@@ -653,7 +657,7 @@ export default {
         // },
 
         getSchoolPermissionsNotifications() {
-            axios.get("http://127.0.0.1:8000/api/secretary/getSchoolPermissionsNotifications").then((response) => {
+            axios.get(this.getMainUrl + "secretary/getSchoolPermissionsNotifications").then((response) => {
                 this.permissionCount = response.data.data;
                 // console.log(response.data.data);
             });

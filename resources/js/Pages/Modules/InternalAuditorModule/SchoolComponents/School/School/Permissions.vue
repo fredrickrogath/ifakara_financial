@@ -248,6 +248,10 @@ export default {
         getAddSchool() {
             return this.$store.getters["SecratarySchoolModule/getAddSchool"];
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     methods: {
@@ -290,7 +294,7 @@ export default {
 
         getSchoolPermissions() {
             axios
-                .get("http://127.0.0.1:8000/api/secretary/getSchoolPermissions")
+                .get(this.getMainUrl + "secretary/getSchoolPermissions")
                 .then((response) => {
                     this.students = response.data.data;
                     this.showLoader = false;
@@ -300,7 +304,7 @@ export default {
 
         async alterPermission(id, object_id, object_type, permission) {console.log(id, object_id, object_type, permission)
             axios
-                .post("http://127.0.0.1:8000/api/secretary/alterPermission", {
+                .post(this.getMainUrl + "secretary/alterPermission", {
                     id: id,
                     object_id: object_id,
                     object_type: object_type,

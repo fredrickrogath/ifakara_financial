@@ -284,6 +284,10 @@ export default {
                 "SecretarySchoolDetailModule/getAddStaff"
             ];
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     watch: {
@@ -344,7 +348,7 @@ export default {
 
         async getStaffs() {
             axios
-                .post("http://127.0.0.1:8000/api/secretary/getSchoolStaffs", {
+                .post(this.getMainUrl + "secretary/getSchoolStaffs", {
                     school_id: this.schoolId,
                 })
                 .then((response) => {

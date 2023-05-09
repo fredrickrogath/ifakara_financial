@@ -255,6 +255,10 @@ export default {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     methods: {
@@ -292,7 +296,7 @@ export default {
 
         getStaffs() {
             axios
-                .get("http://127.0.0.1:8000/api/secretary/getStaffs")
+                .get(this.getMainUrl + "secretary/getStaffs")
                 .then((response) => {
                     this.students = response.data.data;
                     this.showLoader = false;

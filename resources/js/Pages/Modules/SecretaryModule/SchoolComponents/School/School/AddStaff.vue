@@ -247,6 +247,10 @@ export default {
             //     this.$store.getters["SecratarySchoolModule/getSchoolId"];
             return this.$store.getters["SecratarySchoolModule/getSchoolId"];
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     methods: {
@@ -341,7 +345,7 @@ export default {
         async addStaff() {
             this.showLoader = true;
             axios
-                .post("http://127.0.0.1:8000/api/secretary/addStaff", {
+                .post(this.getMainUrl + "secretary/addStaff", {
                     schoolId: this.getSchoolId,
                     name: this.name,
                     email: this.email,
@@ -363,7 +367,7 @@ export default {
         async getDepartments() {
             // this.showLoader = true;
             axios
-                .post("http://127.0.0.1:8000/api/secretary/getDepartments", {
+                .post(this.getMainUrl + "secretary/getDepartments", {
                     schoolId: this.getSchoolId,
                 })
                 .then((response) => {
