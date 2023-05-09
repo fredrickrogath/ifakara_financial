@@ -615,7 +615,7 @@ export default {
         getSchoolPermissionsNotifications() {
             axios
                 .get(
-                    "http://127.0.0.1:8000/api/secretary/getSchoolPermissionsNotifications"
+                    "https://schools.ifakaracatholicdiocese.com/api/secretary/getSchoolPermissionsNotifications"
                 )
                 .then((response) => {
                     this.permissionCount = response.data.data;
