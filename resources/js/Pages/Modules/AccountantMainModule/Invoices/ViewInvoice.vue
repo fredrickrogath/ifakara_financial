@@ -275,7 +275,7 @@ export default {
 
         async getInvoiceView() {
             axios
-                .post("http://127.0.0.1:8000/api/accountant/getInvoiceView", {
+                .post(this.getMainUrl + "accountant/getInvoiceView", {
                     id: this.getInvoiceId,
                 })
                 .then((response) => {
@@ -299,7 +299,7 @@ export default {
             axios
                 .post(
                     // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
-                    "http://127.0.0.1:8000/api/accountant/acceptInvoice",
+                    this.getMainUrl + "accountant/acceptInvoice",
                     {
                         id: this.invoice.id,
                         status_from_financial: this.invoice.status_from_financial,
@@ -340,6 +340,10 @@ export default {
                     this.invoice.invoice_tool.length
                 );
             });
+        },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
     },
 };

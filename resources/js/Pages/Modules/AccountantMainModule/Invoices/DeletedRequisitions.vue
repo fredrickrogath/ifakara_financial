@@ -322,6 +322,10 @@ export default {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     methods: {
@@ -348,7 +352,7 @@ export default {
         },
 
         getTrashedInvoices() {
-            axios.get("http://127.0.0.1:8000/api/accountant/getTrashedInvoices").then((response) => {
+            axios.get(this.getMainUrl + "accountant/getTrashedInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)
