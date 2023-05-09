@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'is_head' => \App\Http\Middleware\IsHeadMiddleware::class,
         'is_bishop' => \App\Http\Middleware\IsBishopMiddleware::class,
         'is_academic' => \App\Http\Middleware\IsAcademicMiddleware::class,
+        'check_screen_size' => \App\Http\Middleware\CheckScreenSize::class,
         'is_secretary' => \App\Http\Middleware\IsSecretaryMiddleware::class,
         'is_accountant' => \App\Http\Middleware\IsAccountantMiddleware::class,
         'is_procurement' => \App\Http\Middleware\IsProcurementMiddleware::class,

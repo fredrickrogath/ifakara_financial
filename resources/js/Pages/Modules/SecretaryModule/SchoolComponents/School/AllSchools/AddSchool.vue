@@ -245,6 +245,10 @@ export default {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     methods: {
@@ -335,7 +339,7 @@ export default {
         async addSchool() {
             this.showLoader = true;
             axios
-                .post("http://127.0.0.1:8000/api/secretary/registerSchool", {
+                .post(this.getMainUrl + "secretary/registerSchool", {
                     name: this.name,
                     email: this.email,
                     location: this.location,

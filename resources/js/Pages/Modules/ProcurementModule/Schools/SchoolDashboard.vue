@@ -570,6 +570,10 @@ export default {
                 this.$store.getters["SecratarySchoolModule/getSchoolId"];
             return this.$store.getters["SecratarySchoolModule/getSchoolId"];
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     watch: {
@@ -631,7 +635,7 @@ export default {
         async getInvoiceDashboardData() {
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/secretary/getInvoiceDashboardData",
+                    this.getMainUrl + "secretary/getInvoiceDashboardData",
                     {
                         school_id: this.schoolId,
                     }
@@ -659,7 +663,7 @@ export default {
         async getToolDashboardData() {
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/secretary/getToolDashboardData",
+                    this.getMainUrl + "secretary/getToolDashboardData",
                     {
                         school_id: this.schoolId,
                     }
@@ -679,7 +683,7 @@ export default {
 
         async headDashboardGetUploads() {
             axios
-                .get("/procurement/getInvoiceDashboardData")
+                .get(this.getMainUrl + "procurement/getInvoiceDashboardData")
                 .then((response) => {
                     this.totalUploads = response.data.data.totalUploads;
                     this.uploadTitles = response.data.data.uploadTitles;

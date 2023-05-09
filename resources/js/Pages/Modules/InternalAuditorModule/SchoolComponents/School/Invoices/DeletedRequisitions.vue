@@ -272,6 +272,10 @@ export default {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     methods: {
@@ -298,84 +302,84 @@ export default {
         },
 
         getTrashedInvoices() {
-            axios.get("http://127.0.0.1:8000/api/accountant/getTrashedInvoices").then((response) => {
+            axios.get(this.getMainUrl + "accountant/getTrashedInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)
             });
         },
 
-        async restoreInvoice(id,data ,column) {
-            axios
-                .post("/accountant/restoreInvoice", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async restoreInvoice(id,data ,column) {
+        //     axios
+        //         .post("/accountant/restoreInvoice", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async updateTools(id, column, data) {
-            axios
-                .post("/accountant/updateTools", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async updateTools(id, column, data) {
+        //     axios
+        //         .post("/accountant/updateTools", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async deleteInvoice() {
-            axios
-                .post("/accountant/deleteInvoice", {
-                    id: this.idForAction,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async deleteInvoice() {
+        //     axios
+        //         .post("/accountant/deleteInvoice", {
+        //             id: this.idForAction,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async permanentDeleteInvoice() {
-            axios
-                .post("/accountant/permanentDeleteInvoice", {
-                    id: this.idForAction,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async permanentDeleteInvoice() {
+        //     axios
+        //         .post("/accountant/permanentDeleteInvoice", {
+        //             id: this.idForAction,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async starredInvoice(id,data ,column) {
-            axios
-                .post("/accountant/starredInvoice", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async starredInvoice(id,data ,column) {
+        //     axios
+        //         .post("/accountant/starredInvoice", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
         setInvoiceView(id) {
             this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);

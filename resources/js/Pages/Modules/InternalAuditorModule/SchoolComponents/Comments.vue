@@ -160,6 +160,10 @@ export default {
                 "SecratarySchoolModule/getNotificationId"
             ];
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
     watch: {
         //Add watchers...
@@ -185,7 +189,7 @@ export default {
 
         async getComments() {
             axios
-                .post("http://127.0.0.1:8000/api/secretary/getComments", {
+                .post(this.getMainUrl + "secretary/getComments", {
                     id: this.getNotificationId,
                 })
                 .then((response) => {
@@ -209,7 +213,7 @@ export default {
 
         async sendComment() {
             axios
-                .post("http://127.0.0.1:8000/api/secretary/sendComment", {
+                .post(this.getMainUrl + "secretary/sendComment", {
                     id: this.getNotificationId,
                     body: this.body,
                 })

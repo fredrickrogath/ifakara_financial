@@ -309,6 +309,10 @@ export default {
         getAddSchool() {
             return this.$store.getters["SecratarySchoolModule/getAddSchool"];
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     methods: {
@@ -356,7 +360,7 @@ export default {
 
         getSchools() {
             axios
-                .get("http://127.0.0.1:8000/api/secretary/getSchools")
+                .get(this.getMainUrl + "secretary/getSchools")
                 .then((response) => {
                     this.students = response.data.data;
                     this.showLoader = false;

@@ -71,9 +71,7 @@
 
                     <div
                         class="d-flex justify-content-between align-items-center"
-                    ><jet-application-mark
-                                    class="block h-9 w-auto"
-                                />
+                    >
                         <v-icon
                             v-if="!getAddSchool"
                             class="ml-5 pr-0 pt-3 mr-0"
@@ -301,6 +299,10 @@ export default {
         getAddSchool() {
             return this.$store.getters["SecratarySchoolModule/getAddSchool"];
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     // watch: {
@@ -349,7 +351,7 @@ export default {
 
         getSchools() {
             axios
-                .get("http://127.0.0.1:8000/api/secretary/getSchools")
+                .get(this.getMainUrl + "secretary/getSchools")
                 .then((response) => {
                     this.students = response.data.data;
                     this.showLoader = false;

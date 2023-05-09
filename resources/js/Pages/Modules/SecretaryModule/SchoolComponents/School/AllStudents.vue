@@ -223,9 +223,17 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("Student").listen(
+        // window.Echo.channel("Student").listen(
+        //     "Api\\Secretary\\StudentEvent",
+        //     (e) => {
+        //         this.getStudents();
+        //     }
+        // );
+
+        window.Echo.channel("school-student-trigger-from-financial-secretary." + this.getSchoolId).listen(
             "Api\\Secretary\\StudentEvent",
             (e) => {
+                console.log(e);
                 this.getStudents();
             }
         );
@@ -276,6 +284,10 @@ export default {
             this.schoolId =
                 this.$store.getters["SecratarySchoolModule/getSchoolId"];
             return this.$store.getters["SecratarySchoolModule/getSchoolId"];
+        },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
 
         // getSchoolId() {
@@ -329,7 +341,7 @@ export default {
 
         async getStudents() {
             axios
-                .post("http://127.0.0.1:8000/api/secretary/getSchoolStudents", {
+                .post(this.getMainUrl + "secretary/getSchoolStudents", {
                     school_id: this.getSchoolId,
                 })
                 .then((response) => {

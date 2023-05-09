@@ -196,12 +196,12 @@ export default {
             }
         );
 
-        window.Echo.channel("academic-trigger-add-student").listen(
-            "Academic\\StudentEvent",
-            (e) => {
-                this.getSchoolPermissions();
-            }
-        );
+        // window.Echo.channel("academic-trigger-add-student").listen(
+        //     "Academic\\StudentEvent",
+        //     (e) => {
+        //         this.getSchoolPermissions();
+        //     }
+        // );
     },
 
     data() {
@@ -248,6 +248,10 @@ export default {
         getAddSchool() {
             return this.$store.getters["SecratarySchoolModule/getAddSchool"];
         },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     methods: {
@@ -290,17 +294,18 @@ export default {
 
         getSchoolPermissions() {
             axios
-                .get("http://127.0.0.1:8000/api/secretary/getSchoolPermissions")
+                .get(this.getMainUrl + "secretary/getSchoolPermissions")
                 .then((response) => {
                     this.students = response.data.data;
                     this.showLoader = false;
-                    // console.log(response.data.data)
+                    console.log(response.data.data)
                 });
         },
 
-        async alterPermission(id, object_id, object_type, permission) {console.log(id, object_id, object_type, permission)
+        async alterPermission(id, object_id, object_type, permission) {
+            // console.log(id, object_id, object_type, permission)
             axios
-                .post("http://127.0.0.1:8000/api/secretary/alterPermission", {
+                .post(this.getMainUrl + "secretary/alterPermission", {
                     id: id,
                     object_id: object_id,
                     object_type: object_type,
@@ -311,7 +316,7 @@ export default {
                     // this.amount = "";
                     // this.narration = "";
                     // this.getSchoolPermissions();
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

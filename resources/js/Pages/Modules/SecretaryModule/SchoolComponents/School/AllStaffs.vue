@@ -184,8 +184,6 @@
             </v-data-table>
         </v-col>
     </div>
-    <!-- </v-row>
-    </v-col> -->
 </template>
 
 <script>
@@ -229,9 +227,10 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("school-staff-trigger-from-financial-secretary").listen(
-            "Api\\Secretary\\SchoolEvent",
+        window.Echo.channel("school-staff-trigger-from-financial-secretary." + this.getSchoolId).listen(
+            "Api\\Secretary\\StaffEvent",
             (e) => {
+                console.log(e);
                 this.getStaffs();
             }
         );
@@ -284,6 +283,10 @@ export default {
             return this.$store.getters[
                 "SecretarySchoolDetailModule/getAddStaff"
             ];
+        },
+
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
     },
 
@@ -345,7 +348,7 @@ export default {
 
         async getStaffs() {
             axios
-                .post("http://127.0.0.1:8000/api/secretary/getSchoolStaffs", {
+                .post(this.getMainUrl + "secretary/getSchoolStaffs", {
                     school_id: this.schoolId,
                 })
                 .then((response) => {

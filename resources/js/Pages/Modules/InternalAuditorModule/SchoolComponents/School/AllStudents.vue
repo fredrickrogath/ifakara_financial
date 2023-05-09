@@ -278,9 +278,9 @@ export default {
             return this.$store.getters["SecratarySchoolModule/getSchoolId"];
         },
 
-        // getSchoolId() {
-        //     return this.$store.getters["SecratarySchoolModule/getSchoolId"];
-        // },
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
 
     watch: {
@@ -329,7 +329,7 @@ export default {
 
         async getStudents() {
             axios
-                .post("http://127.0.0.1:8000/api/secretary/getSchoolStudents", {
+                .post(this.getMainUrl + "secretary/getSchoolStudents", {
                     school_id: this.getSchoolId,
                 })
                 .then((response) => {
@@ -344,49 +344,49 @@ export default {
             // handle response here
         },
 
-        async updateTools(id, column, data) {
-            axios
-                .post("/accountant/updateTools", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async updateTools(id, column, data) {
+        //     axios
+        //         .post("/accountant/updateTools", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async deleteInvoice() {
-            axios
-                .post("/accountant/deleteInvoice", {
-                    id: this.idForAction,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async deleteInvoice() {
+        //     axios
+        //         .post("/accountant/deleteInvoice", {
+        //             id: this.idForAction,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async starredInvoice(id, data, column) {
-            axios
-                .post("/accountant/starredInvoice", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async starredInvoice(id, data, column) {
+        //     axios
+        //         .post("/accountant/starredInvoice", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
         setInvoiceView(id) {
             this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
