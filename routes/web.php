@@ -70,12 +70,12 @@ Route::middleware([
 
     Route::group(['prefix' => 'bishop', 'middleware' => 'is_bishop', 'as' => 'bishop.'], function () {
         Route::get('/dashboard', [\App\Http\Controllers\Bishop\DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/schools', [\App\Http\Controllers\Bishop\DashboardController::class, 'schools'])->name('schools');
-        Route::get('/documents', [\App\Http\Controllers\Bishop\DashboardController::class, 'documents'])->name('documents');
-        Route::get('/uploads', [\App\Http\Controllers\Bishop\DashboardController::class, 'uploads'])->name('uploads');
-        Route::get('/invoices', [\App\Http\Controllers\Bishop\DashboardController::class, 'invoices'])->name('invoices');
+        Route::get('/secretary', [\App\Http\Controllers\Bishop\DashboardController::class, 'secretary'])->name('secretary');
+        Route::get('/accountant', [\App\Http\Controllers\Bishop\DashboardController::class, 'accountant'])->name('accountant');
+        Route::get('/procurement', [\App\Http\Controllers\Bishop\DashboardController::class, 'procurement'])->name('procurement');
+        Route::get('/internal_auditor', [\App\Http\Controllers\Bishop\DashboardController::class, 'internal_auditor'])->name('internal_auditor');
         // Route::get('/account', [\App\Http\Controllers\Bishop\DashboardController::class, 'account'])->name('account');
-        Route::get('/internal_office', [\App\Http\Controllers\Bishop\DashboardController::class, 'internal_office'])->name('internal_office');
+        // Route::get('/internal_office', [\App\Http\Controllers\Bishop\DashboardController::class, 'internal_office'])->name('internal_office');
     });
 
 

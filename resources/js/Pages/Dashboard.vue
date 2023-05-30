@@ -34,19 +34,19 @@
                         <home-page
                             v-if="route().current('bishop.dashboard')"
                         ></home-page>
-                        <schools
-                            v-if="route().current('bishop.schools')"
-                        ></schools>
+                        <secretary
+                            v-if="route().current('bishop.secretary')"
+                        ></secretary>
                         <!-- <documents v-if="route().current('bishop.documents')"></documents> -->
-                        <uploads
-                            v-if="route().current('bishop.uploads')"
-                        ></uploads>
-                        <invoices
-                            v-if="route().current('bishop.invoices')"
-                        ></invoices>
-                        <internal-office
-                            v-if="route().current('bishop.internal_office')"
-                        ></internal-office>
+                        <accountant
+                            v-if="route().current('bishop.accountant')"
+                        ></accountant>
+                        <procurement
+                            v-if="route().current('bishop.procurement')"
+                        ></procurement>
+                        <internal-auditor
+                            v-if="route().current('bishop.internal_auditor')"
+                        ></internal-auditor>
 
                         <!-- Secretary -->
                         <secretary-home-page
@@ -200,10 +200,10 @@ import TopBar from "./Components/TopBar.vue";
 
 import HomePage from "./Modules/BishopModule/HomePage.vue";
 // import Documents from "./Modules/BishopModule/Documents.vue";
-import InternalOffice from "./Modules/BishopModule/InternalOffice.vue";
-import Invoices from "./Modules/BishopModule/Invoices.vue";
-import Schools from "./Modules/BishopModule/Schools.vue";
-import Uploads from "./Modules/BishopModule/Uploads.vue";
+import InternalAuditor from "./Modules/BishopModule/InternalAuditor.vue";
+import Accountant from "./Modules/BishopModule/Accountant.vue";
+import Secretary from "./Modules/BishopModule/SecretaryOffice.vue";
+import Procurement from "./Modules/BishopModule/Procurement.vue";
 
 import SecretaryHomePage from "./Modules/SecretaryModule/HomePage.vue";
 import SecretarySchools from "./Modules/SecretaryModule/Schools.vue";
@@ -241,10 +241,10 @@ export default {
         // MY PAGES
         HomePage,
         // Documents,
-        InternalOffice,
-        Invoices,
-        Schools,
-        Uploads,
+        InternalAuditor,
+        Accountant,
+        Secretary,
+        Procurement,
 
         SecretaryHomePage,
         SecretarySchools,

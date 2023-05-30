@@ -21,17 +21,17 @@ class ToolsController extends Controller
     }
 
     public function get_tools(Request $request ,ToolService $toolService){
-        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        // $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return response()->json(['data' => $toolService->get_tools()]);
     }
 
     public function getStarredTools(Request $request ,ToolService $toolService){
-        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        // $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return response()->json(['data' => $toolService->getStarredTools()]);
     }
 
     public function getTrashedTools(Request $request ,ToolService $toolService){
-        $this->authorize('authorizeProcurement', \App\Models\User::class); 
+        // $this->authorize('authorizeProcurement', \App\Models\User::class); 
         return response()->json(['data' => $toolService->getTrashedTools()]);
     }
     
@@ -79,13 +79,13 @@ class ToolsController extends Controller
     }
 
     public function getBrokenTools(ToolService $toolService){
-        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        // $this->authorize('authorizeProcurement', \App\Models\User::class);
         // event(new \App\Events\Procurement\BrokenToolsEvent('created'));
         return response()->json(['data' => $toolService->getBrokenTools()]);
     }
 
     public function getSellersList(ToolService $toolService){
-        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        // $this->authorize('authorizeProcurement', \App\Models\User::class);
         // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $toolService->getSellersList()]);
     }

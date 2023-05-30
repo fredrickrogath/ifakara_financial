@@ -1,75 +1,24 @@
 <template>
-    <!-- <v-col>
-        <v-row> -->
-    <div class="h-screen card">
-        <div class="">
-            <spinner v-if="showLoader"></spinner>
+    <div>
+        <div class="ml-3">
+            <div class="row">
+                <div class="h-screen card">
+                    <div class="">
+                        <spinner v-if="showLoader"></spinner>
 
-            <v-col v-else sm="12" md="12" class="mt-0 pt-0">
-                <!-- <v-card flat :dark="isDark"> -->
-                <!-- <v-card elevation="0" data-app> -->
+                        <v-col v-else sm="12" md="12" class="mt-0 pt-0">
+                            <v-card-title class="px-0 pt-0">
+                                Schools
+                                <v-spacer></v-spacer>
+                                <v-text-field
+                                    v-model="search"
+                                    append-icon="mdi-magnify"
+                                    label="Search"
+                                    single-line
+                                    hide-details
+                                ></v-text-field>
 
-                <!-- Warning Alert Modal -->
-                <div
-                    id="warning-alert-modal"
-                    class="modal fade"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-hidden="true"
-                >
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-body p-2">
-                                <div class="text-center">
-                                    <i
-                                        class="dripicons-warning h1 text-warning"
-                                    ></i>
-                                    <h4 class="mt-2 text-gray-500">
-                                        Are you sure you want to delete this
-                                        data ?
-                                    </h4>
-                                    <p class="mt-3">
-                                        Do not worry, deleting this can be
-                                        restored in your trash within 30 days.
-                                    </p>
-                                    <div class="flex justify-around">
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm btn-warning my-1 text-white"
-                                            data-bs-dismiss="modal"
-                                            @click="deleteInvoice()"
-                                        >
-                                            Continue
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm btn-danger my-1 text-white"
-                                            data-bs-dismiss="modal"
-                                        >
-                                            cancel
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-
-                <v-card-title class="px-0 pt-0">
-                    Schools
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                        v-model="search"
-                        append-icon="mdi-magnify"
-                        label="Search"
-                        single-line
-                        hide-details
-                    ></v-text-field>
-
-                    <div
+                                <!-- <div
                         class="d-flex justify-content-between align-items-center"
                     >
                         <v-icon
@@ -89,126 +38,196 @@
                         >
                             mdi-check
                         </v-icon>
-                    </div>
-                </v-card-title>
-                <!-- {{ $page.props.posts }} -->
+                    </div> -->
+                            </v-card-title>
+                            <!-- {{ $page.props.posts }} -->
 
-                <v-data-table
-                    :headers="headers"
-                    :items="students"
-                    item-key="name"
-                    :search="search"
-                    class="elevation-1"
-                >
-                    <template v-slot:body="{ items, headers }">
-                        <tbody>
-                            <tr v-for="(item, idx, k) in items" :key="idx">
-                                <td v-for="(header, key) in headers" :key="key">
-                                    <v-icon
-                                        v-if="header.value == 'delete'"
-                                        size="22"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#warning-alert-modal"
-                                        @click="
-                                            setIdForAction(items[idx]['id'])
-                                        "
-                                    >
-                                        mdi-delete
-                                    </v-icon>
+                            <v-data-table
+                                :headers="headers"
+                                :items="students"
+                                item-key="name"
+                                :search="search"
+                                class="elevation-1"
+                            >
+                                <template v-slot:body="{ items, headers }">
+                                    <tbody>
+                                        <tr
+                                            v-for="(item, idx, k) in items"
+                                            :key="idx"
+                                        >
+                                            <td
+                                                v-for="(header, key) in headers"
+                                                :key="key"
+                                            >
+                                                <v-icon
+                                                    v-if="
+                                                        header.value == 'delete'
+                                                    "
+                                                    size="22"
+                                                    type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#warning-alert-modal"
+                                                    @click="
+                                                        setIdForAction(
+                                                            items[idx]['id']
+                                                        )
+                                                    "
+                                                >
+                                                    mdi-delete
+                                                </v-icon>
 
-                                    <v-icon
-                                        v-if="header.value == 'view'"
-                                        size="22"
-                                        @click="setViewSchoolDashboard(items[idx]['id'])"
-                                    >
-                                        mdi-eye
-                                    </v-icon>
+                                                <v-icon
+                                                    v-if="
+                                                        header.value == 'view'
+                                                    "
+                                                    size="22"
+                                                    @click="
+                                                        setViewSchoolDashboard(
+                                                            items[idx]['id']
+                                                        )
+                                                    "
+                                                >
+                                                    mdi-eye
+                                                </v-icon>
 
-                                    <v-icon
-                                        v-if="header.value == 'starred'"
-                                        size="22"
-                                        :class="
-                                            item[header.value]
-                                                ? 'text-warning'
-                                                : ''
-                                        "
-                                        @click="
-                                            starredInvoice(
-                                                items[idx]['id'],
-                                                item[header.value],
-                                                header.value
-                                            )
-                                        "
-                                    >
-                                        mdi-star
-                                    </v-icon>
+                                                <v-icon
+                                                    v-if="
+                                                        header.value ==
+                                                        'starred'
+                                                    "
+                                                    size="22"
+                                                    :class="
+                                                        item[header.value]
+                                                            ? 'text-warning'
+                                                            : ''
+                                                    "
+                                                    @click="
+                                                        starredInvoice(
+                                                            items[idx]['id'],
+                                                            item[header.value],
+                                                            header.value
+                                                        )
+                                                    "
+                                                >
+                                                    mdi-star
+                                                </v-icon>
 
-                                    <span
-                                        class="text-gray-600"
-                                        v-else-if="header.value == 'id'"
-                                        >{{ item[header.value] }}</span
-                                    >
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value == 'id'
+                                                    "
+                                                    >{{
+                                                        item[header.value]
+                                                    }}</span
+                                                >
 
-                                    <span
-                                        class="text-gray-600"
-                                        v-else-if="header.value == 'created_at'"
-                                        >{{
-                                            formattedDate(item[header.value])
-                                        }}</span
-                                    >
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value ==
+                                                        'created_at'
+                                                    "
+                                                    >{{
+                                                        formattedDate(
+                                                            item[header.value]
+                                                        )
+                                                    }}</span
+                                                >
 
-                                    <span
-                                        class="text-gray-600"
-                                        v-else-if="header.value == 'updated_at'"
-                                        >{{
-                                            formattedDate(item[header.value])
-                                        }}</span
-                                    >
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value ==
+                                                        'logo_path'
+                                                    "
+                                                >
+                                                    <!-- {{ item[header.value] }} -->
+                                                    <!-- {{ formatName(items[idx]['name']) }} -->
 
-                                    <span
-                                        class="text-gray-600"
-                                        v-else-if="header.value == 'name'"
-                                        >{{ item[header.value] }}</span
-                                    >
+                                                    <img
+                                                        class="h-8 w-8 rounded-full object-cover"
+                                                        :src="
+                                                            'https://ui-avatars.com/api/?name=' +
+                                                            formatName(
+                                                                items[idx][
+                                                                    'name'
+                                                                ]
+                                                            ) +
+                                                            '&color=7F9CF5&background=EBF4FF'
+                                                        "
+                                                        :alt="
+                                                            items[idx]['name']
+                                                        "
+                                                    />
+                                                </span>
 
-                                    <span
-                                        class="text-gray-600"
-                                        v-else-if="header.value == 'email'"
-                                    >
-                                        {{ item[header.value] }}
-                                    </span>
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value ==
+                                                        'updated_at'
+                                                    "
+                                                    >{{
+                                                        formattedDate(
+                                                            item[header.value]
+                                                        )
+                                                    }}</span
+                                                >
 
-                                    <!-- <span
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value == 'name'
+                                                    "
+                                                    >{{
+                                                        item[header.value]
+                                                    }}</span
+                                                >
+
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value == 'email'
+                                                    "
+                                                >
+                                                    {{ item[header.value] }}
+                                                </span>
+
+                                                <!-- <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'mobile'"
                                 >
                                     {{ item[header.value] }}
                                 </span> -->
 
-                                    <span
-                                        class="text-gray-600"
-                                        v-else-if="header.value == 'location'"
-                                    >
-                                        {{ item[header.value] }}
-                                    </span>
+                                                <span
+                                                    class="text-gray-600"
+                                                    v-else-if="
+                                                        header.value ==
+                                                        'location'
+                                                    "
+                                                >
+                                                    {{ item[header.value] }}
+                                                </span>
 
-                                    <!-- <span
+                                                <!-- <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'role'"
                                 >
                                     {{ department(item[header.value]) }}
                                 </span> -->
-                                </td>
-                            </tr>
-                        </tbody>
-                    </template>
-                </v-data-table>
-            </v-col>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </template>
+                            </v-data-table>
+                        </v-col>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- </v-row>
-    </v-col> -->
 </template>
 
 <script>
@@ -265,6 +284,10 @@ export default {
             search: "",
             headers: [
                 {
+                    text: "Logo",
+                    value: "logo_path",
+                },
+                {
                     text: "Name",
                     align: "start",
                     sortable: false,
@@ -282,7 +305,7 @@ export default {
                     text: "Location",
                     value: "location",
                 },
-                // { text: "Date", value: "created_at" },
+                { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
             ],
             students: [],
@@ -329,8 +352,8 @@ export default {
         },
 
         formattedDate(date) {
-            return moment(date).format("MMMM Do YYYY");
-            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         // totalPrice(item) {
@@ -349,6 +372,16 @@ export default {
             }
         },
 
+        formatName(name) {
+            const nameArr = name.split(" ");
+            const formattedNameArr = nameArr.map((name) => {
+                return name.charAt(0).toUpperCase() + name.slice(1);
+            });
+            const formattedName = formattedNameArr.join("+");
+            // this.formattedName = formattedName;
+            return formattedName;
+        },
+
         getSchools() {
             axios
                 .get(this.getMainUrl + "secretary/getSchools")
@@ -361,7 +394,9 @@ export default {
 
         setViewSchoolDashboard(id) {
             this.setSchoolId(id);
-            this.$store.dispatch("ProcurementToolModule/setViewSchoolDashboard");
+            this.$store.dispatch(
+                "ProcurementToolModule/setViewSchoolDashboard"
+            );
         },
 
         setSchoolView(id) {

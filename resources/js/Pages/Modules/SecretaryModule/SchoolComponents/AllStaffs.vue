@@ -66,16 +66,6 @@
                     single-line
                     hide-details
                 ></v-text-field>
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <v-icon
-                        class="ml-5 pr-0 pt-3 mr-0"
-                        size="22"
-                        @click=""
-                    >
-                        mdi-pen-plus
-                    </v-icon>
-                </div>
             </v-card-title>
 
             <!-- {{ $page.props.posts }} -->
@@ -150,20 +140,20 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'email'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'role'"
                                 >
                                     {{ department(item[header.value]) }}
@@ -212,10 +202,17 @@ export default {
         this.getStaffs();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         // console.log('abc');
+        //         this.getStaffs();
+        //     }
+        // );
+
+        window.Echo.channel("school-staff-trigger-from-financial-secretary").listen(
+            "Api\\Secretary\\StaffEvent",
             (e) => {
-                // console.log('abc');
                 this.getStaffs();
             }
         );
@@ -285,12 +282,14 @@ export default {
         // },
 
         department(role) {
-            if (role == 3) {
-                return "Academic";
+            if (role == 1) {
+                return "Head Office";
+            } else if (role == 3) {
+                return "Academic Office";
             } else if (role == 5) {
-                return "Accountant";
+                return "Accountant Office";
             } else if (role == 6) {
-                return "Procurement";
+                return "Procurement Office";
             }
         },
 

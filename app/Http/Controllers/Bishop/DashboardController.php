@@ -38,27 +38,22 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 
-    public function schools(BishopService $bishopService){
+    public function secretary(BishopService $bishopService){
         $this->authorize('authorizeBishop', \App\Models\User::class); 
         return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 
-    public function documents(BishopService $bishopService){
+    public function accountant(BishopService $bishopService){
         $this->authorize('authorizeBishop', \App\Models\User::class); 
         return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 
-    public function uploads(BishopService $bishopService){
+    public function procurement(BishopService $bishopService){
         $this->authorize('authorizeBishop', \App\Models\User::class); 
         return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
 
-    public function invoices(BishopService $bishopService){
-        $this->authorize('authorizeBishop', \App\Models\User::class); 
-        return Inertia::render('Dashboard', $bishopService->dashboardData());
-    }
-
-    public function internal_office(BishopService $bishopService){
+    public function internal_auditor(BishopService $bishopService){
         $this->authorize('authorizeBishop', \App\Models\User::class); 
         return Inertia::render('Dashboard', $bishopService->dashboardData());
     }

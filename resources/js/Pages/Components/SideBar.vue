@@ -266,40 +266,15 @@
                         </li>
     
                         <li class="menu-title mt-2">Apps</li>
-    
+
                         <li>
-                            <a href="#sidebarCrm" data-bs-toggle="collapse">
+                            <my-custom-link
+                                :href="route('secretary.uploads')"
+                                :active="route().current('secretary.uploads')"
+                            >
                                 <v-icon>mdi-file-document</v-icon>
                                 <span> Documents </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarCrm">
-                                <ul class="nav-second-level">
-                                    <!-- <li>
-                                        <my-custom-link
-                                            :href="route('secretary.schools')"
-                                            :active="
-                                                route().current('secretary.schools')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-school</v-icon>
-                                            <span> Schools </span>
-                                        </my-custom-link>
-                                    </li> -->
-    
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('secretary.uploads')"
-                                            :active="
-                                                route().current('secretary.uploads')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-upload</v-icon>
-                                            <span> Uploads </span>
-                                        </my-custom-link>
-                                    </li>
-                                </ul>
-                            </div>
+                            </my-custom-link>
                         </li>
     
                         <li class="flex items-center">
@@ -314,7 +289,7 @@
                             <span class="me-4">
                                 <i
                                     v-if="permissionCount > 0"
-                                    class="mdi mdi-bell inline-block animate-shake shake text-red-500 font-17 align-middle me-2 pb-1"
+                                    class="mdi mdi-bell inline-block animate-shake shake text-red-500 font-15 align-middle me-2 pb-1"
                                     >{{ permissionCount }}</i
                                 >
                             </span>
@@ -351,156 +326,48 @@
                         </li>
     
                         <li class="menu-title mt-2">Apps</li>
-    
+                        
+
                         <li>
-                            <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                            <my-custom-link
+                                :href="route('bishop.secretary')"
+                                :active="route().current('bishop.secretary')"
+                            >
                                 <v-icon size="22">mdi-account-tie</v-icon>
                                 <span> Secretary </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarEcommerce">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('bishop.documents')"
-                                            :active="
-                                                route().current('bishop.documents')
-                                            "
-                                        >
-                                            <v-icon size="20"
-                                                >mdi-file-document</v-icon
-                                            >
-                                            <span> Documents </span>
-                                        </my-custom-link>
-                                    </li>
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('bishop.uploads')"
-                                            :active="
-                                                route().current('bishop.uploads')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-upload</v-icon>
-                                            <span> Uploads </span>
-                                        </my-custom-link>
-                                    </li>
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('bishop.invoices')"
-                                            :active="
-                                                route().current('bishop.invoices')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-cash</v-icon>
-                                            <span> Invoices </span>
-                                        </my-custom-link>
-                                    </li>
-    
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('bishop.schools')"
-                                            :active="
-                                                route().current('bishop.schools')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-school</v-icon>
-                                            <span> Schools </span>
-                                        </my-custom-link>
-                                    </li>
-    
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('bishop.schools')"
-                                            :active="
-                                                route().current('bishop.schools')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-school</v-icon>
-                                            <span> Diocese </span>
-                                        </my-custom-link>
-                                    </li>
-    
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('bishop.schools')"
-                                            :active="
-                                                route().current('bishop.schools')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-school</v-icon>
-                                            <span> Health Institute </span>
-                                        </my-custom-link>
-                                    </li>
-                                </ul>
-                            </div>
+                            </my-custom-link>
                         </li>
-    
+
                         <li>
-                            <a href="#sidebarCrm" data-bs-toggle="collapse">
-                                <v-icon>mdi-account-box</v-icon>
-                                <span> Account </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarCrm">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('bishop.schools')"
-                                            :active="
-                                                route().current('bishop.schools')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-school</v-icon>
-                                            <span> Schools </span>
-                                        </my-custom-link>
-                                    </li>
-    
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('bishop.schools')"
-                                            :active="
-                                                route().current('bishop.schools')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-school</v-icon>
-                                            <span> Diocese </span>
-                                        </my-custom-link>
-                                    </li>
-    
-                                    <li>
-                                        <my-custom-link
-                                            :href="route('bishop.schools')"
-                                            :active="
-                                                route().current('bishop.schools')
-                                            "
-                                        >
-                                            <v-icon size="20">mdi-school</v-icon>
-                                            <span> Health Institute </span>
-                                        </my-custom-link>
-                                    </li>
-                                </ul>
-                            </div>
+                            <my-custom-link
+                                :href="route('bishop.accountant')"
+                                :active="route().current('bishop.accountant')"
+                            >
+                                <v-icon size="22">mdi-account-tie</v-icon>
+                                <span> Accountant </span>
+                            </my-custom-link>
+                        </li>
+
+                        <li>
+                            <my-custom-link
+                                :href="route('bishop.procurement')"
+                                :active="route().current('bishop.procurement')"
+                            >
+                                <v-icon size="22">mdi-account-tie</v-icon>
+                                <span> Procurement </span>
+                            </my-custom-link>
                         </li>
     
                         <li>
                             <my-custom-link
-                                :href="route('bishop.internal_office')"
-                                :active="route().current('bishop.internal_office')"
+                                :href="route('bishop.internal_auditor')"
+                                :active="route().current('bishop.internal_auditor')"
                             >
                                 <v-icon size="22">mdi-account-tie</v-icon>
                                 <span> Internal Auditor </span>
                             </my-custom-link>
                         </li>
     
-                        <li>
-                            <my-custom-link
-                                :href="route('bishop.internal_office')"
-                                :active="route().current('bishop.internal_office')"
-                            >
-                                <v-icon size="22">mdi-account-tie</v-icon>
-                                <span> Procurement </span>
-                            </my-custom-link>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -615,7 +482,7 @@ export default {
         getSchoolPermissionsNotifications() {
             axios
                 .get(
-                    "https://schools.ifakaracatholicdiocese.com/api/secretary/getSchoolPermissionsNotifications"
+                    this.getMainUrl + "secretary/getSchoolPermissionsNotifications"
                 )
                 .then((response) => {
                     this.permissionCount = response.data.data;
@@ -631,7 +498,11 @@ export default {
         // },
     },
 
-    computed: {},
+    computed: {
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
+    },
 };
 </script>
 

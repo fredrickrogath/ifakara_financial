@@ -95,6 +95,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -159,20 +160,20 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'email'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'role'"
                                 >
                                     {{ department(item[header.value]) }}
@@ -227,10 +228,17 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("school-staff-trigger-from-financial-secretary." + this.getSchoolId).listen(
-            "Api\\Secretary\\StaffEvent",
+        // window.Echo.channel("school-staff-trigger-from-financial-secretary." + this.getSchoolId).listen(
+        //     "Api\\Secretary\\StaffEvent",
+        //     (e) => {
+        //         console.log(e);
+        //         this.getStaffs();
+        //     }
+        // );
+
+        window.Echo.channel("staff-event." + this.getSchoolId).listen(
+            "Academic\\StaffEvent",
             (e) => {
-                console.log(e);
                 this.getStaffs();
             }
         );
@@ -325,12 +333,15 @@ export default {
         // },
 
         department(role) {
-            if (role == 3) {
-                return "Academic";
+            if (role == 1) {
+                return "Head Office";
+            }
+            else if (role == 3) {
+                return "Academic Office";
             } else if (role == 5) {
-                return "Accountant";
+                return "Accountant Office";
             } else if (role == 6) {
-                return "Procurement";
+                return "Procurement Office";
             }
         },
 

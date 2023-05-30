@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <div class="">
         <div class="">
-            <div v-if="getSchoolDashboards" class="mt-0 pt-0">
-                <schools v-if="!getViewSchoolDashboard"></schools>
-                <school-dashboard v-if="getViewSchoolDashboard"></school-dashboard>
+            <div v-show="getSchoolDashboards" class="">
+                <schools v-show="!getViewSchoolDashboard"></schools>
+                <school-dashboard v-show="getViewSchoolDashboard"></school-dashboard>
             </div>
-            <div class="mt-0 pt-0" v-else>
-                <div class="row">
-                    <div class="col-md-3 col-xl-3 my-0 pb-1 pt-0">
+            <div class="mt-0 pt-0" v-show="!getSchoolDashboards">
+                <div class="d-flex">
+                    <div class="my-0 pt-0 flex-grow-1">
                         <div class="card bg-pattern py-0 my-0 shadow">
                             <div class="card-body">
                                 <div class="row">
@@ -39,7 +39,7 @@
                     </div>
                     <!-- end col -->
 
-                    <div class="col-md-3 col-xl-3 px-0 pb-1 pt-0">
+                    <div class="pl-1 pt-0 flex-grow-1">
                         <div class="card bg-pattern py-0 my-0">
                             <div class="card-body shadow">
                                 <div class="row">
@@ -72,7 +72,7 @@
                     </div>
                     <!-- end col -->
 
-                    <div class="col-md-3 col-xl-3 pb-1 pt-0">
+                    <div class="pl-1 pt-0 flex-grow-1">
                         <div class="card bg-pattern py-0 my-0">
                             <div class="card-body shadow">
                                 <div class="row">
@@ -105,7 +105,7 @@
                     </div>
                     <!-- end col -->
 
-                    <div class="col-md-3 col-xl-3 px-0 pb-1 pt-0">
+                    <div class="pl-1 pt-0 flex-grow-1">
                         <div class="card bg-pattern py-0 my-0">
                             <div class="card-body shadow">
                                 <div class="row">
@@ -139,8 +139,8 @@
 
                 <!-- end row -->
 
-                <div class="row pt-0 mt-0">
-                    <div class="col-xl-8 col-md-6 mb-0 pb-0">
+                <div class="d-flex pt-1">
+                    <div class="mb-0 pb-0 mr-1">
                         <div class="card">
                             <div class="card-body pb-2">
                                 <div class="float-end d-none d-md-inline-block">
@@ -425,7 +425,7 @@
                 </div> -->
                     <!-- end col-->
 
-                    <div class="col-xl-8 col-md-6 mb-0 pb-0">
+                    <div class="mb-0 pb-0">
                         <div class="card">
                             <div class="card-body">
                                 <!-- <div class="float-end d-none d-md-inline-block"> -->

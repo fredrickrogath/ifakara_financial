@@ -50,7 +50,7 @@
                 <template v-slot:body="{ items, headers }">
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
-                            <td v-for="(header, key) in headers" :key="key">
+                            <td v-for="(header, key) in headers" :key="key" :class="!item.read? 'bg-yellow-200' : null ">
                                 <v-icon
                                     v-if="header.value == 'delete'"
                                     size="22"
@@ -66,7 +66,7 @@
                                     v-if="header.value == 'financial_secreatary_permission'"
                                     size="22"
                                     :color="!item[header.value].financial_secreatary_permission ? 'bg-red-400' : 'bg-green-400'"
-                                    @click="alterPermission(items[idx]['id'], items[idx].object.id, items[idx].object_type, item[header.value].financial_secreatary_permission)"
+                                    @click="alterPermission(items[idx]['id'], items[idx].object.id, items[idx].object_type, item[header.value].financial_secreatary_permission, item[header.value].school_id)"
                                 >
                                     {{!item[header.value].financial_secreatary_permission ? 'mdi-lock' : 'mdi-lock-open-variant'}}
                                 </v-icon>
@@ -89,7 +89,7 @@
                                     mdi-chat-processing
                                 </v-icon>
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'from_role'"
                                     >{{ item[header.value] }}
                                     
@@ -105,7 +105,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'to_role'"
                                     >{{
                                         item[header.value]
@@ -113,13 +113,13 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'object'"
                                     >{{ item[header.value].first_name }}  {{ item[header.value].last_name }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'object_type'"
                                 >
                                     {{ item[header.value] }}
@@ -298,15 +298,16 @@ export default {
                 .then((response) => {
                     this.students = response.data.data;
                     this.showLoader = false;
-                    console.log(response.data.data)
+                    // console.log(response.data.data)
                 });
         },
 
-        async alterPermission(id, object_id, object_type, permission) {
-            // console.log(id, object_id, object_type, permission)
+        async alterPermission(id, object_id, object_type, permission, school_id) {
+            // console.log(id, object_id, object_type, permission, school_id)
             axios
                 .post(this.getMainUrl + "secretary/alterPermission", {
                     id: id,
+                    school_id: school_id,
                     object_id: object_id,
                     object_type: object_type,
                     permission: permission,

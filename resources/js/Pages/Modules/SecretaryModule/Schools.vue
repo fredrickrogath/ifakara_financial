@@ -378,7 +378,7 @@
                                     ></i
                                     >Permissions <i
                                     v-if="permissionCount > 0"
-                                        class="mdi mdi-bell inline-block animate-shake shake text-red-500 font-17 align-middle me-2 pb-1 px-2"
+                                        class="mdi mdi-bell inline-block animate-shake shake text-red-500 font-15 align-middle me-2 pb-1 px-2"
                                     > {{ permissionCount }} </i
                                     ></a
                                 >

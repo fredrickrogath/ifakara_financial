@@ -249,8 +249,8 @@ export default {
         this.getSchools();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
+        window.Echo.channel("school-trigger-from-financial-secretary").listen(
+            "Api\\Secretary\\SchoolEvent",
             (e) => {
                 // console.log('abc');
                 this.getSchools();

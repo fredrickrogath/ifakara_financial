@@ -183,13 +183,13 @@ export default {
         this.initialize();
 
         // Receiving broadicasting
-        window.Echo.channel("EventTriggered").listen(
-            "NewPostPublished",
-            (e) => {
-                // console.log('abc');
-                // this.getTools();
-            }
-        );
+        // window.Echo.channel("EventTriggered").listen(
+        //     "NewPostPublished",
+        //     (e) => {
+        //         // console.log('abc');
+        //         // this.getTools();
+        //     }
+        // );
     },
 
     data() {

@@ -75,6 +75,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -139,25 +140,25 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'first_name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'last_name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'gender'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'from'"
                                 >
                                     {{ item[header.value] }}
@@ -230,10 +231,17 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("school-student-trigger-from-financial-secretary." + this.getSchoolId).listen(
-            "Api\\Secretary\\StudentEvent",
+        // window.Echo.channel("school-student-trigger-from-financial-secretary." + this.getSchoolId).listen(
+        //     "Api\\Secretary\\StudentEvent",
+        //     (e) => {
+        //         console.log('hello world');
+        //         this.getStudents();
+        //     }
+        // );
+
+        window.Echo.channel("student-event." + this.getSchoolId).listen(
+            "Academic\\StudentEvent",
             (e) => {
-                console.log(e);
                 this.getStudents();
             }
         );

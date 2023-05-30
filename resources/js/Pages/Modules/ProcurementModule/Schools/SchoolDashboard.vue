@@ -18,7 +18,11 @@
                                         <div class="text-end">
                                             <h4 class="my-1">
                                                 <span data-plugin="counterup">
-                                                    {{ totalTools? totalTools : 0 }}
+                                                    {{
+                                                        totalTools
+                                                            ? totalTools
+                                                            : 0
+                                                    }}
                                                 </span>
                                             </h4>
                                             <p
@@ -58,7 +62,11 @@
                                             <p
                                                 class="text-muted mb-1 text-truncate"
                                             >
-                                                {{ newToolTitle? newToolTitle : 'please wait' }}
+                                                {{
+                                                    newToolTitle
+                                                        ? newToolTitle
+                                                        : "please wait"
+                                                }}
                                             </p>
                                         </div>
                                     </div>
@@ -91,7 +99,11 @@
                                             <p
                                                 class="text-muted mb-1 text-truncate"
                                             >
-                                                {{ brokenToolTitle? brokenToolTitle : 'please wait' }}
+                                                {{
+                                                    brokenToolTitle
+                                                        ? brokenToolTitle
+                                                        : "please wait"
+                                                }}
                                             </p>
                                         </div>
                                     </div>
@@ -118,7 +130,11 @@
                                                 <span data-plugin="counterup">
                                                     <!-- {{ totalUploads }} -->
                                                     <!-- 0 -->
-                                                    {{ getSchoolId? getSchoolId: 0 }}
+                                                    {{
+                                                        getSchoolId
+                                                            ? getSchoolId
+                                                            : 0
+                                                    }}
                                                 </span>
                                             </h4>
                                             <p
@@ -450,7 +466,9 @@
                                 </div> -->
                                 <!-- </div> -->
 
-                                <h4 class="header-title">Invoices Status</h4>
+                                <h4 class="header-title">
+                                    Invoices Status {{ getSchoolId }}
+                                </h4>
 
                                 <!-- <div class="d-flex text-center">
                                 <div class="col-md-4">
@@ -567,8 +585,9 @@ export default {
 
         getSchoolId() {
             this.schoolId =
-                this.$store.getters["SecratarySchoolModule/getSchoolId"];
-            return this.$store.getters["SecratarySchoolModule/getSchoolId"];
+                this.$store.getters["ProcurementToolModule/getSchoolId"];
+            // console.log(this.schoolId)
+            return this.$store.getters["ProcurementToolModule/getSchoolId"];
         },
 
         getMainUrl() {
@@ -581,9 +600,9 @@ export default {
             if (newVal !== null) {
                 this.initialize();
             }
-            console.log(
-                `The message has changed from "${oldVal}" to "${newVal}"`
-            );
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
         },
     },
 
@@ -595,7 +614,7 @@ export default {
         async initialize() {
             // this.headDashboardGetStudents();
             this.getInvoiceDashboardData();
-            this.headDashboardGetUploads();
+            // this.headDashboardGetUploads();
             this.getToolDashboardData();
             // this.getDashboardData();
 
@@ -633,9 +652,11 @@ export default {
         // },
 
         async getInvoiceDashboardData() {
+            // console.log(this.schoolId);
             axios
                 .post(
-                    this.getMainUrl + "secretary/getInvoiceDashboardData",
+                    this.getMainUrl +
+                        "secretary/getInvoiceDashboardDataToFinancial",
                     {
                         school_id: this.schoolId,
                     }
@@ -655,7 +676,7 @@ export default {
                             response.data.data.accountantFinancialCount,
                         ],
                     ];
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                     // console.log(this.chartData);
                 });
         },
@@ -663,7 +684,8 @@ export default {
         async getToolDashboardData() {
             axios
                 .post(
-                    this.getMainUrl + "secretary/getToolDashboardData",
+                    this.getMainUrl +
+                        "secretary/getToolDashboardDataToFinancial",
                     {
                         school_id: this.schoolId,
                     }
@@ -678,18 +700,19 @@ export default {
                         ["New Tools", response.data.data.newTools],
                         ["Broken Tools", response.data.data.brokenTools],
                     ];
+                    // console.log(this.tools);
                 });
         },
 
-        async headDashboardGetUploads() {
-            axios
-                .get(this.getMainUrl + "procurement/getInvoiceDashboardData")
-                .then((response) => {
-                    this.totalUploads = response.data.data.totalUploads;
-                    this.uploadTitles = response.data.data.uploadTitles;
-                    // console.log(response.data.data)
-                });
-        },
+        // async headDashboardGetUploads() {
+        //     axios
+        //         .get(this.getMainUrl + "secretary/headDashboardGetUploads")
+        //         .then((response) => {
+        //             this.totalUploads = response.data.data.totalUploads;
+        //             this.uploadTitles = response.data.data.uploadTitles;
+        //             // console.log(response.data.data)
+        //         });
+        // },
 
         department(role) {
             if (role == 3) {
