@@ -231,7 +231,7 @@
                                 </div>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -268,7 +268,7 @@
                                     large
                                 >
                                     <span
-                                        class="text-gray-600"
+                                        class="text-gray-600 italic font-semibold"
                                         :class="
                                             item[header.value] == null &&
                                             header.value !== 'action' // header.value == 'level1'
@@ -412,12 +412,12 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
-                    text: "Code",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
+                // {
+                //     text: "Code",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
                 {
                     text: "Name",
                     value: "name",

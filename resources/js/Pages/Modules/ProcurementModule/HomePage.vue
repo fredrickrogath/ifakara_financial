@@ -1,12 +1,12 @@
 <template>
     <div class="">
         <div class="">
-            <div v-show="getSchoolDashboards" class="">
-                <schools v-show="!getViewSchoolDashboard"></schools>
-                <school-dashboard v-show="getViewSchoolDashboard"></school-dashboard>
-            </div>
-            <div class="mt-0 pt-0" v-show="!getSchoolDashboards">
-                <div class="d-flex">
+            <div class="mt-0 pt-0">
+                <div v-show="getSchoolDashboards" class="">
+                    <schools v-show="!getViewSchoolDashboard"></schools>
+                    <school-dashboard v-show="getViewSchoolDashboard"></school-dashboard>
+                </div>
+                <div class="d-flex -mt-3" v-show="!getSchoolDashboards">
                     <div class="my-0 pt-0 flex-grow-1">
                         <div class="card bg-pattern py-0 my-0 shadow">
                             <div class="card-body">

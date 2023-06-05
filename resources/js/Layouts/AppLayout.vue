@@ -19,7 +19,7 @@
 
                             <!-- Navigation Links -->
                             <div
-                                class="hidden space-x-8 sm:-my-px  my-auto sm:ml-10 sm:flex"
+                                class="hidden space-x-8 sm:-my-px mt-2 my-auto sm:ml-10 sm:flex"
                                 v-if="route().current('procurement.dashboard')"
                             >
                             <a
@@ -32,7 +32,7 @@
                                             : '',
                                     ]"
                                     ><i
-                                        class="mdi mdi-view-dashboard font-18 align-middle me-2 pb-1"
+                                        class="mdi mdi-view-dashboard font-18 align-middle me-2 mt-1 pb-1"
                                     ></i
                                     >Schools details</a
                                 >
@@ -40,12 +40,12 @@
                             </div>
 
                             <div
-                                class="hidden space-x-8 sm:-my-px  my-auto sm:ml-10 sm:flex"
+                                class="hidden space-x-8 sm:-my-px mt-3 my-auto sm:ml-10 sm:flex"
                                 v-if="route().current('procurement.dashboard')"
                             >
                             <a v-show="getViewSchoolDashboard"
                                     href="#"
-                                    class="list-group-item border-0 font-medium bg-warning text-white mt-1 py-0"
+                                    class="list-group-item border-0 font-medium bg-warning text-white py-0"
                                     @click="setViewSchoolDashboard()"
                                     >Back</a
                                 >
