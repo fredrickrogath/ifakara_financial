@@ -50,7 +50,7 @@
                                 class="elevation-1"
                             >
                                 <template v-slot:body="{ items, headers }">
-                                    <tbody>
+                                    <tbody class="text-gray-900">
                                         <tr
                                             v-for="(item, idx, k) in items"
                                             :key="idx"
