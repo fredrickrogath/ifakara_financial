@@ -1,10 +1,10 @@
 <template>
     <!-- <v-col>
         <v-row> -->
-    <div>
+    <div class="">
         <spinner v-if="showLoader"></spinner>
 
-        <v-col v-else sm="12" md="12">
+        <!-- <v-col v-else sm="12" md="12"> -->
             <!-- <v-card flat :dark="isDark"> -->
             <!-- <v-card elevation="0" data-app> -->
 
@@ -56,7 +56,7 @@
             </div>
             <!-- /.modal -->
 
-            <v-card-title class="px-0 pt-0">
+            <v-card-title class="pt-0">
                 Invoices
                 <v-spacer></v-spacer>
                 <v-text-field
@@ -189,7 +189,7 @@
                     </tbody>
                 </template>
             </v-data-table>
-        </v-col>
+        <!-- </v-col> -->
     </div>
     <!-- </v-row>
     </v-col> -->

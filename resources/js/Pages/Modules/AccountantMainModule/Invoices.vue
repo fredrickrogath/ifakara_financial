@@ -106,14 +106,14 @@
 
         <!-- End of Right modal content -->
 
-        <div class="row px-0 pt-3">
+        <div class="row pt-0">
             <!-- Right Sidebar -->
-            <div class="col-12 px-1">
-                <div class="card h-screen">
-                    <div class="card-body pt-1">
+            <div class="col-12 pt-0">
+                <div class="h-screen mt-3">
+                    <div class="bg-white h-screen">
                         <!-- Left sidebar -->
-                        <div class="inbox-leftbar">
-                            <div class="btn-group dropend d-block mb-2 mx-2">
+                        <div class="inbox-leftbar bg-white mt-1">
+                            <div class="btn-group dropend d-block mb-2">
                                 <button
                                     type="button"
                                     class="bg-gray-200 py-1 w-100 waves-effect waves-light dropdown-toggle"
@@ -215,7 +215,7 @@
                                 </div>
                             </div>
 
-                            <hr class="bg-gray-100 mb-1" />
+                            <hr class="bg-gray-200 mb-1" />
 
                             <div class="mail-list">
                                 <span class="text-center pl-3 mx-auto"
@@ -238,7 +238,7 @@
                                 </a>
                             </div>
 
-                            <hr class="bg-gray-100 mb-1 mt-0" />
+                            <hr class="bg-gray-200 mb-1 mt-0" />
 
                             <div class="mail-list mt-2 mb-3">
                                 <span class="text-center pl-3 mx-auto"
@@ -342,9 +342,9 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-1">
+                        <div class="inbox-rightbar pt-0 px-0">
 
-                            <div class="mt-0 pt-0">
+                            <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
                                     <!-- <entries
@@ -415,6 +415,8 @@ import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 import ViewInvoice from "./Invoices/ViewInvoice.vue";
+import Invoices from "./Invoices/Invoices.vue";
+import Schools from "./Invoices/Schools.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
@@ -427,6 +429,8 @@ export default {
         RejectedRequisitions,
         ViewInvoice,
         Entries,
+        Invoices,
+        Schools,
     },
 
     mounted() {

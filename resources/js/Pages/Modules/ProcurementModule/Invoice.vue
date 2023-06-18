@@ -124,7 +124,7 @@
             <!-- Right Sidebar -->
             <div class="col-12 pt-0 mt-0">
                 <div class="card h-screen">
-                    <div class="pt-1">
+                    <div class="">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar bg-white h-screen">
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">
@@ -354,9 +354,9 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-3 px-0">
+                        <div class="inbox-rightbar px-0">
                         
-                            <div class="bg-white h-screen">
+                            <div class="h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
                                     <div v-show="getInvoiceGenerate && !getInvoiceView" key="1">

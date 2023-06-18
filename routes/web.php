@@ -126,6 +126,33 @@ Route::middleware([
 
 
 
+    // /*
+    // |--------------------------------------------------------------------------
+    // | ROUTES FOR THE ACCOUNTANT
+    // |--------------------------------------------------------------------------
+    // */
+
+    // Route::group(['prefix' => 'accountant', 'middleware' => 'is_accountant', 'as' => 'accountant.'], function () {
+    //     Route::get('/dashboard', [\App\Http\Controllers\Accountant\DashboardController::class, 'dashboard'])->name('dashboard');
+    //     Route::get('/invoice_school', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_school'])->name('invoice_school');
+    //     Route::get('/invoice_create', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_create'])->name('invoice_create');
+    //     Route::get('/invoice_incoming', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_incoming'])->name('invoice_incoming');
+    //     Route::get('/invoice_pending', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_pending'])->name('invoice_pending');
+    //     Route::get('/invoice_reports', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_reports'])->name('invoice_reports');
+    //     Route::get('/charts_of_accounts', [\App\Http\Controllers\Accountant\DashboardController::class, 'charts_of_accounts'])->name('charts_of_accounts');
+    //     Route::get('/invoices', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoices'])->name('invoices');
+    //     Route::get('/accepeted_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'accepeted_requisitions'])->name('accepeted_requisitions');
+    //     Route::get('/rejected_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'rejected_requisitions'])->name('rejected_requisitions');
+    //     Route::get('/starred_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'starred_requisitions'])->name('starred_requisitions');
+    //     Route::get('/deleted_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'deleted_requisitions'])->name('deleted_requisitions');
+    // //     Route::get('/pageSeven', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageSeven'])->name('pageSeven');
+
+    //     Route::get('/getChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getChartOfAccounts'])->name('getChartOfAccounts');
+    //     Route::post('/addChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'addChartOfAccounts'])->name('addChartOfAccounts');
+    //     Route::post('/updateChartOfAccount', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'updateChartOfAccount'])->name('updateChartOfAccount');
+    //     Route::post('/deleteChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'deleteChartOfAccounts'])->name('deleteChartOfAccounts');
+    // });
+
     /*
     |--------------------------------------------------------------------------
     | ROUTES FOR THE ACCOUNTANT
@@ -133,6 +160,12 @@ Route::middleware([
     */
 
     Route::group(['prefix' => 'accountant', 'middleware' => 'is_accountant', 'as' => 'accountant.'], function () {
+        /*
+        |--------------------------------------------------------------------------
+        | NAVIGATIONS
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/dashboard', [\App\Http\Controllers\Accountant\DashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/invoice_school', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_school'])->name('invoice_school');
         Route::get('/invoice_create', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice_create'])->name('invoice_create');
@@ -145,12 +178,74 @@ Route::middleware([
         Route::get('/rejected_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'rejected_requisitions'])->name('rejected_requisitions');
         Route::get('/starred_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'starred_requisitions'])->name('starred_requisitions');
         Route::get('/deleted_requisitions', [\App\Http\Controllers\Accountant\DashboardController::class, 'deleted_requisitions'])->name('deleted_requisitions');
-    //     Route::get('/pageSeven', [\App\Http\Controllers\Accountant\DashboardController::class, 'pageSeven'])->name('pageSeven');
+
+        // Route::get('/dashboard', [\App\Http\Controllers\Accountant\DashboardController::class, 'dashboard'])->name('dashboard');
+        // Route::get('/chart_of_accounts', [\App\Http\Controllers\Accountant\DashboardController::class, 'chart_of_accounts'])->name('chart_of_accounts');
+        // Route::get('/payment_details', [\App\Http\Controllers\Accountant\DashboardController::class, 'payment_details'])->name('payment_details');
+        // Route::get('/uploads', [\App\Http\Controllers\Accountant\DashboardController::class, 'uploads'])->name('uploads');
+        // Route::get('/reports', [\App\Http\Controllers\Accountant\DashboardController::class, 'reports'])->name('reports');
+        // Route::get('/invoice', [\App\Http\Controllers\Accountant\DashboardController::class, 'invoice'])->name('invoice');
+
+        // Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Head\Student\StudentController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetStaffs', [\App\Http\Controllers\Head\Department\DepartmentController::class, 'headDashboardGetStaffs'])->name('headDashboardGetStudents');
+        // Route::get('/headDashboardGetTools', [\App\Http\Controllers\Head\Tool\ToolController::class, 'headDashboardGetTools'])->name('headDashboardGetTools');
+        // Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Head\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
+
+        /*
+        |--------------------------------------------------------------------------
+        | ENTRIES
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/getLegerEntries', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getLegerEntries'])->name('getLegerEntries');
+        Route::get('/getSpecificLegerEntries', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSpecificLegerEntries'])->name('getSpecificLegerEntries');
+        Route::get('/searchStudent', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'searchStudent'])->name('searchStudent');
+        Route::post('/submitTuitionFee', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'submitTuitionFee'])->name('submitTuitionFee');
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHART OF ACCOUNTS
+        |--------------------------------------------------------------------------
+        */
 
         Route::get('/getChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getChartOfAccounts'])->name('getChartOfAccounts');
         Route::post('/addChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'addChartOfAccounts'])->name('addChartOfAccounts');
         Route::post('/updateChartOfAccount', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'updateChartOfAccount'])->name('updateChartOfAccount');
         Route::post('/deleteChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'deleteChartOfAccounts'])->name('deleteChartOfAccounts');
+        Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        /*
+        |--------------------------------------------------------------------------
+        | UPLOADS
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post('/upload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'upload'])->name('upload');
+        Route::get('/getUploads', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'getUploads'])->name('getUploads');
+        Route::get('/getNewUploads', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'getNewUploads'])->name('getNewUploads');
+        Route::get('/getTrashedUploads', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'getTrashedUploads'])->name('getTrashedUploads');
+        Route::post('/restoreUpload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'restoreUpload'])->name('restoreUpload');
+        Route::post('/permanentDeleteUpload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'permanentDeleteUpload'])->name('permanentDeleteUpload');
+        Route::post('/deleteUpload', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'deleteUpload'])->name('deleteUpload');
+        Route::get('/headDashboardGetUploads', [\App\Http\Controllers\Accountant\Upload\UploadController::class, 'headDashboardGetUploads'])->name('headDashboardGetUploads');
+
+        /*
+        |--------------------------------------------------------------------------
+        | INVOICES
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/getInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getInvoices'])->name('getInvoices');
+        Route::post('/getInvoiceView', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getInvoiceView'])->name('getInvoiceView');
+        Route::get('/getStarredInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getStarredInvoices'])->name('getStarredInvoices');
+        Route::get('/getTrashedInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getTrashedInvoices'])->name('getTrashedInvoices');
+        Route::post('/permanentDeleteInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'permanentDeleteInvoice'])->name('permanentDeleteInvoice');
+        Route::post('/restoreInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'restoreInvoice'])->name('restoreInvoice');
+        Route::post('/deleteInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'deleteInvoice'])->name('deleteInvoice');
+        Route::post('/starredInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'starredInvoice'])->name('starredInvoice');
+        Route::get('/acceptedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'acceptedInvoice'])->name('acceptedInvoice');
+        Route::post('/acceptInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'acceptInvoice'])->name('acceptInvoice');
+        Route::get('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
+        Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
     });
 
 

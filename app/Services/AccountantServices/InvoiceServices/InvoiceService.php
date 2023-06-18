@@ -3,18 +3,93 @@
 namespace App\Services\AccountantServices\InvoiceServices;
 
 class InvoiceService
-{    
-    public function invoiceFromSchool($request){
-        return $request->all();
-        // return \App\Models\ChartsOfAccount::create([
-        //     'account_type' => $request->account_type,
-        //     'level1' => $request->level1,
-        //     'level2' => $request->level2,
-        //     'level3' => $request->level3,
-        //     'name' => $request->name,
-        //     'description' => $request->description ,
-        //     'notes' => $request->notes,
+{
+    /*
+    |--------------------------------------------------------------------------
+    | QUERIES FOR THE INVOICE
+    |--------------------------------------------------------------------------
+    */
 
-        // ]);
+    // public function addInvoice($request){
+    //     $created = \App\Models\Invoice::create([
+    //         'name' => $request->name,
+    //         'price' => $request->price,
+    //         'count' => $request->count,
+    //         'description' => $request->narration,
+
+    //     ]);
+    //     if($created){
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    public function getInvoices(){
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
     }
+
+    public function getInvoiceView($request){
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
+    }
+
+    public function acceptedInvoice(){
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('status', true)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function rejectedInvoice(){
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('status', false)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function acceptInvoice($request){
+        return \App\Models\Invoice::find($request->id)->update([
+            'status' => !$request->status,
+        ]);
+    }
+
+    public function deleteInvoice($request){
+        return \App\Models\Invoice::findoRFail($request->id)->delete();
+    }
+
+    // public function starredInvoices($request){
+    //     return \App\Models\Invoice::find($request->id)->update([
+    //         $request->column => !$request->data
+    //     ]);
+    // }
+
+    public function starredInvoice($request){
+        return \App\Models\Invoice::find($request->id)->update([
+            $request->column => !$request->data
+        ]);
+    }
+
+    public function getTrashedInvoices(){
+        return \App\Models\Invoice::onlyTrashed()->with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getStarredInvoices(){
+        return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('starred', true)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function restoreInvoice($request){
+        return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->restore();
+    }
+
+    public function permanentDeleteInvoice($request){
+        return \App\Models\Invoice::onlyTrashed()->findoRFail($request->id)->forceDelete();
+    }
+
+    public function headDashboardGetInvoices(){
+        $procurement = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', false)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
+        $accountantSchool = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
+        $accountantFinancial = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('status_from_financial', true)->orderBy('created_at', 'desc')->get();
+        return [
+            'procurement' => $procurement,
+            'procurementCount' => $procurement->count(),
+            'accountantSchool' => $accountantSchool,
+            'accountantSchoolCount' => $accountantSchool->count(),
+            'accountantFinancial' => $accountantFinancial,
+            'accountantFinancialCount' => $accountantFinancial->count(),
+        ];
+    }
+
 }

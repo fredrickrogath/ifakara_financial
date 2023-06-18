@@ -15,4 +15,13 @@ export default {
         state.invoiceView = !state.invoiceView;
         state.invoiceId = id;
     },
+
+    setCurrentTabInvoices(state){
+        state.currentTabInvoices = !state.currentTabInvoices;
+    },
+
+    setInvoiceSchoolView(state, id){
+        state.invoiceSchoolView = !state.invoiceSchoolView;
+        state.schoolId = id;
+    },
 };

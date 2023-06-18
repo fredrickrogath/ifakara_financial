@@ -56,7 +56,7 @@
             </div>
             <!-- /.modal -->
 
-            <v-card-title class="px-0 pt-0">
+            <v-card-title class="px-0 pt-0 mt-0 bg-info">
                 Invoices
                 <v-spacer></v-spacer>
 
@@ -79,6 +79,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>

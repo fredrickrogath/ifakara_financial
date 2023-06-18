@@ -21,7 +21,19 @@ export default {
 
     getInvoiceId(state){
         return state.invoiceId;
-    }
+    },
+
+    getCurrentTabInvoices(state){
+        return state.currentTabInvoices;
+    },
+
+    getInvoiceSchoolView(state){
+        return state.invoiceSchoolView;
+    },
+
+    getSchoolId(state){
+        return state.schoolId;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

@@ -22,9 +22,9 @@
                                 class="hidden space-x-8 sm:-my-px mt-2 my-auto sm:ml-10 sm:flex"
                                 v-if="route().current('procurement.dashboard')"
                             >
-                            <a
+                                <a
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 bg-transparent"
                                     @click="setSchoolDashboards()"
                                     :class="[
                                         getSchoolDashboards
@@ -43,7 +43,8 @@
                                 class="hidden space-x-8 sm:-my-px mt-3 my-auto sm:ml-10 sm:flex"
                                 v-if="route().current('procurement.dashboard')"
                             >
-                            <a v-show="getViewSchoolDashboard"
+                                <a
+                                    v-show="getViewSchoolDashboard"
                                     href="#"
                                     class="list-group-item border-0 font-medium bg-warning text-white py-0"
                                     @click="setViewSchoolDashboard()"
@@ -51,7 +52,60 @@
                                 >
                                 <!-- <span> hello </span> -->
                             </div>
-                            
+
+                            <div
+                                class="hidden space-x-8 pb-9 mt-1 sm:-my-px my-auto sm:ml-10 sm:flex"
+                                v-if="
+                                    route().current('accountant.invoice_school')
+                                "
+                            >
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0 mb-0 bg-transparent"
+                                    @click="setCurrentTabInvoices()"
+                                    :class="[
+                                        !getCurrentTabInvoices
+                                            ? 'text-warning'
+                                            : 'text-gray-500',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-cash-multiple font-20 align-middle me-2 pb-1"
+                                    ></i
+                                    >Invoices</a
+                                >
+
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0 bg-transparent"
+                                    @click="setCurrentTabInvoices()"
+                                    :class="[
+                                        getCurrentTabInvoices
+                                            ? 'text-warning'
+                                            : 'text-gray-500',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-school font-20 align-middle me-2 pb-1"
+                                    ></i
+                                    >Schools</a
+                                >
+                            </div>
+
+                            <div
+                                    class="hidden space-x-8 sm:-my-px mt-3 my-auto sm:ml-10 sm:flex"
+                                    v-if="
+                                        route().current('accountant.invoice_school')
+                                    "
+                                    v-show="getInvoiceSchoolView"
+                                >
+                                    <a  
+                                        href="#"
+                                        class="list-group-item border-0 font-medium bg-warning text-white py-0"
+                                        @click="setInvoiceSchoolView()"
+                                        >Back</a
+                                    >
+                                    <!-- <span> hello </span> -->
+                                </div>
+
                             <!-- <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
@@ -617,13 +671,25 @@ export default {
     },
 
     methods: {
+        setInvoiceSchoolView(id) {
+            this.$store.dispatch("AccountantInvoiceModule/setInvoiceSchoolView", null);
+        },
+
+        setCurrentTabInvoices() {
+            this.$store.dispatch(
+                "AccountantInvoiceModule/setCurrentTabInvoices"
+            );
+        },
+
         setSchoolDashboards() {
             this.$store.dispatch("ProcurementToolModule/setSchoolDashboards");
         },
 
         setViewSchoolDashboard(id) {
             // this.setSchoolId(id);
-            this.$store.dispatch("ProcurementToolModule/setViewSchoolDashboard");
+            this.$store.dispatch(
+                "ProcurementToolModule/setViewSchoolDashboard"
+            );
         },
 
         switchToTeam(team) {
@@ -660,12 +726,24 @@ export default {
     },
 
     computed: {
+        getInvoiceSchoolView() {
+            return this.$store.getters["AccountantInvoiceModule/getInvoiceSchoolView"];
+        },
+
+        getCurrentTabInvoices() {
+            return this.$store.getters[
+                "AccountantInvoiceModule/getCurrentTabInvoices"
+            ];
+        },
+
         showTopBarComputed() {
             return this.$store.getters["showTopBar"];
         },
 
         getSchoolDashboards() {
-            return this.$store.getters["ProcurementToolModule/getSchoolDashboards"];
+            return this.$store.getters[
+                "ProcurementToolModule/getSchoolDashboards"
+            ];
         },
 
         getViewSchoolDashboard() {

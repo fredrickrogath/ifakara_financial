@@ -15,5 +15,14 @@ export default {
 
     setInvoiceView(context, id){
         context.commit("setInvoiceView", id);
-    }
+    },
+
+    setCurrentTabInvoices(context){
+        context.commit("setCurrentTabInvoices");
+    },
+
+    setInvoiceSchoolView(context, id){
+        context.commit("setInvoiceSchoolView", id);
+    },
+
 };

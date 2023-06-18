@@ -10,9 +10,12 @@ export default {
         return {
             tabInvoice: 'entries',
             invoiceGenerate: false,
+            currentTabInvoices: false,
 
+            invoiceSchoolView: false,
             invoiceView: false,
             invoiceId: null,
+            schoolId: null,
 
             // SNACKBAR
             snackBarState: false,
