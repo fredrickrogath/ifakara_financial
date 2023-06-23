@@ -149,7 +149,8 @@ export default {
 
     data() {
         return {
-            storagePath: window.location.origin + "/storage/",
+            // storagePath: window.location.origin + "/storage/",
+            storagePath: "http://127.0.0.1:8000" + "/storage/",
         };
     },
 

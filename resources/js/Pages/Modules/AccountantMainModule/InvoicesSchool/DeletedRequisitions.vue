@@ -1,10 +1,10 @@
 <template>
     <!-- <v-col>
         <v-row> -->
-    <div>
+    <div class="px-1">
         <spinner v-if="showLoader"></spinner>
 
-        <v-col v-else sm="12" md="12">
+        <!-- <v-col v-else sm="12" md="12"> -->
             <!-- <v-card flat :dark="isDark"> -->
             <!-- <v-card elevation="0" data-app> -->
 
@@ -140,9 +140,39 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'seller'"
-                                    >{{ item[header.value].name }}</span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'sellers'"
+                                    >
+                                    
+                                    <span
+                                        v-for="seller in item[header.value]"
+                                        :key="seller.id"
+                                        class="d-block"
+                                    >
+                                        <div class="">
+                                            <v-menu transition="fab-transition">
+                                                <template
+                                                    v-slot:activator="{
+                                                        on,
+                                                        attrs,
+                                                    }"
+                                                >
+                                                    <span
+                                                        class="seller-name"
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                        @click="getSellerProfile(seller)"
+                                                    >
+                                                        {{ seller.name }}
+                                                    </span>
+                                                </template>
+
+                                                <seller-profile :seller="sellerInfo"></seller-profile>
+                                            </v-menu>
+                                        </div>
+                                    </span>
+                                    
+                                    </span
                                 >
 
                                 <span
@@ -233,7 +263,7 @@
                     </tbody>
                 </template>
             </v-data-table>
-        </v-col>
+        <!-- </v-col> -->
     </div>
     <!-- </v-row>
     </v-col> -->
@@ -242,9 +272,11 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import SellerProfile from "../../.././Components/SellerProfile.vue";
 export default {
     components: {
         Spinner,
+        SellerProfile
     },
 
     props: {
@@ -289,12 +321,12 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
-                    text: "Invoice #",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
+                // {
+                //     text: "Invoice #",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
                 {
                     text: "Seller",
                     value: "seller",
@@ -315,6 +347,8 @@ export default {
             invoices: [],
 
             idForAction: null,
+
+            sellerInfo: [],
         };
     },
 
@@ -331,6 +365,10 @@ export default {
     methods: {
         async setIdForAction(id) {
             this.idForAction = id;
+        },
+
+        getSellerProfile(seller) {
+            this.sellerInfo = seller
         },
 
         formattedPrice(amount) {
