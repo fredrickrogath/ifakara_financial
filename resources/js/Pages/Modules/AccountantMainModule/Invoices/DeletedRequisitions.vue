@@ -1,10 +1,10 @@
 <template>
     <!-- <v-col>
         <v-row> -->
-    <div class="px-2">
+    <div>
         <spinner v-if="showLoader"></spinner>
 
-        <!-- <v-col v-else sm="12" md="12"> -->
+        <div v-else>
             <!-- <v-card flat :dark="isDark"> -->
             <!-- <v-card elevation="0" data-app> -->
 
@@ -55,9 +55,12 @@
             </div>
             <!-- /.modal -->
 
-            <v-card-title class="px-0 pt-0">
+            <v-card-title class="px-1 pt-0">
                 Invoices
                 <v-spacer></v-spacer>
+
+                <snackbar message="Task completed successfully"></snackbar>
+                
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -79,7 +82,7 @@
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
-                                <!-- <v-icon
+                                <v-icon
                                     v-if="header.value == 'delete'"
                                     size="22"
                                     type="button"
@@ -88,7 +91,7 @@
                                     @click="setIdForAction(items[idx]['id'])"
                                 >
                                     mdi-delete
-                                </v-icon> -->
+                                </v-icon>
 
                                 <v-icon
                                     v-if="header.value == 'view'"
@@ -263,7 +266,7 @@
                     </tbody>
                 </template>
             </v-data-table>
-        <!-- </v-col> -->
+        </div>
     </div>
     <!-- </v-row>
     </v-col> -->
@@ -272,10 +275,12 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
-import SellerProfile from "../../.././Components/SellerProfile.vue";
+import Snackbar from "../../../Components/SnackBar.vue";
+import SellerProfile from "../../.././Components/SellerProfile";
 export default {
     components: {
         Spinner,
+        Snackbar,
         SellerProfile,
     },
 
@@ -328,7 +333,7 @@ export default {
                 //     value: "id",
                 // },
                 {
-                    text: "Seller",
+                    text: "Suppliers",
                     value: "sellers",
                 },
                 {
@@ -355,10 +360,6 @@ export default {
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
-        },
-
-        getMainUrl() {
-            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
     },
 
@@ -390,7 +391,7 @@ export default {
         },
 
         getTrashedInvoices() {
-            axios.get(this.getMainUrl + "accountant/getTrashedInvoices").then((response) => {
+            axios.get("/accountant/getTrashedInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)
@@ -408,7 +409,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -464,7 +465,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

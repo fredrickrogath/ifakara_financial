@@ -15,6 +15,7 @@ import SecretarySchoolDetail from "../Store/secretary/schoolDetail/index";
 import Procurementinvoice from '../Store/Procurement/invoice/index';
 import Procurementtool from '../Store/Procurement/tool/index';
 import ProcurementUpload from '../Store/Procurement/Upload/index';
+import ProcurementReport from '../Store/procurement/Report/index'
 
 import InternalAuditorSchoolDetails from '../Store/internal_auditor/schoolDetail/index';
 import InternalAuditorSchool from '../Store/internal_auditor/school/index';
@@ -36,6 +37,8 @@ const ProcurementInvoiceModule = Procurementinvoice;
 const ProcurementToolModule = Procurementtool;
 
 const ProcurementUploadModule = ProcurementUpload;
+
+const ProcurementReportModule = ProcurementReport;
 
 const InternalAuditorSchoolDetailsModule = InternalAuditorSchoolDetails;
 
@@ -59,6 +62,8 @@ const store = new Vuex.Store({
         ProcurementToolModule: ProcurementToolModule,
 
         ProcurementUploadModule: ProcurementUploadModule,
+
+        ProcurementReportModule: ProcurementReportModule,
 
         InternalAuditorSchoolDetailsModule: InternalAuditorSchoolDetailsModule,
 

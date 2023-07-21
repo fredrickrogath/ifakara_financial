@@ -16,11 +16,10 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('narration');
-            $table->boolean('status')->default(false);
-            $table->boolean('status_from_financial')->default(false);
             $table->boolean('starred')->default(false);
+            $table->boolean('status_from_financial_accountant')->default(false);
             $table->boolean('status_from_financial_bishop')->default(false);
-            $table->boolean('status_from_head')->default(false);
+            $table->boolean('status_from_financial_secretary')->default(false);
             $table->boolean('status_from_financial_internalAuditor')->default(false);
             $table->softDeletes('deleted_at');
             $table->timestamps();

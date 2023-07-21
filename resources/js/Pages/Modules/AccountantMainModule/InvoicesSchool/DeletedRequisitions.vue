@@ -357,6 +357,10 @@ export default {
             return this.contentFullWidthWhenSideBarHides;
         },
 
+        getSchoolId() {
+            return this.$store.getters["AccountantInvoiceModule/getSchoolId"];
+        },
+
         getMainUrl() {
             return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
@@ -390,7 +394,9 @@ export default {
         },
 
         getTrashedInvoices() {
-            axios.get(this.getMainUrl + "accountant/getTrashedInvoices").then((response) => {
+            axios.post(this.getMainUrl + "accountant/getTrashedInvoices", {
+                    school_id: this.getSchoolId,
+                }).then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)

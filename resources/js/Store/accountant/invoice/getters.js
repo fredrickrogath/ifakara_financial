@@ -34,6 +34,22 @@ export default {
     getSchoolId(state){
         return state.schoolId;
     },
+
+    getChartOfAcountForm(state){
+        return state.chartOfAcountForm;
+    },
+
+    getPaymentView(state){
+        return state.paymentView;
+    },
+
+    getPaymentId(state){
+        return state.paymentId;
+    },
+
+    getInvoice(state){
+        return state.setInvoice;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

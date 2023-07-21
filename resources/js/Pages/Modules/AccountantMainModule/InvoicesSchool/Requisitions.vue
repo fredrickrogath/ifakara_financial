@@ -348,7 +348,7 @@ export default {
                 .then((response) => {
                     this.invoices = response.data.data;
                     this.showLoader = false;
-                    console.log(response.data.data)
+                    // console.log(response.data.data)
                 });
         },
 

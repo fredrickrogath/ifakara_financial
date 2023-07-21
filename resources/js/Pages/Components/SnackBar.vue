@@ -1,40 +1,46 @@
 <template>
-    <div class="text-center">
-      <v-btn
-        dark
-        color="orange darken-2"
-        @click="snackbar = true"
-      >
-        Open Snackbar
-      </v-btn>
-  
+  <div class="text-center">
+      <span class="d-none" v-if="getSnackBarState"></span>
       <v-snackbar
-        v-model="snackbar"
-        :timeout="timeout"
+          v-model="getSnackBar"
+          :timeout="timeout"
+          rounded="pill"
+          color="#22c55e"
+          :top="true"
+          :right="true"
+          :absolute="true"
       >
-        {{ text }}
-  
-        <template v-slot:action="{ attrs }">
-          <v-btn
-            color="blue"
-            text
-            v-bind="attrs"
-            @click="snackbar = false"
-          >
-            Close
-          </v-btn>
-        </template>
+          {{ text }}
       </v-snackbar>
-    </div>
-  </template>
+  </div>
+</template>
 
 <script>
 export default {
-    
+  props: ['message'],
+
+  mounted(){
+      this.text = this.message;
+  },
+
   data: () => ({
-    snackbar: false,
-    text: 'My timeout is set to 2000.',
-    timeout: 2000,
+      text: "",
+      timeout: 3000,
+      getSnackBar: false,
   }),
-}
+
+  computed: {
+      getSnackBarState() {
+          return this.$store.getters[
+              "ProcurementInvoiceModule/getSnackBarState"
+          ];
+      },
+  },
+
+  watch: {
+      getSnackBarState(newVal) {
+          this.getSnackBar = true;
+      },
+  },
+};
 </script>

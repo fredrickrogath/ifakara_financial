@@ -112,7 +112,7 @@
             <!-- Right Sidebar -->
             <div class="col-12 pt-0 mt-0">
                 <div class="card h-screen">
-                    <div class="pt-1">
+                    <div class="">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar">
                             <div class="mail-list">
@@ -178,7 +178,7 @@
                                     ></i
                                     >Starred Tools</a
                                 >
-                                <a
+                                <!-- <a
                                     href="#"
                                     class="list-group-item border-0"
                                     @click="setTab('lost')"
@@ -191,7 +191,7 @@
                                         class="mdi mdi-close-thick font-18 align-middle me-2 pb-1"
                                     ></i
                                     >Broken & Lost Tools</a
-                                >
+                                > -->
                                 <a
                                     href="#"
                                     class="list-group-item border-0"
@@ -237,7 +237,7 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-1 px-0 h-screen">
+                        <div class="inbox-rightbar pt-2 px-0 h-screen">
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <div v-show="getAddSeller">
@@ -254,9 +254,9 @@
                                         <starred-tools
                                             v-show="getCurrentTab == 'starred'"
                                         ></starred-tools>
-                                        <broken-tools
+                                        <!-- <broken-tools
                                             v-show="getCurrentTab == 'lost'"
-                                        ></broken-tools>
+                                        ></broken-tools> -->
                                         <trashed-tools
                                             v-show="getCurrentTab == 'deleted'"
                                         ></trashed-tools>
@@ -281,7 +281,7 @@
 <script>
 import AllTools from "./Tools/AllTools.vue";
 import StarredTools from "./Tools/StarredTools.vue";
-import BrokenTools from "./Tools/BrokenTools.vue";
+// import BrokenTools from "./Tools/BrokenTools.vue";
 import TrashedTools from "./Tools/TrashedTools.vue";
 import Sellers from "./Tools/Sellers.vue";
 
@@ -295,7 +295,7 @@ export default {
     components: {
         AllTools,
         StarredTools,
-        BrokenTools,
+        // BrokenTools,
         TrashedTools,
         Sellers,
         AddSeller,

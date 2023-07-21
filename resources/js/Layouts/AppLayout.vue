@@ -53,7 +53,7 @@
                                 <!-- <span> hello </span> -->
                             </div>
 
-                            <div
+                            <!-- <div
                                 class="hidden space-x-8 pb-9 mt-1 sm:-my-px my-auto sm:ml-10 sm:flex"
                                 v-if="
                                     route().current('accountant.invoice_school')
@@ -88,7 +88,7 @@
                                     ></i
                                     >Schools</a
                                 >
-                            </div>
+                            </div> -->
 
                             <div
                                     class="hidden space-x-8 sm:-my-px mt-3 my-auto sm:ml-10 sm:flex"

@@ -2,9 +2,9 @@
     <div data-app>
       <div class="h-screen p-0">
         <!-- <transition-group name="fade"> -->
-          <div v-show="!getCurrentTabInvoices">
+          <!-- <div v-show="!getCurrentTabInvoices">
             <invoices></invoices>
-          </div>
+          </div> -->
           <div v-show="getCurrentTabInvoices">
             <schools v-show="!getInvoiceSchoolView"></schools>
             <invoices-school v-show="getInvoiceSchoolView"></invoices-school>
@@ -16,13 +16,13 @@
   
 
 <script>
-import Invoices from "./Invoices/Invoices.vue";
+// import Invoices from "./Invoices/Invoices.vue";
 import Schools from "./InvoicesSchool/Schools.vue";
 import InvoicesSchool from "./InvoicesSchool/Invoices.vue";
 
 export default {
     components: {
-        Invoices,
+        // Invoices,
         Schools,
         InvoicesSchool,
     },

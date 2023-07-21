@@ -9,6 +9,7 @@ class ChatOfAccountService
     }
 
     public function getLegerEntries(){
+        return [];
         return \App\Models\TuitionFee::with('chartOfAccount', 'user')->orderBy('created_at', 'desc')->get();
     }
 
@@ -16,25 +17,25 @@ class ChatOfAccountService
         return \App\Models\ChartsOfAccount::orderBy('created_at', 'desc')->get();
     }
 
-    public function submitTuitionFee($request){
-        \App\Models\TuitionFee::create([
-            'charts_of_accounts_id' => 1,
-            'user_id' => 1,
-            'amount' => $request->amount,
-            'narration' => $request->narration,
+    // public function submitTuitionFee($request){
+    //     \App\Models\TuitionFee::create([
+    //         'charts_of_accounts_id' => 1,
+    //         'user_id' => 1,
+    //         'amount' => $request->amount,
+    //         'narration' => $request->narration,
 
-        ]);
+    //     ]);
 
-        \App\Models\TuitionFee::create([
-            'charts_of_accounts_id' => 2,
-            'user_id' => 1,
-            'amount' => ($request->amount * 10) / 100,
-            'narration' => $request->narration,
+    //     \App\Models\TuitionFee::create([
+    //         'charts_of_accounts_id' => 2,
+    //         'user_id' => 1,
+    //         'amount' => ($request->amount * 10) / 100,
+    //         'narration' => $request->narration,
 
-        ]);
+    //     ]);
 
-        return true;
-    }
+    //     return true;
+    // }
 
     public function updateChartOfAccount($request){
         return \App\Models\ChartsOfAccount::find($request->id)->update([

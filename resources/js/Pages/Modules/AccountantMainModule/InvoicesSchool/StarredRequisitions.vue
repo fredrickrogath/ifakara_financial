@@ -328,7 +328,7 @@ export default {
                 // },
                 {
                     text: "Seller",
-                    value: "seller",
+                    value: "sellers",
                 },
                 {
                     text: "Tools",
@@ -354,6 +354,10 @@ export default {
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        getSchoolId() {
+            return this.$store.getters["AccountantInvoiceModule/getSchoolId"];
         },
 
         getMainUrl() {
@@ -389,7 +393,9 @@ export default {
         },
 
         getStarredInvoices() {
-            axios.get(this.getMainUrl + "accountant/getStarredInvoices").then((response) => {
+            axios.post(this.getMainUrl + "accountant/getStarredInvoices", {
+                    school_id: this.getSchoolId,
+                }).then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)

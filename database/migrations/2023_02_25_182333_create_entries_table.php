@@ -15,9 +15,12 @@ class CreateEntriesTable extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
-            $table->string('from');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('charts_of_accounts_id')->constrained('charts_of_accounts')->onDelete('cascade')->onUpdate('cascade');
-            $table->float('amount', 20, 2);
+            $table->float('level_1', 20, 2);
+            $table->float('level_2', 20, 2);
+            $table->float('level_3', 20, 2);
+            $table->string('narration');
             $table->timestamps();
         });
     }

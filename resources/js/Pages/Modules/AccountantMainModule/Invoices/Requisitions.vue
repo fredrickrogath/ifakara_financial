@@ -1,10 +1,10 @@
 <template>
     <!-- <v-col>
         <v-row> -->
-    <div class="">
+    <div>
         <spinner v-if="showLoader"></spinner>
 
-        <!-- <v-col v-else sm="12" md="12"> -->
+        <div v-else>
             <!-- <v-card flat :dark="isDark"> -->
             <!-- <v-card elevation="0" data-app> -->
 
@@ -56,9 +56,12 @@
             </div>
             <!-- /.modal -->
 
-            <v-card-title class="pt-0">
+            <v-card-title class="px-1 pt-0">
                 Invoices
                 <v-spacer></v-spacer>
+
+                <snackbar message="Task completed successfully"></snackbar>
+                
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -75,12 +78,13 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
-                                <!-- <v-icon
+                                <v-icon
                                     v-if="header.value == 'delete'"
                                     size="22"
                                     type="button"
@@ -89,7 +93,7 @@
                                     @click="setIdForAction(items[idx]['id'])"
                                 >
                                     mdi-delete
-                                </v-icon> -->
+                                </v-icon>
 
                                 <v-icon
                                     v-if="header.value == 'view'"
@@ -117,7 +121,7 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'id'"
                                     >{{ item[header.value] }}</span
                                 >
@@ -195,7 +199,7 @@
                                         <!-- <span class="px-1"> = </span> -->
 
                                         <!-- <span>
-                                            {{
+                                             {{
                                                 formattedPrice(
                                                     tool.price * tool.count
                                                 )
@@ -210,7 +214,7 @@
                                     class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
-                                    {{
+                                    {{ 
                                         formattedPrice(totalPrice(item.invoice_tool))
                                     }}
                                 </span>
@@ -219,7 +223,7 @@
                     </tbody>
                 </template>
             </v-data-table>
-        <!-- </v-col> -->
+        </div>
     </div>
     <!-- </v-row>
     </v-col> -->
@@ -228,11 +232,13 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
-import SellerProfile from "../../.././Components/SellerProfile.vue";
+import Snackbar from "../../.././Components/SnackBar.vue";
+import SellerProfile from "../../.././Components/SellerProfile";
 export default {
     components: {
         Spinner,
-        SellerProfile
+        Snackbar,
+        SellerProfile,
     },
 
     props: {
@@ -284,7 +290,7 @@ export default {
                 //     value: "id",
                 // },
                 {
-                    text: "Seller",
+                    text: "Suppliers",
                     value: "sellers",
                 },
                 {
@@ -295,7 +301,7 @@ export default {
                     text: "Total",
                     value: "tool_sum",
                 },
-                { text: "Starred", value: "starred" },
+                // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
                 // { text: "Delete", value: "delete" },
@@ -311,10 +317,6 @@ export default {
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
-        },
-
-        getMainUrl() {
-            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
     },
 
@@ -346,7 +348,7 @@ export default {
         },
 
         getInvoices() {
-            axios.get(this.getMainUrl + "accountant/getInvoices").then((response) => {
+            axios.get("/accountant/getInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)
@@ -392,7 +394,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

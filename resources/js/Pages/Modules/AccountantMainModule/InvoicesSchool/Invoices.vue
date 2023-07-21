@@ -33,6 +33,46 @@
 
                             <div class="mail-list">
                                 <span class="text-center pl-3 mx-auto"
+                                    >From Invoice Creation</span
+                                >
+
+                                <div class="d-flex">
+                                    <a
+                                    @click="setTab('invoices')"
+                                    href="#"
+                                    class="list-group-item border-0 mt-1 font-semibold"
+                                    :class="[
+                                        getCurrentTab == 'invoices'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Invoices
+                                </a>
+
+                                <a
+                                    @click="setTab('invoicesDeleted')"
+                                    href="#"
+                                    class="list-group-item border-0 mt-1 font-semibold"
+                                    :class="[
+                                        getCurrentTab == 'invoicesDeleted'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Deleted
+                                </a>
+                                </div>
+                            </div>
+
+                            <hr class="bg-gray-100 mb-1 mt-0" />
+
+                            <div class="mail-list">
+                                <span class="text-center pl-3 mx-auto"
                                     >From Procurement</span
                                 >
 
@@ -108,7 +148,7 @@
                                 >
                             </div>
 
-                            <div class="mt-2 ml-3">
+                            <!-- <div class="mt-2 ml-3">
                                 <h5>
                                     <span
                                         class="badge rounded-pill p-1 px-2 badge-soft-secondary"
@@ -129,7 +169,7 @@
                                 <p class="text-muted font-12 mb-0">
                                     7 (25%) of 35 incomplete tasks
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- End Left sidebar -->
 
@@ -145,6 +185,8 @@
                                     <entries
                                     v-show="getCurrentTab == 'entries'"
                                 ></entries>
+                                <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
+                                    <invoice-creation-deleted v-show="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
                                 <requisitions
                                     v-show="getCurrentTab == 'home'"
                                 ></requisitions>
@@ -185,10 +227,13 @@ import DeletedRequisitions from "./DeletedRequisitions.vue";
 import StarredRequisitions from "./StarredRequisitions.vue";
 import RejectedRequisitions from "./RejectedRequisitions.vue";
 import ViewInvoice from "./ViewInvoice.vue";
+import InvoiceCreation from "./InvoiceCreation/InvoiceCreation.vue";
+import InvoiceCreationView from "./InvoiceCreation/InvoiceCreationView.vue";
+import InvoiceCreationDeleted from "./InvoiceCreation/InvoiceCreationDeleted.vue";
 
 import Entries from "./Entries.vue";
 
-import Select2 from "v-select2-component";
+// import Select2 from "v-select2-component";
 
 export default {
     components: {
@@ -198,10 +243,13 @@ export default {
         StarredRequisitions,
         RejectedRequisitions,
         ViewInvoice,
+        InvoiceCreation,
+        InvoiceCreationView,
+        InvoiceCreationDeleted,
 
         Entries,
 
-        Select2,
+        //  ,
     },
 
     mounted() {

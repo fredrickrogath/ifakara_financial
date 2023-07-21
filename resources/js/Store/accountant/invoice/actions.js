@@ -25,4 +25,16 @@ export default {
         context.commit("setInvoiceSchoolView", id);
     },
 
+    setChartOfAcountForm(context, tab){
+        context.commit("setChartOfAcountForm", tab);
+    },
+
+    setPaymentView(context, id){
+        context.commit("setPaymentView", id);
+    },
+
+    setInvoice(context){
+        context.commit("setInvoice");
+    }
+
 };

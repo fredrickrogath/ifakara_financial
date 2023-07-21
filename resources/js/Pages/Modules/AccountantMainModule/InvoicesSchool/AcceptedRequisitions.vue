@@ -105,13 +105,6 @@
                                     :class="
                                         item[header.value] ? 'text-warning' : ''
                                     "
-                                    @click="
-                                        starredInvoice(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
                                 >
                                     mdi-star
                                 </v-icon>
@@ -123,7 +116,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -175,7 +168,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'tools'"
                                 >
                                     <div v-for="tool in item[header.value]">
@@ -207,7 +200,7 @@
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
                                     {{
@@ -327,7 +320,7 @@ export default {
                 //     value: "id",
                 // },
                 {
-                    text: "Seller",
+                    text: "Suppliers",
                     value: "sellers",
                 },
                 {
@@ -354,6 +347,10 @@ export default {
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        getSchoolId() {
+            return this.$store.getters["AccountantInvoiceModule/getSchoolId"];
         },
 
         getMainUrl() {
@@ -387,9 +384,11 @@ export default {
                 return total + item.tool.price * item.count;
             }, 0);
         },
-
+        
         acceptedInvoice() {
-            axios.get(this.getMainUrl + "accountant/acceptedInvoice").then((response) => {
+            axios.post(this.getMainUrl + "accountant/acceptedInvoice", {
+                    school_id: this.getSchoolId,
+                }).then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)

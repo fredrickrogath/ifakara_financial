@@ -24,4 +24,17 @@ export default {
         state.invoiceSchoolView = !state.invoiceSchoolView;
         state.schoolId = id;
     },
+
+    setChartOfAcountForm(state , tab){
+        state.chartOfAcountForm = tab;
+    },
+
+    setPaymentView(state , id){
+        state.paymentView = !state.paymentView;
+        state.paymentId = id;
+    },
+
+    setInvoice(state){
+        state.setInvoice = !state.setInvoice;
+    },
 };

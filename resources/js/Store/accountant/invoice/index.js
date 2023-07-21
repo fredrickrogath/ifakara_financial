@@ -20,6 +20,14 @@ export default {
             // SNACKBAR
             snackBarState: false,
             snackBarMessage: 'Successfully submited',
+
+            tabInvoice: 'entries',
+            chartOfAcountForm: '',
+
+            paymentView: false,
+            paymentId: null,
+
+            setInvoice: false,
         };
     },
     mutations: mutations,

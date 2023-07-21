@@ -66,10 +66,10 @@
 
 
     <!-- Footable js -->
-    <script src="assets/libs/footable/footable.all.min.js"></script>
+    {{-- <script src="assets/libs/footable/footable.all.min.js"></script> --}}
 
     <!-- Init js -->
-    <script src="assets/js/pages/foo-tables.init.js"></script>
+    {{-- <script src="assets/js/pages/foo-tables.init.js"></script> --}}
 
     <style>
         /* .btn:hover {
@@ -104,7 +104,7 @@
     </style>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased font-sans">
     @inertia
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
@@ -146,7 +146,7 @@
 
 
     <!-- Third Party js-->
-    {{-- <script src="assets/libs/apexcharts/apexcharts.min.js"></script> --}}
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
     <!-- Plugins js-->
     {{-- <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
