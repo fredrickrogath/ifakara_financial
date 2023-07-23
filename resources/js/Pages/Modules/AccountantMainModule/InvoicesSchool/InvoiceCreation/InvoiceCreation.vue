@@ -8,7 +8,7 @@
 
         <div v-else>
             <v-card-title class="px-2 pt-0">
-                Invoices
+                Invoices <span class="d-none">{{ getSchoolId }}</span>
                 <v-spacer></v-spacer>
 
                 <!-- <snackbar message="Task completed successfully"></snackbar> -->
@@ -273,6 +273,8 @@ export default {
             idForAction: null,
 
             sellerInfo: [],
+
+            schoolId: null,
         };
     },
 
@@ -282,6 +284,7 @@ export default {
         },
 
         getSchoolId() {
+            this.schoolId = this.$store.getters["AccountantInvoiceModule/getSchoolId"];
             return this.$store.getters["AccountantInvoiceModule/getSchoolId"];
         },
 
@@ -289,6 +292,17 @@ export default {
             return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
     },
+
+    watch: {
+    schoolId(newVal, oldValue) {
+        if (newVal !== null) {
+                this.getInvoices();
+            }
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
+    },
+  },
 
     methods: {
         async setIdForAction(id) {

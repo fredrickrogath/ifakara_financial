@@ -10,7 +10,7 @@
 
                             <div class="mail-list">
                                 <span class="text-center pl-3 mx-auto"
-                                    >From Leger Entry  : {{ getSchoolId }}</span
+                                    >From Leger Entry</span
                                 >
 
                                 <a
@@ -283,9 +283,6 @@ export default {
     },
     computed: {
         //Add computed properties
-        getSchoolId() {
-            return this.$store.getters["AccountantInvoiceModule/getSchoolId"];
-        },
 
         getCurrentTab() {
             return this.$store.getters["AccountantInvoiceModule/getTab"];
