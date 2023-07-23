@@ -7,19 +7,18 @@
         <v-col sm="12" md="12">
             <div class="row">
                 <div class="col-12">
-                    <div class="card h-screen">
-
-                        <div class="mt-0 pt-2 pl-4">
+                    <div class="h-screen">
+                        <div class="mt-0 pt-2">
                             <v-icon
-                                class="ml-1 pr-0 mr-0"
+                                class="pr-0 mr-0"
                                 size="22"
                                 @click="setAddSeller()"
                             >
                                 mdi-keyboard-backspace
-                            </v-icon>   
+                            </v-icon>
                         </div>
 
-                        <div class="card-body">
+                        <div class="">
                             <form @submit.prevent="addStudent">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -37,7 +36,7 @@
                                             />
                                         </div>
 
-                                        <div class="mb-3">
+                                        <div class="mb-2">
                                             <label
                                                 for="simpleinput"
                                                 class="form-label"
@@ -68,7 +67,7 @@
                                             />
                                         </div>
 
-                                        <div class="mb-3">
+                                        <div class="mb-2">
                                             <label
                                                 for="simpleinput"
                                                 class="form-label"
@@ -82,21 +81,60 @@
                                             />
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label
+                                                for="simpleinput"
+                                                class="form-label"
+                                                >PerFormer Invoice</label
+                                            >
+                                            <!-- <b-form-file id="file-small" type="file" size="sm"  class="form-control form-control-sm" v-model="file"></b-form-file> -->
+                                            <input
+                                                type="file"
+                                                ref="file"
+                                                name="file"
+                                                @change="onFileChange"
+                                                id="simpleinput"
+                                                class="form-control form-control-sm"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label
+                                                for="simpleinput"
+                                                class="form-label"
+                                                >Description</label
+                                            >
+                                            <textarea
+                                                name=""
+                                                id="simpleinput"
+                                                cols="10"
+                                                rows="5"
+                                                class="form-control form-control-sm"
+                                                v-model="description"
+                                            ></textarea>
+                                        </div>
+                                    </div>
                                     <!-- end col -->
 
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div
+                                            class="col-md-12 justify-content-center"
+                                        >
                                             <div
                                                 class="button-list mb-1 mb-sm-0"
                                             >
-                                                <button v-if="!showLoader"
+                                                <button
+                                                    v-if="!showLoader"
                                                     class="btn btn-sm btn-primary text-white"
                                                     type="submit"
                                                 >
                                                     Submit
                                                 </button>
                                                 <button
-                                                v-else
+                                                    v-else
                                                     class="btn btn-sm btn-primary"
                                                     type="button"
                                                     disabled
@@ -135,7 +173,7 @@
 <script>
 import moment from "moment";
 import Select2 from "v-select2-component";
-// import SnackBar from "../../.././Components/SnackBar.vue";
+import SnackBar from "../../.././Components/SnackBar.vue";
 
 import Spinner from "../../.././Components/SpinnerLoader.vue";
 
@@ -143,7 +181,7 @@ export default {
     components: {
         Spinner,
         Select2,
-        // SnackBar,
+        SnackBar,
     },
 
     props: {
@@ -218,6 +256,8 @@ export default {
             location: "",
             mobile: "",
             email: "",
+            file: null,
+            description: "",
 
             // totalPrice: 0,
         };
@@ -305,25 +345,54 @@ export default {
             this.$store.dispatch("ProcurementToolModule/setInvoiceGenerate");
         },
 
+        onFileChange(event) {
+            this.file = event.target.files[0];
+        },
+
         async addStudent() {
             this.showLoader = true;
-            axios
-                .post("/procurement/addSeller", {
-                    name: this.name,
-                    email: this.email,
-                    mobile: this.mobile,
-                    location: this.location,
-                })
-                .then((response) => {
-                    // this.clearData()
-                    this.showLoader = false;
-                    this.setAddSeller();
+            let formData = new FormData();
+            formData.append("file", this.file);
+            formData.append("name", this.name);
+            formData.append("email", this.email);
+            formData.append("mobile", this.mobile);
+            formData.append("location", this.location);
+            formData.append("description", this.description);
+            axios.post("/procurement/addSeller", formData).then((response) => {
+                this.showLoader = false;
+                this.setSnackBarState();
+                this.setAddSeller();
 
-                    this.name = "";
-                    this.location = "";
-                    this.email = "";
-                    this.mobile = "";
-                });
+                this.name = "";
+                this.location = "";
+                this.email = "";
+                this.mobile = "";
+                this.description = "";
+                this.$refs.file.value = "";
+            });
+
+            // axios
+            //     .post("/procurement/addSeller", {
+            //         name: this.name,
+            //         email: this.email,
+            //         mobile: this.mobile,
+            //         location: this.location,
+            //         description: this.description,
+            //         file: this.file,
+            //     })
+            //     .then((response) => {
+            //         // this.clearData()
+            //         this.showLoader = false;
+            //         this.setSnackBarState();
+            //         this.setAddSeller();
+
+            //         this.name = "";
+            //         this.location = "";
+            //         this.email = "";
+            //         this.mobile = "";
+            //         this.description = "";
+            //         this.$refs.file.value = "";
+            //     });
         },
 
         // async getclasses() {

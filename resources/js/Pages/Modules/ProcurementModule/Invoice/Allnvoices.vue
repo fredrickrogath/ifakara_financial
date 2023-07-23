@@ -56,9 +56,11 @@
             </div>
             <!-- /.modal -->
 
-            <v-card-title class="px-1 pt-0 mt-0">
+            <v-card-title class="px-1 pt-0">
                 Invoices
                 <v-spacer></v-spacer>
+
+                <snackbar message="Task completed successfully"></snackbar>
 
                 <!-- <v-btn color="primary" @click="generatePdfReport"
                     >Generate PDF Report</v-btn
@@ -122,13 +124,15 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'id'"
-                                    >{{ item[header.value] }}</span
                                 >
+                                    <!-- {{ item[header.value] }} -->
+                                    {{ encrypt() }}
+                                </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -136,7 +140,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -144,13 +148,46 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'seller'"
                                     >{{ item[header.value].name }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value === 'sellers'"
+                                >
+                                    <span
+                                        v-for="seller in item[header.value]"
+                                        :key="seller.id"
+                                        class="d-block"
+                                    >
+                                        <div class="">
+                                            <v-menu transition="fab-transition">
+                                                <template
+                                                    v-slot:activator="{
+                                                        on,
+                                                        attrs,
+                                                    }"
+                                                >
+                                                    <span
+                                                        class="seller-name"
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                        @click="getSellerProfile(seller)"
+                                                    >
+                                                        {{ seller.name }}
+                                                    </span>
+                                                </template>
+
+                                                <seller-profile :seller="sellerInfo"></seller-profile>
+                                            </v-menu>
+                                        </div>
+                                    </span>
+                                </span>
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'tools'"
                                 >
                                     <div v-for="tool in item[header.value]">
@@ -185,9 +222,14 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import Snackbar from "../../.././Components/SnackBar.vue";
+import SellerProfile from "../../../Components/SellerProfile.vue";
+
 export default {
     components: {
         Spinner,
+        Snackbar,
+        SellerProfile,
     },
 
     props: {
@@ -232,24 +274,24 @@ export default {
             showLoader: true,
             search: "",
             headers: [
+                // {
+                //     text: "Invoice #",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
                 {
-                    text: "Invoice #",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
-                {
-                    text: "Seller",
-                    value: "seller",
+                    text: "Suppliers",
+                    value: "sellers",
                 },
                 {
                     text: "Tools",
                     value: "tools",
                 },
-                {
-                    text: "Total",
-                    value: "tool_sum",
-                },
+                // {
+                //     text: "Total",
+                //     value: "tool_sum",
+                // },
                 { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
@@ -258,6 +300,8 @@ export default {
             invoices: [],
 
             idForAction: null,
+
+            sellerInfo: [],
         };
     },
 
@@ -268,6 +312,18 @@ export default {
     },
 
     methods: {
+        encrypt() {
+            let result = "";
+            const characters =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (let i = 0; i < 4; i++) {
+                result += characters.charAt(
+                    Math.floor(Math.random() * characters.length)
+                );
+            }
+            return "wU" + result.slice(2);
+        },
+
         generatePdfReport() {
             // Create a new instance of jsPDF
             const doc = new jsPDF();
@@ -291,7 +347,7 @@ export default {
             doc.text(title, 10, 10);
 
             // Add title
-            doc.text('title', 5, 6);
+            doc.text("title", 5, 6);
 
             // Add the table to the PDF
             doc.autoTable({
@@ -334,11 +390,19 @@ export default {
             }, 0);
         },
 
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
+        getSellerProfile(seller) {
+            this.sellerInfo = seller
+        },
+
         getInvoices() {
             axios.get("/procurement/getInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
-                // console.log(response.data.data)
+                // console.log(response.data.data);
             });
         },
 
@@ -350,6 +414,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
@@ -364,6 +429,7 @@ export default {
                     id: this.idForAction,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // console.log(response.data.data);
                 });
@@ -378,6 +444,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";

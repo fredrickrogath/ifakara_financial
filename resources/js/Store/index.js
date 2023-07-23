@@ -8,6 +8,8 @@ import rootGettes from './getters';
 
 import invoiceModules from '../Store/invoice/index';
 import AccountantInvoice from '../Store/Accountant/invoice/index';
+import AccountantUpload from "../Store/accountant/Upload/index";
+import AccountantReport from "../Store/accountant/Report/index";
 import SecratarySchool from "../Store/secretary/school/index";
 import SecretarySchoolDetail from "../Store/secretary/schoolDetail/index";
 
@@ -15,7 +17,7 @@ import SecretarySchoolDetail from "../Store/secretary/schoolDetail/index";
 import Procurementinvoice from '../Store/Procurement/invoice/index';
 import Procurementtool from '../Store/Procurement/tool/index';
 import ProcurementUpload from '../Store/Procurement/Upload/index';
-import ProcurementReport from '../Store/procurement/Report/index'
+import ProcurementReport from '../Store/procurement/Report/index';
 
 import InternalAuditorSchoolDetails from '../Store/internal_auditor/schoolDetail/index';
 import InternalAuditorSchool from '../Store/internal_auditor/school/index';
@@ -27,6 +29,10 @@ Vue.use(Vuex);
 const counterModule = invoiceModules;
 
 const AccountantInvoiceModule  = AccountantInvoice;
+
+const AccountantReportModule = AccountantReport;
+
+const AccountantUploadModule = AccountantUpload;
 
 const SecratarySchoolModule = SecratarySchool;
 
@@ -52,6 +58,10 @@ const store = new Vuex.Store({
         invoice: counterModule,
 
         AccountantInvoiceModule: AccountantInvoiceModule,
+
+        AccountantUploadModule: AccountantUploadModule,
+
+        AccountantReportModule: AccountantReportModule,
 
         SecratarySchoolModule: SecratarySchoolModule,
 

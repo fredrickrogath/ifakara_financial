@@ -498,9 +498,9 @@ export default {
     methods: {
         //Add methods...
         async initialize() {
-            this.headDashboardGetStudents();
+            // this.headDashboardGetStudents();
             this.headDashboardGetInvoices();
-            this.headDashboardGetUploads();
+            // this.headDashboardGetUploads();
             // this.headDashboardGetTools();
 
             this.finances = [

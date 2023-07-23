@@ -4,7 +4,7 @@
     <div>
         <spinner v-if="showLoader"></spinner>
 
-        <div v-else >
+        <div v-else>
             <!-- <v-card flat :dark="isDark"> -->
             <!-- <v-card elevation="0" data-app> -->
 
@@ -59,6 +59,9 @@
             <v-card-title class="px-1 pt-0">
                 Invoices
                 <v-spacer></v-spacer>
+
+                <snack-bar message="Task completed successfully"></snack-bar>
+
                 <v-text-field
                     v-model="search"
                     append-icon="mdi-magnify"
@@ -75,6 +78,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -123,7 +127,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -131,7 +135,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -139,13 +143,40 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'seller'"
-                                    >{{ item[header.value].name }}</span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value === 'sellers'"
                                 >
+                                    <span
+                                        v-for="seller in item[header.value]"
+                                        :key="seller.id"
+                                        class="d-block"
+                                    >
+                                        <div class="">
+                                            <v-menu transition="fab-transition">
+                                                <template
+                                                    v-slot:activator="{
+                                                        on,
+                                                        attrs,
+                                                    }"
+                                                >
+                                                    <span
+                                                        class="seller-name"
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                        @click="getSellerProfile(seller)"
+                                                    >
+                                                        {{ seller.name }}
+                                                    </span>
+                                                </template>
+
+                                                <seller-profile :seller="sellerInfo"></seller-profile>
+                                            </v-menu>
+                                        </div>
+                                    </span>
+                                </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'tools'"
                                 >
                                     <div v-for="tool in item[header.value]">
@@ -176,7 +207,7 @@
                                     </div>
                                 </span>
 
-                                <span
+                                <!-- <span
                                     class="text-gray-600"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
@@ -185,7 +216,7 @@
                                             totalPrice(item.invoice_tool)
                                         )
                                     }}
-                                </span>
+                                </span> -->
 
                                 <!-- <v-edit-dialog
                                     v-else
@@ -243,9 +274,14 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
+import SnackBar from "../../../Components/SnackBar.vue";
+import SellerProfile from "../../../Components/SellerProfile.vue";
+
 export default {
     components: {
         Spinner,
+        SnackBar,
+        SellerProfile,
     },
 
     props: {
@@ -290,24 +326,24 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
-                    text: "Invoice #",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
+                // {
+                //     text: "Invoice #",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
                 {
                     text: "Seller",
-                    value: "seller",
+                    value: "sellers",
                 },
                 {
                     text: "Tools",
                     value: "tools",
                 },
-                {
-                    text: "Total",
-                    value: "tool_sum",
-                },
+                // {
+                //     text: "Total",
+                //     value: "tool_sum",
+                // },
                 { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
@@ -316,6 +352,8 @@ export default {
             invoices: [],
 
             idForAction: null,
+
+            sellerInfo: [],
         };
     },
 
@@ -346,6 +384,14 @@ export default {
             return item.reduce((total, item) => {
                 return total + item.tool.price * item.count;
             }, 0);
+        },
+
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
+        getSellerProfile(seller) {
+            this.sellerInfo = seller
         },
 
         getStarredInvoices() {
@@ -380,6 +426,7 @@ export default {
                     column: column,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
@@ -394,6 +441,7 @@ export default {
                     id: this.idForAction,
                 })
                 .then((response) => {
+                    this.setSnackBarState();
                     // this.students = response.data.data;
                     // console.log(response.data.data);
                 });

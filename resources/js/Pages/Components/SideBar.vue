@@ -148,7 +148,7 @@
                             </my-custom-link>
                         </li>
     
-                        <li>
+                        <!-- <li>
                             <my-custom-link
                                 :href="route('accountant.invoice_create')"
                                 :active="
@@ -166,7 +166,7 @@
                                 >
                                 <span class="mx-1"> Parish </span>
                             </my-custom-link>
-                        </li>
+                        </li> -->
     
                         <li>
                             <my-custom-link

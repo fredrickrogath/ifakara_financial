@@ -11,10 +11,19 @@ class Entry extends Model
 
     protected $fillable = [
         'charts_of_accounts_id',
-        'from',
-        'amount',
-        
+        'user_id',
+        'level_1',
+        'level_2',
+        'level_3',
+        'student_id',
+        'school_id',
+        'narration',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User','user_id','id');
+    }
 
     public function chartOfAccount()
     {

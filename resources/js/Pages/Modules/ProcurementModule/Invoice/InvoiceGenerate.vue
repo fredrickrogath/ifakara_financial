@@ -5,16 +5,31 @@
         <spinner v-if="showLoader"></spinner>
 
         <v-col v-else sm="12" md="12">
+            <snack-bar
+                message="The Requsition has sent successfully to accountant for futher process"
+            ></snack-bar>
+
             <div class="d-flex justify-content-between">
                 <div class="col-5">
-                    <div class="mb-1">Select Supplier</div>
+                    <!-- <div class="col-5"> -->
+                    <div class="-mb-6">Select Supplier</div>
+                    <v-select
+                        v-model="selectedSuppliers"
+                        :items="supplierOptions"
+                        item-value="id"
+                        chips
+                        multiple
+                    ></v-select>
+                    <!-- </div> -->
+
+                    <!-- <div class="mb-1">Select Supplier</div>
                     <Select2
                         v-model="supplier"
                         :options="supplierOptions"
                         :settings="{ width: '100%', 'z-index': '1060' }"
                         @change="myChangeEvent($event, 'supplier')"
                         @select="mySelectEvent($event, 'supplier')"
-                    />
+                    /> -->
                 </div>
 
                 <div class="col-5">
@@ -42,9 +57,10 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <div class="mt-3">
+                    <div class="">
                         <p>
-                            <b>Hello, {{ supplier }}</b>
+                            <!-- <b>Suppliers : {{ selectedSuppliers }}</b> -->
+                            <!-- <b class="d-none">Suppliers : {{ selectedSuppliersList }}</b> -->
                         </p>
                         <p class="">
                             Thanks a lot because you keep purchasing our
@@ -56,11 +72,12 @@
                 </div>
                 <!-- end col -->
                 <div class="col-md-4 offset-md-2">
-                    <div class="mt-3 float-end">
+                    <div class="float-end">
                         <p>
                             <strong>Order Date : </strong>
                             <span class="float-end">
-                                &nbsp;&nbsp;&nbsp;&nbsp; Jan 17, 2016</span
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                {{ formattedDate }}</span
                             >
                         </p>
                         <p>
@@ -235,13 +252,13 @@
                                 }}</span
                             >
                         </p>
-                        <h3>
+                        <h4>
                             {{
                                 formattedPrice(
                                     totalPrice - (totalPrice * 18) / 100
                                 )
                             }}
-                        </h3>
+                        </h4>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -255,7 +272,7 @@
                             type="submit"
                             class="btn btn-success text-white btn-sm waves-effect waves-light"
                         >
-                            Submit
+                            Submit to accountant
                         </button>
                     </div>
                 </form>
@@ -271,7 +288,7 @@
 <script>
 import moment from "moment";
 import Select2 from "v-select2-component";
-// import SnackBar from "../../.././Components/SnackBar.vue";
+import SnackBar from "../../.././Components/SnackBar.vue";
 
 import Spinner from "../../.././Components/SpinnerLoader.vue";
 
@@ -279,27 +296,7 @@ export default {
     components: {
         Spinner,
         Select2,
-        // SnackBar,
-    },
-
-    props: {
-        // postsData: {
-        // type: Number,
-        // default: [],
-        // default(rawProps) {
-        //     return { message: "hello" };
-        // },
-        // DATA TYPES
-        // String
-        // Number
-        // Boolean
-        // Array
-        // Object
-        // Date
-        // Function
-        // Symbol
-        // disabled: [Boolean, Number]
-        // },
+        SnackBar,
     },
 
     mounted() {
@@ -330,16 +327,17 @@ export default {
                 },
                 { text: "Price", value: "price", align: "center" },
                 { text: "Count", value: "count" },
-                { text: "Action", value: "action" },
+                // { text: "Action", value: "action" },
             ],
 
             tools: [],
 
             idForAction: null,
 
-            supplier: "",
+            supplier: [],
             supplierId: null,
             supplierOptions: [],
+            selectedSuppliers: [],
 
             tool: "",
             toolId: null,
@@ -607,6 +605,8 @@ export default {
             price: "",
 
             totalPrice: 0,
+
+            currentDate: new Date(),
         };
     },
 
@@ -614,6 +614,19 @@ export default {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
         },
+
+        formattedDate() {
+            return moment(this.currentDate).format("MMM DD, YYYY");
+        },
+
+        // selectedSuppliersList() {console.log(this.selectedSuppliers)
+        //     // return this.selectedSuppliers.map((supplier) => {
+        //     //     return {
+        //     //         id: supplier.id,
+        //     //         text: supplier.text,
+        //     //     };
+        //     // });
+        // },
     },
 
     methods: {
@@ -638,10 +651,10 @@ export default {
             });
         },
 
-        formattedDate(date) {
-            // return moment(date).format("MMMM Do YYYY");
-            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
-        },
+        // formattedDate(date) {
+        //     // return moment(date).format("MMMM Do YYYY");
+        //     return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        // },
 
         mySelectEvent(e, action) {
             if (action == "tool") {
@@ -652,9 +665,10 @@ export default {
             } else if (action == "count") {
                 this.countIsSet = true;
             } else if (action == "supplier") {
-                this.supplier = e.text;
-                this.supplierId = e.id;
-                this.supplierIsSet = true;
+                // this.supplier = e.text;
+                // this.supplierId = e.id;
+                // this.supplierIsSet = true;
+                // console.log(e)
             }
 
             if (this.toolIsSet && this.countIsSet) {
@@ -663,7 +677,15 @@ export default {
         },
 
         myChangeEvent(e) {
-            console.log(e);
+            // console.log(e);
+        },
+
+        setSnackBarState() {
+            this.$store.dispatch("ProcurementInvoiceModule/setSnackBarState");
+        },
+
+        setInvoiceGenerate() {
+            this.$store.dispatch("ProcurementInvoiceModule/setInvoiceGenerate");
         },
 
         async buildInvoiceTools() {
@@ -685,15 +707,19 @@ export default {
             this.count = "";
         },
 
-        async submitInvoice() {console.log(this.supplierId)
+        async submitInvoice() {
             axios
                 .post("/procurement/submitInvoice", {
-                    sellerId: this.supplierId,
+                    sellers: this.selectedSuppliers,
                     // toolId: this.toolId,
+                    total: this.totalPrice,
                     tools: this.tools,
                 })
                 .then((response) => {
-                    this.clearData()
+                    // console.log(response.data)
+                    this.clearData();
+                    this.setInvoiceGenerate();
+                    this.setSnackBarState();
                 });
         },
 

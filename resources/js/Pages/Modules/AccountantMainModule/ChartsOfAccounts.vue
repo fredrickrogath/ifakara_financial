@@ -1,5 +1,5 @@
 <template>
-    <div data-app>
+    <div data-app class="card p-0 h-screen -mt-3">
         <spinner v-if="showLoader"></spinner>
         <div v-else class="h-screen card">
             <!-- <v-card elevation=""> -->

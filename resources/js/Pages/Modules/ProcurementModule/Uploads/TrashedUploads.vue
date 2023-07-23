@@ -1,5 +1,51 @@
 <template>
-    <div class="h-screen bg-white card">
+    <div class="h-screen bg-white card-body p-0 pt-1">
+
+        <!-- Warning Alert Modal -->
+        <div
+            id="warning-alert-modal-pu-2"
+            class="modal fade"
+            tabindex="-1"
+            role="dialog"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body p-2">
+                        <div class="text-center">
+                            <i class="dripicons-warning h1 text-warning"></i>
+                            <h4 class="mt-2 text-gray-500">
+                                Are you sure you want to delete this data ?
+                            </h4>
+                            <p class="mt-3">
+                                This operation can not be reversed.
+                            </p>
+                            <div class="flex justify-around">
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-warning my-1 text-white"
+                                    data-bs-dismiss="modal"
+                                    @click="permanentDeleteUpload()"
+                                >
+                                    Continue
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-danger my-1 text-white"
+                                    data-bs-dismiss="modal"
+                                >
+                                    cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
         <div class="col-12 p-0 m-0">
             <div class="">
                 <div class="row">
@@ -54,12 +100,25 @@
                             size="22"
                             type="button"
                             data-bs-toggle="modal"
-                            data-bs-target="#warning-alert-modal"
+                            data-bs-target="#warning-alert-modal-pu-2"
                             @click="setIdForAction(item.id)"
                         >
                             mdi-delete
                         </v-icon>
                     </span>
+                </template>
+
+                <template v-slot:item.restore="{ item }">
+                    <v-icon
+                        size="22"
+                        @click="
+                            restoreInvoice(
+                                item.id,
+                            )
+                        "
+                    >
+                        mdi-restore
+                    </v-icon>
                 </template>
 
                 <template v-slot:item.view="{ item }">

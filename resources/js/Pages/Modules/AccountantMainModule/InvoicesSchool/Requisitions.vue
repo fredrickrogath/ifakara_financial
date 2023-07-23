@@ -219,10 +219,12 @@
 <script>
 import moment from "moment";
 import Spinner from "../../.././Components/SpinnerLoader.vue";
-import SellerProfile from "../../.././Components/SellerProfile.vue";
+import Snackbar from "../../.././Components/Snackbar";
+import SellerProfile from "../../.././Components/SellerProfile";
 export default {
     components: {
         Spinner,
+        Snackbar,
         SellerProfile,
     },
 
@@ -286,7 +288,7 @@ export default {
                     text: "Total",
                     value: "tool_sum",
                 },
-                { text: "Starred", value: "starred" },
+                // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
                 // { text: "Delete", value: "delete" },
@@ -302,14 +304,6 @@ export default {
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
-        },
-
-        getSchoolId() {
-            return this.$store.getters["AccountantInvoiceModule/getSchoolId"];
-        },
-
-        getMainUrl() {
-            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
     },
 
@@ -339,17 +333,57 @@ export default {
         getSellerProfile(seller) {
             this.sellerInfo = seller
         },
-        
+
         getInvoices() {
+            axios.get("/accountant/getInvoices").then((response) => {
+                this.invoices = response.data.data;
+                this.showLoader = false;
+                console.log(response.data.data)
+            });
+        },
+
+        async updateTools(id, column, data) {
             axios
-                .post(this.getMainUrl + "accountant/getInvoicesFinancial", {
-                    school_id: this.getSchoolId,
+                .post("/accountant/updateTools", {
+                    id: id,
+                    data: data,
+                    column: column,
                 })
                 .then((response) => {
-                    this.invoices = response.data.data;
-                    this.showLoader = false;
-                    // console.log(response.data.data)
+                    // this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    // console.log(response.data.data);
                 });
+            // handle response here
+        },
+
+        async deleteInvoice() {
+            axios
+                .post("/accountant/deleteInvoice", {
+                    id: this.idForAction,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
+
+        async starredInvoice(id,data ,column) {
+            axios
+                .post("/accountant/starredInvoice", {
+                    id: id,
+                    data: data,
+                    column: column,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    // console.log(response.data.data);
+                });
+            // handle response here
         },
 
         setInvoiceView(id) {

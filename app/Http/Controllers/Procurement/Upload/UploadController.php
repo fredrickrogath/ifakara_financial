@@ -60,7 +60,7 @@ class UploadController extends Controller
     }
     
     public function headDashboardGetUploads(UploadService $uploadService){
-        $this->authorize('authorizeProcurement', \App\Models\User::class);
+        // $this->authorize('authorizeProcurement', \App\Models\User::class);
         // event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $uploadService->headDashboardGetUploads()]);
     }

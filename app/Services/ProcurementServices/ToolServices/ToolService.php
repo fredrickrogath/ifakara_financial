@@ -27,13 +27,18 @@ class ToolService
     }
 
     public function addSeller($request){
+        $file = $request->file('file');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $filePath = $file->storeAs('documents', $fileName, 'public');
+        
         $created = \App\Models\Seller::create([
             'name' => $request->name,
             'email' => $request->email,
+            'path' => $filePath,
             'location' => $request->location,
             'user_id' => auth()->user()->id,
             'mobile' => $request->mobile,
-
+            'description' => $request->description,
         ]);
 
         if($created){

@@ -25,11 +25,11 @@ class InvoiceService
     }
 
     public function getInvoices(){
-        return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
     }
 
     public function getInvoiceView($request){
-        return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
     }
     
     public function updateInvoice($request){
@@ -55,11 +55,11 @@ class InvoiceService
     }
 
     public function getTrashedInvoices(){
-        return \App\Models\Invoice::onlyTrashed()->with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
+        return \App\Models\Invoice::onlyTrashed()->with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->orderBy('created_at', 'desc')->get();
     }
 
     public function getStarredInvoices(){
-        return \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('starred', true)->orderBy('created_at', 'desc')->get();
+        return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('starred', true)->orderBy('created_at', 'desc')->get();
     }
 
     public function restoreInvoice($request){
@@ -71,9 +71,9 @@ class InvoiceService
     }
 
     public function headDashboardGetInvoices(){
-        $procurement = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', false)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
-        $accountantSchool = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('status_from_financial', false)->orderBy('created_at', 'desc')->get();
-        $accountantFinancial = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status', true)->where('status_from_financial', true)->orderBy('created_at', 'desc')->get();
+        $procurement = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status_from_financial_accountant', false)->where('status_from_financial_bishop', false)->orderBy('created_at', 'desc')->get();
+        $accountantSchool = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status_from_financial_accountant', true)->where('status_from_financial_bishop', false)->orderBy('created_at', 'desc')->get();
+        $accountantFinancial = \App\Models\Invoice::with('tools', 'seller', 'toolSum', 'invoiceTool.tool')->where('status_from_financial_accountant', true)->where('status_from_financial_bishop', true)->orderBy('created_at', 'desc')->get();
         return [
             'procurement' => $procurement,
             'procurementCount' => $procurement->count(),
@@ -101,8 +101,9 @@ class InvoiceService
     public function submitInvoice($request){
 
         $invoice = \App\Models\Invoice::create([
-            'invoice_no' => 0000,
-            'seller_id' => $request->sellerId,
+            // 'invoice_no' => 0000,
+            // 'seller_id' => 1,
+            'total' => $request->total,
             'narration' => '...'
         ]);
 
@@ -112,6 +113,14 @@ class InvoiceService
                 'tool_id' => $tool['id'],
                 'user_id' => auth()->user()->id,
                 'count' => $tool['count'],
+            ]);
+        }
+
+        foreach ($request->sellers as $key => $seller) {
+            \App\Models\SellerInvoice::create([
+                'seller_id' => $seller,
+                'invoice_id' => $invoice->id,
+                'user_id' => auth()->user()->id,
             ]);
         }
         return true;

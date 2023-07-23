@@ -1,5 +1,5 @@
 <template>
-    <div class="card p-0 -mt-3" data-app>
+    <div class="card p-0 h-screen -mt-3" data-app>
         <!-- <spinner v-if="showLoader"></spinner> -->
 
         <div class="p-0">
@@ -69,7 +69,7 @@
                             ><i
                                 class="mdi mdi-form-select font-18 align-middle me-1 pb-1"
                             ></i
-                            >Invoices {{ getCurrentTab }}
+                            >Invoices <span class="d-none">{{ getCurrentTab }}</span>
                         </a>
                         <a
                             href="#"
