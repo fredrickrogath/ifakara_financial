@@ -36,14 +36,17 @@
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
                                 <v-icon
-                                    v-if="header.value == 'delete'"
+                                    v-if="header.value == 'head'"
                                     size="22"
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
-                                    @click="setIdForAction(items[idx]['id'])"
                                 >
-                                    mdi-delete
+                                    {{ items[idx]['status_from_head'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+                                <v-icon
+                                    v-if="header.value == 'finance'"
+                                    size="22"
+                                    @click="verifyInvoiceCreation(items[idx]['id'], items[idx]['status_from_financial_accountant'])"
+                                >
+                                    {{ items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>
 
                                 <v-icon
@@ -265,6 +268,8 @@ export default {
                 // },
                 // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
+                { text: "Head", value: "head" },
+                { text: "Finance", value: "finance" },
                 // { text: "Action", value: "delete" },
                 // { text: "Created At", value: "created_at" },
             ],
@@ -317,8 +322,8 @@ export default {
         },
 
         formattedDate(date) {
-            // return moment(date).format("MMMM Do YYYY");
-            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            return moment(date).format("MMMM Do YYYY");
+            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         totalPrice(item) {
@@ -329,6 +334,19 @@ export default {
 
         getSellerProfile(seller) {
             this.sellerInfo = seller;
+        },
+        
+        async verifyInvoiceCreation(id , status_from_financial_accountant) {
+            axios
+                .post(this.getMainUrl + "accountant/verifyInvoiceCreation", {
+                    id: id,
+                    status_from_financial_accountant: status_from_financial_accountant
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // console.log(response.data.data);
+                });
+            // handle response here
         },
 
         getInvoices() {
