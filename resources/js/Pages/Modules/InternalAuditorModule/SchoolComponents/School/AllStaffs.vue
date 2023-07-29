@@ -57,7 +57,7 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Staffs {{ getSchoolId }}
+                Staffs <span class="d-none">{{ getSchoolId }} </span>
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -137,13 +137,13 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'id'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -151,7 +151,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -159,20 +159,20 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'email'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'role'"
                                 >
                                     {{ department(item[header.value]) }}
@@ -327,11 +327,15 @@ export default {
 
         department(role) {
             if (role == 3) {
-                return "Academic";
+                return "Academic Office";
             } else if (role == 5) {
-                return "Accountant";
+                return "Accountant Office";
             } else if (role == 6) {
-                return "Procurement";
+                return "Procurement Office";
+            }else if (role == 1){
+                return "Head Office";
+            }else if (role == 8){
+                return "Other Offices"
             }
         },
 

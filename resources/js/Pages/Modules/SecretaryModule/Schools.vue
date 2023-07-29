@@ -328,6 +328,21 @@
                                     ></i
                                     >All Students
                                 </a>
+
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    @click="setSchoolDetailTab('allInvoices')"
+                                    :class="[
+                                        getCurrentSchoolDetailTab == 'allInvoices'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                    ></i
+                                    >Invoices
+                                </a>
                                 </div>
 
                                 <div
@@ -382,6 +397,21 @@
                                     > {{ permissionCount }} </i
                                     ></a
                                 >
+
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0 pt-1"
+                                    @click="setTab('invoices')"
+                                    :class="[
+                                        getCurrentTab == 'invoices'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                    ></i
+                                    >Invoices
+                                </a>
                                 </div>
                             </div>
 
@@ -433,6 +463,7 @@
                                     v-show="!getAddStudent && !getSchoolView"
                                     key="2"
                                 >
+                                <all-invoices-vue v-show="getCurrentTab == 'invoices' && !getAddSchool"></all-invoices-vue>
                                     <all-schools
                                         v-show="getCurrentTab == 'allSchools' && !getAddSchool"
                                     ></all-schools>
@@ -495,9 +526,12 @@ import AddSchool from "./SchoolComponents/School/AllSchools/AddSchool.vue";
 import Permissions from "./SchoolComponents/School/School/Permissions.vue";
 import Comments from "./SchoolComponents/Comments.vue";
 
+// import AllInvoices from "./AllInvoices.vue";
+
 // import Entries from "./Invoices/Entries.vue";
 
 import Select2 from "v-select2-component";
+import AllInvoicesVue from '../InternalAuditorModule/AllInvoices.vue';
 
 export default {
     components: {
@@ -517,6 +551,8 @@ export default {
         Permissions,
         Comments,
         // Entries,
+
+        AllInvoicesVue,
 
         Select2,
     },

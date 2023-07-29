@@ -70,7 +70,7 @@
                                 </div>
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -78,7 +78,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -86,7 +86,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 italic font-semibold"
                                     v-else-if="header.value == 'id'"
                                 >
                                     {{ encrypt() }}
@@ -109,7 +109,7 @@
                                     large
                                 >
                                     <span
-                                        class="text-gray-600"
+                                        class="text-gray-600 italic font-semibold"
                                         :class="
                                             item[header.value] == null &&
                                             header.value !== 'action' // header.value == 'level1'

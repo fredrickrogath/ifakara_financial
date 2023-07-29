@@ -259,9 +259,9 @@
                                 <a
                                     href="#"
                                     class="list-group-item border-0 pt-1"
-                                    @click="setTab('allStaffs')"
+                                    @click="setTab('diocese'); setTab('diocese-invoices')"
                                     :class="[
-                                        getCurrentTab == 'allStaffs'
+                                        getCurrentTab == 'diocese' || getCurrentTab == 'diocese-invoices'
                                             ? 'text-warning'
                                             : '',
                                     ]"
@@ -284,16 +284,29 @@
                                     ><i
                                         class="mdi mdi-hospital-box font-20 align-middle me-2 pb-1"
                                     ></i
-                                    >Health Institutes <i
-                                    v-if="permissionCount > 0"
-                                        class="mdi mdi-bell inline-block animate-shake shake text-red-500 font-17 align-middle me-2 pb-1 px-2"
-                                    > {{ permissionCount }} </i
-                                    ></a
+                                    >Health Institutes</a
                                 >
                                 </div>
                             </div>
 
-                            <hr class="bg-gray-200 mx-2 mb-2 mt-2" />
+                            <hr class="bg-gray-200 mx-1 mb-1 mt-2" />
+
+                            <div v-show="getCurrentTab == 'diocese' || getCurrentTab == 'diocese-invoices'">
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0 pt-1"
+                                    @click="setTab('diocese-invoices')"
+                                    :class="[
+                                        getCurrentTab == 'diocese-invoices' || getCurrentTab == 'diocese'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                        ></i
+                        >Invoices
+                                </a>
+                            </div>
 
                             <!-- <div class="mt-2 ml-3">
                                 <h5>
@@ -341,6 +354,10 @@
                                     v-show="!getAddStudent && !getSchoolView"
                                     key="2"
                                 >
+                                <all-invoices
+                                        v-show="getCurrentTab == 'diocese-invoices' && !getAddSchool"
+                                    ></all-invoices>
+
                                     <all-schools
                                         v-show="getCurrentTab == 'allSchools' && !getAddSchool"
                                     ></all-schools>
@@ -405,6 +422,7 @@ import Comments from "./SchoolComponents/Comments.vue";
 
 // import Entries from "./Invoices/Entries.vue";
 
+import AllInvoices from "./AllInvoices.vue";
 import Select2 from "v-select2-component";
 
 export default {
@@ -425,6 +443,8 @@ export default {
         Permissions,
         Comments,
         // Entries,
+
+        AllInvoices,
 
         Select2,
     },

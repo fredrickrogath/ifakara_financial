@@ -1,84 +1,100 @@
 <template>
-    <div class="pt-0 mt-0">
-        <!-- <div class="d-flex justify-content-between">
+    <div class="">
+        <div class="d-flex justify-content-between mt-2">
             <a @click="setInvoiceView()" class="btn text-lg-700">
                 <strong class="text-danger" style="font-size: large"
                     ><i class="fe-arrow-left"></i>
                 </strong>
             </a>
 
-            <form @submit.prevent="acceptInvoice">
-                <div class="d-flex justify-content-between my-1 mt-2">
+            <form>
+                <div class="d-flex justify-content-between my-1 px-1 mr-3">
                     <button
                         type="submit"
-                        class="btn btn-success text-white btn-sm waves-effect waves-light"
-                        v-if="!this.invoice.status_from_financial"
+                        class="disabled btn btn-success text-white btn-sm waves-effect waves-light"
+                        v-if="!this.invoice.status_from_financial_accountant"
                     >
                         Verify
                     </button>
 
                     <button
                         type="submit"
-                        class="btn btn-danger text-white btn-sm waves-effect waves-light"
+                        class="disabled btn btn-danger text-white btn-sm waves-effect waves-light"
                         v-else
                     >
                         Unverify
                     </button>
                 </div>
             </form>
-        </div> -->
+        </div>
 
         <div class="col-12">
-            <div class="">
+            <div class="px-1">
                 <div class="">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mt-1">
-                                <p>
-                                    <b>Hello, {{ seller }}</b>
-                                </p>
-                                <small>Procumerement</small>
+                            <div class="mt-0">
+                                <!-- <strong>Procumerement</strong> -->
+                                <span
+                                        v-for="(seller, index) in invoice.sellers"
+                                        :key="seller.id"
+                                        class="d-block"
+                                    >
+                                        <div class="">
+                                            <v-menu transition="fab-transition">
+                                                <template
+                                                    v-slot:activator="{
+                                                        on,
+                                                        attrs,
+                                                    }"
+                                                >
+                                                <strong>Supplier {{ index + 1 }} : </strong>
+                                                    <span
+                                                        class="seller-name uppercase"
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                        @click="getSellerProfile(seller)"
+                                                    >
+                                                        {{ seller.name }}
+                                                    </span>
+                                                </template>
+
+                                                <seller-profile :seller="sellerInfo"></seller-profile>
+                                            </v-menu>
+                                        </div>
+                                    </span>
                             </div>
                         </div>
                         <!-- end col -->
                         <div class="col-md-4 offset-md-2">
-                            <div class="mt-1 float-end">
-                                <p>
-                                    <strong> Invoice id :  </strong
+                            <div class="mt-0 float-end d-flex flex-col">
+                                <span>
+                                    <strong> Invoice id : </strong
                                     ><span>{{ getInvoiceId }}</span>
-                                </p>
-                                <p>
-                                    <strong>Invoice Date : </strong>
+                                </span>
+                                <span>
+                                    <strong>Invoice Date:</strong>
                                     <span class="float-end">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;  {{ formattedDate(this.invoice.created_at) }}</span
-                                    >
-                                </p>
-                                <p>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ currentDate | formatDate }}
+                                    </span>
+                                </span>
+
+                                <span>
                                     <strong>Invoice Status : </strong>
                                     <span class="float-end"
-                                        >
-                                        <span
-                                        v-if="!this.invoice.status_from_financial"
-                                        class="badge bg-danger"
+                                        ><span class="badge bg-danger"
                                             >Unpaid</span
-                                        >
-
-                                        <span
-                                        v-else
-                                        class="badge bg-success"
-                                            >Paid</span
-                                        >
-                                        
-                                        </span
+                                        ></span
                                     >
-                                </p>
+                                </span>
                             </div>
                         </div>
                         <!-- end col -->
                     </div>
                     <!-- end row -->
 
-                    <div class="row">
+                    <div class="row mt-0">
                         <div class="col-sm-6">
                             <h6>Invoice Address</h6>
                             <address>
@@ -96,10 +112,10 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table class="table  table-centered">
+                                <table class="table table-centered">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <!-- <th>#</th> -->
                                             <th>Tool&Item</th>
                                             <th style="width: 10%">Quantity</th>
                                             <th style="width: 10%">Amount</th>
@@ -116,29 +132,29 @@
                                             v-for="data in invoice.invoice_tool"
                                             :key="data.id"
                                         >
-                                            <template v-if="formattedData">
-                                                <td>1</td>
-                                                <td>
-                                                    <b>{{ data.tool.name }}</b>
-                                                    <br />
-                                                </td>
-                                                <td>{{ data.count }}</td>
-                                                <td>
-                                                    {{
-                                                        formattedPrice(
+                                            <!-- <td>1</td> -->
+                                            <td>
+                                                <b>{{ data.tool.name }}</b>
+                                                <br />
+                                                <!-- 2 Pages static website - my
+                                                website -->
+                                            </td>
+                                            <td>{{ data.count }}</td>
+                                            <td>
+                                                {{
+                                                    formattedPrice(
+                                                        data.tool.price
+                                                    )
+                                                }}
+                                            </td>
+                                            <td class="text-end">
+                                                {{
+                                                    formattedPrice(
+                                                        data.count *
                                                             data.tool.price
-                                                        )
-                                                    }}
-                                                </td>
-                                                <td class="text-end">
-                                                    {{
-                                                        formattedPrice(
-                                                            data.count *
-                                                                data.tool.price
-                                                        )
-                                                    }}
-                                                </td>
-                                            </template>
+                                                    )
+                                                }}
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -152,7 +168,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="clearfix pt-5">
-                                <h4 class="text-primary">
+                                <h4 class="">
                                     Total Amount of the Tools & Items
                                 </h4>
                             </div>
@@ -175,13 +191,13 @@
                                         }}</span
                                     >
                                 </p>
-                                <h3>
+                                <h4 class="float-end">
                                     {{
                                         formattedPrice(
                                             total - total * (18 / 100)
                                         )
                                     }}
-                                </h3>
+                                </h4>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -189,7 +205,7 @@
                     </div>
                     <!-- end row -->
 
-                    <div class="mt-4 mb-1">
+                    <!-- <div class="mt-4 mb-1">
                         <div class="text-end d-print-none">
                             <a
                                 href="javascript:window.print()"
@@ -202,7 +218,7 @@
                                 >Submit</a
                             >
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- end card -->
@@ -213,7 +229,12 @@
 
 <script>
 import moment from "moment";
+import SellerProfile from "../../../../../Components/SellerProfile.vue";
 export default {
+    components: {
+        SellerProfile,
+    },
+
     mounted() {
         this.showLoader = true;
 
@@ -237,8 +258,17 @@ export default {
             total: 0,
             count: 0,
             id: null,
+            sellerInfo: [],
+            currentDate: new Date(),
         };
     },
+
+    filters: {
+        formatDate(date) {
+            return moment(date).format("MMM DD, YYYY");
+        },
+    },
+
     methods: {
         setInvoiceView() {
             this.$store.dispatch(
@@ -266,11 +296,15 @@ export default {
             this.objectData.splice(0, this.objectData.length);
         },
 
-        async sellerName(invoice) {
-            if (typeof invoice !== "undefined" && invoice !== null) {
-                this.seller = invoice.seller.name;
-                // this.supplier = invoice.seller;
-            }
+        // async sellerName(invoice) {
+        //     if (typeof invoice !== "undefined" && invoice !== null) {
+        //         this.seller = invoice.seller.name;
+        //         // this.supplier = invoice.seller;
+        //     }
+        // },
+
+        getSellerProfile(seller) {
+            this.sellerInfo = seller
         },
 
         async getInvoiceView() {
@@ -279,10 +313,12 @@ export default {
                     id: this.getInvoiceId,
                 })
                 .then((response) => {
-                    this.showLoader = false;
-                    this.totalPrice(response.data.data);
-                    this.invoice = response.data.data;
-                    this.sellerName(this.invoice);
+                    if(response.data.data != null){
+                        this.showLoader = false;
+                        this.totalPrice(response.data.data);
+                        this.invoice = response.data.data;
+                        // this.sellerName(this.invoice);
+                    }
                 });
         },
 
@@ -302,7 +338,7 @@ export default {
                     this.getMainUrl + "accountant/acceptInvoice",
                     {
                         id: this.invoice.id,
-                        status_from_financial: this.invoice.status_from_financial,
+                        status_from_financial_accountant: this.invoice.status_from_financial_accountant,
                         // invoice: this.objectData,
                     }
                 )

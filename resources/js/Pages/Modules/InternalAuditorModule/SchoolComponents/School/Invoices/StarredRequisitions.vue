@@ -1,12 +1,63 @@
 <template>
     <!-- <v-col>
         <v-row> -->
-    <div>
+    <div class="px-1">
         <spinner v-if="showLoader"></spinner>
 
-        <v-col v-else sm="12" md="12" class="px-0 pt-0">
+        <!-- <v-col v-else sm="12" md="12"> -->
+            <!-- <v-card flat :dark="isDark"> -->
+            <!-- <v-card elevation="0" data-app> -->
+
+            <!-- Warning Alert Modal -->
+            <div
+                id="warning-alert-modal1"
+                class="modal fade"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body p-2">
+                            <div class="text-center">
+                                <i
+                                    class="dripicons-warning h1 text-warning"
+                                ></i>
+                                <h4 class="mt-2 text-gray-500">
+                                    Are you sure you want to delete this data ?
+                                </h4>
+                                <p class="mt-3">
+                                    Do not worry, deleting this can be restored
+                                    in your trash within 30 days.
+                                </p>
+                                <div class="flex justify-around">
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-warning my-1 text-white"
+                                        data-bs-dismiss="modal"
+                                        @click="deleteInvoice()"
+                                    >
+                                        Continue
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-danger my-1 text-white"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
             <v-card-title class="px-0 pt-0">
-                Invoices
+                Invoices <span class="d-none">{{ getSchoolId }}</span>
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -54,13 +105,6 @@
                                     :class="
                                         item[header.value] ? 'text-warning' : ''
                                     "
-                                    @click="
-                                        starredInvoices(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
                                 >
                                     mdi-star
                                 </v-icon>
@@ -88,9 +132,39 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'seller'"
-                                    >{{ item[header.value].name }}</span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'sellers'"
+                                    >
+                                    
+                                    <span
+                                        v-for="seller in item[header.value]"
+                                        :key="seller.id"
+                                        class="d-block"
+                                    >
+                                        <div class="">
+                                            <v-menu transition="fab-transition">
+                                                <template
+                                                    v-slot:activator="{
+                                                        on,
+                                                        attrs,
+                                                    }"
+                                                >
+                                                    <span
+                                                        class="seller-name"
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                        @click="getSellerProfile(seller)"
+                                                    >
+                                                        {{ seller.name }}
+                                                    </span>
+                                                </template>
+
+                                                <seller-profile :seller="sellerInfo"></seller-profile>
+                                            </v-menu>
+                                        </div>
+                                    </span>
+                                    
+                                    </span
                                 >
 
                                 <span
@@ -181,7 +255,7 @@
                     </tbody>
                 </template>
             </v-data-table>
-        </v-col>
+        <!-- </v-col> -->
     </div>
     <!-- </v-row>
     </v-col> -->
@@ -189,10 +263,12 @@
 
 <script>
 import moment from "moment";
-import Spinner from "../../../../.././Components/SpinnerLoader.vue";
+import Spinner from "../../../../../Components/SpinnerLoader.vue";
+import SellerProfile from "../../../../../Components/SellerProfile.vue";
 export default {
     components: {
         Spinner,
+        SellerProfile,
     },
 
     props: {
@@ -237,15 +313,15 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
-                    text: "Invoice #",
-                    align: "start",
-                    sortable: false,
-                    value: "id",
-                },
+                // {
+                //     text: "Invoice #",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
                 {
                     text: "Seller",
-                    value: "seller",
+                    value: "sellers",
                 },
                 {
                     text: "Tools",
@@ -255,7 +331,7 @@ export default {
                     text: "Total",
                     value: "tool_sum",
                 },
-                // { text: "Starred", value: "starred" },
+                { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
                 // { text: "Delete", value: "delete" },
@@ -263,6 +339,10 @@ export default {
             invoices: [],
 
             idForAction: null,
+
+            sellerInfo: [],
+
+            schoolId: null,
         };
     },
 
@@ -271,14 +351,34 @@ export default {
             return this.contentFullWidthWhenSideBarHides;
         },
 
+        getSchoolId() {
+            this.schoolId = this.$store.getters["AccountantInvoiceModule/getSchoolId"];
+            return this.$store.getters["AccountantInvoiceModule/getSchoolId"];
+        },
+
         getMainUrl() {
             return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
     },
 
+    watch: {
+    schoolId(newVal, oldValue) {
+        if (newVal !== null) {
+                this.getStarredInvoices();
+            }
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
+    },
+  },
+
     methods: {
         async setIdForAction(id) {
             this.idForAction = id;
+        },
+
+        getSellerProfile(seller) {
+            this.sellerInfo = seller
         },
 
         formattedPrice(amount) {
@@ -300,56 +400,58 @@ export default {
         },
 
         getStarredInvoices() {
-            axios.get(this.getMainUrl + "accountant/getStarredInvoices").then((response) => {
+            axios.post(this.getMainUrl + "accountant/getStarredInvoices", {
+                    school_id: this.getSchoolId,
+                }).then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
                 // console.log(response.data.data)
             });
         },
 
-        // async updateTools(id, column, data) {
-        //     axios
-        //         .post("/accountant/updateTools", {
-        //             id: id,
-        //             data: data,
-        //             column: column,
-        //         })
-        //         .then((response) => {
-        //             // this.students = response.data.data;
-        //             // this.amount = "";
-        //             // this.narration = "";
-        //             // console.log(response.data.data);
-        //         });
-        //     // handle response here
-        // },
+        async updateTools(id, column, data) {
+            axios
+                .post("/accountant/updateTools", {
+                    id: id,
+                    data: data,
+                    column: column,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
 
-        // async starredInvoices(id, data, column) {
-        //     axios
-        //         .post("/accountant/starredInvoice", {
-        //             id: id,
-        //             data: data,
-        //             column: column,
-        //         })
-        //         .then((response) => {
-        //             // this.students = response.data.data;
-        //             // this.amount = "";
-        //             // this.narration = "";
-        //             // console.log(response.data.data);
-        //         });
-        //     // handle response here
-        // },
+        async starredInvoices(id, data, column) {
+            axios
+                .post("/accountant/starredInvoice", {
+                    id: id,
+                    data: data,
+                    column: column,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
 
-        // async deleteInvoice() {
-        //     axios
-        //         .post("/accountant/deleteInvoice", {
-        //             id: this.idForAction,
-        //         })
-        //         .then((response) => {
-        //             // this.students = response.data.data;
-        //             // console.log(response.data.data);
-        //         });
-        //     // handle response here
-        // },
+        async deleteInvoice() {
+            axios
+                .post("/accountant/deleteInvoice", {
+                    id: this.idForAction,
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
 
         setInvoiceView(id) {
             this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);

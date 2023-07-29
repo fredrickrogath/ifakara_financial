@@ -1,0 +1,186 @@
+<template>
+    <!-- <v-col>
+        <v-row> -->
+    <div>
+        <spinner-loader v-if="showLoader"></spinner-loader>
+
+        <div v-else>
+            <!-- <v-card flat :dark="isDark"> -->
+            <!-- <v-card elevation="0" data-app> -->
+            <v-card-title class="px-1 pt-0">
+                Transaction Entries
+                <v-spacer></v-spacer>
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line
+                    hide-details
+                ></v-text-field>
+            </v-card-title>
+            <!-- {{ $page.props.posts }} -->
+            <v-data-table
+                mobile-breakpoint="0"
+                :headers="headers"
+                :items="legerEntries"
+                :search="search"
+                class="bg-red-900"
+                :items-per-page="11"
+            >
+                <template v-slot:item.id="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.id
+                    }}</span>
+                </template>
+
+                <template v-slot:item.chart_of_account.account_type="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.chart_of_account.account_type
+                    }}</span>
+                </template>
+
+                <template v-slot:item.chart_of_account.name="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.chart_of_account.name
+                    }}</span>
+                </template>
+
+                <template v-slot:item.level_1="{ item }">
+                    <span
+                        class="text-gray-600 italic font-semibold"
+                        :class="[
+                            item.level_1 !== 0
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                        ]"
+                        >{{ formattedPrice(item.level_1) }}</span
+                    >
+                </template>
+
+                <template v-slot:item.level_2="{ item }">
+                    <span
+                        class="text-gray-600 italic font-semibold"
+                        :class="[
+                            item.level_2 !== 0
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                        ]"
+                        >{{ formattedPrice(item.level_2) }}</span
+                    >
+                </template>
+
+                <template v-slot:item.level_3="{ item }">
+                    <span
+                        class="text-gray-600 italic font-semibold"
+                        :class="[
+                            item.level_3 !== 0
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                        ]"
+                        >{{ formattedPrice(item.level_3) }}</span
+                    >
+                </template>
+
+                <template v-slot:item.narration="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{
+                        item.narration
+                    }}</span>
+                </template>
+
+                <template v-slot:item.created_at="{ item }">
+                    <span class="text-gray-600 italic font-semibold">{{
+                        formattedDate(item.created_at)
+                    }}</span>
+                </template>
+            </v-data-table>
+            <!-- </v-card> -->
+            <!-- </v-card> -->
+        </div>
+    </div>
+    <!-- </v-row>
+    </v-col> -->
+</template>
+
+<script>
+import moment from "moment";
+import SnackBar from "../../../Components/SnackBar.vue";
+import SpinnerLoader from "../../../Components/SpinnerLoader.vue";
+export default {
+    components: {
+        SnackBar,
+        SpinnerLoader,
+    },
+    mounted() {
+        this.getLegerEntries();
+
+        // Receiving broadicasting
+        window.Echo.channel("EventTriggered").listen(
+            "NewPostPublished",
+            (e) => {
+                // console.log('abc');
+                this.getLegerEntries();
+            }
+        );
+    },
+
+    data() {
+        return {
+            contentFullWidthWhenSideBarHides: 10,
+            storagePath: window.location.origin + "/storage/systemFiles/",
+
+            showLoader: true,
+            search: "",
+            headers: [
+                // {
+                //     text: "Code",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
+                {
+                    text: "Type",
+                    value: "chart_of_account.account_type",
+                },
+                {
+                    text: "Name",
+                    value: "chart_of_account.name",
+                    align: "center",
+                },
+                { text: "Level 1", value: "level_1" },
+                { text: "Level 2", value: "level_2" },
+                { text: "Level 3", value: "level_3" },
+                { text: "Narration", value: "narration" },
+                { text: "Date", value: "created_at" },
+
+                // { text: "Iron (%)", value: "iron" },
+            ],
+            // posts: this.$store.getters["getPosts"],
+            // posts: null,
+            legerEntries: [],
+        };
+    },
+
+    methods: {
+        formattedPrice(amount) {
+            return amount.toLocaleString("sw-TZ", {
+                style: "currency",
+                currency: "Tsh",
+            });
+        },
+
+        formattedDate(date) {
+            return moment(date).format("MMMM Do YYYY");
+            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        },
+
+        getLegerEntries() {
+            // console.log("Loading next page");
+            axios.get("/accountant/getLegerEntries").then((response) => {
+                this.legerEntries = response.data.data;
+                this.showLoader = false;
+                // console.log(th   is.legerEntries)
+            });
+        },
+    },
+};
+</script>

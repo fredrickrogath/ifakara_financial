@@ -105,13 +105,6 @@
                                     :class="
                                         item[header.value] ? 'text-warning' : ''
                                     "
-                                    @click="
-                                        starredInvoices(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
                                 >
                                     mdi-star
                                 </v-icon>

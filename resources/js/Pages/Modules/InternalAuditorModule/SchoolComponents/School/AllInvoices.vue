@@ -4,6 +4,44 @@
             <div class="d-flex justify-content-end mail-list mt-2 mb-1">
                 <div class="d-flex justifi-content-between">
                     <a
+                        @click="setTab('invoices')"
+                        href="#"
+                        class="list-group-item border-0"
+                        :class="[getCurrentTab == 'invoices' ? 'text-warning' : '']"
+                    >
+                        <i
+                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                        ></i
+                        >Invoices
+                    </a>
+
+                    <a
+                        @click="setTab('invoicesDeleted')"
+                        href="#"
+                        class="list-group-item border-0"
+                        :class="[getCurrentTab == 'invoicesDeleted' ? 'text-warning' : '']"
+                    >
+                        <i
+                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                        ></i
+                        >Deleted
+                    </a>
+
+                    <span class="list-group-item border-0 h-100"> | </span>
+                    <a
+                        @click="setTab('entries')"
+                        href="#"
+                        class="list-group-item border-0"
+                        :class="[getCurrentTab == 'entries' ? 'text-warning' : '']"
+                    >
+                        <i
+                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                        ></i
+                        >Entries
+                    </a>
+
+                    <span class="list-group-item border-0 h-100"> | </span>
+                    <a
                         @click="setTab('home')"
                         href="#"
                         class="list-group-item border-0"
@@ -77,6 +115,8 @@
                 </div>
 
                 <div v-show="!getInvoiceView">
+                    <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
+                                    <invoice-creation-deleted v-show="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
                     <entries v-show="getCurrentTab == 'entries'"></entries>
                     <requisitions
                         v-show="getCurrentTab == 'home'"
@@ -108,6 +148,8 @@ import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 import ViewInvoice from "./Invoices/ViewInvoice.vue";
+import InvoiceCreation from "./Invoices/InvoiceCreation/InvoiceCreation.vue";
+import InvoiceCreationDeleted from "./Invoices/InvoiceCreation/InvoiceCreationDeleted.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
@@ -120,6 +162,8 @@ export default {
         RejectedRequisitions,
         ViewInvoice,
         Entries,
+        InvoiceCreation,
+        InvoiceCreationDeleted,
     },
 
     mounted() {

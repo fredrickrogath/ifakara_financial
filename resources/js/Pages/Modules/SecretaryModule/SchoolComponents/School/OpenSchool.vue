@@ -13,6 +13,9 @@
         <all-school-students
             v-show="getCurrentSchoolDetailTab == 'allStudents'"
         ></all-school-students>
+        <all-invoices
+            v-show="getCurrentSchoolDetailTab == 'allInvoices'"
+        ></all-invoices>
         <!-- </v-col> -->
     </div>
     <!-- </v-row>
@@ -28,6 +31,8 @@ import AllSchoolStudents from "./AllStudents.vue";
 
 import AddStaff from ".././School/School/AddStaff.vue";
 import AddStudent from ".././School/School/AddStudent.vue";
+
+import AllInvoices from "../../../InternalAuditorModule/SchoolComponents/School/AllInvoices.vue"
 export default {
     components: {
         Spinner,
@@ -37,6 +42,8 @@ export default {
 
         AddStaff,
         AddStudent,
+
+        AllInvoices,
     },
 
     props: {

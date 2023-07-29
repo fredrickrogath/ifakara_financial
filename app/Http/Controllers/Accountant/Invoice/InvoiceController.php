@@ -20,12 +20,12 @@ class InvoiceController extends Controller
     // }
 
     public function getInvoices(InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getInvoices()]);
     }
 
     public function getInvoicesCreation(InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getInvoicesCreation()]);
     }
 
@@ -35,7 +35,7 @@ class InvoiceController extends Controller
     }
     
     public function getInvoiceView(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getInvoiceView($request)]);
     }
 
@@ -51,63 +51,63 @@ class InvoiceController extends Controller
     }
 
     public function acceptedInvoice(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->acceptedInvoice($request)]);
     }
     
     public function rejectedInvoice(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->rejectedInvoice($request)]);
     }
 
     public function getTrashedInvoices(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getTrashedInvoices($request)]);
     }
 
     public function getStarredInvoices(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getStarredInvoices($request)]);
     }
 
     public function deleteInvoice(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        // $this->authorize('authorizeAccountant', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->deleteInvoice($request)]);
     }
 
     public function deleteCreateInvoice(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        // $this->authorize('authorizeAccountant', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->deleteCreateInvoice($request)]);
     }
     
     public function restoreInvoice(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        // $this->authorize('authorizeAccountant', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->restoreInvoice($request)]);
     }
 
     public function restoreCreateInvoice(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        // $this->authorize('authorizeAccountant', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->restoreCreateInvoice($request)]);
     }
     
     public function permanentDeleteInvoice(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        // $this->authorize('authorizeAccountant', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->permanentDeleteInvoice($request)]);
     }
     
     public function starredInvoice(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class);
+        // $this->authorize('authorizeAccountant', \App\Models\User::class);
         event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $invoiceService->starredInvoice($request)]);
     }
     
     public function headDashboardGetInvoices(Request $request, InvoiceService $invoiceService){
-        $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->headDashboardGetInvoices($request)]);
     }
 
