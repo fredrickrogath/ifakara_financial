@@ -44,7 +44,6 @@
                                 <v-icon
                                     v-if="header.value == 'finance'"
                                     size="22"
-                                    @click="verifyInvoiceCreation(items[idx]['id'], items[idx]['status_from_financial_accountant'])"
                                 >
                                     {{ items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>

@@ -332,7 +332,7 @@ export default {
                 // },
                 // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
-                { text: "Action", value: "delete" },
+                // { text: "Action", value: "delete" },
                 // { text: "Created At", value: "created_at" },
             ],
             invoices: [],
