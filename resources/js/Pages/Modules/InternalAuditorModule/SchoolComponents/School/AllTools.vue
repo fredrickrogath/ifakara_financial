@@ -268,13 +268,32 @@ export default {
 
             idForAction: null,
 
+            schoolId: null,
+
             // url: "http://127.0.0.1:8000/api",
         };
+    },
+
+    watch: {
+        schoolId(newVal, oldVal) {
+            if (newVal !== null) {
+                this.getStaffs();
+            }
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
+        },
     },
 
     computed: {
         contentFullWidthWhenSideBarHidesComputed() {
             return this.contentFullWidthWhenSideBarHides;
+        },
+
+        getSchoolId() {
+            this.schoolId =
+                this.$store.getters["SecratarySchoolModule/getSchoolId"];
+            return this.$store.getters["SecratarySchoolModule/getSchoolId"];
         },
 
         getMainUrl() {
@@ -313,7 +332,7 @@ export default {
 
         getTools() {
             axios.post(this.getMainUrl + "procurement/getToolsForInternalAuditor", {
-                school_id: 1,
+                school_id: this.schoolId,
                 }).then((response) => {
                 this.tools = response.data.data;
                 this.showLoader = false;
