@@ -110,11 +110,11 @@
             <hr class="bg-gray-200 py-0 my-0" />
 
             <div class="mt-0 pt-0">
-                <div v-show="getInvoiceView">
+                <!-- <div v-show="getInvoiceView">
                     <view-invoice></view-invoice>
-                </div>
+                </div> -->
 
-                <div v-show="!getInvoiceView">
+                <!-- <div v-show="!getInvoiceView">
                     <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
                                     <invoice-creation-deleted v-show="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
                     <entries v-show="getCurrentTab == 'entries'"></entries>
@@ -133,7 +133,7 @@
                     <rejected-requisitions
                         v-show="getCurrentTab == 'rejected'"
                     ></rejected-requisitions>
-                </div>
+                </div> -->
             </div>
             <!-- end card -->
         </div>
@@ -142,28 +142,28 @@
 </template>
 
 <script>
-import Requisitions from "./Invoices/Requisitions.vue";
-import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
-import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
-import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
-import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
-import ViewInvoice from "./Invoices/ViewInvoice.vue";
-import InvoiceCreation from "./Invoices/InvoiceCreation/InvoiceCreation.vue";
-import InvoiceCreationDeleted from "./Invoices/InvoiceCreation/InvoiceCreationDeleted.vue";
+// import Requisitions from "./Invoices/Requisitions.vue";
+// import AcceptedRequisitions from "./Invoices/AcceptedRequisitions.vue";
+// import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
+// import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
+// import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
+// import ViewInvoice from "./Invoices/ViewInvoice.vue";
+// import InvoiceCreation from "./Invoices/InvoiceCreation/InvoiceCreation.vue";
+// import InvoiceCreationDeleted from "./Invoices/InvoiceCreation/InvoiceCreationDeleted.vue";
 
-import Entries from "./Invoices/Entries.vue";
+// import Entries from "./Invoices/Entries.vue";
 
 export default {
     components: {
-        Requisitions,
-        AcceptedRequisitions,
-        DeletedRequisitions,
-        StarredRequisitions,
-        RejectedRequisitions,
-        ViewInvoice,
-        Entries,
-        InvoiceCreation,
-        InvoiceCreationDeleted,
+        // Requisitions,
+        // AcceptedRequisitions,
+        // DeletedRequisitions,
+        // StarredRequisitions,
+        // RejectedRequisitions,
+        // ViewInvoice,
+        // Entries,
+        // InvoiceCreation,
+        // InvoiceCreationDeleted,
     },
 
     mounted() {
