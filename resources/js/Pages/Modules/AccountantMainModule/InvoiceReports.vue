@@ -71,7 +71,7 @@
                             ></i
                             >Invoices
                         </a>
-                        <a
+                        <!-- <a
                             href="#"
                             class="list-group-item font-semibold border-0 pb-1"
                             @click="setTab('studentPayment')"
@@ -82,7 +82,7 @@
                                 class="mdi mdi-cash-multiple font-18 align-middle me-1 pb-2"
                             ></i
                             >Student Payments</a
-                        >
+                        > -->
                     </div>
                     <hr class="bg-gray-200 mb-1 mt-1 mx-2" />
                 </div>
@@ -92,9 +92,9 @@
                 <invoice-report></invoice-report>
             </div>
 
-            <div v-show="getCurrentTab == 'studentPayment'">
+            <!-- <div v-show="getCurrentTab == 'studentPayment'">
                 <student-payment-report></student-payment-report>
-            </div>
+            </div> -->
         </v-col>
     </div>
 </template>
