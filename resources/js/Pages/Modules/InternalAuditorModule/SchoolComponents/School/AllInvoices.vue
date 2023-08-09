@@ -16,6 +16,18 @@
                     </a>
 
                     <a
+                        @click="setTab('payments')"
+                        href="#"
+                        class="list-group-item border-0"
+                        :class="[getCurrentTab == 'payments' ? 'text-warning' : '']"
+                    >
+                        <i
+                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                        ></i
+                        >Student Payments
+                    </a>
+
+                    <a
                         @click="setTab('invoicesDeleted')"
                         href="#"
                         class="list-group-item border-0"
@@ -115,6 +127,7 @@
                 </div>
 
                 <div v-show="!getInvoiceView">
+                    <payment-details v-show="getCurrentTab == 'payments'"></payment-details>
                     <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
                                     <invoice-creation-deleted v-show="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
                     <entries v-show="getCurrentTab == 'entries'"></entries>
@@ -150,6 +163,7 @@ import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 import ViewInvoice from "./Invoices/ViewInvoice.vue";
 import InvoiceCreation from "./Invoices/InvoiceCreation/InvoiceCreation.vue";
 import InvoiceCreationDeleted from "./Invoices/InvoiceCreation/InvoiceCreationDeleted.vue";
+import PaymentDetails from "../../../AccountantMainModule/InvoicesSchool/PaymentDetails.vue";
 
 import Entries from "./Invoices/Entries.vue";
 
@@ -164,6 +178,8 @@ export default {
         Entries,
         InvoiceCreation,
         InvoiceCreationDeleted,
+
+        PaymentDetails,
     },
 
     mounted() {
