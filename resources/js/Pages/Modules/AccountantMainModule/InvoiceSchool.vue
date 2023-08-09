@@ -5,7 +5,7 @@
           <!-- <div v-show="!getCurrentTabInvoices">
             <invoices></invoices>
           </div> -->
-          <div v-show="getCurrentTabInvoices">
+          <div>
             <schools v-show="!getInvoiceSchoolView"></schools>
             <invoices-school v-show="getInvoiceSchoolView"></invoices-school>
           </div>

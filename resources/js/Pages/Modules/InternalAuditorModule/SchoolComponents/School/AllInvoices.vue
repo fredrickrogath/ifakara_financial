@@ -4,6 +4,20 @@
             <div class="d-flex justify-content-end mail-list mt-2 mb-1">
                 <div class="d-flex justifi-content-between">
                     <a
+                        @click="setTab('payments')"
+                        href="#"
+                        class="list-group-item border-0"
+                        :class="[getCurrentTab == 'payments' ? 'text-warning' : '']"
+                    >
+                        <i
+                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                        ></i
+                        >Student Payments
+                    </a>
+
+                    <span class="list-group-item border-0 h-100"> | </span>
+                    
+                    <a
                         @click="setTab('invoices')"
                         href="#"
                         class="list-group-item border-0"
@@ -15,17 +29,6 @@
                         >Invoices
                     </a>
 
-                    <a
-                        @click="setTab('payments')"
-                        href="#"
-                        class="list-group-item border-0"
-                        :class="[getCurrentTab == 'payments' ? 'text-warning' : '']"
-                    >
-                        <i
-                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
-                        ></i
-                        >Student Payments
-                    </a>
 
                     <a
                         @click="setTab('invoicesDeleted')"

@@ -212,7 +212,7 @@ export default {
 
     mounted() {
         this.showLoader = true;
-        this.getStudents();
+        // this.getStudents();
 
         // Receiving broadicasting
         // window.Echo.channel("Student").listen(
