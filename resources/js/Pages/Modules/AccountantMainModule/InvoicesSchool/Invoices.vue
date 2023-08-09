@@ -33,6 +33,29 @@
 
                             <div class="mail-list">
                                 <span class="text-center pl-3 mx-auto"
+                                    >From Leger Entry</span
+                                >
+
+                                <a
+                                    @click="setTab('payments')"
+                                    href="#"
+                                    class="list-group-item border-0 mt-1 font-semibold"
+                                    :class="[
+                                        getCurrentTab == 'payments'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >Student Payments
+                                </a>
+                            </div>
+
+                            <hr class="bg-gray-100 mb-1 mt-0" />
+
+                            <div class="mail-list">
+                                <span class="text-center pl-3 mx-auto"
                                     >From Invoice Creation</span
                                 >
 
@@ -185,6 +208,9 @@
                                     <entries
                                     v-show="getCurrentTab == 'entries'"
                                 ></entries>
+                                    <payment-details
+                                    v-show="getCurrentTab == 'payments'"
+                                ></payment-details>
                                 <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
                                     <invoice-creation-deleted v-show="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
                                 <requisitions
@@ -231,6 +257,8 @@ import InvoiceCreation from "./InvoiceCreation/InvoiceCreation.vue";
 import InvoiceCreationView from "./InvoiceCreation/InvoiceCreationView.vue";
 import InvoiceCreationDeleted from "./InvoiceCreation/InvoiceCreationDeleted.vue";
 
+import PaymentDetails from "./PaymentDetails.vue";
+
 import Entries from "./Entries.vue";
 
 // import Select2 from "v-select2-component";
@@ -246,6 +274,8 @@ export default {
         InvoiceCreation,
         InvoiceCreationView,
         InvoiceCreationDeleted,
+
+        PaymentDetails,
 
         Entries,
 
