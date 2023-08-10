@@ -1,6 +1,5 @@
 <template>
     <div data-app>
-
         <div class="row bg-white">
             <!-- Right Sidebar -->
             <div class="col-12">
@@ -164,147 +163,161 @@
                                     class="list-group-item border-0 d-flex justify-content-between align-items-center"
                                 >
                                     <button
-                                    v-show="getSchoolView"
+                                        v-show="getSchoolView"
                                         @click="setSchoolView"
                                         class="btn btn-secondary text-white btn-sm waves-effect waves-light ml-0 pl-0"
                                     >
                                         Back
                                     </button>
 
-                                    <div class="ml-3 font-15 text-gray-600">My Office</div>
+                                    <div class="ml-3 font-15 text-gray-600">
+                                        My Office
+                                    </div>
                                 </div>
 
                                 <hr class="bg-gray-200 mb-1 mt-0 mx-2" />
 
                                 <div v-show="getSchoolView">
                                     <a
-                                    href="#"
-                                    class="list-group-item border-0"
-                                    @click="setSchoolDetailTab('allStaffs')"
-                                    :class="[
-                                        getCurrentSchoolDetailTab == 'allStaffs'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-account-group font-20 align-middle me-2"
-                                    ></i
-                                    >Staffs</a
-                                >
+                                        href="#"
+                                        class="list-group-item border-0"
+                                        @click="setSchoolDetailTab('allStaffs')"
+                                        :class="[
+                                            getCurrentSchoolDetailTab ==
+                                            'allStaffs'
+                                                ? 'text-warning'
+                                                : '',
+                                        ]"
+                                        ><i
+                                            class="mdi mdi-account-group font-20 align-middle me-2"
+                                        ></i
+                                        >Staffs</a
+                                    >
 
-                                <a
-                                    href="#"
-                                    class="list-group-item border-0"
-                                    @click="setSchoolDetailTab('allStudents')"
-                                    :class="[
-                                        getCurrentSchoolDetailTab == 'allStudents'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-school font-20 align-middle me-2 pb-1"
-                                    ></i
-                                    >Students
-                                </a>
+                                    <a
+                                        href="#"
+                                        class="list-group-item border-0"
+                                        @click="
+                                            setSchoolDetailTab('allStudents')
+                                        "
+                                        :class="[
+                                            getCurrentSchoolDetailTab ==
+                                            'allStudents'
+                                                ? 'text-warning'
+                                                : '',
+                                        ]"
+                                        ><i
+                                            class="mdi mdi-school font-20 align-middle me-2 pb-1"
+                                        ></i
+                                        >Students
+                                    </a>
 
-                                <a
-                                    href="#"
-                                    class="list-group-item border-0"
-                                    @click="setSchoolDetailTab('tools')"
-                                    :class="[
-                                        getCurrentSchoolDetailTab == 'tools'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-tools font-20 align-middle me-2 pb-1"
-                                    ></i
-                                    >Tool Details
-                                </a>
+                                    <a
+                                        href="#"
+                                        class="list-group-item border-0"
+                                        @click="setSchoolDetailTab('tools')"
+                                        :class="[
+                                            getCurrentSchoolDetailTab == 'tools'
+                                                ? 'text-warning'
+                                                : '',
+                                        ]"
+                                        ><i
+                                            class="mdi mdi-tools font-20 align-middle me-2 pb-1"
+                                        ></i
+                                        >Tool Details
+                                    </a>
 
-                                <a
-                                    href="#"
-                                    class="list-group-item border-0"
-                                    @click="setSchoolDetailTab('invoices')"
-                                    :class="[
-                                        getCurrentSchoolDetailTab == 'invoices'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-cash-multiple font-20 align-middle me-2 pb-1"
-                                    ></i
-                                    >Invoice Details
-                                </a>
+                                    <a
+                                        href="#"
+                                        class="list-group-item border-0"
+                                        @click="setSchoolDetailTab('invoices')"
+                                        :class="[
+                                            getCurrentSchoolDetailTab ==
+                                            'invoices'
+                                                ? 'text-warning'
+                                                : '',
+                                        ]"
+                                        ><i
+                                            class="mdi mdi-cash-multiple font-20 align-middle me-2 pb-1"
+                                        ></i
+                                        >Invoice Details
+                                    </a>
                                 </div>
 
-                                <div
-                                v-show="!getSchoolView"
-                                >
+                                <div v-show="!getSchoolView">
                                     <a
-                                    href="#"
-                                    class="list-group-item border-0 pt-0"
-                                    @click="setTab('allSchools')"
-                                    :class="[
-                                        getCurrentTab == 'allSchools'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-school font-20 align-middle me-2 pb-1"
-                                    ></i
-                                    >schools</a
-                                >
+                                        href="#"
+                                        class="list-group-item border-0 pt-0"
+                                        @click="setTab('allSchools')"
+                                        :class="[
+                                            getCurrentTab == 'allSchools'
+                                                ? 'text-warning'
+                                                : '',
+                                        ]"
+                                        ><i
+                                            class="mdi mdi-school font-20 align-middle me-2 pb-1"
+                                        ></i
+                                        >schools</a
+                                    >
 
-                                <a
-                                    href="#"
-                                    class="list-group-item border-0 pt-1"
-                                    @click="setTab('diocese'); setTab('diocese-invoices')"
-                                    :class="[
-                                        getCurrentTab == 'diocese' || getCurrentTab == 'diocese-invoices'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-church font-20 align-middle me-2 pb-1"
-                                    ></i
-                                    >Diocese
-                                </a>
-                                
-                                
-                                <a
-                                    href="#"
-                                    class="list-group-item border-0 pt-1"
-                                    @click="setTab('permissions')"
-                                    :class="[
-                                        getCurrentTab == 'permissions'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-hospital-box font-20 align-middle me-2 pb-1"
-                                    ></i
-                                    >Health Institutes</a
-                                >
+                                    <a
+                                        href="#"
+                                        class="list-group-item border-0 pt-1"
+                                        @click="
+                                            setTab('diocese');
+                                            setTab('diocese-invoices');
+                                        "
+                                        :class="[
+                                            getCurrentTab == 'diocese' ||
+                                            getCurrentTab == 'diocese-invoices'
+                                                ? 'text-warning'
+                                                : '',
+                                        ]"
+                                        ><i
+                                            class="mdi mdi-church font-20 align-middle me-2 pb-1"
+                                        ></i
+                                        >Diocese
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        class="list-group-item border-0 pt-1"
+                                        @click="setTab('permissions')"
+                                        :class="[
+                                            getCurrentTab == 'permissions'
+                                                ? 'text-warning'
+                                                : '',
+                                        ]"
+                                        ><i
+                                            class="mdi mdi-hospital-box font-20 align-middle me-2 pb-1"
+                                        ></i
+                                        >Health Institutes</a
+                                    >
                                 </div>
                             </div>
 
                             <hr class="bg-gray-200 mx-1 mb-1 mt-2" />
 
-                            <div v-show="getCurrentTab == 'diocese' || getCurrentTab == 'diocese-invoices'">
+                            <div
+                                v-show="
+                                    getCurrentTab == 'diocese' ||
+                                    getCurrentTab == 'diocese-invoices'
+                                "
+                            >
                                 <a
                                     href="#"
                                     class="list-group-item border-0 pt-1"
                                     @click="setTab('diocese-invoices')"
                                     :class="[
-                                        getCurrentTab == 'diocese-invoices' || getCurrentTab == 'diocese'
+                                        getCurrentTab == 'diocese-invoices' ||
+                                        getCurrentTab == 'diocese'
                                             ? 'text-warning'
                                             : '',
                                     ]"
                                     ><i
-                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
-                        ></i
-                        >Invoices
+                                        class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                                    ></i
+                                    >Invoices
                                 </a>
                             </div>
 
@@ -348,28 +361,49 @@
 
                                 <div v-show="getSchoolView && !getAddStudent">
                                     <open-school></open-school>
-                                    
                                 </div>
                                 <div
                                     v-show="!getAddStudent && !getSchoolView"
                                     key="2"
                                 >
-                                <all-invoices
-                                        v-show="getCurrentTab == 'diocese-invoices' && !getAddSchool"
+                                    <all-invoices
+                                        v-show="
+                                            getCurrentTab ==
+                                                'diocese-invoices' &&
+                                            !getAddSchool
+                                        "
                                     ></all-invoices>
 
                                     <all-schools
-                                        v-show="getCurrentTab == 'allSchools' && !getAddSchool"
+                                        v-show="
+                                            getCurrentTab == 'allSchools' &&
+                                            !getAddSchool
+                                        "
                                     ></all-schools>
-                                    <add-school v-show="getCurrentTab == 'allSchools' && getAddSchool"></add-school>
+                                    <add-school
+                                        v-show="
+                                            getCurrentTab == 'allSchools' &&
+                                            getAddSchool
+                                        "
+                                    ></add-school>
                                     <all-staffs
                                         v-show="getCurrentTab == 'allStaffs'"
                                     ></all-staffs>
                                     <all-students
                                         v-show="getCurrentTab == 'allStudents'"
                                     ></all-students>
-                                    <permissions v-show="getCurrentTab == 'permissions' && !getCommentView"></permissions>
-                                    <Comments v-show="getCommentView && getCurrentTab == 'permissions'"></Comments>
+                                    <permissions
+                                        v-show="
+                                            getCurrentTab == 'permissions' &&
+                                            !getCommentView
+                                        "
+                                    ></permissions>
+                                    <Comments
+                                        v-show="
+                                            getCommentView &&
+                                            getCurrentTab == 'permissions'
+                                        "
+                                    ></Comments>
                                 </div>
                                 <!-- <requisitions
                                     v-if="getCurrentTab == 'home'"
@@ -496,11 +530,15 @@ export default {
         },
 
         getCurrentSchoolDetailTab() {
-            return this.$store.getters["InternalAuditorSchoolDetailsModule/getTab"];
+            return this.$store.getters[
+                "InternalAuditorSchoolDetailsModule/getTab"
+            ];
         },
 
         getSchoolView() {
-            return this.$store.getters["InternalAuditorSchoolModule/getSchoolView"];
+            return this.$store.getters[
+                "InternalAuditorSchoolModule/getSchoolView"
+            ];
         },
 
         legerEntriesListener() {
@@ -512,15 +550,21 @@ export default {
         },
 
         getAddStudent() {
-            return this.$store.getters["InternalAuditorSchoolModule/getAddStudent"];
+            return this.$store.getters[
+                "InternalAuditorSchoolModule/getAddStudent"
+            ];
         },
 
         getAddSchool() {
-            return this.$store.getters["InternalAuditorSchoolDetailsModule/getAddSchool"];
+            return this.$store.getters[
+                "InternalAuditorSchoolDetailsModule/getAddSchool"
+            ];
         },
 
         getCommentView() {
-            return this.$store.getters["InternalAuditorSchoolModule/getCommentView"];
+            return this.$store.getters[
+                "InternalAuditorSchoolModule/getCommentView"
+            ];
         },
 
         getMainUrl() {
@@ -559,7 +603,10 @@ export default {
         },
 
         setSchoolDetailTab(tab) {
-            this.$store.dispatch("InternalAuditorSchoolDetailsModule/setTab", tab);
+            this.$store.dispatch(
+                "InternalAuditorSchoolDetailsModule/setTab",
+                tab
+            );
         },
 
         setAddStudent() {
@@ -567,7 +614,10 @@ export default {
         },
 
         setSchoolView() {
-            this.$store.dispatch("InternalAuditorSchoolModule/setSchoolView", null);
+            this.$store.dispatch(
+                "InternalAuditorSchoolModule/setSchoolView",
+                null
+            );
         },
 
         // getSpecificLegerEntries() {
@@ -585,10 +635,15 @@ export default {
         // },
 
         getSchoolPermissionsNotifications() {
-            axios.get(this.getMainUrl + "secretary/getSchoolPermissionsNotifications").then((response) => {
-                this.permissionCount = response.data.data;
-                // console.log(response.data.data);
-            });
+            axios
+                .get(
+                    this.getMainUrl +
+                        "secretary/getSchoolPermissionsNotifications"
+                )
+                .then((response) => {
+                    this.permissionCount = response.data.data;
+                    // console.log(response.data.data);
+                });
         },
 
         // async submitForm() {
@@ -665,14 +720,24 @@ export default {
 }
 
 @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-4px) rotate(-5deg); }
-    50% { transform: translateX(4px) rotate(5deg); }
-    75% { transform: translateX(-4px) rotate(-5deg); }
-    100% { transform: translateX(0); }
-  }
-  
-  .shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-4px) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(4px) rotate(5deg);
+    }
+    75% {
+        transform: translateX(-4px) rotate(-5deg);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.shake {
     animation: shake 0.5s infinite;
-  }
+}
 </style>

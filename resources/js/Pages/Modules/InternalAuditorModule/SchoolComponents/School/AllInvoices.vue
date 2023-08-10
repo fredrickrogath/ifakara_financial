@@ -1,6 +1,6 @@
 <template>
     <div data-app>
-        <div class="h-screen col-12 pt-0 mt-0">
+        <div class="h-screen p-0 col-12 pt-0 mt-0">
             <div class="d-flex justify-content-end mail-list mt-2 mb-1">
                 <div class="d-flex justifi-content-between">
                     <a
@@ -16,7 +16,7 @@
                     </a>
 
                     <span class="list-group-item border-0 h-100"> | </span>
-                    
+
                     <a
                         @click="setTab('invoices')"
                         href="#"

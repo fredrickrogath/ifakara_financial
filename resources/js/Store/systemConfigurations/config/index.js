@@ -8,7 +8,7 @@ export default {
 
     state() {
         return {
-            mainUrl: 'http://127.0.0.1:8000/api/',
+            mainUrl: 'http://34.31.59.59/api/',
         };
     },
     mutations: mutations,
