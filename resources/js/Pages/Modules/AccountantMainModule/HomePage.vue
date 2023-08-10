@@ -16,7 +16,9 @@
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
-                                            {{ students ? students : 0 }}
+                                            {{
+                                                studentCount ? studentCount : 0
+                                            }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
@@ -45,7 +47,9 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">{{ paidStudents ? paidStudents : 0}}</span>
+                                        <span data-plugin="counterup">{{
+                                            paidStudents ? paidStudents : 0
+                                        }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Paid Fees
@@ -72,7 +76,11 @@
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">{{ unpaidStudents ? unpaidStudents : 0 }}</span>
+                                        <span data-plugin="counterup">{{
+                                            studentCount - paidStudents
+                                                ? studentCount - paidStudents
+                                                : 0
+                                        }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Unpaid Fees
@@ -101,16 +109,12 @@
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
                                             {{
-                                                totalUploads ? totalUploads : 0
+                                                countMatches ? countMatches : 0
                                             }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        {{
-                                            uploadTitles
-                                                ? uploadTitles
-                                                : "Please wait"
-                                        }}
+                                        Full Paid Fees
                                     </p>
                                 </div>
                             </div>
@@ -470,6 +474,11 @@ export default {
     data() {
         return {
             echo: null,
+
+            studentCount: null,
+
+            countMatches: null,
+
             students: null,
             paidStudents: null,
             unpaidStudents: null,
@@ -490,7 +499,9 @@ export default {
         };
     },
     computed: {
-        //Add computed properties
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
     watch: {
         //Add watchers...
@@ -499,6 +510,9 @@ export default {
         //Add methods...
         async initialize() {
             // this.headDashboardGetStudents();
+            this.studentsCount();
+            this.paidStudentsFn();
+            this.fullPaidStudents();
             this.headDashboardGetInvoices();
             // this.headDashboardGetUploads();
             // this.headDashboardGetTools();
@@ -512,37 +526,105 @@ export default {
             ];
         },
 
-        async headDashboardGetStudents() {
-            axios
-                .get("/accountant/headDashboardGetStudents")
-                .then((response) => {
-                    if (response.data.data != null) {
-                        this.students = response.data.data.totalStudents;
-                        // Filter the students with entries.length > 0
-                        const studentsWithEntries =
-                            response.data.data.paidStudents.filter(
-                                (student) => student.entries.length > 0
-                            );
-                        // Get the count of students with entries
-                        const count = studentsWithEntries.length;
-                        this.unpaidStudents = response.data.data.totalStudents - count
-                        this.paidStudents = count
-                        this.registeredStudents = [
-                            ["Language", "Students"],
-                            // ["Total Students", response.data.data.totalStudents],
-                            ["Paid Students", this.paidStudents],
-                            [
-                                "Unpaid Students",
-                                this.unpaidStudents,
-                            ],
-                        ];
-
-                        this.showLoader = false;
-                    }
-
-                    // console.log(response.data.data);
-                });
+        async studentsCount() {
+            axios.get(this.getMainUrl + "studentsCount").then((response) => {
+                this.studentCount = response.data;
+            });
         },
+
+        async paidStudentsFn() {
+            axios.get(this.getMainUrl + "paidStudents").then((response) => {
+                this.paidStudents = response.data;
+
+                this.registeredStudents = [
+                    ["Language", "Students"],
+                    // ["Total Students", response.data.data.totalStudents],
+                    ["Paid Students", this.paidStudents],
+                    ["Unpaid Students", this.studentCount - this.paidStudents],
+                    ["Full Paid Students", this.countMatches],
+                    [
+                        "Incomplete Paid Students",
+                        this.paidStudents - this.countMatches,
+                    ],
+                ];
+            });
+        },
+
+        async fullPaidStudents() {
+            try {
+                const response = await axios.get(
+                    this.getMainUrl + "fullPaidStudents"
+                );
+                const paidStudents = response.data;
+
+                let countMatches = 0;
+
+                // Loop through each student and calculate the sum of entries levels
+                paidStudents.forEach((student) => {
+                    const entrySum = student.entries.reduce(
+                        (sum, entry) => {
+                            return {
+                                level_1: sum.level_1 + entry.level_1,
+                                level_2: sum.level_2 + entry.level_2,
+                                level_3: sum.level_3 + entry.level_3,
+                            };
+                        },
+                        { level_1: 0, level_2: 0, level_3: 0 }
+                    );
+
+                    // Compare with chart_of_account levels
+                    const chartOfAccount = student.entries[0].chart_of_account;
+                    if (
+                        entrySum.level_1 >= chartOfAccount.level1 &&
+                        entrySum.level_2 >= chartOfAccount.level2 &&
+                        entrySum.level_3 >= chartOfAccount.level3
+                    ) {
+                        this.countMatches++;
+                    }
+                });
+
+                // console.log(`Number of entries sums that match chart of account or greater: ${this.countMatches}`);
+            } catch (error) {
+                // console.error('Error fetching full paid students:', error);
+            }
+        },
+
+        // async fullPaidStudents() {
+        //     axios.get(this.getMainUrl + "fullPaidStudents").then((response) => {
+        //             // this.paidStudents = response.data
+        //             console.log(response.data)
+        //     });
+        // },
+
+        // async headDashboardGetStudents() {
+        //     axios
+        //         .get("/accountant/headDashboardGetStudents")
+        //         .then((response) => {
+        //             if (response.data.data != null) {
+        //                 this.students = response.data.data.totalStudents;
+        //                 // Filter the students with entries.length > 0
+        //                 const studentsWithEntries =
+        //                     response.data.data.paidStudents.filter(
+        //                         (student) => student.entries.length > 0
+        //                     );
+        //                 // Get the count of students with entries
+        //                 const count = studentsWithEntries.length;
+        //                 this.unpaidStudents =
+        //                     response.data.data.totalStudents - count;
+        //                 this.paidStudents = count;
+        //                 this.registeredStudents = [
+        //                     ["Language", "Students"],
+        //                     // ["Total Students", response.data.data.totalStudents],
+        //                     ["Paid Students", this.paidStudents],
+        //                     ["Unpaid Students", this.unpaidStudents],
+        //                 ];
+
+        //                 this.showLoader = false;
+        //             }
+
+        //             console.log(response.data.data);
+        //         });
+        // },
 
         async headDashboardGetInvoices() {
             axios

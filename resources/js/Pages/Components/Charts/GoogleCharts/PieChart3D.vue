@@ -11,7 +11,7 @@
 
     <div>
         <div class="chart-description">
-            <h2>New Tools vs Total Tools</h2>
+            <h4>New Tools vs Total Tools</h4>
             <p>
                 This chart shows the percentage of new tools compared to the
                 total number of tools. The pie chart is divided into two
