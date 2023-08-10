@@ -538,7 +538,6 @@ export default {
 
                 this.registeredStudents = [
                     ["Language", "Students"],
-                    // ["Total Students", response.data.data.totalStudents],
                     ["Paid Students", this.paidStudents],
                     ["Unpaid Students", this.studentCount - this.paidStudents],
                     ["Full Paid Students", this.countMatches],
@@ -556,8 +555,6 @@ export default {
                     this.getMainUrl + "fullPaidStudents"
                 );
                 const paidStudents = response.data;
-
-                let countMatches = 0;
 
                 // Loop through each student and calculate the sum of entries levels
                 paidStudents.forEach((student) => {
