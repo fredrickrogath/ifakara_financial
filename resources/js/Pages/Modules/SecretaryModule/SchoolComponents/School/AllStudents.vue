@@ -308,9 +308,9 @@ export default {
             if (newVal !== null) {
                 this.getStudents();
             }
-            console.log(
-                `The message has changed from "${oldVal}" to "${newVal}"`
-            );
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
         },
     },
 

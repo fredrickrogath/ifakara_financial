@@ -341,7 +341,22 @@
                                     ><i
                                         class="mdi mdi-school font-19 align-middle me-2 pb-1"
                                     ></i
-                                    >Invoices
+                                    >School Invoices
+                                </a>
+
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    @click="setSchoolDetailTab('allReport')"
+                                    :class="[
+                                        getCurrentSchoolDetailTab == 'allReport'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                    ></i
+                                    >School Report
                                 </a>
                                 </div>
 

@@ -169,6 +169,21 @@
                                     ></i
                                     >Deleted Requisitions</a
                                 >
+
+                                <a
+                                    @click="setTab('report')"
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    :class="[
+                                        getCurrentTab == 'report'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-poll font-18 align-middle me-2 pb-1"
+                                    ></i
+                                    >School Report</a
+                                >
                             </div>
 
                             <!-- <div class="mt-2 ml-3">
@@ -228,6 +243,9 @@
                                 <rejected-requisitions
                                     v-show="getCurrentTab == 'rejected'"
                                 ></rejected-requisitions>
+                                <report
+                                    v-show="getCurrentTab == 'report'"
+                                ></report>
                                 </div>
                                 <!-- </transition> -->
                             </div>
@@ -261,6 +279,8 @@ import PaymentDetails from "./PaymentDetails.vue";
 
 import Entries from "./Entries.vue";
 
+import Report from "../../SecretaryModule/SchoolComponents/School/Report.vue";
+
 // import Select2 from "v-select2-component";
 
 export default {
@@ -278,6 +298,8 @@ export default {
         PaymentDetails,
 
         Entries,
+
+        Report,
 
         //  ,
     },

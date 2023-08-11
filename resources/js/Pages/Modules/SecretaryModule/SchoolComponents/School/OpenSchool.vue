@@ -16,6 +16,10 @@
         <all-invoices
             v-show="getCurrentSchoolDetailTab == 'allInvoices'"
         ></all-invoices>
+
+        <report
+            v-show="getCurrentSchoolDetailTab == 'allReport'"
+        ></report>
         <!-- </v-col> -->
     </div>
     <!-- </v-row>
@@ -32,6 +36,8 @@ import AllSchoolStudents from "./AllStudents.vue";
 import AddStaff from ".././School/School/AddStaff.vue";
 import AddStudent from ".././School/School/AddStudent.vue";
 
+import Report from "./../School/Report.vue";
+
 import AllInvoices from "../../../InternalAuditorModule/SchoolComponents/School/AllInvoices.vue"
 export default {
     components: {
@@ -42,6 +48,8 @@ export default {
 
         AddStaff,
         AddStudent,
+
+        Report,
 
         AllInvoices,
     },

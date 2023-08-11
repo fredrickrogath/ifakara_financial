@@ -284,7 +284,7 @@
                                 class="flex items-center"
                             >
                                 <v-icon size="20">mdi-school</v-icon>
-                                <span>Schools</span>
+                                <span>My Office</span>
                             </my-custom-link>
                             <span class="me-4">
                                 <i
