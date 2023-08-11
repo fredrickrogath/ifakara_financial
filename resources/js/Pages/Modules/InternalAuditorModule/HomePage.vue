@@ -1,20 +1,24 @@
 <template>
-    <div class="mb-5">
-        <div class="row">
-            <div class="col-md-3 col-xl-3">
-                <div class="card bg-pattern  shadow">
+    <div class="-my-3 pt-0 bg-white h-screen">
+        <div class="d-flex">
+            <div class="flex-grow-1">
+                <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm  rounded">
-                                    <i class=" fas fa-users font-10 text-primary" style="font-size:40px;"></i>
+                                <div class="avatar-sm bg-blue rounded">
+                                    <i
+                                        class="fe-aperture avatar-title font-22 text-white"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
                                         <span data-plugin="counterup">
-                                            {{ students ? students : 'please wait ...' }}
+                                            {{
+                                                studentCount ? studentCount : 0
+                                            }}
                                         </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
@@ -29,19 +33,23 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm rounded">
-                                    <i class="fas fa-money-check avatar-title font-22 text-danger" style="font-size:40px"></i>
+                                <div class="avatar-sm bg-success rounded">
+                                    <i
+                                        class="fe-shopping-cart avatar-title font-22 text-white"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">12</span>
+                                        <span data-plugin="counterup">{{
+                                            paidStudents ? paidStudents : 0
+                                        }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Paid Fees
@@ -54,19 +62,25 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
-                                <div class="avatar-sm rounded">
-                                    <i class="fas fa-minus-square  avatar-title  text-warning" style="font-size:40px"></i>
+                                <div class="avatar-sm bg-primary rounded">
+                                    <i
+                                        class="fe-bar-chart-2 avatar-title font-22 text-white"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup">87</span>
+                                        <span data-plugin="counterup">{{
+                                            studentCount - paidStudents
+                                                ? studentCount - paidStudents
+                                                : 0
+                                        }}</span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
                                         Unpaid Fees
@@ -79,22 +93,28 @@
             </div>
             <!-- end col -->
 
-            <div class="col-md-3 col-xl-3 px-0">
+            <div class="my-0 pt-0 flex-grow-1 pl-1">
                 <div class="card bg-pattern py-0 my-0">
                     <div class="card-body shadow">
                         <div class="row">
                             <div class="col-6">
                                 <div class="avatar-sm bg-info rounded">
-                                    <i class="fe-cpu avatar-title font-22 text-white"></i>
+                                    <i
+                                        class="fe-cpu avatar-title font-22 text-white"
+                                    ></i>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-end">
                                     <h4 class="my-1">
-                                        <span data-plugin="counterup"> {{ totalTool ? totalTool : 'please wait ...'  }} </span>
+                                        <span data-plugin="counterup">
+                                            {{
+                                                countMatches ? countMatches : 0
+                                            }}
+                                        </span>
                                     </h4>
                                     <p class="text-muted mb-1 text-truncate">
-                                        Tools
+                                        Full Paid Fees
                                     </p>
                                 </div>
                             </div>
@@ -104,10 +124,13 @@
             </div>
             <!-- end col -->
         </div>
-        <div class="row">
-            <div class="col-xl-6 col-md-6">
+
+        <!-- end row -->
+
+        <div class="d-flex pt-1">
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
-                    <div class="card-body pb-2">
+                    <div class="card-body">
                         <div class="float-end d-none d-md-inline-block">
                             <!-- <div class="btn-group mb-2">
                                 <button
@@ -168,12 +191,14 @@
                         <v-card flat>
                             <v-tabs color="deep-purple accent-4" right>
                                 <v-tab>Students</v-tab>
-                               
+                                <v-tab>Cash Flow</v-tab>
 
                                 <v-tab-item key="1">
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="registeredStudents"
+                                            :head="headDonghurt"
+                                            :content="contentDonghurt"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -182,193 +207,481 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="finances"
+                                            :head="headDonghurt"
+                                            :content="contentDonghurt"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
                             </v-tabs>
                         </v-card>
-                        <div class="">
-                        </div>
+                        <!-- <div class="">
+                            <google-donut></google-donut>
+                        </div> -->
                     </div>
                 </div>
                 <!-- end card -->
             </div>
             <!-- end col-->
 
-            <div class="col-xl-6 col-md-6">
+            <!-- <div class="col-xl-6 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title mb-1">School Staffs</h4>
+                        <h4 class="header-title mb-1">
+                            Recently Finance Reports
+                        </h4>
 
-                         <div class="table-responsive">
+                        <div class="table-responsive">
                             <table
                                 class="table table-centered table-nowrap table-hover mb-0"
                             >
                                 <thead>
                                     <tr>
                                         <th class="border-top-0">Identity</th>
-                                        <th class="border-top-0">Name</th>
                                         <th class="border-top-0">
                                             Departiment
                                         </th>
-                                        <th class="border-top-0">Email</th>
-                                        <th class="border-top-0">
-                                            Registered On
-                                        </th>
-                                        <!-- <th class="border-top-0">Download</th> -->
+                                        <th class="border-top-0">Title</th>
+                                        <th class="border-top-0">Published</th>
+                                        <th class="border-top-0">View</th>
+                                        <th class="border-top-0">Download</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="staff in staffs" :key="staff.id">
+                                    <tr>
                                         <td>
                                             <img
-                                                class="h-8 w-8 rounded-full object-cover"
-                                                :src="
-                                                    $page.props.user
-                                                        .profile_photo_url
-                                                "
-                                                :alt="$page.props.user.name"
-                                            />
-                                            <!-- <img
                                                 src="assets/images/users/user-2.jpg"
                                                 alt="user-pic"
                                                 class="rounded-circle avatar-sm bx-shadow-lg"
-                                            /> -->
+                                            />
                                         </td>
                                         <td>
-                                            <span class="text-center">
-                                                {{ staff.name }}
-                                            </span>
+                                            <span class="text-center"
+                                                >Finance</span
+                                            >
                                         </td>
-                                        <td>{{ department(staff.role) }}</td>
-                                        <td>{{ staff.email }}</td>
-                                        <td>
-                                            {{
-                                                formattedDate(staff.created_at)
-                                            }}
-                                        </td>
-                                        <!-- <td class="text-center">
+                                        <td>Finacial report of ...</td>
+                                        <td>27.03.2018</td>
+                                        <td class="text-center">
                                             <v-icon size="20">mdi-eye</v-icon>
                                         </td>
                                         <td class="text-center">
                                             <v-icon size="22"
                                                 >mdi-download</v-icon
                                             >
-                                        </td> -->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-3.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Procurement</span
+                                            >
+                                        </td>
+
+                                        <td>Finacial report of ...</td>
+
+                                        <td>28.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-1.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Procurement</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>28.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-4.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Finance</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>29.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-5.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Account</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>31.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-3.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Finance</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>28.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img
+                                                src="assets/images/users/user-1.jpg"
+                                                alt="user-pic"
+                                                class="rounded-circle avatar-sm bx-shadow-lg"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span class="text-center"
+                                                >Procurement</span
+                                            >
+                                        </td>
+                                        <td>Finacial report of ...</td>
+                                        <td>28.03.2018</td>
+                                        <td class="text-center">
+                                            <v-icon size="20">mdi-eye</v-icon>
+                                        </td>
+                                        <td class="text-center">
+                                            <v-icon size="22"
+                                                >mdi-download</v-icon
+                                            >
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> -->
+            <!-- end col-->
 
-        <div class="row">
-            <div class="col-md-12 col-lg-12">
+            <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title mb-1">Reports</h4>
+                        <h4 class="header-title">Invoices Status</h4>
 
-                         <div class="table-responsive">
-                            <table
-                                class="table table-centered table-nowrap table-hover mb-0"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th class="border-top-0">Identity</th>
-                                        <th class="border-top-0">Name</th>
-                                        <th class="border-top-0">
-                                            Departiment
-                                        </th>
-                                        <th class="border-top-0">Email</th>
-                                        <th class="border-top-0">
-                                            Registered On
-                                        </th>
-                                        <!-- <th class="border-top-0">Download</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="staff in staffs" :key="staff.id">
-                                        <td>
-                                            <img
-                                                class="h-8 w-8 rounded-full object-cover"
-                                                :src="
-                                                    $page.props.user
-                                                        .profile_photo_url
-                                                "
-                                                :alt="$page.props.user.name"
-                                            />
-                                            <!-- <img
-                                                src="assets/images/users/user-2.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            /> -->
-                                        </td>
-                                        <td>
-                                            <span class="text-center">
-                                                {{ staff.name }}
-                                            </span>
-                                        </td>
-                                        <td>{{ department(staff.role) }}</td>
-                                        <td>{{ staff.email }}</td>
-                                        <td>
-                                            {{
-                                                formattedDate(staff.created_at)
-                                            }}
-                                        </td>
-                                        <!-- <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td> -->
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="">
+                            <google-bar
+                                :data="chartData"
+                                YText="Invoice Count"
+                                :head="head"
+                                :content="content"
+                            ></google-bar>
                         </div>
                     </div>
                 </div>
+                <!-- end card -->
             </div>
-         
         </div>
-        <!-- end row -->
-
     </div>
 </template>
 
 <script>
+import moment from "moment";
+import PieChart3D from "../.././Components/Charts/GoogleCharts/PieChart3D.vue";
+import GoogleDonut from "../.././Components/Charts/GoogleCharts/GoogleDonut.vue";
+import GoogleBar from "../.././Components/Charts/GoogleCharts/GoogleBar.vue";
+import GoogleGroupedBar from "../.././Components/Charts/GoogleCharts/GoogleGroupedBar.vue";
 export default {
+    components: {
+        PieChart3D,
+        GoogleDonut,
+        GoogleBar,
+        GoogleGroupedBar,
+    },
     mounted() {
-        let recaptchaScript = document.createElement("script");
-        recaptchaScript.setAttribute(
-            "src",
-            "assets/js/pages/ecommerce-dashboard.init.js"
-        );
-        document.head.appendChild(recaptchaScript);
+        this.initialize();
 
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                console.log(e);
+                // console.log(e);
             }
         );
     },
 
     data() {
-        return { echo: null };
+        return {
+            echo: null,
+
+            studentCount: null,
+
+            countMatches: null,
+
+            students: null,
+            paidStudents: null,
+            unpaidStudents: null,
+            registeredStudents: [],
+            totalUploads: null,
+            uploadTitles: "",
+            staffs: null,
+            tools: [],
+            finances: [],
+            invoices: null,
+            chartData: [],
+            headDonghurt: "3D New Tools vs Total Tools",
+            contentDonghurt:
+                "3D This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
+            head: "Bar New Tools vs Total Tools",
+            content:
+                "Bar This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
+        };
     },
     computed: {
-        //Add computed properties
+        getMainUrl() {
+            return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
+        },
     },
     watch: {
         //Add watchers...
     },
     methods: {
         //Add methods...
+        async initialize() {
+            // this.headDashboardGetStudents();
+            this.studentsCount();
+            this.paidStudentsFn();
+            this.fullPaidStudents();
+            this.headDashboardGetInvoices();
+            // this.headDashboardGetUploads();
+            // this.headDashboardGetTools();
+
+            this.finances = [
+                ["Language", "Finances"],
+                ["Incomes", 120000],
+                ["Expenses", 320000],
+                ["Liabilities", 6700000],
+                ["Assets", 700000],
+            ];
+        },
+
+        async studentsCount() {
+            axios.get(this.getMainUrl + "studentsCount").then((response) => {
+                this.studentCount = response.data;
+            });
+        },
+
+        async paidStudentsFn() {
+            axios.get(this.getMainUrl + "paidStudents").then((response) => {
+                this.paidStudents = response.data;
+
+                this.registeredStudents = [
+                    ["Language", "Students"],
+                    ["Paid Students", this.paidStudents],
+                    ["Unpaid Students", this.studentCount - this.paidStudents],
+                    ["Full Paid Students", this.countMatches],
+                    [
+                        "Incomplete Paid Students",
+                        this.paidStudents - this.countMatches,
+                    ],
+                ];
+            });
+        },
+
+        async fullPaidStudents() {
+            try {
+                const response = await axios.get(
+                    this.getMainUrl + "fullPaidStudents"
+                );
+                const paidStudents = response.data;
+
+                // Loop through each student and calculate the sum of entries levels
+                paidStudents.forEach((student) => {
+                    const entrySum = student.entries.reduce(
+                        (sum, entry) => {
+                            return {
+                                level_1: sum.level_1 + entry.level_1,
+                                level_2: sum.level_2 + entry.level_2,
+                                level_3: sum.level_3 + entry.level_3,
+                            };
+                        },
+                        { level_1: 0, level_2: 0, level_3: 0 }
+                    );
+
+                    // Compare with chart_of_account levels
+                    const chartOfAccount = student.entries[0].chart_of_account;
+                    if (
+                        entrySum.level_1 >= chartOfAccount.level1 &&
+                        entrySum.level_2 >= chartOfAccount.level2 &&
+                        entrySum.level_3 >= chartOfAccount.level3
+                    ) {
+                        this.countMatches++;
+                    }
+                });
+
+                // console.log(`Number of entries sums that match chart of account or greater: ${this.countMatches}`);
+            } catch (error) {
+                // console.error('Error fetching full paid students:', error);
+            }
+        },
+
+        // async fullPaidStudents() {
+        //     axios.get(this.getMainUrl + "fullPaidStudents").then((response) => {
+        //             // this.paidStudents = response.data
+        //             console.log(response.data)
+        //     });
+        // },
+
+        // async headDashboardGetStudents() {
+        //     axios
+        //         .get("/accountant/headDashboardGetStudents")
+        //         .then((response) => {
+        //             if (response.data.data != null) {
+        //                 this.students = response.data.data.totalStudents;
+        //                 // Filter the students with entries.length > 0
+        //                 const studentsWithEntries =
+        //                     response.data.data.paidStudents.filter(
+        //                         (student) => student.entries.length > 0
+        //                     );
+        //                 // Get the count of students with entries
+        //                 const count = studentsWithEntries.length;
+        //                 this.unpaidStudents =
+        //                     response.data.data.totalStudents - count;
+        //                 this.paidStudents = count;
+        //                 this.registeredStudents = [
+        //                     ["Language", "Students"],
+        //                     // ["Total Students", response.data.data.totalStudents],
+        //                     ["Paid Students", this.paidStudents],
+        //                     ["Unpaid Students", this.unpaidStudents],
+        //                 ];
+
+        //                 this.showLoader = false;
+        //             }
+
+        //             console.log(response.data.data);
+        //         });
+        // },
+
+        async headDashboardGetInvoices() {
+            axios
+                .get("/accountant/headDashboardGetInvoices")
+                .then((response) => {
+                    // this.classOptions = response.data.data;
+                    // this.showLoader = false;
+                    this.chartData = [
+                        ["Language", "INVOICES"],
+                        ["procurement", response.data.data.procurementCount],
+                        [
+                            "Accountant School",
+                            response.data.data.accountantSchoolCount,
+                        ],
+                        [
+                            "Accountant Financial",
+                            response.data.data.accountantFinancialCount,
+                        ],
+                    ];
+                    // console.log(response.data.data);
+                    // console.log(this.chartData);
+                });
+        },
+
+        async headDashboardGetUploads() {
+            axios
+                .get("/accountant/headDashboardGetUploads")
+                .then((response) => {
+                    this.totalUploads = response.data.data.totalUploads;
+                    this.uploadTitles = response.data.data.uploadTitles;
+                    // console.log(response.data.data)
+                });
+        },
+        // async headDashboardGetTools() {
+        //     axios.get("/accountant/headDashboardGetTools").then((response) => {
+        //         this.tools = [
+        //             ["Language", "Tools"],
+        //             ["Total tools", response.data.data.totalTools],
+        //             ["New Tools", response.data.data.newTools],
+        //             ["Broken Tools", response.data.data.brokenTools],
+        //         ];
+        //     });
+        // },
+
+        // department(role) {
+        //     if (role == 3) {
+        //         return "Academic";
+        //     } else if (role == 1) {
+        //         return "Head Master";
+        //     } else if (role == 5) {
+        //         return "Accountant";
+        //     } else if (role == 6) {
+        //         return "Procurement";
+        //     }
+        // },
+
+        // formattedDate(date) {
+        //     // return moment(date).format("MMMM Do YYYY");
+        //     return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+        // },
     },
 };
 </script>
