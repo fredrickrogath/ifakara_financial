@@ -4,7 +4,7 @@
 # /storage/*.key
 /vendor
 # .env
-/resources\js\Store\systemConfigurations\config\index.js
+# /resources\js\Store\systemConfigurations\config\index.js
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
