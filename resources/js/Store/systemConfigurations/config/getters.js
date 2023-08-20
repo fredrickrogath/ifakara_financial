@@ -1,6 +1,6 @@
 export default {
     getMainUrl(state) {
-        return state.mainUrl;
+        return 'http://34.31.59.59/api/';
     },
 
     // getAddStudent(state){
