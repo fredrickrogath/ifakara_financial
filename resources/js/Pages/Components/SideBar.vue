@@ -267,7 +267,7 @@
     
                         <li class="menu-title mt-2">Apps</li>
 
-                        <li>
+                        <!-- <li>
                             <my-custom-link
                                 :href="route('secretary.uploads')"
                                 :active="route().current('secretary.uploads')"
@@ -275,7 +275,7 @@
                                 <v-icon>mdi-file-document</v-icon>
                                 <span> Documents </span>
                             </my-custom-link>
-                        </li>
+                        </li> -->
     
                         <li class="flex items-center">
                             <my-custom-link
@@ -328,7 +328,7 @@
                         <li class="menu-title mt-2">Apps</li>
                         
 
-                        <li>
+                        <!-- <li>
                             <my-custom-link
                                 :href="route('bishop.secretary')"
                                 :active="route().current('bishop.secretary')"
@@ -336,9 +336,9 @@
                                 <v-icon size="22">mdi-account-tie</v-icon>
                                 <span> Secretary </span>
                             </my-custom-link>
-                        </li>
+                        </li> -->
 
-                        <li>
+                        <!-- <li>
                             <my-custom-link
                                 :href="route('bishop.accountant')"
                                 :active="route().current('bishop.accountant')"
@@ -346,9 +346,9 @@
                                 <v-icon size="22">mdi-account-tie</v-icon>
                                 <span> Accountant </span>
                             </my-custom-link>
-                        </li>
+                        </li> -->
 
-                        <li>
+                        <!-- <li>
                             <my-custom-link
                                 :href="route('bishop.procurement')"
                                 :active="route().current('bishop.procurement')"
@@ -356,8 +356,16 @@
                                 <v-icon size="22">mdi-account-tie</v-icon>
                                 <span> Procurement </span>
                             </my-custom-link>
-                        </li>
+                        </li> -->
     
+                        <li>
+                            <my-custom-link
+                            >
+                                <v-icon size="22">mdi-account-tie</v-icon>
+                                <span> Approves </span>
+                            </my-custom-link>
+                        </li>
+
                         <li>
                             <my-custom-link
                                 :href="route('bishop.internal_auditor')"

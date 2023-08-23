@@ -508,7 +508,8 @@ export default {
     },
     methods: {
         //Add methods...
-        async initialize() {console.log(this.getMainUrl + "paidStudents")
+        async initialize() {
+            // console.log(this.getMainUrl + "paidStudents")
             // this.headDashboardGetStudents();
             this.studentsCount();
             this.paidStudentsFn();

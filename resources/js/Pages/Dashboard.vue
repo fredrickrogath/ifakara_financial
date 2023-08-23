@@ -34,16 +34,16 @@
                         <home-page
                             v-if="route().current('bishop.dashboard')"
                         ></home-page>
-                        <secretary
+                        <!-- <secretary
                             v-if="route().current('bishop.secretary')"
-                        ></secretary>
+                        ></secretary> -->
                         <!-- <documents v-if="route().current('bishop.documents')"></documents> -->
-                        <accountant
+                        <!-- <accountant
                             v-if="route().current('bishop.accountant')"
-                        ></accountant>
-                        <procurement
+                        ></accountant> -->
+                        <!-- <procurement
                             v-if="route().current('bishop.procurement')"
-                        ></procurement>
+                        ></procurement> -->
                         <internal-auditor
                             v-if="route().current('bishop.internal_auditor')"
                         ></internal-auditor>
@@ -200,10 +200,10 @@ import TopBar from "./Components/TopBar.vue";
 
 import HomePage from "./Modules/BishopModule/HomePage.vue";
 // import Documents from "./Modules/BishopModule/Documents.vue";
-import InternalAuditor from "./Modules/BishopModule/InternalAuditor.vue";
-import Accountant from "./Modules/BishopModule/Accountant.vue";
-import Secretary from "./Modules/BishopModule/SecretaryOffice.vue";
-import Procurement from "./Modules/BishopModule/Procurement.vue";
+import InternalAuditor from "./Modules/InternalAuditorModule/Audit.vue";
+// import Accountant from "./Modules/AccountantMainModule/Invoices.vue";
+// import Secretary from "./Modules/BishopModule/SecretaryOffice.vue";
+// import Procurement from "./Modules/ProcurementModule/HomePage.vue";
 
 import SecretaryHomePage from "./Modules/SecretaryModule/HomePage.vue";
 import SecretarySchools from "./Modules/SecretaryModule/Schools.vue";
@@ -242,9 +242,9 @@ export default {
         HomePage,
         // Documents,
         InternalAuditor,
-        Accountant,
-        Secretary,
-        Procurement,
+        // Accountant,
+        // Secretary,
+        // Procurement,
 
         SecretaryHomePage,
         SecretarySchools,
