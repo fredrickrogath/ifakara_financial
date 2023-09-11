@@ -92,15 +92,15 @@
                                     mdi-delete
                                 </v-icon>
 
-                                <v-icon
+                                <!-- <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
                                     @click="setInvoiceView(items[idx]['id'])"
                                 >
                                     mdi-eye
-                                </v-icon>
+                                </v-icon> -->
 
-                                <v-icon
+                                <!-- <v-icon
                                     v-if="header.value == 'starred'"
                                     size="22"
                                     :class="
@@ -115,25 +115,43 @@
                                     "
                                 >
                                     mdi-star
-                                </v-icon>
+                                </v-icon> -->
+
+                                <!-- <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'basic_salary'"
+                                    >{{ item[header.value] }}</span
+                                > -->
 
                                 <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'id'"
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'phone'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'created_at'"
+                                    class="text-gray-600 italic font-semibold uppercase"
+                                    v-else-if="header.value == 'gender'"
+                                    >{{ item[header.value] }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold uppercase"
+                                    v-else-if="header.value == 'vacant_name'"
+                                    >{{ item[header.value] }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'basic_salary'"
                                     >{{
-                                        formattedDate(item[header.value])
+                                        formattedPrice(item[header.value])
                                     }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'updated_at'"
+                                    class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'end_date'"
                                     >{{
                                         formattedDate(item[header.value])
                                     }}</span
@@ -141,22 +159,40 @@
 
                                 <span
                                     class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'name'"
-                                    >{{ item[header.value] }}</span
+                                    v-else-if="
+                                        header.value == 'allounce_salary'
+                                    "
+                                    >{{
+                                        formattedPrice(item[header.value])
+                                    }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 italic font-semibold uppercase"
+                                    v-else-if="header.value == 'fname'"
+                                    >{{
+                                        item["fname"] +
+                                        " " +
+                                        item["mname"] +
+                                        " " +
+                                        item["lname"]
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 italic font-semibold lowercase"
                                     v-else-if="header.value == 'email'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'role'"
+                                    class="text-gray-600 italic font-semibold uppercase"
+                                    v-else-if="
+                                        header.value == 'institution_name'
+                                    "
                                 >
-                                    {{ department(item[header.value]) }}
+                                    {{ item[header.value] }}
                                 </span>
                             </td>
                         </tr>
@@ -210,12 +246,11 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("school-staff-trigger-from-financial-secretary").listen(
-            "Api\\Secretary\\StaffEvent",
-            (e) => {
-                this.getStaffs();
-            }
-        );
+        window.Echo.channel(
+            "school-staff-trigger-from-financial-secretary"
+        ).listen("Api\\Secretary\\StaffEvent", (e) => {
+            this.getStaffs();
+        });
     },
 
     data() {
@@ -230,17 +265,37 @@ export default {
                     text: "Name",
                     align: "start",
                     sortable: false,
-                    value: "name",
+                    value: "fname",
                 },
                 {
                     text: "Email",
                     value: "email",
                 },
                 {
-                    text: "Department",
-                    value: "role",
+                    text: "Phone",
+                    value: "phone",
                 },
-                { text: "Date", value: "created_at" },
+                {
+                    text: "Gender",
+                    value: "gender",
+                },
+                {
+                    text: "Basic Salary",
+                    value: "basic_salary",
+                },
+                {
+                    text: "Allowance Salary",
+                    value: "allounce_salary",
+                },
+                {
+                    text: "Vacant",
+                    value: "vacant_name",
+                },
+                {
+                    text: "Institution",
+                    value: "institution_name",
+                },
+                { text: "End Date", value: "end_date" },
             ],
             students: [],
 
@@ -263,11 +318,24 @@ export default {
             this.idForAction = id;
         },
 
-        formattedPrice(amount) {
-            return amount.toLocaleString("sw-TZ", {
-                style: "currency",
-                currency: "Tsh",
-            });
+        // formattedPrice(amount) {
+        //     return amount.toLocaleString("sw-TZ", {
+        //         style: "currency",
+        //         currency: "Tsh",
+        //     });
+        // },
+
+        formattedPrice(priceString) {
+            // Assuming the priceString is in plain numeric format (e.g., "300000")
+            const price = parseFloat(priceString);
+            if (!isNaN(price)) {
+                return new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "Tsh", // Change to your desired currency code
+                    minimumFractionDigits: 2, // Specify the number of decimal places
+                }).format(price);
+            }
+            return priceString; // Return the original string if parsing fails
         },
 
         formattedDate(date) {
@@ -297,57 +365,57 @@ export default {
 
         getStaffs() {
             axios
-                .get(this.getMainUrl + "secretary/getStaffs")
+                .get("http://35.239.9.62/api/v1/hr/staff/")
                 .then((response) => {
-                    this.students = response.data.data;
+                    this.students = response.data.staffs;
                     this.showLoader = false;
-                    // console.log(response.data.data)
+                    // console.log(response.data.staffs)
                 });
         },
 
-        async updateTools(id, column, data) {
-            axios
-                .post("/accountant/updateTools", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async updateTools(id, column, data) {
+        //     axios
+        //         .post("/accountant/updateTools", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async deleteInvoice() {
-            axios
-                .post("/accountant/deleteInvoice", {
-                    id: this.idForAction,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async deleteInvoice() {
+        //     axios
+        //         .post("/accountant/deleteInvoice", {
+        //             id: this.idForAction,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
-        async starredInvoice(id, data, column) {
-            axios
-                .post("/accountant/starredInvoice", {
-                    id: id,
-                    data: data,
-                    column: column,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // this.amount = "";
-                    // this.narration = "";
-                    console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async starredInvoice(id, data, column) {
+        //     axios
+        //         .post("/accountant/starredInvoice", {
+        //             id: id,
+        //             data: data,
+        //             column: column,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // this.amount = "";
+        //             // this.narration = "";
+        //             console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
         setInvoiceView(id) {
             this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);

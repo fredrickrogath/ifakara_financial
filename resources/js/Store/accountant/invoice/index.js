@@ -17,6 +17,9 @@ export default {
             invoiceId: null,
             schoolId: null,
 
+            activeClass: 'ALL',
+            activePayment: 'ALL',
+
             // SNACKBAR
             snackBarState: false,
             snackBarMessage: 'Successfully submited',

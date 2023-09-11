@@ -363,6 +363,36 @@
                                 <div
                                 v-show="!getSchoolView"
                                 >
+                                
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0 pt-1"
+                                    @click="setTab('allStaffs')"
+                                    :class="[
+                                        getCurrentTab == 'allStaffs'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                    ></i
+                                    >Finance Staffs
+                                </a>
+
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0 pt-1"
+                                    @click="setTab('portalstaffs')"
+                                    :class="[
+                                        getCurrentTab == 'portalstaffs'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                    ></i
+                                    >Portal Staffs
+                                </a>
                                     <a
                                     href="#"
                                     class="list-group-item border-0 pt-0"
@@ -378,20 +408,6 @@
                                     >All schools</a
                                 >
 
-                                <a
-                                    href="#"
-                                    class="list-group-item border-0 pt-1"
-                                    @click="setTab('allStaffs')"
-                                    :class="[
-                                        getCurrentTab == 'allStaffs'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
-                                    ></i
-                                    >All Staffs
-                                </a>
                                 
                                 
                                 <a
@@ -464,33 +480,34 @@
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
                                 <div
-                                    v-show="getAddStudent && !getSchoolView"
+                                    v-if="getAddStudent && !getSchoolView"
                                     key="1"
                                 >
                                     <add-staff></add-staff>
                                 </div>
 
-                                <div v-show="getSchoolView && !getAddStudent">
+                                <div v-if="getSchoolView && !getAddStudent">
                                     <open-school></open-school>
                                     
                                 </div>
                                 <div
-                                    v-show="!getAddStudent && !getSchoolView"
+                                    v-if="!getAddStudent && !getSchoolView"
                                     key="2"
                                 >
-                                <all-invoices-vue v-show="getCurrentTab == 'invoices' && !getAddSchool"></all-invoices-vue>
+                                <all-invoices-vue v-if="getCurrentTab == 'invoices' && !getAddSchool"></all-invoices-vue>
                                     <all-schools
-                                        v-show="getCurrentTab == 'allSchools' && !getAddSchool"
+                                        v-if="getCurrentTab == 'allSchools' && !getAddSchool"
                                     ></all-schools>
-                                    <add-school v-show="getCurrentTab == 'allSchools' && getAddSchool"></add-school>
+                                    <add-school v-if="getCurrentTab == 'allSchools' && getAddSchool"></add-school>
                                     <all-staffs
-                                        v-show="getCurrentTab == 'allStaffs'"
+                                        v-if="getCurrentTab == 'allStaffs'"
                                     ></all-staffs>
                                     <all-students
-                                        v-show="getCurrentTab == 'allStudents'"
+                                        v-if="getCurrentTab == 'allStudents'"
                                     ></all-students>
-                                    <permissions v-show="getCurrentTab == 'permissions' && !getCommentView"></permissions>
-                                    <Comments v-show="getCommentView && getCurrentTab == 'permissions'"></Comments>
+                                    <permissions v-if="getCurrentTab == 'permissions' && !getCommentView"></permissions>
+                                    <Comments v-if="getCommentView && getCurrentTab == 'permissions'"></Comments>
+                                    <portal-staffs v-if="!getCommentView && getCurrentTab == 'portalstaffs'"></portal-staffs>
                                 </div>
                                 <!-- <requisitions
                                     v-if="getCurrentTab == 'home'"
@@ -539,6 +556,7 @@ import AllSchools from "./SchoolComponents/School/AllSchools.vue";
 import OpenSchool from "./SchoolComponents/School/OpenSchool.vue";
 import AddSchool from "./SchoolComponents/School/AllSchools/AddSchool.vue";
 import Permissions from "./SchoolComponents/School/School/Permissions.vue";
+import PortalStaffs from "./SchoolComponents/PortalStaff.vue";
 import Comments from "./SchoolComponents/Comments.vue";
 
 // import AllInvoices from "./AllInvoices.vue";
@@ -568,6 +586,8 @@ export default {
         // Entries,
 
         AllInvoicesVue,
+
+        PortalStaffs,
 
         Select2,
     },

@@ -29,7 +29,15 @@ export default {
 
     getNotificationId(state){
         return state.notificationId;
-    }
+    },
+
+    getActiveClass(state){
+        return state.activeClass;
+    },
+
+    getActivePayment(state){
+        return state.activePayment;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

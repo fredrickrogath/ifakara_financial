@@ -8,13 +8,13 @@
         <!-- {{ getAddStudent }} -->
         <!-- <add-staff v-if="getCurrentSchoolDetailTab == 'allStaffs'"></add-staff> -->
         <all-school-staffs
-            v-show="getCurrentSchoolDetailTab == 'allStaffs'"
+            v-if="getCurrentSchoolDetailTab == 'allStaffs'"
         ></all-school-staffs>
         <all-school-students
-            v-show="getCurrentSchoolDetailTab == 'allStudents'"
+            v-if="getCurrentSchoolDetailTab == 'allStudents'"
         ></all-school-students>
-        <all-invoices v-show="getCurrentSchoolDetailTab == 'invoices'"></all-invoices>
-        <all-tools v-show="getCurrentSchoolDetailTab == 'tools'"></all-tools>
+        <all-invoices v-if="getCurrentSchoolDetailTab == 'invoices'"></all-invoices>
+        <all-tools v-if="getCurrentSchoolDetailTab == 'tools'"></all-tools>
         <!-- </v-col> -->
     </div>
     <!-- </v-row>
@@ -27,6 +27,7 @@ import Spinner from "../../../.././Components/SpinnerLoader.vue";
 
 import AllSchoolStaffs from "./AllStaffs.vue";
 import AllSchoolStudents from "./AllStudents.vue";
+// import AllSchoolStudents from "./../../../SecretaryModule/SchoolComponents/School/AllStudents.vue";
 import AllInvoices from "./AllInvoices.vue";
 import AllTools from "./AllTools.vue";
 

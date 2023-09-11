@@ -353,21 +353,21 @@
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
                                 <div
-                                    v-show="getAddStudent && !getSchoolView"
+                                    v-if="getAddStudent && !getSchoolView"
                                     key="1"
                                 >
                                     <add-staff></add-staff>
                                 </div>
 
-                                <div v-show="getSchoolView && !getAddStudent">
+                                <div v-if="getSchoolView && !getAddStudent">
                                     <open-school></open-school>
                                 </div>
                                 <div
-                                    v-show="!getAddStudent && !getSchoolView"
+                                    v-if="!getAddStudent && !getSchoolView"
                                     key="2"
                                 >
                                     <all-invoices
-                                        v-show="
+                                        v-if="
                                             getCurrentTab ==
                                                 'diocese-invoices' &&
                                             !getAddSchool
@@ -375,31 +375,31 @@
                                     ></all-invoices>
 
                                     <all-schools
-                                        v-show="
+                                        v-if="
                                             getCurrentTab == 'allSchools' &&
                                             !getAddSchool
                                         "
                                     ></all-schools>
                                     <add-school
-                                        v-show="
+                                        v-if="
                                             getCurrentTab == 'allSchools' &&
                                             getAddSchool
                                         "
                                     ></add-school>
                                     <all-staffs
-                                        v-show="getCurrentTab == 'allStaffs'"
+                                        v-if="getCurrentTab == 'allStaffs'"
                                     ></all-staffs>
                                     <all-students
-                                        v-show="getCurrentTab == 'allStudents'"
+                                        v-if="getCurrentTab == 'allStudents'"
                                     ></all-students>
                                     <permissions
-                                        v-show="
+                                        v-if="
                                             getCurrentTab == 'permissions' &&
                                             !getCommentView
                                         "
                                     ></permissions>
                                     <Comments
-                                        v-show="
+                                        v-if="
                                             getCommentView &&
                                             getCurrentTab == 'permissions'
                                         "

@@ -14,6 +14,9 @@ export default {
             setSchoolView: false,
             schoolId: null,
 
+            activeClass: 'ALL',
+            activePayment: 'ALL',
+
             setCommentView: false,
             notificationId: null,
 

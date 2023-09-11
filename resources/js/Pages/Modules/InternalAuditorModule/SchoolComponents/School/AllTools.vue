@@ -292,8 +292,8 @@ export default {
 
         getSchoolId() {
             this.schoolId =
-                this.$store.getters["SecratarySchoolModule/getSchoolId"];
-            return this.$store.getters["SecratarySchoolModule/getSchoolId"];
+                this.$store.getters["InternalAuditorSchoolModule/getSchoolId"];
+            return this.$store.getters["InternalAuditorSchoolModule/getSchoolId"];
         },
 
         getMainUrl() {

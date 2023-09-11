@@ -8,17 +8,17 @@
         <!-- {{ getAddStudent }} -->
         <add-staff v-if="getCurrentSchoolDetailTab == 'allStaffs' && getAddStaff"></add-staff>
         <all-school-staffs
-            v-show="getCurrentSchoolDetailTab == 'allStaffs' && !getAddStaff"
+            v-if="getCurrentSchoolDetailTab == 'allStaffs' && !getAddStaff"
         ></all-school-staffs>
         <all-school-students
-            v-show="getCurrentSchoolDetailTab == 'allStudents'"
+            v-if="getCurrentSchoolDetailTab == 'allStudents'"
         ></all-school-students>
         <all-invoices
-            v-show="getCurrentSchoolDetailTab == 'allInvoices'"
+            v-if="getCurrentSchoolDetailTab == 'allInvoices'"
         ></all-invoices>
 
         <report
-            v-show="getCurrentSchoolDetailTab == 'allReport'"
+            v-if="getCurrentSchoolDetailTab == 'allReport'"
         ></report>
         <!-- </v-col> -->
     </div>

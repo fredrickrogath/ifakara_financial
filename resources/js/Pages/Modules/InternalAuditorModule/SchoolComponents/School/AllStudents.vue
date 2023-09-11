@@ -69,12 +69,53 @@
             </v-card-title>
             <!-- {{ $page.props.posts }} -->
 
+            <hr class="bg-gray-200 mb-2 mt-0" />
+
+            <div class="d-flex justify-content-between">
+                <div class="ml-3">
+                    <span class="text-xl font-semibold">
+                        {{ filteredStudentCount }}
+                    </span>
+                    <span>
+                        {{ getActiveClass }}
+                    </span>
+                    <span>STUDENTS</span>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <span
+                        class="cursor-pointer uppercase ml-3"
+                        :class="getActiveClass == 'ALL' ? 'text-warning' : 'underline'"
+                        @click="setActiveClass('ALL')"
+                        >ALL</span
+                    >
+                    <div
+                        v-for="classs in classes"
+                        :key="classs.id"
+                        class="d-flex"
+                    >
+                        <span
+                            class="cursor-pointer uppercase ml-3"
+                            :class="
+                                getActiveClass == classs.class_level
+                                    ? 'text-warning'
+                                    : 'underline'
+                            "
+                            @click="setActiveClass(classs.class_level)"
+                            >{{ classs.class_level }}</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <hr class="bg-gray-200 mb-2 mt-1" />
+
             <v-data-table
                 :headers="headers"
-                :items="students"
+                :items="filteredStudents"
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -117,13 +158,13 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600"
                                     v-else-if="header.value == 'id'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -132,6 +173,12 @@
 
                                 <span
                                     class="text-gray-600 italic font-semibold"
+                                    v-else-if="header.value == 'class_type'"
+                                    >{{ item[header.value].class_level }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -164,7 +211,7 @@
                                 </span>
 
                                 <!-- <span 
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600"
                                     v-else-if="header.value == 'gender'"
                                 >
                                     {{
@@ -213,6 +260,7 @@ export default {
     mounted() {
         this.showLoader = true;
         this.getStudents();
+        this.getStudentClasses();
 
         // Receiving broadicasting
         // window.Echo.channel("Student").listen(
@@ -223,8 +271,23 @@ export default {
         //     }
         // );
 
-        window.Echo.channel("Student").listen(
-            "Api\\Secretary\\StudentEvent",
+        // window.Echo.channel("Student").listen(
+        //     "Api\\Secretary\\StudentEvent",
+        //     (e) => {
+        //         this.getStudents();
+        //     }
+        // );
+
+        // window.Echo.channel("school-student-trigger-from-financial-secretary." + this.getSchoolId).listen(
+        //     "Api\\Secretary\\StudentEvent",
+        //     (e) => {
+        //         console.log('hello world');
+        //         this.getStudents();
+        //     }
+        // );
+
+        window.Echo.channel("student-event." + this.getSchoolId).listen(
+            "Academic\\StudentEvent",
             (e) => {
                 this.getStudents();
             }
@@ -250,6 +313,10 @@ export default {
                     value: "last_name",
                 },
                 {
+                    text: "Class",
+                    value: "class_type",
+                },
+                {
                     text: "Gender",
                     value: "gender",
                 },
@@ -260,6 +327,10 @@ export default {
                 { text: "Date", value: "created_at" },
             ],
             students: [],
+
+            classes: [],
+
+            classType: "ALL",
 
             idForAction: null,
 
@@ -274,13 +345,37 @@ export default {
 
         getSchoolId() {
             this.schoolId =
-                this.$store.getters["SecratarySchoolModule/getSchoolId"];
-            return this.$store.getters["SecratarySchoolModule/getSchoolId"];
+                this.$store.getters["InternalAuditorSchoolModule/getSchoolId"];
+            return this.$store.getters["InternalAuditorSchoolModule/getSchoolId"];
         },
 
         getMainUrl() {
             return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
+
+        getActiveClass() {
+            this.classType =
+                this.$store.getters["SecratarySchoolModule/getActiveClass"];
+            return this.$store.getters["SecratarySchoolModule/getActiveClass"];
+        },
+
+        filteredStudents() {
+            if (this.classType === "ALL") {
+                return this.students; // Display all rows
+            } else {
+                return this.students.filter(
+                    (item) => item.class_type.class_level === this.classType
+                );
+            }
+        },
+
+        filteredStudentCount() {
+            return this.filteredStudents.length;
+        },
+
+        // getSchoolId() {
+        //     return this.$store.getters["SecratarySchoolModule/getSchoolId"];
+        // },
     },
 
     watch: {
@@ -288,9 +383,9 @@ export default {
             if (newVal !== null) {
                 this.getStudents();
             }
-            console.log(
-                `The message has changed from "${oldVal}" to "${newVal}"`
-            );
+            // console.log(
+            //     `The message has changed from "${oldVal}" to "${newVal}"`
+            // );
         },
     },
 
@@ -307,8 +402,8 @@ export default {
         },
 
         formattedDate(date) {
-            return moment(date).format("MMMM Do YYYY");
-            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         // totalPrice(item) {
@@ -317,14 +412,22 @@ export default {
         //     }, 0);
         // },
 
-        department(role) {
-            if (role == 3) {
-                return "Academic";
-            } else if (role == 5) {
-                return "Accountant";
-            } else if (role == 6) {
-                return "Procurement";
-            }
+        // department(role) {
+        //     if (role == 3) {
+        //         return "Academic";
+        //     } else if (role == 5) {
+        //         return "Accountant";
+        //     } else if (role == 6) {
+        //         return "Procurement";
+        //     }
+        // },
+
+        setActiveClass(setActiveClass) {
+            this.classType = setActiveClass;
+            this.$store.dispatch(
+                "SecratarySchoolModule/setActiveClass",
+                setActiveClass
+            );
         },
 
         async getStudents() {
@@ -336,6 +439,22 @@ export default {
                     // this.students = response.data.data;
                     this.showLoader = false;
                     this.students = response.data.data;
+                    // this.amount = "";
+                    // this.narration = "";
+                    // console.log(this.schoolId)
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
+
+        async getStudentClasses() {
+            axios
+                .post(this.getMainUrl + "accountant/getStudentClasses", {
+                    school_id: this.getSchoolId,
+                })
+                .then((response) => {
+                    this.showLoader = false;
+                    this.classes = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
                     // console.log(this.schoolId)
@@ -388,9 +507,9 @@ export default {
         //     // handle response here
         // },
 
-        setInvoiceView(id) {
-            this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
-        },
+        // setInvoiceView(id) {
+        //     this.$store.dispatch("AccountantInvoiceModule/setInvoiceView", id);
+        // },
 
         save(id, column, data) {
             this.updateTools(id, data, column);

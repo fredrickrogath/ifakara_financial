@@ -308,15 +308,15 @@ export default {
         //     }, 0);
         // },
 
-        department(role) {
-            if (role == 3) {
-                return "Academic";
-            } else if (role == 5) {
-                return "Accountant";
-            } else if (role == 6) {
-                return "Procurement";
-            }
-        },
+        // department(role) {
+        //     if (role == 3) {
+        //         return "Academic";
+        //     } else if (role == 5) {
+        //         return "Accountant";
+        //     } else if (role == 6) {
+        //         return "Procurement";
+        //     }
+        // },
 
         getStudents() {
             axios

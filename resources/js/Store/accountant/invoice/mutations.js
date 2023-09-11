@@ -37,4 +37,12 @@ export default {
     setInvoice(state){
         state.setInvoice = !state.setInvoice;
     },
+
+    setActiveClass(state, activeClass){
+        state.activeClass = activeClass;
+    },
+
+    setActivePayment(state, activePayment){
+        state.activePayment = activePayment;
+    },
 };

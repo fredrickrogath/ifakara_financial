@@ -23,4 +23,12 @@ export default {
     setNotificationId(state, id){
         state.notificationId = id;
     },
+
+    setActiveClass(state, activeClass){
+        state.activeClass = activeClass;
+    },
+
+    setActivePayment(state, activePayment){
+        state.activePayment = activePayment;
+    },
 };
