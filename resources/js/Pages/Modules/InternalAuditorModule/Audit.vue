@@ -1,12 +1,12 @@
 <template>
     <div data-app>
-        <div class="row bg-white">
+        <div class="row bg-gray-100">
             <!-- Right Sidebar -->
             <div class="col-12">
                 <div class="h-screen">
-                    <div class="mt-2">
+                    <div class="">
                         <!-- Left sidebar -->
-                        <div class="inbox-leftbar bg-white h-screen">
+                        <!-- <div class="inbox-leftbar bg-white h-screen"> -->
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">
                                 <button
                                     type="button"
@@ -134,7 +134,7 @@
 
                             <hr class="bg-gray-100 mb-1 mt-0" /> -->
 
-                            <div class="mail-list">
+                            <!-- <div class="mail-list"> -->
                                 <!-- <div
                                     class="d-flex justify-content-between align-items-center"
                                 >
@@ -159,7 +159,7 @@
                                     </v-icon>
                                 </div> -->
 
-                                <div
+                                <!-- <div
                                     class="list-group-item border-0 d-flex justify-content-between align-items-center"
                                 >
                                     <button
@@ -173,9 +173,9 @@
                                     <div class="ml-3 font-15 text-gray-600">
                                         My Office
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <hr class="bg-gray-200 mb-1 mt-0 mx-2" />
+                                <!-- <hr class="bg-gray-200 mb-1 mt-0 mx-2" />
 
                                 <div v-show="getSchoolView">
                                     <a
@@ -293,11 +293,11 @@
                                         ></i
                                         >Health Institutes</a
                                     >
-                                </div>
-                            </div>
+                                </div> -->
+                            <!-- </div> -->
 
-                            <hr class="bg-gray-200 mx-1 mb-1 mt-2" />
-
+                            <!-- <hr class="bg-gray-200 mx-1 mb-1 mt-2" /> -->
+<!-- 
                             <div
                                 v-show="
                                     getCurrentTab == 'diocese' ||
@@ -319,7 +319,7 @@
                                     ></i
                                     >Invoices
                                 </a>
-                            </div>
+                            </div> -->
 
                             <!-- <div class="mt-2 ml-3">
                                 <h5>
@@ -345,10 +345,9 @@
                                     7 (25%) of 350
                                 </p>
                             </div> -->
-                        </div>
-                        <!-- End Left sidebar -->
+                        <!-- </div> -->
 
-                        <div class="inbox-rightbar pt-0 px-0">
+                        <div class="pt-0 px-0 card mx-0 px-0">
                             <div class="h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
@@ -484,7 +483,7 @@ export default {
     },
 
     mounted() {
-        this.getSchoolPermissionsNotifications();
+        // this.getSchoolPermissionsNotifications();
 
         // Receiving broadicasting
         window.Echo.channel("academic-trigger-student-permission").listen(
@@ -598,27 +597,27 @@ export default {
         //         });
         //     // handle response here
         // },
-        setTab(tab) {
-            this.$store.dispatch("InternalAuditorSchoolModule/setTab", tab);
-        },
+        // setTab(tab) {
+        //     this.$store.dispatch("InternalAuditorSchoolModule/setTab", tab);
+        // },
 
-        setSchoolDetailTab(tab) {
-            this.$store.dispatch(
-                "InternalAuditorSchoolDetailsModule/setTab",
-                tab
-            );
-        },
+        // setSchoolDetailTab(tab) {
+        //     this.$store.dispatch(
+        //         "InternalAuditorSchoolDetailsModule/setTab",
+        //         tab
+        //     );
+        // },
 
-        setAddStudent() {
-            this.$store.dispatch("InternalAuditorSchoolModule/setAddStudent");
-        },
+        // setAddStudent() {
+        //     this.$store.dispatch("InternalAuditorSchoolModule/setAddStudent");
+        // },
 
-        setSchoolView() {
-            this.$store.dispatch(
-                "InternalAuditorSchoolModule/setSchoolView",
-                null
-            );
-        },
+        // setSchoolView() {
+        //     this.$store.dispatch(
+        //         "InternalAuditorSchoolModule/setSchoolView",
+        //         null
+        //     );
+        // },
 
         // getSpecificLegerEntries() {
         //     // console.log("Loading next page");

@@ -3,52 +3,62 @@
         <v-row> -->
     <div class="">
         <!-- Right Sidebar -->
-        <div class="col-12  card p-0 m-0">
-            <div class="h-screen bg-white" v-show="getPaymentView">
+        <div class="col-12 card p-0 m-0">
+            <div class="h-screen bg-white" v-if="getPaymentView">
                 <payment-view></payment-view>
             </div>
-            <div class="h-screen bg-white" v-show="!getPaymentView">
+            <div class="h-screen bg-white" v-if="!getPaymentView">
                 <spinner v-if="showLoader"></spinner>
 
                 <!-- <v-col v-else sm="12" md="12"> -->
                 <!-- <v-card flat :dark="isDark"> -->
                 <!-- <v-card elevation="0" data-app> -->
 
-                <v-card-title class="px-0 pt-0">
-                    <div class="pl-2 pt-1">Payments</div>
+                <v-card-title class="px-0 pt-0 pb-1">
+                    <div class="pl-2 pt-1 text-sm uppercase">Payments</div>
                     <v-spacer></v-spacer>
 
-                    <snack-bar
+                    <!-- <snack-bar
                         class="absolute right-0 top-14"
                         message="Task completed successfully"
-                    ></snack-bar>
+                    ></snack-bar> -->
 
-                    <v-text-field
+                    <div class="flex col-3 p-0 pt-1 mr-2">
+                        <input
+                        v-model="search"
+                            type="text"
+                            class="form-control form-control-sm"
+                        />
+                        <v-icon size="20" class="px-1"
+                            >mdi-magnify</v-icon
+                        >
+                    </div>
+                    <!-- <v-text-field
                         v-model="search"
                         append-icon="mdi-magnify"
                         label="Search"
                         single-line
                         hide-details
-                    ></v-text-field>
+                    ></v-text-field> -->
                 </v-card-title>
                 <!-- {{ $page.props.posts }} -->
 
-                <hr class="bg-gray-200 mb-2 mt-0" />
+                <hr class="bg-gray-200 mb-1 mt-0" />
 
                 <div class="d-flex justify-content-between">
                     <div class="ml-3">
-                        <span class="text-xl font-semibold">
-                            {{ filteredStudentCount }}
+                        <span class="font-semibold">
+                            {{ filteredStudentCount }} :
                         </span>
-                        <span>
+                        <span class="text-xs">
                             {{ payType }}
                         </span>
-                        <span>STUDENTS</span>
+                        <span class="text-xs">STUDENTS</span>
                     </div>
 
                     <div class="d-flex justify-content-end">
                         <span
-                            class="cursor-pointer uppercase ml-3"
+                            class="cursor-pointer uppercase ml-3 text-xs"
                             :class="
                                 getActivePayment == 'ALL'
                                     ? 'text-warning'
@@ -63,7 +73,7 @@
                             class="d-flex"
                         >
                             <span
-                                class="cursor-pointer uppercase ml-3"
+                                class="cursor-pointer uppercase ml-3 text-xs"
                                 :class="
                                     getActivePayment == classs.class_level
                                         ? 'text-warning'
@@ -77,7 +87,7 @@
 
                     <div class="d-flex justify-content-end">
                         <span
-                            class="cursor-pointer uppercase ml-3"
+                            class="cursor-pointer uppercase ml-3 text-xs"
                             :class="
                                 getActivePayment == 'ALL'
                                     ? 'text-warning'
@@ -88,7 +98,7 @@
                         >
                         <div class="d-flex">
                             <span
-                                class="cursor-pointer uppercase ml-3"
+                                class="cursor-pointer uppercase ml-3 text-xs"
                                 :class="
                                     getActivePayment == 'PAID'
                                         ? 'text-warning'
@@ -100,7 +110,7 @@
                             </span>
 
                             <span
-                                class="cursor-pointer uppercase ml-3 mr-2"
+                                class="cursor-pointer uppercase ml-3 mr-2 text-xs"
                                 :class="
                                     getActivePayment == 'UNPAID'
                                         ? 'text-warning'
@@ -112,7 +122,7 @@
                             </span>
 
                             <span
-                                class="cursor-pointer uppercase ml-3 mr-2"
+                                class="cursor-pointer uppercase ml-3 mr-2 text-xs"
                                 :class="
                                     getActivePayment == 'PARTIALPAID'
                                         ? 'text-warning'
@@ -124,7 +134,7 @@
                             </span>
 
                             <span
-                                class="cursor-pointer uppercase ml-3 mr-2"
+                                class="cursor-pointer uppercase ml-3 mr-2 text-xs"
                                 :class="
                                     getActivePayment == 'FULLPAID'
                                         ? 'text-warning'
@@ -138,7 +148,7 @@
                     </div>
                 </div>
 
-                <hr class="bg-gray-200 mb-2 mt-1" />
+                <hr class="bg-gray-200 mb-1 mt-1" />
 
                 <v-data-table
                     :headers="headers"
@@ -147,23 +157,24 @@
                     :search="search"
                     class="elevation-1"
                     :items-per-page="20"
+                    dense
                 >
                     <template v-slot:body="{ items, headers }">
                         <tbody>
                             <tr v-for="(item, idx, k) in items" :key="idx">
                                 <td v-for="(header, key) in headers" :key="key">
-                   
-
                                     <v-icon
-                                    v-if="header.value == 'view'"
-                                    size="22"
-                                    @click=" studentDetails(items[idx]['id'])"
-                                >
-                                    mdi-eye
-                                </v-icon>
+                                        v-if="header.value == 'view'"
+                                        size="22"
+                                        @click="
+                                            studentDetails(items[idx]['id'])
+                                        "
+                                    >
+                                        mdi-eye
+                                    </v-icon>
 
                                     <span
-                                        class="text-gray-600 italic font-semibold"
+                                        class="text-gray-600 font-semibold uppercase text-xs"
                                         v-else-if="header.value == 'created_at'"
                                         >{{
                                             formattedDate(item[header.value])
@@ -179,13 +190,13 @@
                                     >
 
                                     <span
-                                        class="text-gray-600 italic font-semibold"
+                                        class="text-gray-600 font-semibold uppercase text-xs"
                                         v-else-if="header.value == 'first_name'"
                                         >{{ item[header.value] }}</span
                                     >
 
                                     <span
-                                        class="text-gray-600 italic font-semibold"
+                                        class="text-gray-600 font-semibold uppercase text-xs"
                                         v-else-if="
                                             header.value == 'middle_name'
                                         "
@@ -194,14 +205,14 @@
                                     </span>
 
                                     <span
-                                        class="text-gray-600 italic font-semibold"
+                                        class="text-gray-600 font-semibold uppercase text-xs"
                                         v-else-if="header.value == 'last_name'"
                                     >
                                         {{ item[header.value] }}
                                     </span>
 
                                     <span
-                                        class="text-gray-600 italic font-semibold"
+                                        class="text-gray-600 font-semibold uppercase text-xs"
                                         v-else-if="header.value == 'class_type'"
                                         >{{
                                             item[header.value].class_level
@@ -209,7 +220,7 @@
                                     >
 
                                     <span
-                                        class="text-gray-600 italic font-semibold"
+                                        class="text-gray-600 font-semibold uppercase text-xs"
                                         v-else-if="header.text === 'Level 1'"
                                     >
                                         <template
@@ -349,7 +360,7 @@
                                     </span>
 
                                     <span
-                                        class="text-gray-600 italic font-semibold"
+                                        class="text-gray-600 font-semibold uppercase text-xs"
                                         v-else-if="header.text === 'Level 2'"
                                     >
                                         <template
@@ -489,7 +500,7 @@
                                     </span>
 
                                     <span
-                                        class="text-gray-600 italic font-semibold"
+                                        class="text-gray-600 font-semibold uppercase text-xs"
                                         v-else-if="header.text === 'Level 3'"
                                     >
                                         <template
@@ -629,7 +640,7 @@
                                     </span>
 
                                     <span
-                                        class="text-gray-600 italic font-semibold"
+                                        class="text-gray-600 font-semibold uppercase text-xs"
                                         v-else-if="
                                             header.text === 'Last Pay On'
                                         "
@@ -799,7 +810,8 @@ export default {
         },
 
         getSchoolId() {
-            this.schoolId = this.$store.getters["AccountantInvoiceModule/getSchoolId"];
+            this.schoolId =
+                this.$store.getters["AccountantInvoiceModule/getSchoolId"];
             return this.$store.getters["AccountantInvoiceModule/getSchoolId"];
         },
 
@@ -808,7 +820,9 @@ export default {
         },
 
         getPaymentView() {
-            return this.$store.getters["AccountantInvoiceModule/getPaymentView"];
+            return this.$store.getters[
+                "AccountantInvoiceModule/getPaymentView"
+            ];
         },
 
         getActivePayment() {
@@ -856,7 +870,10 @@ export default {
                               student.entries[0].chart_of_account.level3
                             : 0;
 
-                        return total !== chartOfAccountTotal;
+                        return (
+                            total !== chartOfAccountTotal &&
+                            total < chartOfAccountTotal
+                        );
                     }
                 );
 
@@ -883,7 +900,10 @@ export default {
                               student.entries[0].chart_of_account.level3
                             : 0;
 
-                        return total === chartOfAccountTotal;
+                        return (
+                            total === chartOfAccountTotal &&
+                            total <= chartOfAccountTotal
+                        );
                     }
                 );
 
@@ -945,23 +965,25 @@ export default {
                 })
                 .then((response) => {
                     this.students = response.data.data;
-                this.showLoader = false;
+                    this.showLoader = false;
                     // console.log(response.data.data)
                 });
         },
 
         getStudentClasses() {
-            axios.post(this.getMainUrl + "accountant/getStudentClasses", {
-                school_id: this.getSchoolId,
-            }).then((response) => {
-                this.classes = response.data.data;
-                this.showLoader = false;
-                // console.log(response.data.data);
-            });
+            axios
+                .post(this.getMainUrl + "accountant/getStudentClasses", {
+                    school_id: this.getSchoolId,
+                })
+                .then((response) => {
+                    this.classes = response.data.data;
+                    this.showLoader = false;
+                    // console.log(response.data.data);
+                });
         },
 
         save(id, column, data) {
-             this.updateTools(id, data, column);
+            this.updateTools(id, data, column);
             // console.log(id + " , " +data);
         },
         cancel() {},

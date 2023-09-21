@@ -57,7 +57,7 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Staffs <span class="d-none">{{ getSchoolId }} </span>
+                <span class="text-sm uppercase">Staffs</span> <span class="d-none">{{ getSchoolId }} </span>
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -95,6 +95,7 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                dense
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -137,13 +138,13 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'id'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -151,7 +152,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -159,20 +160,20 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'email'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'role'"
                                 >
                                     {{ department(item[header.value]) }}
@@ -315,8 +316,8 @@ export default {
         },
 
         formattedDate(date) {
-            return moment(date).format("MMMM Do YYYY");
-            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         // totalPrice(item) {

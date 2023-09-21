@@ -1,5 +1,5 @@
 <template>
-    <div class="-my-3 pt-0 bg-white h-screen">
+    <div class="pt-0 bg-white h-screen">
         <div class="d-flex">
             <div class="flex-grow-1">
                 <div class="card bg-pattern py-0 my-0 shadow">

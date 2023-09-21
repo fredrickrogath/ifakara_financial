@@ -8,7 +8,7 @@
             <!-- end Topbar -->
 
             <!-- ========== Left Sidebar Start ========== -->
-            <div class="left-side-menu pt-0 -mt-2">
+            <div class="left-side-menu ml-0 pl-0 pt-0 -mt-2">
                 <div class="bg-gray-100" data-simplebar>
                     <!--- Sidemenu -->
 
@@ -26,10 +26,10 @@
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
 
-            <div class="content-page mt-0 pt-0 px-0 bg-gray-100">
+            <div class="content-page mt-0 pt-0 px-0">
                 <div class="content">
                     <!-- Start Content-->
-                    <div class="ml-1 mt-11">
+                    <div class="mt-8">
                         <!-- Bishop -->
                         <home-page
                             v-if="route().current('bishop.dashboard')"

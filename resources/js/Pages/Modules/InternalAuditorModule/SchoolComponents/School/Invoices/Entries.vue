@@ -25,29 +25,30 @@
                 :items="legerEntries"
                 :search="search"
                 class="bg-red-900"
-                :items-per-page="11"
+                :items-per-page="15"
+                dense
             >
                 <template v-slot:item.id="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{
+                    <span class="text-gray-600 font-semibold uppercase text-xs">{{
                         item.id
                     }}</span>
                 </template>
 
                 <template v-slot:item.chart_of_account.account_type="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{
+                    <span class="text-gray-600 font-semibold uppercase text-xs">{{
                         item.chart_of_account.account_type
                     }}</span>
                 </template>
 
                 <template v-slot:item.chart_of_account.name="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{
+                    <span class="text-gray-600 font-semibold uppercase text-xs">{{
                         item.chart_of_account.name
                     }}</span>
                 </template>
 
                 <template v-slot:item.level_1="{ item }">
                     <span
-                        class="text-gray-600 italic font-semibold"
+                        class="text-gray-600 font-semibold uppercase text-xs"
                         :class="[
                             item.level_1 !== 0
                                 ? 'text-green-500'
@@ -59,7 +60,7 @@
 
                 <template v-slot:item.level_2="{ item }">
                     <span
-                        class="text-gray-600 italic font-semibold"
+                        class="text-gray-600 font-semibold uppercase text-xs"
                         :class="[
                             item.level_2 !== 0
                                 ? 'text-green-500'
@@ -71,7 +72,7 @@
 
                 <template v-slot:item.level_3="{ item }">
                     <span
-                        class="text-gray-600 italic font-semibold"
+                        class="text-gray-600 font-semibold uppercase text-xs"
                         :class="[
                             item.level_3 !== 0
                                 ? 'text-green-500'
@@ -82,13 +83,13 @@
                 </template>
 
                 <template v-slot:item.narration="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{
+                    <span class="text-gray-600 font-semibold uppercase text-xs">{{
                         item.narration
                     }}</span>
                 </template>
 
                 <template v-slot:item.created_at="{ item }">
-                    <span class="text-gray-600 italic font-semibold">{{
+                    <span class="text-gray-600 font-semibold uppercase text-xs">{{
                         formattedDate(item.created_at)
                     }}</span>
                 </template>

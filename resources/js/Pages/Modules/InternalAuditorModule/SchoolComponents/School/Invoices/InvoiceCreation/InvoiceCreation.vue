@@ -30,6 +30,7 @@
                 :search="search"
                 class="elevation-1"
                 :items-per-page="11"
+                dense
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -74,7 +75,7 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-green-500 italic font-semibold"
+                                    class="text-green-500 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'total'"
                                     >{{
                                         formattedPrice(item[header.value])
@@ -82,7 +83,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -134,7 +135,7 @@
                                 > -->
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'invoice_items'"
                                 >
                                     <div v-for="item in item[header.value]">
@@ -162,7 +163,7 @@
                                 </span>
 
                                 <!-- <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'invoice_items'"
                                 >
                                     <div v-for="item in item[header.value]">
@@ -173,7 +174,7 @@
                                 </span> -->
 
                                 <!-- <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
                                     {{ 

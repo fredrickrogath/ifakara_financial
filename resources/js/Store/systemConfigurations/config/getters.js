@@ -1,7 +1,7 @@
 export default {
     getMainUrl(state) {
-        // return 'http://127.0.0.1:8000/api/';
-        return 'http://34.31.59.59/api/';
+        return 'http://127.0.0.1:8000/api/';
+        // return 'http://34.31.59.59/api/';
     },
 
     // getAddStudent(state){

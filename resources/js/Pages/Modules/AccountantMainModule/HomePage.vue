@@ -1,6 +1,6 @@
 <template>
-    <div class="-my-3 pt-0 bg-white h-screen">
-        <div class="d-flex">
+    <div class="-my-2 h-screen card">
+        <div class="d-flex pt-1">
             <div class="flex-grow-1">
                 <div class="card bg-pattern py-0 my-0 shadow">
                     <div class="card-body">

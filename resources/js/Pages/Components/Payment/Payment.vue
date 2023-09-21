@@ -10,13 +10,13 @@
                     <div class="mx-auto w-1/3 text-center">
                         <v-icon
                             size="92"
-                            class="mx-auto h-52 w-52 rounded-lg border p-2 md:mt-0"
+                            class="mx-auto h-30 w-30 rounded-lg border p-2 md:mt-0"
                             >mdi-account-tie</v-icon
                         >
                         <!-- <img class="mx-auto h-52 w-52 rounded-lg border p-2 md:mt-0" src="https://i.imgur.com/FQS7fFC.png" alt="step" /> -->
                         <div>
                             <h1
-                                class="font-laonoto mt-4 text-center text-xl font-bold"
+                                class="font-laonoto mt-4 text-center text-xl text-secondary font-bold"
                             >
                                 <span v-show="false">{{ getPaymentId }}</span>
                                 {{ student.first_name }}
@@ -29,15 +29,15 @@
                                     student.entries &&
                                     student.entries.length > 0
                                 "
-                                class="mt-2 text-center italic font-semibold text-gray-600"
+                                class="mt-2 text-center font-semibold text-gray-600 text-sm"
                             >
                                 <span class="text-red-500">STATUS</span> <span class="text-xl text-red-700 font-bold">:</span>
-                                <span>  {{calculateFormattedTotal() > 0.00 ? (calculateFormattedFeeTotal() <= calculateFormattedTotal() ? ' FULL PAID AND COMPLETE' : ' PARTIAL PAID AND INCOMPLETE') : ' UNPAID'}}</span>
+                                <span class="italic">  {{calculateFormattedTotal() > 0.00 ? (calculateFormattedFeeTotal() <= calculateFormattedTotal() ? ' FULL PAID AND COMPLETE' : ' PARTIAL PAID AND INCOMPLETE') : ' UNPAID'}}</span>
 
                                 <div v-if="
                                     student.entries &&
                                     student.entries.length > 0
-                                " class="mt-2 text-center italic font-semibold">
+                                " class="mt-2 text-center font-semibold">
             <span>PAID</span>
             <span class="text-gray-700 font-bold">{{
                 formattedPrice(
@@ -52,7 +52,7 @@
                             </p>
 
                             <div
-                                class="bg-warning text-white italic font-semibold"
+                                class="bg-warning text-white font-semibold text-sm"
                             >
                                 EXPECTED
                             </div>
@@ -62,9 +62,9 @@
                                     student.entries &&
                                     student.entries.length > 0
                                 "
-                                class="d-flex justify-content-between py-1"
+                                class="d-flex justify-content-between py-1 text-sm"
                             >
-                                <div class="italic font-semibold">
+                                <div class="font-semibold">
                                     <div>Level 1</div>
                                     <div>
                                         {{
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
 
-                                <div class="italic font-semibold">
+                                <div class="font-semibold">
                                     <div>Level 2</div>
                                     <div>
                                         {{
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
 
-                                <div class="italic font-semibold">
+                                <div class="font-semibold">
                                     <div>Level 3</div>
                                     <div>
                                         {{
@@ -96,7 +96,7 @@
                             </div>
 
                             <div
-                                class="bg-green-500 text-white italic font-semibold"
+                                class="bg-green-500 text-white font-semibold text-sm"
                             >
                                 TOTAL PAYMENTS
                             </div>
@@ -108,7 +108,7 @@
                                 "
                                 class="d-flex justify-content-between py-1"
                             >
-                                <div class="italic font-semibold">
+                                <div class="text-sm font-semibold">
                                     <div>Level 1</div>
                                     <div>
                                         {{
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
 
-                                <div class="italic font-semibold">
+                                <div class="text-sm font-semibold">
                                     <div>Level 2</div>
                                     <div>
                                         {{
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
 
-                                <div class="italic font-semibold">
+                                <div class="text-sm font-semibold">
                                     <div>Level 3</div>
                                     <div>
                                         {{
@@ -146,7 +146,7 @@
                             </div>
 
                             <div
-                                class="bg-red-500 text-white italic font-semibold"
+                                class="bg-red-500 text-white font-semibold text-sm"
                             >
                                 REMAINED
                             </div>
@@ -158,7 +158,7 @@
                                 "
                                 class="d-flex justify-content-between py-1"
                             >
-                                <div class="italic font-semibold">
+                                <div class="text-sm font-semibold">
                                     <div>Level 1</div>
                                     <div>
                                         {{
@@ -172,7 +172,7 @@
                                     </div>
                                 </div>
 
-                                <div class="italic font-semibold">
+                                <div class="text-sm font-semibold">
                                     <div>Level 2</div>
                                     <div>
                                         {{
@@ -186,7 +186,7 @@
                                     </div>
                                 </div>
 
-                                <div class="italic font-semibold">
+                                <div class="text-sm font-semibold">
                                     <div>Level 3</div>
                                     <div>
                                         {{
@@ -239,7 +239,7 @@
                                     </div>
                                     <div class="flex-grow pl-4">
                                         <h2
-                                            class="title-font mb-1 text-sm font-medium tracking-wider text-gray-600 italic font-semibold"
+                                            class="title-font mb-1 text-sm font-medium tracking-wider text-gray-600 font-semibold"
                                         >
                                             Payment On
                                             {{
@@ -248,7 +248,7 @@
                                         </h2>
                                         <p class="font-laonoto leading-relaxed">
                                             <span
-                                                class="text-gray-600 italic font-semibold"
+                                                class="text-gray-600 text-sm font-semibold"
                                             >
                                                 Level 1
                                                 <v-icon
@@ -276,7 +276,7 @@
                                                 >
                                             </span>
                                             <span
-                                                class="text-gray-600 italic font-semibold"
+                                                class="text-gray-600 text-sm font-semibold"
                                             >
                                                 Level 2
                                                 <v-icon
@@ -285,6 +285,7 @@
                                                     >mdi-hand-pointing-right</v-icon
                                                 >
                                                 <span
+                                                class="text-sm"
                                                     :class="[
                                                         entry.level_2 !== 0
                                                             ? 'text-green-500'
@@ -303,7 +304,7 @@
                                                 >
                                             </span>
                                             <span
-                                                class="text-gray-600 italic font-semibold"
+                                                class="text-gray-600 text-sm font-semibold"
                                             >
                                                 Level 3
                                                 <v-icon
@@ -312,6 +313,7 @@
                                                     >mdi-hand-pointing-right</v-icon
                                                 >
                                                 <span
+                                                class="text-sm"
                                                     :class="[
                                                         entry.level_3 !== 0
                                                             ? 'text-green-500'

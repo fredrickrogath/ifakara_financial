@@ -3,15 +3,15 @@
         <!-- <spinner v-if="showLoader"></spinner> -->
 
         <div class="h-screen bg-white" style="overflow-y: auto">
-            <div class="d-flex justify-content-between bg-warning">
+            <!-- <div class="d-flex justify-content-between">
                 <a @click="setInvoiceView()" class="btn text-lg-700">
-                    <strong class="text-white" style="font-size: large"
+                    <strong class="text-warning" style="font-size: large"
                         ><i class="fe-arrow-left"></i>
                     </strong>
                 </a>
-            </div>
+            </div> -->
 
-            <payment></payment>
+            <payment></payment> 
         </div>
     </div>
 </template>

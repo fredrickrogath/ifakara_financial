@@ -1,251 +1,247 @@
 <template>
     <div data-app>
-        <div class="row">
+        <div class="row bg-gray-100">
             <!-- Right Sidebar -->
             <div class="col-12">
-                <div class="h-screen bg-white">
-                    <div class="mt-2">
-                        <!-- Left sidebar -->
-                        <div class="inbox-leftbar bg-white pt-0">
+                <div class="h-screen">
+                    <div class="card">
 
-                            <div class="mail-list">
-                                <span class="text-center pl-3 mx-auto"
-                                    >From Leger Entry</span
-                                >
-
+                        <div class="d-flex justify-content-end mail-list mt-0">
+                            <div class="d-flex justifi-content-between">
                                 <a
-                                    @click="setTab('entries')"
-                                    href="#"
-                                    class="list-group-item border-0 mt-1"
-                                    :class="[
-                                        getCurrentTab == 'entries'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >All Entries
-                                </a>
-                            </div>
-
-                            <hr class="bg-gray-100 mb-1 mt-0" />
-
-                            <div class="mail-list">
-                                <span class="text-center pl-3 mx-auto"
-                                    >From Leger Entry</span
+                                    v-show="getPaymentView"
+                                    @click="setInvoiceView()"
+                                    class="btn text-lg-700"
                                 >
+                                    <strong
+                                        class="text-warning"
+                                        style="font-size: large"
+                                        ><i class="fe-arrow-left"></i>
+                                    </strong>
+                                </a>
 
                                 <a
                                     @click="setTab('payments')"
                                     href="#"
-                                    class="list-group-item border-0 mt-1 font-semibold"
+                                    class="list-group-item border-0"
                                     :class="[
                                         getCurrentTab == 'payments'
                                             ? 'text-warning'
                                             : '',
                                     ]"
-                                    ><i
-                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >Student Payments
-                                </a>
-                            </div>
-
-                            <hr class="bg-gray-100 mb-1 mt-0" />
-
-                            <div class="mail-list">
-                                <span class="text-center pl-3 mx-auto"
-                                    >From Invoice Creation</span
                                 >
+                                    <i
+                                        class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
+                                    ></i
+                                    ><span
+                                        class="text-xs uppercase font-semibold"
+                                        >Student Payments</span
+                                    >
+                                </a>
 
-                                <div class="d-flex">
-                                    <a
+                                <span class="list-group-item border-0 h-100">
+                                    |
+                                </span>
+
+                                <a
                                     @click="setTab('invoices')"
                                     href="#"
-                                    class="list-group-item border-0 mt-1 font-semibold"
+                                    class="list-group-item border-0"
                                     :class="[
                                         getCurrentTab == 'invoices'
                                             ? 'text-warning'
                                             : '',
                                     ]"
-                                    ><i
-                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                >
+                                    <i
+                                        class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
                                     ></i
-                                    >Invoices
+                                    ><span
+                                        class="text-xs uppercase font-semibold"
+                                        >Invoices</span
+                                    >
                                 </a>
 
                                 <a
                                     @click="setTab('invoicesDeleted')"
                                     href="#"
-                                    class="list-group-item border-0 mt-1 font-semibold"
+                                    class="list-group-item border-0"
                                     :class="[
                                         getCurrentTab == 'invoicesDeleted'
                                             ? 'text-warning'
                                             : '',
                                     ]"
-                                    ><i
-                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >Deleted
-                                </a>
-                                </div>
-                            </div>
-
-                            <hr class="bg-gray-100 mb-1 mt-0" />
-
-                            <div class="mail-list">
-                                <span class="text-center pl-3 mx-auto"
-                                    >From Procurement</span
                                 >
+                                    <i
+                                        class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
+                                    ></i
+                                    ><span
+                                        class="text-xs uppercase font-semibold"
+                                        >Deleted</span
+                                    >
+                                </a>
 
+                                <span class="list-group-item border-0 h-100">
+                                    |
+                                </span>
+                                <a
+                                    @click="setTab('entries')"
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    :class="[
+                                        getCurrentTab == 'entries'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                >
+                                    <i
+                                        class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
+                                    ></i
+                                    ><span
+                                        class="text-xs uppercase font-semibold"
+                                        >Entries</span
+                                    >
+                                </a>
+
+                                <span class="list-group-item border-0 h-100">
+                                    |
+                                </span>
                                 <a
                                     @click="setTab('home')"
                                     href="#"
-                                    class="list-group-item border-0 mt-1"
+                                    class="list-group-item border-0"
                                     :class="[
                                         getCurrentTab == 'home'
                                             ? 'text-warning'
                                             : '',
                                     ]"
-                                    ><i
-                                        class="mdi mdi-form-select font-18 align-middle me-2 pb-1"
+                                >
+                                    <i
+                                        class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
                                     ></i
-                                    >All Requisitions
+                                    ><span
+                                        class="text-xs uppercase font-semibold"
+                                        >All</span
+                                    >
                                 </a>
                                 <a
                                     @click="setTab('accepted')"
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 pt-2"
                                     :class="[
                                         getCurrentTab == 'accepted'
                                             ? 'text-warning'
                                             : '',
                                     ]"
-                                    ><i
-                                        class="mdi mdi-check-bold font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >Accepted Requisitions</a
                                 >
+                                    <!-- <i
+                            class="mdi mdi-check-bold font-18 pb-1 align-middle me-1"
+                        ></i
+                        > -->
+                                    <span
+                                        class="text-xs uppercase font-semibold"
+                                        >Accepted</span
+                                    >
+                                </a>
                                 <a
                                     @click="setTab('rejected')"
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 pt-2"
                                     :class="[
                                         getCurrentTab == 'rejected'
                                             ? 'text-warning'
                                             : '',
                                     ]"
-                                    ><i
-                                        class="mdi mdi-alert-circle font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >Rejected Requisitions</a
                                 >
+                                    <!-- <i
+                            class="mdi mdi-alert-circle font-18 pb-1 align-middle me-2"
+                        ></i
+                        > -->
+                                    <span
+                                        class="text-xs uppercase font-semibold"
+                                        >Rejected</span
+                                    >
+                                </a>
                                 <a
                                     @click="setTab('starred')"
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 pt-2"
                                     :class="[
                                         getCurrentTab == 'starred'
                                             ? 'text-warning'
                                             : '',
                                     ]"
-                                    ><i
-                                        class="mdi mdi-star font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >Starred Requisitions</a
                                 >
+                                    <!-- <i
+                            class="mdi mdi-star font-18 pb-1 align-middle me-2"
+                        ></i
+                        > -->
+                                    <span
+                                        class="text-xs uppercase font-semibold"
+                                        >Starred</span
+                                    >
+                                </a>
                                 <a
                                     @click="setTab('deleted')"
                                     href="#"
-                                    class="list-group-item border-0"
+                                    class="list-group-item border-0 pt-2"
                                     :class="[
                                         getCurrentTab == 'deleted'
                                             ? 'text-warning'
                                             : '',
                                     ]"
-                                    ><i
-                                        class="mdi mdi-delete font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >Deleted Requisitions</a
                                 >
-
-                                <a
-                                    @click="setTab('report')"
-                                    href="#"
-                                    class="list-group-item border-0"
-                                    :class="[
-                                        getCurrentTab == 'report'
-                                            ? 'text-warning'
-                                            : '',
-                                    ]"
-                                    ><i
-                                        class="mdi mdi-poll font-18 align-middle me-2 pb-1"
-                                    ></i
-                                    >School Report</a
-                                >
-                            </div>
-
-                            <!-- <div class="mt-2 ml-3">
-                                <h5>
                                     <span
-                                        class="badge rounded-pill p-1 px-2 badge-soft-secondary"
-                                        >TASKS</span
+                                        class="text-xs uppercase font-semibold"
+                                        >Deleted</span
                                     >
-                                </h5>
-                                <h6 class="text-uppercase mt-3">Pending</h6>
-                                <div class="progress my-2 progress-sm">
-                                    <div
-                                        class="progress-bar progress-lg bg-danger"
-                                        role="progressbar"
-                                        style="width: 46%"
-                                        aria-valuenow="46"
-                                        aria-valuemin="0"
-                                        aria-valuemax="100"
-                                    ></div>
-                                </div>
-                                <p class="text-muted font-12 mb-0">
-                                    7 (25%) of 35 incomplete tasks
-                                </p>
-                            </div> -->
+                                </a>
+                            </div>
                         </div>
-                        <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar h-screen p-0">
+                        <hr class="py-0 my-0" />
+
+                        <div class="h-screen p-0">
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
-                                <div v-show="getInvoiceView">
+                                <div v-if="getInvoiceView">
                                     <view-invoice></view-invoice>
                                 </div>
 
-                                <div v-show="!getInvoiceView">
+                                <div v-if="!getInvoiceView">
                                     <entries
-                                    v-show="getCurrentTab == 'entries'"
-                                ></entries>
+                                        v-if="getCurrentTab == 'entries'"
+                                    ></entries>
                                     <payment-details
-                                    v-show="getCurrentTab == 'payments'"
-                                ></payment-details>
-                                <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
-                                    <invoice-creation-deleted v-show="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
-                                <requisitions
-                                    v-show="getCurrentTab == 'home'"
-                                ></requisitions>
-                                <accepted-requisitions
-                                    v-show="getCurrentTab == 'accepted'"
-                                ></accepted-requisitions>
-                                <deleted-requisitions
-                                    v-show="getCurrentTab == 'deleted'"
-                                ></deleted-requisitions>
-                                <starred-requisitions
-                                    v-show="getCurrentTab == 'starred'"
-                                ></starred-requisitions>
-                                <rejected-requisitions
-                                    v-show="getCurrentTab == 'rejected'"
-                                ></rejected-requisitions>
-                                <report
-                                    v-show="getCurrentTab == 'report'"
-                                ></report>
+                                        v-if="getCurrentTab == 'payments'"
+                                    ></payment-details>
+                                    <invoice-creation
+                                        v-if="getCurrentTab == 'invoices'"
+                                    ></invoice-creation>
+                                    <invoice-creation-deleted
+                                        v-if="
+                                            getCurrentTab == 'invoicesDeleted'
+                                        "
+                                    ></invoice-creation-deleted>
+                                    <requisitions
+                                        v-if="getCurrentTab == 'home'"
+                                    ></requisitions>
+                                    <accepted-requisitions
+                                        v-if="getCurrentTab == 'accepted'"
+                                    ></accepted-requisitions>
+                                    <deleted-requisitions
+                                        v-if="getCurrentTab == 'deleted'"
+                                    ></deleted-requisitions>
+                                    <starred-requisitions
+                                        v-if="getCurrentTab == 'starred'"
+                                    ></starred-requisitions>
+                                    <rejected-requisitions
+                                        v-if="getCurrentTab == 'rejected'"
+                                    ></rejected-requisitions>
+                                    <report
+                                        v-if="getCurrentTab == 'report'"
+                                    ></report>
                                 </div>
                                 <!-- </transition> -->
                             </div>
@@ -341,11 +337,15 @@ export default {
         },
 
         getCurrentTabInvoices() {
-            return this.$store.getters["AccountantInvoiceModule/getCurrentTabInvoices"];
+            return this.$store.getters[
+                "AccountantInvoiceModule/getCurrentTabInvoices"
+            ];
         },
 
         getInvoiceView() {
-            return this.$store.getters["AccountantInvoiceModule/getInvoiceView"];
+            return this.$store.getters[
+                "AccountantInvoiceModule/getInvoiceView"
+            ];
         },
 
         legerEntriesListener() {

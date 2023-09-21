@@ -1,18 +1,28 @@
 <template>
     <div data-app>
         <div class="h-screen p-0 col-12 pt-0 mt-0">
-            <div class="d-flex justify-content-end mail-list mt-2 mb-1">
+            <div class="d-flex justify-content-end mail-list mt-0">
                 <div class="d-flex justifi-content-between">
+                    <a v-show="getPaymentView" @click="setInvoiceView()" class="btn text-lg-700">
+                        <strong class="text-warning" style="font-size: large"
+                            ><i class="fe-arrow-left"></i>
+                        </strong>
+                    </a>
+
                     <a
                         @click="setTab('payments')"
                         href="#"
                         class="list-group-item border-0"
-                        :class="[getCurrentTab == 'payments' ? 'text-warning' : '']"
+                        :class="[
+                            getCurrentTab == 'payments' ? 'text-warning' : '',
+                        ]"
                     >
                         <i
-                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                            class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
                         ></i
-                        >Student Payments
+                        ><span class="text-xs uppercase font-semibold"
+                            >Student Payments</span
+                        >
                     </a>
 
                     <span class="list-group-item border-0 h-100"> | </span>
@@ -21,25 +31,34 @@
                         @click="setTab('invoices')"
                         href="#"
                         class="list-group-item border-0"
-                        :class="[getCurrentTab == 'invoices' ? 'text-warning' : '']"
+                        :class="[
+                            getCurrentTab == 'invoices' ? 'text-warning' : '',
+                        ]"
                     >
                         <i
-                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                            class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
                         ></i
-                        >Invoices
+                        ><span class="text-xs uppercase font-semibold"
+                            >Invoices</span
+                        >
                     </a>
-
 
                     <a
                         @click="setTab('invoicesDeleted')"
                         href="#"
                         class="list-group-item border-0"
-                        :class="[getCurrentTab == 'invoicesDeleted' ? 'text-warning' : '']"
+                        :class="[
+                            getCurrentTab == 'invoicesDeleted'
+                                ? 'text-warning'
+                                : '',
+                        ]"
                     >
                         <i
-                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                            class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
                         ></i
-                        >Deleted
+                        ><span class="text-xs uppercase font-semibold"
+                            >Deleted</span
+                        >
                     </a>
 
                     <span class="list-group-item border-0 h-100"> | </span>
@@ -47,12 +66,16 @@
                         @click="setTab('entries')"
                         href="#"
                         class="list-group-item border-0"
-                        :class="[getCurrentTab == 'entries' ? 'text-warning' : '']"
+                        :class="[
+                            getCurrentTab == 'entries' ? 'text-warning' : '',
+                        ]"
                     >
                         <i
-                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                            class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
                         ></i
-                        >Entries
+                        ><span class="text-xs uppercase font-semibold"
+                            >Entries</span
+                        >
                     </a>
 
                     <span class="list-group-item border-0 h-100"> | </span>
@@ -63,61 +86,75 @@
                         :class="[getCurrentTab == 'home' ? 'text-warning' : '']"
                     >
                         <i
-                            class="mdi mdi-form-select font-18 pb-1 align-middle me-1"
+                            class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
                         ></i
-                        >All
+                        ><span class="text-xs uppercase font-semibold"
+                            >All</span
+                        >
                     </a>
                     <a
                         @click="setTab('accepted')"
                         href="#"
-                        class="list-group-item border-0"
+                        class="list-group-item border-0 pt-2"
                         :class="[
                             getCurrentTab == 'accepted' ? 'text-warning' : '',
                         ]"
                     >
-                        <i
+                        <!-- <i
                             class="mdi mdi-check-bold font-18 pb-1 align-middle me-1"
                         ></i
-                        >Accepted
+                        > -->
+                        <span class="text-xs uppercase font-semibold"
+                            >Accepted</span
+                        >
                     </a>
                     <a
                         @click="setTab('rejected')"
                         href="#"
-                        class="list-group-item border-0"
+                        class="list-group-item border-0 pt-2"
                         :class="[
                             getCurrentTab == 'rejected' ? 'text-warning' : '',
                         ]"
                     >
-                        <i
+                        <!-- <i
                             class="mdi mdi-alert-circle font-18 pb-1 align-middle me-2"
                         ></i
-                        >Rejected
+                        > -->
+                        <span class="text-xs uppercase font-semibold"
+                            >Rejected</span
+                        >
                     </a>
                     <a
                         @click="setTab('starred')"
                         href="#"
-                        class="list-group-item border-0"
+                        class="list-group-item border-0 pt-2"
                         :class="[
                             getCurrentTab == 'starred' ? 'text-warning' : '',
                         ]"
                     >
-                        <i
+                        <!-- <i
                             class="mdi mdi-star font-18 pb-1 align-middle me-2"
                         ></i
-                        >Starred
+                        > -->
+                        <span class="text-xs uppercase font-semibold"
+                            >Starred</span
+                        >
                     </a>
                     <a
                         @click="setTab('deleted')"
                         href="#"
-                        class="list-group-item border-0"
+                        class="list-group-item border-0 pt-2"
                         :class="[
                             getCurrentTab == 'deleted' ? 'text-warning' : '',
                         ]"
                     >
-                        <i
+                        <!-- <i
                             class="mdi mdi-delete font-18 pb-1 align-middle me-2"
                         ></i
-                        >Deleted
+                        > -->
+                        <span class="text-xs uppercase font-semibold"
+                            >Deleted</span
+                        >
                     </a>
                 </div>
             </div>
@@ -130,24 +167,30 @@
                 </div>
 
                 <div v-show="!getInvoiceView">
-                    <payment-details v-show="getCurrentTab == 'payments'"></payment-details>
-                    <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
-                                    <invoice-creation-deleted v-show="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
-                    <entries v-show="getCurrentTab == 'entries'"></entries>
+                    <payment-details
+                        v-if="getCurrentTab == 'payments'"
+                    ></payment-details>
+                    <invoice-creation
+                        v-if="getCurrentTab == 'invoices'"
+                    ></invoice-creation>
+                    <invoice-creation-deleted
+                        v-if="getCurrentTab == 'invoicesDeleted'"
+                    ></invoice-creation-deleted>
+                    <entries v-if="getCurrentTab == 'entries'"></entries>
                     <requisitions
-                        v-show="getCurrentTab == 'home'"
+                        v-if="getCurrentTab == 'home'"
                     ></requisitions>
                     <accepted-requisitions
-                        v-show="getCurrentTab == 'accepted'"
+                        v-if="getCurrentTab == 'accepted'"
                     ></accepted-requisitions>
                     <deleted-requisitions
-                                    v-show="getCurrentTab == 'deleted'"
-                                ></deleted-requisitions>
+                        v-if="getCurrentTab == 'deleted'"
+                    ></deleted-requisitions>
                     <starred-requisitions
-                        v-show="getCurrentTab == 'starred'"
+                        v-if="getCurrentTab == 'starred'"
                     ></starred-requisitions>
                     <rejected-requisitions
-                        v-show="getCurrentTab == 'rejected'"
+                        v-if="getCurrentTab == 'rejected'"
                     ></rejected-requisitions>
                 </div>
             </div>
@@ -213,6 +256,12 @@ export default {
                 "AccountantInvoiceModule/getInvoiceView"
             ];
         },
+
+        getPaymentView() {
+            return this.$store.getters[
+                "AccountantInvoiceModule/getPaymentView"
+            ];
+        },
     },
     watch: {
         //Add watchers...
@@ -225,6 +274,13 @@ export default {
 
         setTab(tab) {
             this.$store.dispatch("AccountantInvoiceModule/setTab", tab);
+        },
+
+        setInvoiceView() {
+            this.$store.dispatch(
+                "AccountantInvoiceModule/setPaymentView",
+                null
+            );
         },
     },
 };

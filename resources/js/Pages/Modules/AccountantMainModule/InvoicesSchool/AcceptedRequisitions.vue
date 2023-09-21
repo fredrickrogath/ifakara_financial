@@ -75,6 +75,8 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                items-per-page="11"
+                dense
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -116,7 +118,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -132,7 +134,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'sellers'"
                                     >
                                     
@@ -168,7 +170,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'tools'"
                                 >
                                     <div v-for="tool in item[header.value]">
@@ -200,7 +202,7 @@
                                 </span>
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
                                     {{

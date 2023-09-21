@@ -57,7 +57,7 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0">
-                Students {{ getSchoolId }}
+                <span class="text-sm uppercase">Students</span> <span v-show="false">{{ getSchoolId }}</span>
                 <v-spacer></v-spacer>
                 <v-text-field
                     v-model="search"
@@ -116,6 +116,7 @@
                 :search="search"
                 class="elevation-1"
                 :items-per-page="11"
+                dense
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -164,7 +165,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -172,7 +173,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'class_type'"
                                     >{{ item[header.value].class_level }}</span
                                 >
@@ -186,25 +187,25 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'first_name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'last_name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'gender'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'from'"
                                 >
                                     {{ item[header.value] }}
