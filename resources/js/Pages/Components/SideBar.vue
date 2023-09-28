@@ -37,7 +37,7 @@
                                 <span class="text-xs font-semibold uppercase"> Audits</span>
                             </my-custom-link>
 
-                            <div class="ml-5 pl-5">
+                            <div class="ml-5 pl-5" v-show="route().current('internal_auditor.audits')">
                                 <div>
                                     <a
                                         href="#"
@@ -146,7 +146,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ml-3 pl-3">
+                            <div class="ml-3 pl-3" v-show="route().current('internal_auditor.audits')">
 
                                 <div>
                                     <a
@@ -494,38 +494,11 @@
 
                         <li class="menu-title mt-2">Apps</li>
 
-                        <!-- <li>
-                            <my-custom-link
-                                :href="route('bishop.secretary')"
-                                :active="route().current('bishop.secretary')"
-                            >
-                                <v-icon size="22">mdi-account-tie</v-icon>
-                                <span> Secretary </span>
-                            </my-custom-link>
-                        </li> -->
-
-                        <!-- <li>
-                            <my-custom-link
-                                :href="route('bishop.accountant')"
-                                :active="route().current('bishop.accountant')"
-                            >
-                                <v-icon size="22">mdi-account-tie</v-icon>
-                                <span> Accountant </span>
-                            </my-custom-link>
-                        </li> -->
-
-                        <!-- <li>
-                            <my-custom-link
-                                :href="route('bishop.procurement')"
-                                :active="route().current('bishop.procurement')"
-                            >
-                                <v-icon size="22">mdi-account-tie</v-icon>
-                                <span> Procurement </span>
-                            </my-custom-link>
-                        </li> -->
-
                         <li>
-                            <my-custom-link href="#">
+                            <my-custom-link :href="route('bishop.approves')"
+                                :active="
+                                    route().current('bishop.approves')
+                                ">
                                 <v-icon size="22">mdi-account-tie</v-icon>
                                 <span> Approves </span>
                             </my-custom-link>
@@ -542,7 +515,7 @@
                                 <span> Internal Auditor </span>
                             </my-custom-link>
 
-                            <div class="ml-5 pl-5">
+                            <div class="ml-5 pl-5" v-show="route().current('bishop.internal_auditor')">
                                 <div>
                                     <a
                                         href="#"
@@ -651,7 +624,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ml-3 pl-3">
+                            <div class="ml-3 pl-3" v-show="route().current('bishop.internal_auditor')">
 
                                 <div>
                                     <a

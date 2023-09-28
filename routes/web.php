@@ -74,8 +74,7 @@ Route::middleware([
         Route::get('/accountant', [\App\Http\Controllers\Bishop\DashboardController::class, 'accountant'])->name('accountant');
         Route::get('/procurement', [\App\Http\Controllers\Bishop\DashboardController::class, 'procurement'])->name('procurement');
         Route::get('/internal_auditor', [\App\Http\Controllers\Bishop\DashboardController::class, 'internal_auditor'])->name('internal_auditor');
-        // Route::get('/account', [\App\Http\Controllers\Bishop\DashboardController::class, 'account'])->name('account');
-        // Route::get('/internal_office', [\App\Http\Controllers\Bishop\DashboardController::class, 'internal_office'])->name('internal_office');
+        Route::get('/approves', [\App\Http\Controllers\Bishop\DashboardController::class, 'approves'])->name('approves');
     });
 
 

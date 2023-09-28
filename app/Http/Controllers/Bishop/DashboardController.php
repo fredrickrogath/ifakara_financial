@@ -57,4 +57,9 @@ class DashboardController extends Controller
         $this->authorize('authorizeBishop', \App\Models\User::class); 
         return Inertia::render('Dashboard', $bishopService->dashboardData());
     }
+
+    public function approves(BishopService $bishopService){
+        $this->authorize('authorizeBishop', \App\Models\User::class); 
+        return Inertia::render('Dashboard', $bishopService->dashboardData());
+    }
 }
