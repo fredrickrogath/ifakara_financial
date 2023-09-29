@@ -162,11 +162,15 @@
             <hr class="bg-gray-200 py-0 my-0" />
 
             <div class="mt-0 pt-0">
-                <div v-show="getInvoiceView">
+                <div v-show="getInvoiceView && !getInvoiceCreationView">
                     <view-invoice></view-invoice>
                 </div>
 
-                <div v-show="!getInvoiceView">
+                <div v-show="getInvoiceCreationView && !getInvoiceView">
+                    <invoice-creation-view></invoice-creation-view>
+                </div>
+
+                <div v-show="!getInvoiceView && !getInvoiceCreationView">
                     <payment-details
                         v-if="getCurrentTab == 'payments'"
                     ></payment-details>
@@ -209,6 +213,7 @@ import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 import ViewInvoice from "./Invoices/ViewInvoice.vue";
 import InvoiceCreation from "./Invoices/InvoiceCreation/InvoiceCreation.vue";
 import InvoiceCreationDeleted from "./Invoices/InvoiceCreation/InvoiceCreationDeleted.vue";
+import InvoiceCreationView from "../../../AccountantMainModule/InvoicesSchool/InvoiceCreation/InvoiceCreationView.vue";
 import PaymentDetails from "../../../AccountantMainModule/InvoicesSchool/PaymentDetails.vue";
 
 import Entries from "./Invoices/Entries.vue";
@@ -223,6 +228,7 @@ export default {
         ViewInvoice,
         Entries,
         InvoiceCreation,
+        InvoiceCreationView,
         InvoiceCreationDeleted,
 
         PaymentDetails,
@@ -260,6 +266,12 @@ export default {
         getPaymentView() {
             return this.$store.getters[
                 "AccountantInvoiceModule/getPaymentView"
+            ];
+        },
+
+        getInvoiceCreationView() {
+            return this.$store.getters[
+                "AccountantInvoiceModule/getInvoiceCreationView"
             ];
         },
     },

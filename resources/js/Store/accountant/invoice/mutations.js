@@ -16,6 +16,11 @@ export default {
         state.invoiceId = id;
     },
 
+    setInvoiceCreationView(state, id){
+        state.invoiceCreationView = !state.invoiceCreationView;
+        state.invoiceCreationId = id;
+    },
+
     setCurrentTabInvoices(state){
         state.currentTabInvoices = !state.currentTabInvoices;
     },

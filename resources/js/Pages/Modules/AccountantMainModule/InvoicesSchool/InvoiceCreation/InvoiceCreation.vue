@@ -37,30 +37,43 @@
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
                                 <v-icon
-                                    v-if="header.value == 'head'"
-                                    size="22"
+                                    v-if="header.value == 'head' && $page.props.role === 'bishop'"
+                                    :class="
+                                        items[idx]['status_from_head'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
                                 >
                                     {{ items[idx]['status_from_head'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>
+
                                 <v-icon
                                     v-if="header.value == 'finance' && $page.props.role !== 'bishop'"
-                                    size="22"
+                                    :class="
+                                        !items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
                                     @click="verifyInvoiceCreation(items[idx]['id'], items[idx]['status_from_financial_accountant'])"
                                 >
                                     {{ items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>
 
                                 <v-icon
-                                    v-if="header.value == 'finance' && $page.props.role === 'bishop'"
-                                    size="22"
-                                    @click="verifyInvoiceCreation(items[idx]['id'], items[idx]['status_from_financial_accountant'])"
+                                    v-if="header.text == 'Approval' && $page.props.role === 'bishop'"
+                                    :class="
+                                        items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                    @click="verifyInvoiceCreation(items[idx]['id'], items[idx]['status_from_financial_bishop'])"
                                 >
-                                    {{ items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                    {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>
 
                                 <v-icon
                                     v-if="header.value == 'finance' && $page.props.role === 'bishop'"
-                                    size="22"
+                                    :class="
+                                        !items[idx]['status_from_financial_accountant'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
                                 >
                                     {{ !items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>
@@ -68,7 +81,7 @@
                                 <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
-                                    @click="setInvoiceView(items[idx]['id'])"
+                                    @click="setInvoiceCreationView(items[idx]['id'])"
                                 >
                                     mdi-eye
                                 </v-icon>
@@ -124,13 +137,13 @@
                                             }}</span>
                                         </span>
 
-                                        <v-icon size="20" class="mb-1 px-1"
+                                        <!-- <v-icon size="20" class="mb-1 px-1"
                                             >mdi-hand-pointing-right</v-icon
                                         >
 
                                         <span>
                                             Description {{ item.description }}
-                                        </span>
+                                        </span> -->
                                     </div>
                                 </span>
                             </td>
@@ -222,10 +235,11 @@ export default {
                     text: "Items",
                     value: "invoice_items",
                 },
-                { text: "Date", value: "created_at" },
                 { text: "Head", value: "head" },
                 { text: "Finance", value: "finance" },
-                { text: "Approval", value: "status_from_financial_bishop" },
+                { text: "Approval", value: "bishop" },
+                { text: "Date", value: "created_at" },
+                { text: "View", value: "view" },
             ],
 
             invoices: [],
@@ -282,8 +296,8 @@ export default {
         },
 
         formattedDate(date) {
-            return moment(date).format("MMMM Do YYYY");
-            // return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+            // return moment(date).format("MMMM Do YYYY");
+            return moment(date).format("MMMM Do YYYY, h:mm:ss a");
         },
 
         totalPrice(item) {
@@ -294,6 +308,10 @@ export default {
 
         getSellerProfile(seller) {
             this.sellerInfo = seller;
+        },
+
+        setInvoiceCreationView(id) {
+            this.$store.dispatch("AccountantInvoiceModule/setInvoiceCreationView", id);
         },
         
         async verifyInvoiceCreation(id , status_from_financial_accountant) {

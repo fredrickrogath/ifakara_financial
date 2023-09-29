@@ -167,7 +167,7 @@
                                            Price <span class="text-green-500">{{ formattedPrice(item.price) }}</span>
                                         </span>
 
-                                        <v-icon
+                                        <!-- <v-icon
                                                     size="20"
                                                     class="mb-1 px-1"
                                                     >mdi-hand-pointing-right</v-icon
@@ -175,7 +175,7 @@
 
                                         <span>
                                            Description {{ item.description }}
-                                        </span>
+                                        </span> -->
                                     </div>
                                 </span>
 

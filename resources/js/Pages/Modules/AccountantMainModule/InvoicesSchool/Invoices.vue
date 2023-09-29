@@ -121,7 +121,7 @@
                                     ></i
                                     ><span
                                         class="text-xs uppercase font-semibold"
-                                        >All</span
+                                        >All 876869896</span
                                     >
                                 </a>
                                 <a
@@ -347,7 +347,7 @@ export default {
                 "AccountantInvoiceModule/getInvoiceView"
             ];
         },
-
+    
         legerEntriesListener() {
             return this.legerEntries !== null ? this.legerEntries.data : null;
         },

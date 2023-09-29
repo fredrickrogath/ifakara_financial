@@ -14,6 +14,8 @@ export default {
 
             invoiceSchoolView: false,
             invoiceView: false,
+            invoiceCreationView: false,
+            invoiceCreationId: null,
             invoiceId: null,
             schoolId: null,
 

@@ -19,10 +19,18 @@ export default {
         return state.invoiceView;
     },
 
+    getInvoiceCreationView(state){
+        return state.invoiceCreationView;
+    },
+
+    getInvoiceCreationId(state){
+        return state.invoiceCreationId;
+    },
+
     getInvoiceId(state){
         return state.invoiceId;
     },
-
+    
     getCurrentTabInvoices(state){
         return state.currentTabInvoices;
     },

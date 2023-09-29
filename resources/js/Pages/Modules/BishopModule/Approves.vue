@@ -5,10 +5,8 @@
             <div class="col-12">
                 <div class="h-screen">
                     <div class="card">
-
                         <div class="d-flex justify-content-end mail-list mt-0">
                             <div class="d-flex justifi-content-between">
-
                                 <a
                                     @click="setTab('invoices')"
                                     href="#"
@@ -58,11 +56,20 @@
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
-                                <div v-if="getInvoiceView">
+                                <div v-if="getInvoiceView & !getInvoiceCreationView">
                                     <view-invoice></view-invoice>
                                 </div>
 
-                                <div v-if="!getInvoiceView">
+                                <div
+                                    v-show="
+                                        getInvoiceCreationView &&
+                                        !getInvoiceView
+                                    "
+                                >
+                                    <invoice-creation-view></invoice-creation-view>
+                                </div>
+
+                                <div v-if="!getInvoiceView && !getInvoiceCreationView">
                                     <!-- <entries
                                         v-if="getCurrentTab == 'entries'"
                                     ></entries> -->
@@ -121,6 +128,7 @@ import Requisitions from "./../AccountantMainModule/InvoicesSchool/Requisitions.
 // import RejectedRequisitions from "./RejectedRequisitions.vue";
 import ViewInvoice from "./../AccountantMainModule/InvoicesSchool/ViewInvoice.vue";
 import InvoiceCreation from "./../AccountantMainModule/InvoicesSchool/InvoiceCreation/InvoiceCreation.vue";
+import InvoiceCreationView from "../AccountantMainModule/InvoicesSchool/InvoiceCreation/InvoiceCreationView.vue";
 // import InvoiceCreationView from "./InvoiceCreation/InvoiceCreationView.vue";
 // import InvoiceCreationDeleted from "./InvoiceCreation/InvoiceCreationDeleted.vue";
 
@@ -141,6 +149,7 @@ export default {
         // RejectedRequisitions,
         ViewInvoice,
         InvoiceCreation,
+        InvoiceCreationView,
         // InvoiceCreationView,
         // InvoiceCreationDeleted,
 
@@ -207,6 +216,12 @@ export default {
 
         setLegerEntryListener() {
             return this.selectedLegerEntry;
+        },
+
+        getInvoiceCreationView() {
+            return this.$store.getters[
+                "AccountantInvoiceModule/getInvoiceCreationView"
+            ];
         },
     },
     watch: {
@@ -286,4 +301,3 @@ export default {
     },
 };
 </script>
-
