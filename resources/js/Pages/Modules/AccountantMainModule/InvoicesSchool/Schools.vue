@@ -188,27 +188,7 @@ export default {
     components: {
         Spinner,
     },
-
-    props: {
-        // postsData: {
-        // type: Number,
-        // default: [],
-        // default(rawProps) {
-        //     return { message: "hello" };
-        // },
-        // DATA TYPES
-        // String
-        // Number
-        // Boolean
-        // Array
-        // Object
-        // Date
-        // Function
-        // Symbol
-        // disabled: [Boolean, Number]
-        // },
-    },
-
+    
     mounted() {
         this.showLoader = true;
         this.getSchools();

@@ -351,12 +351,12 @@
                             <div class="h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
-                                <div
+                                <!-- <div
                                     v-if="getAddStudent && !getSchoolView"
                                     key="1"
                                 >
                                     <add-staff></add-staff>
-                                </div>
+                                </div> -->
 
                                 <div v-if="getSchoolView && !getAddStudent">
                                     <open-school></open-school>
@@ -379,12 +379,12 @@
                                             !getAddSchool
                                         "
                                     ></all-schools>
-                                    <add-school
+                                    <!-- <add-school
                                         v-if="
                                             getCurrentTab == 'allSchools' &&
                                             getAddSchool
                                         "
-                                    ></add-school>
+                                    ></add-school> -->
                                     <all-staffs
                                         v-if="getCurrentTab == 'allStaffs'"
                                     ></all-staffs>
@@ -441,7 +441,7 @@
 
 import AllStaffs from "./SchoolComponents/AllStaffs.vue";
 import NewStaffs from "./SchoolComponents/NewStaffs.vue";
-import AddStaff from "./SchoolComponents/AddStaff.vue";
+// import AddStaff from "./SchoolComponents/AddStaff.vue";
 import ViewStaff from "./SchoolComponents/ViewStaff.vue";
 import AllStudents from "./SchoolComponents/AllStudents.vue";
 
@@ -449,7 +449,7 @@ import AllSchools from "./SchoolComponents/School/AllSchools.vue";
 // import AllSchoolStudents from "./SchoolComponents/School/AllStudents.vue";
 // import AllSchoolStaffs from "./SchoolComponents/School/AllStaffs.vue";
 import OpenSchool from "./SchoolComponents/School/OpenSchool.vue";
-import AddSchool from "./SchoolComponents/School/AllSchools/AddSchool.vue";
+// import AddSchool from "./SchoolComponents/School/AllSchools/AddSchool.vue";
 import Permissions from "./SchoolComponents/School/School/Permissions.vue";
 import Comments from "./SchoolComponents/Comments.vue";
 
@@ -464,7 +464,7 @@ export default {
 
         AllStaffs,
         NewStaffs,
-        AddStaff,
+        // AddStaff,
         ViewStaff,
         AllStudents,
 
@@ -472,7 +472,7 @@ export default {
         // AllSchoolStudents,
         // AllSchoolStaffs,
         OpenSchool,
-        AddSchool,
+        // AddSchool,
         Permissions,
         Comments,
         // Entries,
@@ -685,58 +685,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-.slide-enter-active {
-    animation: slide-in 200ms ease-out forwards;
-}
-.slide-leave-active {
-    animation: slide-out 200ms ease-out forwards;
-}
-
-@keyframes slide-in {
-    from {
-        transform: translateY(-30px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slide-out {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    to {
-        transform: translateY(-30);
-        opacity: 0;
-    }
-}
-
-@keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-4px) rotate(-5deg);
-    }
-    50% {
-        transform: translateX(4px) rotate(5deg);
-    }
-    75% {
-        transform: translateX(-4px) rotate(-5deg);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
-.shake {
-    animation: shake 0.5s infinite;
-}
-</style>

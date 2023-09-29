@@ -323,14 +323,14 @@ export default {
     },
 
     watch: {
-    schoolId(newVal, oldValue) {
-        if (newVal !== null) {
-                this.getInvoices();
-            }
-            // console.log(
-            //     `The message has changed from "${oldVal}" to "${newVal}"`
-            // );
-    },
+    // schoolId(newVal, oldValue) {
+    //     if (newVal !== null) {
+    //             this.getInvoices();
+    //         }
+    //         // console.log(
+    //         //     `The message has changed from "${oldVal}" to "${newVal}"`
+    //         // );
+    // },
   },
 
     methods: {
@@ -361,7 +361,19 @@ export default {
         },
         
         getInvoices() {
-            axios
+            if(this.$page.props.role == 'bishop'){
+                axios
+                .post(this.getMainUrl + "accountant/getInvoicesFinancialAll", {
+                })
+                .then((response) => {
+                    this.invoices = response.data.data;
+                    this.showLoader = false;
+                    // console.log(response.data.data)
+                });
+            }
+            
+            if(this.$page.props.role != 'bishop'){
+                axios
                 .post(this.getMainUrl + "accountant/getInvoicesFinancial", {
                     school_id: this.getSchoolId,
                 })
@@ -370,6 +382,7 @@ export default {
                     this.showLoader = false;
                     // console.log(response.data.data)
                 });
+            }
         },
 
         setInvoiceView(id) {

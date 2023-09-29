@@ -34,9 +34,9 @@
                         <home-page
                             v-if="route().current('bishop.dashboard')"
                         ></home-page>
-                        <!-- <secretary
-                            v-if="route().current('bishop.secretary')"
-                        ></secretary> -->
+                        <approves
+                            v-if="route().current('bishop.approves')"
+                        ></approves>
                         <!-- <documents v-if="route().current('bishop.documents')"></documents> -->
                         <!-- <accountant
                             v-if="route().current('bishop.accountant')"
@@ -201,6 +201,7 @@ import TopBar from "./Components/TopBar.vue";
 import HomePage from "./Modules/BishopModule/HomePage.vue";
 // import Documents from "./Modules/BishopModule/Documents.vue";
 import InternalAuditor from "./Modules/InternalAuditorModule/Audit.vue";
+import Approves from './Modules/BishopModule/Approves.vue';
 // import Accountant from "./Modules/AccountantMainModule/Invoices.vue";
 // import Secretary from "./Modules/BishopModule/SecretaryOffice.vue";
 // import Procurement from "./Modules/ProcurementModule/HomePage.vue";
@@ -241,6 +242,7 @@ export default {
         // MY PAGES
         HomePage,
         // Documents,
+        Approves,
         InternalAuditor,
         // Accountant,
         // Secretary,
