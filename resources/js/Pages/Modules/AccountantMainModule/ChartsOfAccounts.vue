@@ -210,15 +210,20 @@
             <!-- End of Right modal content -->
 
             <v-card-title class="px-1 pt-0">
-                Chart Of Accounts
+                
+                <div class="pl-2 pt-1 text-sm uppercase">Chart Of Accounts</div>
+
                 <v-spacer></v-spacer>
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
+                <div class="flex col-3 p-0 pt-1 mr-2">
+                        <input
+                        v-model="search"
+                            type="text"
+                            class="form-control form-control-sm"
+                        />
+                        <v-icon size="20" class="px-1"
+                            >mdi-magnify</v-icon
+                        >
+                    </div>
 
                 <v-icon
                     type="button"
@@ -231,6 +236,7 @@
                     mdi-pen-plus
                 </v-icon>
             </v-card-title>
+            <hr class="bg-gray-200 mb-1 mt-0" />
 
             <v-data-table
                 :headers="headers"

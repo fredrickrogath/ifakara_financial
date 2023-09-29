@@ -9,20 +9,12 @@
             <!-- <v-card elevation="0" data-app> -->
 
             <!-- Warning Alert Modal -->
-            <div
-                id="warning-alert-modal"
-                class="modal fade"
-                tabindex="-1"
-                role="dialog"
-                aria-hidden="true"
-            >
+            <div id="warning-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-body p-2">
                             <div class="text-center">
-                                <i
-                                    class="dripicons-warning h1 text-warning"
-                                ></i>
+                                <i class="dripicons-warning h1 text-warning"></i>
                                 <h4 class="mt-2 text-gray-500">
                                     Are you sure you want to delete this data ?
                                 </h4>
@@ -31,19 +23,12 @@
                                     in your trash within 30 days.
                                 </p>
                                 <div class="flex justify-around">
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-warning my-1 text-white"
-                                        data-bs-dismiss="modal"
-                                        @click="deleteInvoice()"
-                                    >
+                                    <button type="button" class="btn btn-sm btn-warning my-1 text-white"
+                                        data-bs-dismiss="modal" @click="deleteInvoice()">
                                         Continue
                                     </button>
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-danger my-1 text-white"
-                                        data-bs-dismiss="modal"
-                                    >
+                                    <button type="button" class="btn btn-sm btn-danger my-1 text-white"
+                                        data-bs-dismiss="modal">
                                         cancel
                                     </button>
                                 </div>
@@ -56,126 +41,73 @@
             </div>
             <!-- /.modal -->
 
-            <v-card-title class="px-1 pt-0">
-                Invoices
+            <v-card-title class="px-0 pt-0 pb-1">
+                <div class="pl-2 pt-1 text-sm uppercase">Invoice</div>
                 <v-spacer></v-spacer>
 
                 <snackbar message="Task completed successfully"></snackbar>
 
-                <!-- <v-btn color="primary" @click="generatePdfReport"
-                    >Generate PDF Report</v-btn
-                > -->
 
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
+                <div class="flex col-3 p-0 pt-1 mr-2">
+                    <input v-model="search" type="text" class="form-control form-control-sm" />
+                    <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                </div>
+
             </v-card-title>
+            <hr class="bg-gray-200 mb-1 mt-0" />
 
-            <v-data-table
-                :headers="headers"
-                :items="invoices"
-                item-key="name"
-                :search="search"
-                class="elevation-1"
-                :items-per-page="11"
-            >
+            <v-data-table :headers="headers" :items="invoices" item-key="name" :search="search" class="elevation-1"
+                :items-per-page="11">
                 <template v-slot:body="{ items, headers }">
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
-                                <v-icon
-                                    v-if="header.value == 'delete'"
-                                    size="22"
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
-                                    @click="setIdForAction(items[idx]['id'])"
-                                >
+                                <v-icon v-if="header.value == 'delete'" size="22" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#warning-alert-modal" @click="setIdForAction(items[idx]['id'])">
                                     mdi-delete
                                 </v-icon>
 
-                                <v-icon
-                                    v-if="header.value == 'view'"
-                                    size="22"
-                                    @click="setInvoiceView(items[idx]['id'])"
-                                >
+                                <v-icon v-if="header.value == 'view'" size="22" @click="setInvoiceView(items[idx]['id'])">
                                     mdi-eye
                                 </v-icon>
 
-                                <v-icon
-                                    v-if="header.value == 'starred'"
-                                    size="22"
-                                    :class="
-                                        item[header.value] ? 'text-warning' : ''
-                                    "
-                                    @click="
-                                        starredInvoice(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                >
+                                <v-icon v-if="header.value == 'starred'" size="22" :class="item[header.value] ? 'text-warning' : ''
+                                    " @click="
+        starredInvoice(
+            items[idx]['id'],
+            item[header.value],
+            header.value
+        )
+        ">
                                     mdi-star
                                 </v-icon>
 
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'id'"
-                                >
+                                <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'id'">
                                     <!-- {{ item[header.value] }} -->
                                     {{ encrypt() }}
                                 </span>
 
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'created_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
+                                <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'created_at'">{{
+                                    formattedDate(item[header.value])
+                                }}</span>
 
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'updated_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
+                                <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'updated_at'">{{
+                                    formattedDate(item[header.value])
+                                }}</span>
 
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'seller'"
-                                    >{{ item[header.value].name }}</span
-                                >
+                                <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'seller'">{{
+                                    item[header.value].name }}</span>
 
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value === 'sellers'"
-                                >
-                                    <span
-                                        v-for="seller in item[header.value]"
-                                        :key="seller.id"
-                                        class="d-block"
-                                    >
+                                <span class="text-gray-600 italic font-semibold" v-else-if="header.value === 'sellers'">
+                                    <span v-for="seller in item[header.value]" :key="seller.id" class="d-block">
                                         <div class="">
                                             <v-menu transition="fab-transition">
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
-                                                >
-                                                    <span
-                                                        class="seller-name"
-                                                        v-bind="attrs"
-                                                        v-on="on"
-                                                        @click="getSellerProfile(seller)"
-                                                    >
+                                                <template v-slot:activator="{
+                                                    on,
+                                                    attrs,
+                                                }">
+                                                    <span class="seller-name" v-bind="attrs" v-on="on"
+                                                        @click="getSellerProfile(seller)">
                                                         {{ seller.name }}
                                                     </span>
                                                 </template>
@@ -186,10 +118,7 @@
                                     </span>
                                 </span>
 
-                                <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'tools'"
-                                >
+                                <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'tools'">
                                     <div v-for="tool in item[header.value]">
                                         <span>
                                             {{ tool.name }}
@@ -197,10 +126,7 @@
                                     </div>
                                 </span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'tool_sum'"
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'tool_sum'">
                                     {{
                                         formattedPrice(totalPrice(item.invoice_tool))
                                     }}
@@ -465,9 +391,9 @@ export default {
             this.updateTools(id, data, column);
             // console.log(id + " , " +data);
         },
-        cancel() {},
-        open() {},
-        close() {},
+        cancel() { },
+        open() { },
+        close() { },
     },
 };
 </script>

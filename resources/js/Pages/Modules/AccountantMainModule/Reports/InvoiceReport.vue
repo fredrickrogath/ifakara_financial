@@ -1,45 +1,25 @@
 <template>
     <div>
         <v-card-title class="px-1 py-0 my-0">
-            INVOICE REPORT {{ formattedDateRange }}
+            <div class="pl-2 pt-1 text-sm uppercase">INVOICE REPORT <span class="d-none">{{ formattedDateRange }}</span>
+            </div>
+
+
             <v-spacer></v-spacer>
 
             <v-row class="px-2 pt-1">
-                <v-menu
-                    ref="datePickerMenu"
-                    :close-on-content-click="false"
-                    v-model="datePickerMenu"
-                    :return-value.sync="dates"
-                    transition="scale-transition"
-                    offset-y
-                    max-width="290px"
-                >
+                <v-menu ref="datePickerMenu" :close-on-content-click="false" v-model="datePickerMenu"
+                    :return-value.sync="dates" transition="scale-transition" offset-y max-width="290px">
                     <template v-slot:activator="{ on }">
-                        <v-text-field
-                            v-model="dateRangeText"
-                            label="Date range"
-                            prepend-icon="mdi-calendar"
-                            class=""
-                            readonly
-                            v-on="on"
-                        ></v-text-field>
+                        <v-text-field v-model="dateRangeText" label="Date range" prepend-icon="mdi-calendar" class=""
+                            readonly v-on="on"></v-text-field>
                     </template>
-                    <v-date-picker
-                        color="#52525b"
-                        header-color="#52525b"
-                        v-model="dates"
-                        range
-                    ></v-date-picker>
+                    <v-date-picker color="#52525b" header-color="#52525b" v-model="dates" range></v-date-picker>
                     <v-card-actions>
-                        <v-btn
-                            text
-                            color="primary"
-                            class="w-full bg-gray-600 text-white"
-                            @click="
-                                datePickerMenu = false;
-                                filteredStudentsByDate();
-                            "
-                        >
+                        <v-btn text color="primary" class="w-full bg-gray-600 text-white" @click="
+                            datePickerMenu = false;
+                        filteredStudentsByDate();
+                        ">
                             Done
                         </v-btn>
                     </v-card-actions>
@@ -47,131 +27,74 @@
             </v-row>
 
             <!-- <v-spacer></v-spacer> -->
-            <v-text-field
-                v-model="search"
-                append-icon="mdi-magnify"
-                label="Search"
-                single-line
-                hide-details
-                class="pr-5 py-0 my-0"
-            ></v-text-field>
+            <div class="flex col-3 p-0 pt-1 mr-2">
+                <input v-model="search" type="text" class="form-control form-control-sm" />
+                <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+            </div>
             <!-- <v-spacer></v-spacer> -->
             <v-icon size="22" @click="resetData"> mdi-restore </v-icon>
         </v-card-title>
+        <hr class="bg-gray-200 mb-1 mt-0" />
+
         <!-- {{ $page.props.posts }} -->
 
-        <v-data-table
-            :headers="headers"
-            :items="students"
-            item-key="name"
-            :search="search"
-            class="elevation-1"
-            :items-per-page="11"
-        >
+        <v-data-table :headers="headers" :items="students" item-key="name" :search="search" class="elevation-1"
+            :items-per-page="11">
             <template v-slot:body="{ items, headers }">
                 <tbody>
                     <tr v-for="(item, idx, k) in items" :key="idx">
                         <td v-for="(header, key) in headers" :key="key">
-                            <v-icon
-                                v-if="header.value == 'delete'"
-                                size="22"
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#warning-alert-modal"
-                                @click="setIdForAction(items[idx]['id'])"
-                            >
+                            <v-icon v-if="header.value == 'delete'" size="22" type="button" data-bs-toggle="modal"
+                                data-bs-target="#warning-alert-modal" @click="setIdForAction(items[idx]['id'])">
                                 mdi-delete
                             </v-icon>
 
-                            <v-icon
-                                v-if="header.value == 'view'"
-                                size="22"
-                                @click="setInvoiceView(items[idx]['id'])"
-                            >
+                            <v-icon v-if="header.value == 'view'" size="22" @click="setInvoiceView(items[idx]['id'])">
                                 mdi-eye
                             </v-icon>
 
-                            <v-icon
-                                v-if="header.value == 'edit'"
-                                size="22"
-                                @click="setEditStudent(items[idx]['id'])"
-                            >
+                            <v-icon v-if="header.value == 'edit'" size="22" @click="setEditStudent(items[idx]['id'])">
                                 mdi-pen
                             </v-icon>
 
-                            <v-icon
-                                v-if="header.value == 'starred'"
-                                size="22"
-                                :class="
-                                    item[header.value] ? 'text-warning' : ''
-                                "
-                                @click="
-                                    starredInvoice(
-                                        items[idx]['id'],
-                                        item[header.value],
-                                        header.value
-                                    )
-                                "
-                            >
+                            <v-icon v-if="header.value == 'starred'" size="22" :class="item[header.value] ? 'text-warning' : ''
+                                " @click="
+        starredInvoice(
+            items[idx]['id'],
+            item[header.value],
+            header.value
+        )
+        ">
                                 mdi-star
                             </v-icon>
 
-                            <span
-                                class="text-gray-600"
-                                v-else-if="header.value == 'id'"
-                                >{{ item[header.value] }}</span
-                            >
+                            <span class="text-gray-600" v-else-if="header.value == 'id'">{{ item[header.value] }}</span>
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'created_at'"
-                                >{{ formattedDate(item[header.value]) }}</span
-                            >
+                            <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'created_at'">{{
+                                formattedDate(item[header.value]) }}</span>
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'updated_at'"
-                                >{{ formattedDate(item[header.value]) }}</span
-                            >
+                            <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'updated_at'">{{
+                                formattedDate(item[header.value]) }}</span>
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'sellers'"
-                            >
-                                <span
-                                    v-for="seller in item[header.value]"
-                                    :key="seller.id"
-                                    class="d-block"
-                                >
+                            <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'sellers'">
+                                <span v-for="seller in item[header.value]" :key="seller.id" class="d-block">
                                     <div class="">
                                         <v-menu transition="fab-transition">
-                                            <template
-                                                v-slot:activator="{ on, attrs }"
-                                            >
-                                                <span
-                                                    class="seller-name"
-                                                    v-bind="attrs"
-                                                    v-on="on"
-                                                    @click="
-                                                        getSellerProfile(seller)
-                                                    "
-                                                >
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <span class="seller-name" v-bind="attrs" v-on="on" @click="
+                                                    getSellerProfile(seller)
+                                                    ">
                                                     {{ seller.name }}
                                                 </span>
                                             </template>
 
-                                            <seller-profile
-                                                :seller="sellerInfo"
-                                            ></seller-profile>
+                                            <seller-profile :seller="sellerInfo"></seller-profile>
                                         </v-menu>
                                     </div>
                                 </span>
                             </span>
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'tools'"
-                            >
+                            <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'tools'">
                                 <div v-for="tool in item[header.value]">
                                     <span>
                                         {{ tool.name }}
@@ -179,10 +102,7 @@
                                 </div>
                             </span>
 
-                            <span
-                                class="text-gray-600 italic font-semibold"
-                                v-else-if="header.value == 'tool_sum'"
-                            >
+                            <span class="text-gray-600 italic font-semibold" v-else-if="header.value == 'tool_sum'">
                                 {{
                                     formattedPrice(
                                         totalPrice(item.invoice_tool)
@@ -194,9 +114,7 @@
                 </tbody>
             </template>
         </v-data-table>
-        <v-btn class="w-screen" @click="generatePDF"
-            >Generate REPORT {{ reportRange }}</v-btn
-        >
+        <v-btn class="w-screen" @click="generatePDF">Generate REPORT {{ reportRange }}</v-btn>
     </div>
 </template>
 
@@ -493,9 +411,9 @@ export default {
             this.updateTools(id, data, column);
             // console.log(id + " , " +data);
         },
-        cancel() {},
-        open() {},
-        close() {},
+        cancel() { },
+        open() { },
+        close() { },
     },
 };
 </script>

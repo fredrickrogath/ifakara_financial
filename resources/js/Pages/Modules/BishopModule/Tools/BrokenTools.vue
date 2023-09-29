@@ -9,20 +9,12 @@
             <!-- <v-card elevation="0" data-app> -->
 
             <!-- Warning Alert Modal -->
-            <div
-                id="warning-alert-modal"
-                class="modal fade"
-                tabindex="-1"
-                role="dialog"
-                aria-hidden="true"
-            >
+            <div id="warning-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-body p-2">
                             <div class="text-center">
-                                <i
-                                    class="dripicons-warning h1 text-warning"
-                                ></i>
+                                <i class="dripicons-warning h1 text-warning"></i>
                                 <h4 class="mt-2 text-gray-500">
                                     Are you sure you want to delete this data ?
                                 </h4>
@@ -31,19 +23,12 @@
                                     in your trash within 30 days.
                                 </p>
                                 <div class="flex justify-around">
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-warning my-1 text-white"
-                                        data-bs-dismiss="modal"
-                                        @click="deleteTools()"
-                                    >
+                                    <button type="button" class="btn btn-sm btn-warning my-1 text-white"
+                                        data-bs-dismiss="modal" @click="deleteTools()">
                                         Continue
                                     </button>
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-danger my-1 text-white"
-                                        data-bs-dismiss="modal"
-                                    >
+                                    <button type="button" class="btn btn-sm btn-danger my-1 text-white"
+                                        data-bs-dismiss="modal">
                                         cancel
                                     </button>
                                 </div>
@@ -57,13 +42,7 @@
             <!-- /.modal -->
 
             <!-- Right modal content -->
-            <div
-                id="right-modal-broken"
-                class="modal fade"
-                tabindex="-1"
-                role="dialog"
-                aria-hidden="true"
-            >
+            <div id="right-modal-broken" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-right bg-transparent">
                     <div class="modal-content">
                         <!-- <div class="modal-header border-0 bg-info">
@@ -78,22 +57,12 @@
                             <div class="">
                                 <form @submit.prevent="submitForm">
                                     <div class="mb-1 text-gray-600">
-                                        <label
-                                            for="example-email"
-                                            class="form-label text-gray-500 font-normal"
-                                            >Select Tool</label
-                                        >
+                                        <label for="example-email" class="form-label text-gray-500 font-normal">Select
+                                            Tool</label>
                                         <div class="">
-                                            <select
-                                                class="form-select form-select-sm"
-                                                v-model="selectTool"
-                                                id="gender"
-                                            >
-                                                <option
-                                                    v-for="selectTool in tools"
-                                                    :key="selectTool.id"
-                                                    :value="selectTool.name"
-                                                >
+                                            <select class="form-select form-select-sm" v-model="selectTool" id="gender">
+                                                <option v-for="selectTool in tools" :key="selectTool.id"
+                                                    :value="selectTool.name">
                                                     {{ selectTool.name }}
                                                 </option>
                                             </select>
@@ -101,18 +70,10 @@
                                     </div>
 
                                     <div class="mb-1 text-gray-600">
-                                        <label
-                                            for="example-email"
-                                            class="form-label text-gray-500 font-normal"
-                                            >Tool Count</label
-                                        >
-                                        <input
-                                            type="text"
-                                            id="example-email"
-                                            v-model="count"
-                                            class="form-control form-control-sm"
-                                            placeholder="Tool Count"
-                                        />
+                                        <label for="example-email" class="form-label text-gray-500 font-normal">Tool
+                                            Count</label>
+                                        <input type="text" id="example-email" v-model="count"
+                                            class="form-control form-control-sm" placeholder="Tool Count" />
                                     </div>
 
                                     <!-- <div class="mb-1 text-gray-600">
@@ -129,21 +90,13 @@
                                         ></textarea>
                                     </div> -->
 
-                                    <div
-                                        class="d-flex justify-content-between my-1 mt-2"
-                                    >
-                                        <button
-                                            data-bs-dismiss="modal"
-                                            type="submit"
-                                            class="btn btn-success text-white btn-sm waves-effect waves-light"
-                                        >
+                                    <div class="d-flex justify-content-between my-1 mt-2">
+                                        <button data-bs-dismiss="modal" type="submit"
+                                            class="btn btn-success text-white btn-sm waves-effect waves-light">
                                             Submit
                                         </button>
-                                        <button
-                                            data-bs-dismiss="modal"
-                                            type="button"
-                                            class="btn btn-danger btn-sm text-white waves-effect waves-light"
-                                        >
+                                        <button data-bs-dismiss="modal" type="button"
+                                            class="btn btn-danger btn-sm text-white waves-effect waves-light">
                                             Cancel
                                         </button>
                                     </div>
@@ -156,142 +109,87 @@
                 <!-- /.modal-dialog -->
             </div>
 
-            <v-card-title class="px-0 pt-0">
-                Broken Tools & Equipments
+            <v-card-title class="px-0 pt-0 pb-1">
+                <div class="pl-2 pt-1 text-sm uppercase">Broken Tools & Equipments</div>
                 <v-spacer></v-spacer>
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
 
-                <v-icon
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#right-modal-broken"
-                    class="ml-4 px-1 mt-3 mr-0 py-1"
-                    size="22"
-                    @click=""
-                >
+                <div class="flex col-3 p-0 pt-1 mr-2">
+                    <input v-model="search" type="text" class="form-control form-control-sm" />
+                    <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                </div>
+
+                <v-spacer></v-spacer>
+
+                <v-icon type="button" data-bs-toggle="modal" data-bs-target="#right-modal-broken"
+                    class="ml-4 px-1 mt-3 mr-0 py-1" size="22" @click="">
                     mdi-pen-plus
                 </v-icon>
             </v-card-title>
+            <hr class="bg-gray-200 mb-1 mt-0" />
             <!-- {{ $page.props.posts }} -->
 
-            <v-data-table
-                :headers="headers"
-                :items="brokenTools"
-                item-key="name"
-                :search="search"
-                class="elevation-1"
-            >
+            <v-data-table :headers="headers" :items="brokenTools" item-key="name" :search="search" class="elevation-1">
                 <template v-slot:body="{ items, headers }">
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
-                                <div
-                                    v-if="
-                                        header.value == 'action' ||
-                                        header.value == 'starred'
-                                    "
-                                >
-                                    <v-icon
-                                        v-if="header.value == 'action'"
-                                        size="22"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#warning-alert-modal"
-                                        @click="
+                                <div v-if="header.value == 'action' ||
+                                    header.value == 'starred'
+                                    ">
+                                    <v-icon v-if="header.value == 'action'" size="22" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#warning-alert-modal" @click="
                                             setIdForAction(items[idx]['id'])
-                                        "
-                                    >
+                                            ">
                                         mdi-delete
                                     </v-icon>
 
-                                    <v-icon
-                                        v-if="header.value == 'starred'"
-                                        size="22"
-                                        :class="
-                                            item[header.value]
-                                                ? 'text-warning'
-                                                : ''
-                                        "
-                                        @click="
-                                            starredTools(
-                                                items[idx]['id'],
-                                                item[header.value],
-                                                header.value
-                                            )
-                                        "
-                                    >
+                                    <v-icon v-if="header.value == 'starred'" size="22" :class="item[header.value]
+                                            ? 'text-warning'
+                                            : ''
+                                        " @click="
+        starredTools(
+            items[idx]['id'],
+            item[header.value],
+            header.value
+        )
+        ">
                                         mdi-star
                                     </v-icon>
                                 </div>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'created_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'created_at'">{{
+                                    formattedDate(item[header.value])
+                                }}</span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'updated_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'updated_at'">{{
+                                    formattedDate(item[header.value])
+                                }}</span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'id'"
-                                    >{{ item[header.value] }}</span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'id'">{{ item[header.value] }}</span>
 
-                                <v-edit-dialog
-                                    v-else
-                                    :return-value.sync="item[header.value]"
-                                    @save="
-                                        save(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                    @cancel="cancel"
-                                    @open="open"
-                                    @close="close"
-                                    large
-                                >
-                                    <span
-                                        class="text-gray-600"
-                                        :class="
-                                            item[header.value] == null &&
+                                <v-edit-dialog v-else :return-value.sync="item[header.value]" @save="
+                                    save(
+                                        items[idx]['id'],
+                                        item[header.value],
+                                        header.value
+                                    )
+                                    " @cancel="cancel" @open="open" @close="close" large>
+                                    <span class="text-gray-600" :class="item[header.value] == null &&
                                             header.value !== 'action' // header.value == 'level1'
-                                                ? 'bg-gray-100 italic rounded px-1'
-                                                : ''
-                                        "
-                                        >{{
-                                            item[header.value] !== null
-                                                ? header.value == "price"
-                                                    ? formattedPrice(
-                                                          item[header.value]
-                                                      )
-                                                    : item[header.value]
-                                                : "Empty"
-                                        }}</span
-                                    >
+                                            ? 'bg-gray-100 italic rounded px-1'
+                                            : ''
+                                        ">{{
+        item[header.value] !== null
+        ? header.value == "price"
+            ? formattedPrice(
+                item[header.value]
+            )
+            : item[header.value]
+        : "Empty"
+    }}</span>
 
                                     <template v-slot:input>
-                                        <v-text-field
-                                            v-model="item[header.value]"
-                                            label="Edit"
-                                            single-line
-                                        ></v-text-field>
+                                        <v-text-field v-model="item[header.value]" label="Edit" single-line></v-text-field>
                                     </template>
                                 </v-edit-dialog>
                             </td>
@@ -555,9 +453,9 @@ export default {
             this.updateTools(id, data, column);
             // console.log(id + " , " +data);
         },
-        cancel() {},
-        open() {},
-        close() {},
+        cancel() { },
+        open() { },
+        close() { },
     },
 };
 </script>

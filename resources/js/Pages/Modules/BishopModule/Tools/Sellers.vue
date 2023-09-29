@@ -156,26 +156,25 @@
                 <!-- /.modal-dialog -->
             </div>
 
-            <v-card-title class="px-0 pt-0">
-                Sellers
+  
+            <v-card-title class="px-0 pt-0 pb-1">
+                <div class="pl-2 pt-1 text-sm uppercase">Sellers</div>
                 <v-spacer></v-spacer>
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
 
-                <v-icon
-                    type="button"
-                    class="ml-4 px-1 mt-3 mr-0 py-1"
-                    size="22"
-                    @click="setAddSeller()"
-                >
+                <div class="flex col-3 p-0 pt-1 mr-2">
+                    <input v-model="search" type="text" class="form-control form-control-sm" />
+                    <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                </div>
+
+                <v-spacer></v-spacer>
+
+                <v-icon type="button" data-bs-toggle="modal" data-bs-target="#right-modal-broken"
+                    class="ml-4 px-1 mt-3 mr-0 py-1" size="22" @click="setAddSeller()">
                     mdi-pen-plus
                 </v-icon>
             </v-card-title>
+            <hr class="bg-gray-200 mb-1 mt-0" />
+
             <!-- {{ $page.props.posts }} -->
 
             <v-data-table

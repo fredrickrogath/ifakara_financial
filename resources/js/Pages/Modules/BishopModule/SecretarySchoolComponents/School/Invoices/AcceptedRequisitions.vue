@@ -5,26 +5,21 @@
         <spinner v-if="showLoader"></spinner>
 
         <v-col v-else sm="12" md="12" class="px-0 pt-0">
-            <v-card-title class="px-0 pt-0">
-                Invoices
+
+            <v-card-title class="px-0 pt-0 pb-1">
+                <div class="pl-2 pt-1 text-sm uppercase">Invoices</div>
                 <v-spacer></v-spacer>
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
+
+                <div class="flex col-3 p-0 pt-1 mr-2">
+                    <input v-model="search" type="text" class="form-control form-control-sm" />
+                    <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                </div>
             </v-card-title>
+            <hr class="bg-gray-200 mb-1 mt-0" />
+
             <!-- {{ $page.props.posts }} -->
 
-            <v-data-table
-                :headers="headers"
-                :items="invoices"
-                item-key="name"
-                :search="search"
-                class="elevation-1"
-            >
+            <v-data-table :headers="headers" :items="invoices" item-key="name" :search="search" class="elevation-1">
                 <template v-slot:body="{ items, headers }">
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
@@ -40,63 +35,35 @@
                                     mdi-delete
                                 </v-icon> -->
 
-                                <v-icon
-                                    v-if="header.value == 'view'"
-                                    size="22"
-                                    @click=" setInvoiceView(items[idx]['id'])"
-                                >
+                                <v-icon v-if="header.value == 'view'" size="22" @click=" setInvoiceView(items[idx]['id'])">
                                     mdi-eye
                                 </v-icon>
 
-                                <v-icon
-                                    v-if="header.value == 'starred'"
-                                    size="22"
-                                    :class="
-                                        item[header.value] ? 'text-warning' : ''
-                                    "
-                                    @click="
-                                        starredInvoice(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                >
+                                <v-icon v-if="header.value == 'starred'" size="22" :class="item[header.value] ? 'text-warning' : ''
+                                    " @click="
+        starredInvoice(
+            items[idx]['id'],
+            item[header.value],
+            header.value
+        )
+        ">
                                     mdi-star
                                 </v-icon>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'id'"
-                                    >{{ item[header.value] }}</span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'id'">{{ item[header.value] }}</span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'created_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'created_at'">{{
+                                    formattedDate(item[header.value])
+                                }}</span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'updated_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'updated_at'">{{
+                                    formattedDate(item[header.value])
+                                }}</span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'seller'"
-                                    >{{ item[header.value].name }}</span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'seller'">{{ item[header.value].name
+                                }}</span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'tools'"
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'tools'">
                                     <div v-for="tool in item[header.value]">
                                         <span>
                                             {{ tool.name }}
@@ -120,15 +87,12 @@
                                                 )
                                             }}
                                         </span> -->
-                                        
+
                                         <!-- <span class="px-1 font-bold"> {{ tool.id == item[header.value].length? ' . ': ' , ' }} </span> -->
                                     </div>
                                 </span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'tool_sum'"
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'tool_sum'">
                                     {{
                                         formattedPrice(totalPrice(item.invoice_tool))
                                     }}
@@ -359,9 +323,9 @@ export default {
             this.updateTools(id, data, column);
             // console.log(id + " , " +data);
         },
-        cancel() {},
-        open() {},
-        close() {},
+        cancel() { },
+        open() { },
+        close() { },
     },
 };
 </script>
