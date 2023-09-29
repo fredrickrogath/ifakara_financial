@@ -5,17 +5,17 @@
         <spinner v-if="showLoader"></spinner>
 
         <v-col v-else sm="12" md="12" class="mt-0 pt-0">
-        
-            <v-card-title class="px-0 pt-0">
-                Permissions
+
+            <v-card-title class="px-0 pt-0 pb-1">
+                <div class="pl-2 pt-1 text-sm uppercase">Permissions</div>
                 <v-spacer></v-spacer>
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
+
+                <div class="flex col-3 p-0 pt-1 mr-2">
+                    <input v-model="search" type="text" class="form-control form-control-sm" />
+                    <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                </div>
+
+
 
                 <!-- <div class="d-flex justify-content-between align-items-center">
 
@@ -38,90 +38,53 @@
                     </v-icon>
                 </div> -->
             </v-card-title>
+            <hr class="bg-gray-200 mb-1 mt-0" />
             <!-- {{ $page.props.posts }} -->
 
-            <v-data-table
-                :headers="headers"
-                :items="students"
-                item-key="name"
-                :search="search"
-                class="elevation-1"
-            >
+            <v-data-table :headers="headers" :items="students" item-key="name" :search="search" class="elevation-1">
                 <template v-slot:body="{ items, headers }">
                     <tbody>
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
-                                <v-icon
-                                    v-if="header.value == 'delete'"
-                                    size="22"
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#warning-alert-modal"
-                                    @click="setIdForAction(items[idx]['id'])"
-                                >
+                                <v-icon v-if="header.value == 'delete'" size="22" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#warning-alert-modal" @click="setIdForAction(items[idx]['id'])">
                                     mdi-delete
                                 </v-icon>
 
-                                <v-icon
-                                    v-if="header.value == 'financial_secreatary_permission'"
-                                    size="22"
+                                <v-icon v-if="header.value == 'financial_secreatary_permission'" size="22"
                                     :color="!item[header.value].financial_secreatary_permission ? 'bg-red-400' : 'bg-green-400'"
-                                    @click="alterPermission(items[idx]['id'], items[idx].object.id, items[idx].object_type, item[header.value].financial_secreatary_permission)"
-                                >
-                                    {{!item[header.value].financial_secreatary_permission ? 'mdi-lock' : 'mdi-lock-open-variant'}}
+                                    @click="alterPermission(items[idx]['id'], items[idx].object.id, items[idx].object_type, item[header.value].financial_secreatary_permission)">
+                                    {{ !item[header.value].financial_secreatary_permission ? 'mdi-lock' :
+                                        'mdi-lock-open-variant' }}
                                 </v-icon>
-                                
-                                <v-icon
-                                    v-if="header.value == 'comment'"
-                                    size="22"
-                                    :class="
-                                        item[header.value] ? 'text-warning' : ''
-                                    "
-                                    @click="
-                                        // starredInvoice(
-                                        //     items[idx]['id'],
-                                        //     item[header.value],
-                                        //     header.value
-                                        // );
-                                         setCommentView(items[idx]['id']);
-                                    "
-                                >
+
+                                <v-icon v-if="header.value == 'comment'" size="22" :class="item[header.value] ? 'text-warning' : ''
+                                    " @click="
+        // starredInvoice(
+        //     items[idx]['id'],
+        //     item[header.value],
+        //     header.value
+        // );
+        setCommentView(items[idx]['id']);
+    ">
                                     mdi-chat-processing
                                 </v-icon>
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'from_role'"
-                                    >{{ item[header.value] }}
-                                    
-                                    </span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'from_role'">{{ item[header.value] }}
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'created_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
+                                </span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'to_role'"
-                                    >{{
-                                        item[header.value]
-                                    }}</span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'created_at'">{{
+                                    formattedDate(item[header.value])
+                                }}</span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'object'"
-                                    >{{ item[header.value].first_name }}  {{ item[header.value].last_name }}</span
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'to_role'">{{
+                                    item[header.value]
+                                }}</span>
 
-                                <span
-                                    class="text-gray-600"
-                                    v-else-if="header.value == 'object_type'"
-                                >
+                                <span class="text-gray-600" v-else-if="header.value == 'object'">{{
+                                    item[header.value].first_name }} {{ item[header.value].last_name }}</span>
+
+                                <span class="text-gray-600" v-else-if="header.value == 'object_type'">
                                     {{ item[header.value] }}
                                 </span>
 
@@ -302,7 +265,8 @@ export default {
                 });
         },
 
-        async alterPermission(id, object_id, object_type, permission) {console.log(id, object_id, object_type, permission)
+        async alterPermission(id, object_id, object_type, permission) {
+            console.log(id, object_id, object_type, permission)
             axios
                 .post(this.getMainUrl + "secretary/alterPermission", {
                     id: id,
@@ -355,7 +319,7 @@ export default {
         setAddSchool() {
             this.$store.dispatch("SecretarySchoolDetailModule/setAddSchool");
         },
-        
+
         // save(id, column, data) {
         //     this.updateTools(id, data, column);
         //     // console.log(id + " , " +data);
