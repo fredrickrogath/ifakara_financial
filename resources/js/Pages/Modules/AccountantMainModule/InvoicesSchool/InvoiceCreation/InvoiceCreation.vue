@@ -24,7 +24,7 @@
             <!-- {{ $page.props.posts }} -->
 
             <v-data-table
-                :headers="headers"
+                :headers="determineHeader"
                 :items="invoices"
                 item-key="name"
                 :search="search"
@@ -43,11 +43,26 @@
                                     {{ items[idx]['status_from_head'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>
                                 <v-icon
-                                    v-if="header.value == 'finance'"
+                                    v-if="header.value == 'finance' && $page.props.role !== 'bishop'"
                                     size="22"
                                     @click="verifyInvoiceCreation(items[idx]['id'], items[idx]['status_from_financial_accountant'])"
                                 >
                                     {{ items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'finance' && $page.props.role === 'bishop'"
+                                    size="22"
+                                    @click="verifyInvoiceCreation(items[idx]['id'], items[idx]['status_from_financial_accountant'])"
+                                >
+                                    {{ items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'finance' && $page.props.role === 'bishop'"
+                                    size="22"
+                                >
+                                    {{ !items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>
 
                                 <v-icon
@@ -91,50 +106,6 @@
                                     }}</span
                                 >
 
-                                <!-- <span
-                                    class="text-gray-600 font-semibold uppercase text-xs"
-                                    v-else-if="header.value == 'updated_at'"
-                                    >{{
-                                        formattedDate(item[header.value])
-                                    }}</span
-                                >
-
-                                <span
-                                    class="text-gray-600 font-semibold uppercase text-xs"
-                                    v-else-if="header.value == 'sellers'"
-                                    >
-                                    
-                                    <span
-                                        v-for="seller in item[header.value]"
-                                        :key="seller.id"
-                                        class="d-block"
-                                    >
-                                        <div class="">
-                                            <v-menu transition="fab-transition">
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
-                                                >
-                                                    <span
-                                                        class="seller-name"
-                                                        v-bind="attrs"
-                                                        v-on="on"
-                                                        @click="getSellerProfile(seller)"
-                                                    >
-                                                        {{ seller.name }}
-                                                    </span>
-                                                </template>
-
-                                                <seller-profile :seller="sellerInfo"></seller-profile>
-                                            </v-menu>
-                                        </div>
-                                    </span>
-                                    
-                                    </span
-                                > -->
-
                                 <span
                                     class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'invoice_items'"
@@ -162,26 +133,6 @@
                                         </span>
                                     </div>
                                 </span>
-
-                                <!-- <span
-                                    class="text-gray-600 font-semibold uppercase text-xs"
-                                    v-else-if="header.value == 'invoice_items'"
-                                >
-                                    <div v-for="item in item[header.value]">
-                                        <span>
-                                            {{ item.name }}
-                                        </span>
-                                    </div>
-                                </span> -->
-
-                                <!-- <span
-                                    class="text-gray-600 font-semibold uppercase text-xs"
-                                    v-else-if="header.value == 'tool_sum'"
-                                >
-                                    {{ 
-                                        formattedPrice(totalPrice(item.invoice_tool))
-                                    }}
-                                </span> -->
                             </td>
                         </tr>
                     </tbody>
@@ -249,12 +200,6 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                // {
-                //     text: "Invoice #",
-                //     align: "start",
-                //     sortable: false,
-                //     value: "id",
-                // },
                 {
                     text: "Total",
                     value: "total",
@@ -263,17 +208,26 @@ export default {
                     text: "Items",
                     value: "invoice_items",
                 },
-                // {
-                //     text: "Total",
-                //     value: "tool_sum",
-                // },
-                // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "Head", value: "head" },
                 { text: "Finance", value: "finance" },
-                // { text: "Action", value: "delete" },
-                // { text: "Created At", value: "created_at" },
             ],
+
+            headersBishop: [
+                {
+                    text: "Total",
+                    value: "total",
+                },
+                {
+                    text: "Items",
+                    value: "invoice_items",
+                },
+                { text: "Date", value: "created_at" },
+                { text: "Head", value: "head" },
+                { text: "Finance", value: "finance" },
+                { text: "Approval", value: "status_from_financial_bishop" },
+            ],
+
             invoices: [],
 
             idForAction: null,
@@ -297,17 +251,22 @@ export default {
         getMainUrl() {
             return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
+
+        determineHeader(){
+            return this.$page.props.role != 'bishop' ? this.headers : this.headersBishop;
+        }
     },
 
     watch: {
-    schoolId(newVal, oldValue) {
-        if (newVal !== null) {
-                this.getInvoices();
-            }
-            // console.log(
-            //     `The message has changed from "${oldVal}" to "${newVal}"`
-            // );
-    },
+    // schoolId(newVal, oldValue) {
+    //     if (newVal !== null && newVal !== oldValue) {
+    //         console.log(newVal + ' ' + oldValue)
+    //             this.getInvoices();
+    //         }
+    //         // console.log(
+    //         //     `The message has changed from "${oldVal}" to "${newVal}"`
+    //         // );
+    // },
   },
 
     methods: {
@@ -351,7 +310,20 @@ export default {
         },
 
         getInvoices() {
-            axios
+            if(this.$page.props.role == 'bishop'){
+                axios
+                .post(this.getMainUrl + "accountant/getInvoicesCreationAll", {
+                    school_id: this.getSchoolId,
+                })
+                .then((response) => {
+                    this.invoices = response.data.data;
+                    this.showLoader = false;
+                    // console.log(response.data.data)
+                });
+            }
+            
+            if(this.$page.props.role != 'bishop'){
+                axios
                 .post(this.getMainUrl + "accountant/getInvoicesCreation", {
                     school_id: this.getSchoolId,
                 })
@@ -360,7 +332,7 @@ export default {
                     this.showLoader = false;
                     // console.log(response.data.data)
                 });
-        },
+        }},
 
         // async updateTools(id, column, data) {
         //     axios

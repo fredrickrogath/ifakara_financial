@@ -38,14 +38,14 @@
 
     
     <!-- Plugins css -->
-    <link href="assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
+    {{-- <link href="assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" /> --}}
 
     <!-- third party css -->
-    <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    {{-- <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css" rel="stylesheet" type="text/css" /> --}}
     <!-- third party css end -->
 
     <!-- App css -->
@@ -110,23 +110,23 @@
     <script src="assets/js/vendor.min.js"></script>
 
     <!-- Plugins js-->
-    <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
+    {{-- <script src="assets/libs/flatpickr/flatpickr.min.js"></script> --}}
     {{-- <script src="assets/libs/apexcharts/apexcharts.min.js"></script> --}}
 
-    <script src="assets/libs/selectize/js/standalone/selectize.min.js"></script>
+    {{-- <script src="assets/libs/selectize/js/standalone/selectize.min.js"></script> --}}
 
     <!-- Dashboar 1 init js-->
-    <script src="assets/js/pages/dashboard-1.init.js"></script>
+    {{-- <script src="assets/js/pages/dashboard-1.init.js"></script> --}}
 
     <!-- Footable js -->
-    <script src="assets/libs/footable/footable.all.min.js"></script>
+    {{-- <script src="assets/libs/footable/footable.all.min.js"></script> --}}
 
     <!-- Init js -->
-    <script src="assets/js/pages/foo-tables.init.js"></script>
+    {{-- <script src="assets/js/pages/foo-tables.init.js"></script> --}}
 
 
     <!-- third party js -->
-    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
     <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
@@ -138,7 +138,7 @@
     <script src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
-    <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script> --}}
     <!-- third party js ends -->
 
     <!-- Datatables init -->

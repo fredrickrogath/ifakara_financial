@@ -494,7 +494,7 @@
 
                         <li class="menu-title mt-2">Apps</li>
 
-                        <li>
+                        <li @click="setTabFromBishopApproved">
                             <my-custom-link :href="route('bishop.approves')"
                                 :active="
                                     route().current('bishop.approves')
@@ -784,6 +784,13 @@ export default {
             this.getPaymentView ? this.setInvoiceView() : null;
             this.$store.dispatch("InternalAuditorSchoolModule/setTab", tab);
         },
+
+        setTabFromBishopApproved() {
+            if(this.getCurrentTab != 'invoices' || this.getCurrentTab != 'home'){
+                this.$store.dispatch("AccountantInvoiceModule/setTab", 'invoices');
+            }
+            return
+        },
         
         setSchoolView() {
             this.$store.dispatch(
@@ -837,6 +844,10 @@ export default {
             return this.$store.getters["InternalAuditorSchoolModule/getTab"];
         },
 
+        getCurrentTabForBishopApproved() {
+            return this.$store.getters["AccountantInvoiceModule/getTab"];
+        },
+
         getSchoolView() {
             return this.$store.getters[
                 "InternalAuditorSchoolModule/getSchoolView"
@@ -863,58 +874,3 @@ export default {
     },
 };
 </script>
-
-<!-- <style scoped>
-.slide-enter-active {
-    animation: slide-in 200ms ease-out forwards;
-}
-.slide-leave-active {
-    animation: slide-out 200ms ease-out forwards;
-}
-
-@keyframes slide-in {
-    from {
-        transform: translateY(-30px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slide-out {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    to {
-        transform: translateY(-30);
-        opacity: 0;
-    }
-}
-
-@keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-4px) rotate(-5deg);
-    }
-    50% {
-        transform: translateX(4px) rotate(5deg);
-    }
-    75% {
-        transform: translateX(-4px) rotate(-5deg);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
-.shake {
-    animation: shake 0.5s infinite;
-}
-</style> -->

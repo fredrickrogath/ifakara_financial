@@ -55,7 +55,7 @@
         <!-- /.modal -->
 
         <v-card-title class="pt-0">
-            Invoices <span class="d-none">{{ getSchoolId }}</span>
+            Invoices  424324 <span class="d-none">{{ getSchoolId }}</span>
             <v-spacer></v-spacer>
             <v-text-field
                 v-model="search"
@@ -317,14 +317,14 @@ export default {
     },
 
     watch: {
-    schoolId(newVal, oldValue) {
-        if (newVal !== null) {
-                this.getInvoices();
-            }
-            // console.log(
-            //     `The message has changed from "${oldVal}" to "${newVal}"`
-            // );
-    },
+    // schoolId(newVal, oldValue) {
+    //     if (newVal !== null) {
+    //             this.getInvoices();
+    //         }
+    //         // console.log(
+    //         //     `The message has changed from "${oldVal}" to "${newVal}"`
+    //         // );
+    // },
   },
 
     methods: {
@@ -355,15 +355,28 @@ export default {
         },
         
         getInvoices() {
-            axios
+            if(this.$page.props.role == 'bishop'){
+                axios
+                .post(this.getMainUrl + "accountant/getInvoicesFinancialAll", {
+                })
+                .then((response) => {
+                    this.invoices = response.data.data;
+                    this.showLoader = false;
+                    // console.log(response.data.data)
+                });
+            }
+            
+            if(this.$page.props.role != 'bishop'){
+                axios
                 .post(this.getMainUrl + "accountant/getInvoicesFinancial", {
                     school_id: this.getSchoolId,
                 })
                 .then((response) => {
                     this.invoices = response.data.data;
                     this.showLoader = false;
-                    console.log(response.data.data)
+                    // console.log(response.data.data)
                 });
+            }
         },
 
         setInvoiceView(id) {

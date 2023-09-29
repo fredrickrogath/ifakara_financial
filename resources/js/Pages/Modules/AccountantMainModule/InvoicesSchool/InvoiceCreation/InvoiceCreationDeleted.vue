@@ -312,14 +312,14 @@ export default {
     },
 
     watch: {
-    schoolId(newVal, oldValue) {
-        if (newVal !== null) {
-                this.getInvoices();
-            }
-            // console.log(
-            //     `The message has changed from "${oldVal}" to "${newVal}"`
-            // );
-    },
+    // schoolId(newVal, oldValue) {
+    //     if (newVal !== null) {
+    //             this.getInvoices();
+    //         }
+    //         // console.log(
+    //         //     `The message has changed from "${oldVal}" to "${newVal}"`
+    //         // );
+    // },
   },
 
     methods: {
