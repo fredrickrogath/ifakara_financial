@@ -84,7 +84,7 @@
             <!-- </div> -->
         </div>
 
-        <hr class="bg-gray-200 mb-1 mt-1" />
+        <hr class="bg-gray-200 mb-2 mt-1" />
 
         <div class="">
             <div class="mt-0 pt-0">
@@ -95,7 +95,7 @@
                     <div class="row">
                         <div class="">
                             <div class="table-responsive">
-                                <table class="table table-centered teble-sm text-xs uppercase">
+                                <table class="table table-centered teble-sm table-condensed text-xs uppercase">
                                     <thead>
                                         <tr>
                                             <!-- <th>#</th> -->
@@ -204,6 +204,9 @@
             <!-- end card -->
         </div>
         <!-- end col -->
+
+        <hr class="bg-gray-200 mb-2 mt-1" />
+        
     </div>
 </template>
 
@@ -383,3 +386,9 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td{
+    padding: 7px;
+}
+</style>

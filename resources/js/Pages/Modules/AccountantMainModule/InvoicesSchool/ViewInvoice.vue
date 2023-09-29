@@ -265,6 +265,9 @@
                         <!-- end col -->
                     </div>
                         <!-- end col -->
+
+                        <hr class="bg-gray-200 mb-2 mt-1" />
+                        
                     </div>
                     <!-- end row -->
 
@@ -411,7 +414,7 @@ export default {
                 .then((response) => {
                     this.showLoader = false;
                     // Clear objectData
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                     // console.log(this.objectData);
                 });
         },
