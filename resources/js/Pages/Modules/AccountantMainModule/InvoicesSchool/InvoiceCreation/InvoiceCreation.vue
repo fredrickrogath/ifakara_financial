@@ -63,7 +63,7 @@
                                         items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
                                     "
                                     size="20"
-                                    @click="verifyInvoiceCreation(items[idx]['id'], items[idx]['status_from_financial_bishop'])"
+                                    @click="verifyInvoiceCreationBishop(items[idx]['id'], items[idx]['status_from_financial_bishop'])"
                                 >
                                     {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>
@@ -327,6 +327,19 @@ export default {
             // handle response here
         },
 
+        async verifyInvoiceCreationBishop(id , status_from_financial_bishop) {
+            axios
+                .post(this.getMainUrl + "accountant/verifyInvoiceCreationBishop", {
+                    id: id,
+                    status_from_financial_bishop: status_from_financial_bishop
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // console.log(response.data.data);
+                });
+            // handle response here
+        },
+
         getInvoices() {
             if(this.$page.props.role == 'bishop'){
                 axios
@@ -368,17 +381,17 @@ export default {
         //     // handle response here
         // },
 
-        async deleteInvoice() {
-            axios
-                .post("/accountant/deleteCreateInvoice", {
-                    id: this.idForAction,
-                })
-                .then((response) => {
-                    // this.students = response.data.data;
-                    // console.log(response.data.data);
-                });
-            // handle response here
-        },
+        // async deleteInvoice() {
+        //     axios
+        //         .post("/accountant/deleteCreateInvoice", {
+        //             id: this.idForAction,
+        //         })
+        //         .then((response) => {
+        //             // this.students = response.data.data;
+        //             // console.log(response.data.data);
+        //         });
+        //     // handle response here
+        // },
 
         // async starredInvoice(id,data ,column) {
         //     axios

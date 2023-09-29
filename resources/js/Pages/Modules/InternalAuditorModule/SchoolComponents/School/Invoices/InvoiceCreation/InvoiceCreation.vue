@@ -350,7 +350,8 @@ export default {
         },
 
         getInvoices() {
-            axios
+            if(this.$page.props.role != 'bishop'){
+                axios
                 .post(this.getMainUrl + "accountant/getInvoicesCreation", {
                     school_id: this.getSchoolId,
                 })
@@ -359,6 +360,7 @@ export default {
                     this.showLoader = false;
                     // console.log(response.data.data)
                 });
+            }
         },
 
         // async updateTools(id, column, data) {

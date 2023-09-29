@@ -22,7 +22,7 @@
                                     ></i
                                     ><span
                                         class="text-xs uppercase font-semibold"
-                                        >Invoices</span
+                                        >SCHOOL INVOICES</span
                                     >
                                 </a>
 
@@ -44,7 +44,48 @@
                                     ></i
                                     ><span
                                         class="text-xs uppercase font-semibold"
-                                        >All</span
+                                        >SCHOOL REQUISITIONS</span
+                                    >
+                                </a>
+
+                                <a
+                                    @click="setTab('diocese-invoices')"
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    :class="[
+                                        getCurrentTab == 'diocese-invoices'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                >
+                                    <i
+                                        class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
+                                    ></i
+                                    ><span
+                                        class="text-xs uppercase font-semibold"
+                                        >DIOCESE INVOICES</span
+                                    >
+                                </a>
+
+                                <span class="list-group-item border-0 h-100">
+                                    |
+                                </span>
+                                <a
+                                    @click="setTab('diocese-home')"
+                                    href="#"
+                                    class="list-group-item border-0"
+                                    :class="[
+                                        getCurrentTab == 'diocese-home'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                >
+                                    <i
+                                        class="mdi mdi-form-select font-17 pb-1 align-middle me-1"
+                                    ></i
+                                    ><span
+                                        class="text-xs uppercase font-semibold"
+                                        >DIOCESE REQUISITIONS</span
                                     >
                                 </a>
                             </div>
@@ -61,7 +102,7 @@
                                 </div>
 
                                 <div
-                                    v-show="
+                                    v-if="
                                         getInvoiceCreationView &&
                                         !getInvoiceView
                                     "
@@ -167,7 +208,7 @@ export default {
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                console.log(e);
+                // console.log(e);
             }
         );
     },

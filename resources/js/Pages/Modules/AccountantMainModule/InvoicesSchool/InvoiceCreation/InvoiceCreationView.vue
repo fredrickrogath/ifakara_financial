@@ -11,34 +11,52 @@
                 <!-- end col -->
                 <div>
                     <div class="mt-0 float-end d-flex flex-col mr-2">
-                        <span>
+                        <span class="pb-1">
                             <strong> Invoice id : </strong
-                            ><span>{{ getInvoiceId }}</span>
+                            ><span>{{ getInvoiceCreationId }}</span>
                         </span>
 
-                        <span>
+                        <span class="pb-1">
                             <strong>Invoice Status : </strong>
                             <span class="float-end"
                                 ><span class="">
-                                    <form>
                                         <div
                                             class="px-1"
                                         >
-                                            <button
-                                                type="submit"
+                                            <span
                                                 class="btn btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
                                                 v-if="
                                                     !this.invoice
                                                         .status_from_financial_bishop &&
                                                     $page.props.role == 'bishop'
                                                 "
+                                                @click="verifyInvoiceCreationBishop"
                                             >
-                                                {{
-                                                    $page.props.role == "bishop"
-                                                        ? "Approve"
-                                                        : "Approved"
-                                                }}
-                                            </button>
+                                                Approve
+                                            </span>
+
+                                            <span
+                                                class="btn btn-danger text-white btn-sm waves-effect waves-light px-1 py-0"
+                                                v-else-if="
+                                                    this.invoice
+                                                        .status_from_financial_bishop &&
+                                                    $page.props.role == 'bishop'
+                                                "
+                                                @click="verifyInvoiceCreationBishop"
+                                            >
+                                                Unapproved
+                                            </span>
+
+                                            <span
+                                                class="btn btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
+                                                v-else-if="
+                                                    !this.invoice
+                                                        .status_from_financial_bishop &&
+                                                    $page.props.role !== 'bishop'
+                                                "
+                                            >
+                                                Approved
+                                            </span>
 
                                             <button
                                                 type="submit"
@@ -48,7 +66,6 @@
                                                 Unapproved
                                             </button>
                                         </div>
-                                    </form>
                                 </span></span
                             >
                         </span>
@@ -57,7 +74,8 @@
                             <strong>Invoice Date:</strong>
                             <span class="float-end">
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                {{ currentDate | formatDate }}
+                                <!-- {{ currentDate | formatDate }} -->
+                                {{ formattedDate(invoice.created_at) }}
                             </span>
                         </span>
                     </div>
@@ -77,47 +95,43 @@
                     <div class="row">
                         <div class="">
                             <div class="table-responsive">
-                                <table class="table table-centered">
-                                    <thead>{{ getInvoiceCreationId }}
+                                <table class="table table-centered teble-sm text-xs uppercase">
+                                    <thead>
                                         <tr>
                                             <!-- <th>#</th> -->
-                                            <th>Tool&Item</th>
-                                            <th style="width: 10%">Quantity</th>
+                                            <th style="width: 10%">Tool&Item</th>
+                                            <!-- <th style="width: 10%">Quantity</th> -->
                                             <th style="width: 10%">Amount</th>
                                             <th
-                                                style="width: 10%"
                                                 class="text-end"
                                             >
-                                                Total
+                                            Description
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr
-                                            v-for="data in invoice.invoice_tool"
+                                            v-for="data in invoice.invoice_items"
                                             :key="data.id"
                                         >
                                             <!-- <td>1</td> -->
-                                            <td>
-                                                <b>{{ data.tool.name }}</b>
+                                            <td class="text-gray-600 font-semibold uppercase text-xs">
+                                                {{ data.name }}
                                                 <br />
                                                 <!-- 2 Pages static website - my
                                                 website -->
                                             </td>
-                                            <td>{{ data.count }}</td>
-                                            <td>
+                                            <!-- <td>{{ data.count }}</td> -->
+                                            <td class="text-gray-600 font-semibold uppercase text-xs">
                                                 {{
                                                     formattedPrice(
-                                                        data.tool.price
+                                                        data.price
                                                     )
                                                 }}
                                             </td>
-                                            <td class="text-end">
+                                            <td class="text-gray-600 font-semibold uppercase text-xs text-end">
                                                 {{
-                                                    formattedPrice(
-                                                        data.count *
-                                                            data.tool.price
-                                                    )
+                                                    data.description
                                                 }}
                                             </td>
                                         </tr>
@@ -130,7 +144,7 @@
                     </div>
                     <!-- end row -->
 
-                    <div class="row">
+                    <div class="row text-xs">
                         <div class="col-sm-6">
                             <!-- <div class="clearfix pt-5">
                                 <h4 class="">
@@ -156,13 +170,14 @@
                                         }}</span
                                     >
                                 </p>
-                                <h4 class="float-end">
+                                <b class="float-end">
+                                    <span>TOTAL</span>
                                     {{
                                         formattedPrice(
                                             total - total * (18 / 100)
                                         )
                                     }}
-                                </h4>
+                                </b>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -202,12 +217,15 @@ export default {
 
     mounted() {
         this.showLoader = true;
+        this.getInvoiceCreation();
 
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
             (e) => {
-                this.getInvoiceView();
+                if(this.getInvoiceCreationView){
+                    this.getInvoiceCreation();
+                }
                 // console.log(e);
             }
         );
@@ -217,14 +235,14 @@ export default {
         return {
             showLoader: false,
             objectData: [],
-            seller: "",
-            supplier: [],
+            // seller: "",
+            // supplier: [],
             invoice: [],
             total: 0,
-            count: 0,
-            id: null,
-            sellerInfo: [],
-            currentDate: new Date(),
+            // count: 0,
+            // id: null,
+            // sellerInfo: [],
+            // currentDate: new Date(),
         };
     },
 
@@ -255,8 +273,8 @@ export default {
         },
 
         totalPrice(invoice) {
-            this.total = invoice.invoice_tool.reduce((total, item) => {
-                return total + item.tool.price * item.count;
+            this.total = invoice.invoice_items.reduce((total, item) => {
+                return total + item.price;
             }, 0);
             this.objectData.splice(0, this.objectData.length);
         },
@@ -272,15 +290,16 @@ export default {
         //     this.sellerInfo = seller;
         // },
 
-        async getInvoiceView() {
+        async getInvoiceCreation() {
             axios
-                .post(this.getMainUrl + "accountant/getInvoiceView", {
-                    id: this.getInvoiceId,
+                .post(this.getMainUrl + "accountant/getInvoiceCreation", {
+                    id: this.getInvoiceCreationId,
                 })
                 .then((response) => {
                     if (response.data.data != null) {
-                        this.showLoader = false;
+                        // this.showLoader = false;
                         this.totalPrice(response.data.data);
+                        // console.log(response.data.data)
                         this.invoice = response.data.data;
                         // this.sellerName(this.invoice);
                     }
@@ -300,44 +319,44 @@ export default {
             this.$store.dispatch("AccountantInvoiceModule/setInvoiceCreationView", id);
         },
 
-        async acceptInvoice() {
+        async verifyInvoiceCreationBishop() {
             axios
                 .post(
                     // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
-                    this.getMainUrl + "accountant/acceptInvoice",
+                    this.getMainUrl + "accountant/verifyInvoiceCreationBishop",
                     {
                         id: this.invoice.id,
-                        status_from_financial_accountant:
-                            this.invoice.status_from_financial_accountant,
+                        status_from_financial_bishop:
+                            this.invoice.status_from_financial_bishop,
                         // invoice: this.objectData,
                     }
                 )
                 .then((response) => {
-                    this.showLoader = false;
+                    // this.showLoader = false;
                     // Clear objectData
-                    console.log(response.data.data);
-                    console.log(this.objectData);
+                    // console.log(response.data.data);
+                    // console.log(this.objectData);
                 });
         },
     },
 
     watch: {
-        id(newVal, oldVal) {
-            if (newVal !== null) {
-                this.getInvoiceView();
-            }
-            console.log(
-                `The message has changed from "${oldVal}" to "${newVal}"`
-            );
-        },
+        // id(newVal, oldVal) {
+        //     if (newVal !== null) {
+        //         this.getInvoiceView();
+        //     }
+        //     // console.log(
+        //     //     `The message has changed from "${oldVal}" to "${newVal}"`
+        //     // );
+        // },
     },
 
     computed: {
-        getInvoiceId() {
-            this.id =
-                this.$store.getters["AccountantInvoiceModule/getInvoiceId"];
-            return this.$store.getters["AccountantInvoiceModule/getInvoiceId"];
-        },
+        // getInvoiceId() {
+        //     this.id =
+        //         this.$store.getters["AccountantInvoiceModule/getInvoiceId"];
+        //     return this.$store.getters["AccountantInvoiceModule/getInvoiceId"];
+        // },
 
         formattedData() {
             return this.invoice.invoice_tool.map((data) => {
@@ -354,6 +373,12 @@ export default {
 
         getInvoiceCreationId() {
             return this.$store.getters["AccountantInvoiceModule/getInvoiceCreationId"];
+        },
+
+        getInvoiceCreationView() {
+            return this.$store.getters[
+                "AccountantInvoiceModule/getInvoiceCreationView"
+            ];
         },
     },
 };

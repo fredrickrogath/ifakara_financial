@@ -162,15 +162,15 @@
             <hr class="bg-gray-200 py-0 my-0" />
 
             <div class="mt-0 pt-0">
-                <div v-show="getInvoiceView && !getInvoiceCreationView">
+                <div v-if="getInvoiceView && !getInvoiceCreationView">
                     <view-invoice></view-invoice>
                 </div>
 
-                <div v-show="getInvoiceCreationView && !getInvoiceView">
+                <div v-if="getInvoiceCreationView && !getInvoiceView">
                     <invoice-creation-view></invoice-creation-view>
                 </div>
 
-                <div v-show="!getInvoiceView && !getInvoiceCreationView">
+                <div v-if="!getInvoiceView && !getInvoiceCreationView">
                     <payment-details
                         v-if="getCurrentTab == 'payments'"
                     ></payment-details>
@@ -211,7 +211,7 @@ import DeletedRequisitions from "./Invoices/DeletedRequisitions.vue";
 import StarredRequisitions from "./Invoices/StarredRequisitions.vue";
 import RejectedRequisitions from "./Invoices/RejectedRequisitions.vue";
 import ViewInvoice from "./Invoices/ViewInvoice.vue";
-import InvoiceCreation from "./Invoices/InvoiceCreation/InvoiceCreation.vue";
+import InvoiceCreation from "../../../AccountantMainModule/InvoicesSchool/InvoiceCreation/InvoiceCreation.vue";
 import InvoiceCreationDeleted from "./Invoices/InvoiceCreation/InvoiceCreationDeleted.vue";
 import InvoiceCreationView from "../../../AccountantMainModule/InvoicesSchool/InvoiceCreation/InvoiceCreationView.vue";
 import PaymentDetails from "../../../AccountantMainModule/InvoicesSchool/PaymentDetails.vue";

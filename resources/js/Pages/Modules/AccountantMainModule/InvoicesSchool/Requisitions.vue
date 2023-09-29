@@ -55,7 +55,7 @@
         <!-- /.modal -->
 
         <v-card-title class="pt-0">
-            Invoices  424324 <span class="d-none">{{ getSchoolId }}</span>
+            Invoices <span class="d-none">{{ getSchoolId }}</span>
             <v-spacer></v-spacer>
             <v-text-field
                 v-model="search"

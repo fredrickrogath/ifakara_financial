@@ -7,7 +7,7 @@
                 </strong>
             </a>
 
-            <form @submit.prevent="acceptInvoice">
+            <!-- <form @submit.prevent="acceptInvoice">
                 <div class="d-flex justify-content-between my-1 px-1 mr-3">
                     <button
                         type="submit"
@@ -25,7 +25,7 @@
                         Unverify
                     </button>
                 </div>
-            </form>
+            </form> -->
         </div>
 
         <div class="col-12">
@@ -36,33 +36,36 @@
                             <div class="mt-0">
                                 <!-- <strong>Procumerement</strong> -->
                                 <span
-                                        v-for="(seller, index) in invoice.sellers"
-                                        :key="seller.id"
-                                        class="d-block"
-                                    >
-                                        <div class="">
-                                            <v-menu transition="fab-transition">
-                                                <template
-                                                    v-slot:activator="{
-                                                        on,
-                                                        attrs,
-                                                    }"
+                                    v-for="(seller, index) in invoice.sellers"
+                                    :key="seller.id"
+                                    class="d-block"
+                                >
+                                    <div class="">
+                                        <v-menu transition="fab-transition">
+                                            <template
+                                                v-slot:activator="{ on, attrs }"
+                                            >
+                                                <strong
+                                                    >Supplier {{ index + 1 }} :
+                                                </strong>
+                                                <span
+                                                    class="seller-name uppercase"
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                                    @click="
+                                                        getSellerProfile(seller)
+                                                    "
                                                 >
-                                                <strong>Supplier {{ index + 1 }} : </strong>
-                                                    <span
-                                                        class="seller-name uppercase"
-                                                        v-bind="attrs"
-                                                        v-on="on"
-                                                        @click="getSellerProfile(seller)"
-                                                    >
-                                                        {{ seller.name }}
-                                                    </span>
-                                                </template>
+                                                    {{ seller.name }}
+                                                </span>
+                                            </template>
 
-                                                <seller-profile :seller="sellerInfo"></seller-profile>
-                                            </v-menu>
-                                        </div>
-                                    </span>
+                                            <seller-profile
+                                                :seller="sellerInfo"
+                                            ></seller-profile>
+                                        </v-menu>
+                                    </div>
+                                </span>
                             </div>
                         </div>
                         <!-- end col -->
@@ -80,13 +83,31 @@
                                     </span>
                                 </span>
 
-                                <span>
+                                <span class="d-flex justify-content-between">
                                     <strong>Invoice Status : </strong>
-                                    <span class="float-end"
+                                    <div>
+                                        <span
+                                            class="btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
+                                            v-if="
+                                                !this.invoice
+                                                    .status_from_financial_accountant
+                                            "
+                                        >
+                                            Verify
+                                        </span>
+
+                                        <span
+                                            class="btn btn-sm btn-danger text-white btn-sm waves-effect waves-light px-1 py-0"
+                                            v-else
+                                        >
+                                            Unverify
+                                        </span>
+                                    </div>
+                                    <!-- <span class="float-end"
                                         ><span class="badge bg-danger"
                                             >Unpaid</span
                                         ></span
-                                    >
+                                    > -->
                                 </span>
                             </div>
                         </div>
@@ -304,7 +325,7 @@ export default {
         // },
 
         getSellerProfile(seller) {
-            this.sellerInfo = seller
+            this.sellerInfo = seller;
         },
 
         async getInvoiceView() {
@@ -313,7 +334,7 @@ export default {
                     id: this.getInvoiceId,
                 })
                 .then((response) => {
-                    if(response.data.data != null){
+                    if (response.data.data != null) {
                         this.showLoader = false;
                         this.totalPrice(response.data.data);
                         this.invoice = response.data.data;
@@ -338,7 +359,8 @@ export default {
                     this.getMainUrl + "accountant/acceptInvoice",
                     {
                         id: this.invoice.id,
-                        status_from_financial_accountant: this.invoice.status_from_financial_accountant,
+                        status_from_financial_accountant:
+                            this.invoice.status_from_financial_accountant,
                         // invoice: this.objectData,
                     }
                 )
@@ -356,9 +378,9 @@ export default {
             if (newVal !== null) {
                 this.getInvoiceView();
             }
-                console.log(
-                    `The message has changed from "${oldVal}" to "${newVal}"`
-                );
+            console.log(
+                `The message has changed from "${oldVal}" to "${newVal}"`
+            );
         },
     },
 
