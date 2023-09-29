@@ -46,7 +46,7 @@
                                         :class="[
                                             getCurrentTab == 'allSchools' && route().current('internal_auditor.audits')
                                                 ? 'text-warning'
-                                                : 'text-secondary',
+                                                : 'text-gray-600',
                                         ]"
                                         ><i
                                             class="mdi mdi-school font-18 align-middle me-2 pb-1"
@@ -58,7 +58,7 @@
                                         v-show="getSchoolView"
                                         @click="setSchoolView"
                                         href="#"
-                                        class="border-0 pt-0 text-xs font-semibold uppercase ml-6 pl-3 text-secondary"
+                                        class="border-0 pt-0 text-xs font-semibold uppercase ml-6 pl-3 text-gray-600"
                                     >
                                         Back
                                     </a>
@@ -76,7 +76,7 @@
                                                 getCurrentSchoolDetailTab ==
                                                 'allStaffs' && getCurrentTab == 'allSchools' 
                                                     ? 'text-warning'
-                                                    : 'text-secondary',
+                                                    : 'text-gray-600',
                                             ]"
                                             ><i
                                                 class="mdi mdi-account-group font-15 align-middle me-2"
@@ -98,7 +98,7 @@
                                                 getCurrentSchoolDetailTab ==
                                                 'allStudents' && getCurrentTab == 'allSchools'
                                                     ? 'text-warning'
-                                                    : 'text-secondary',
+                                                    : 'text-gray-600',
                                             ]"
                                             ><i
                                                 class="mdi mdi-school font-15 align-middle me-2 pb-1"
@@ -116,7 +116,7 @@
                                                 getCurrentSchoolDetailTab ==
                                                 'tools' && getCurrentTab == 'allSchools'
                                                     ? 'text-warning'
-                                                    : 'text-secondary',
+                                                    : 'text-gray-600',
                                             ]"
                                             ><i
                                                 class="mdi mdi-tools font-15 align-middle me-2 pb-1"
@@ -136,7 +136,7 @@
                                                 getCurrentSchoolDetailTab ==
                                                 'invoices' && getCurrentTab == 'allSchools'
                                                     ? 'text-warning'
-                                                    : 'text-secondary',
+                                                    : 'text-gray-600',
                                             ]"
                                             ><i
                                                 class="mdi mdi-cash-multiple font-15 align-middle me-2 pb-1"
@@ -160,7 +160,7 @@
                                             getCurrentTab == 'diocese' ||
                                             getCurrentTab == 'diocese-invoices' && route().current('internal_auditor.audits')
                                                 ? 'text-warning'
-                                                : 'text-secondary',
+                                                : 'text-gray-600',
                                         ]"
                                         ><i
                                             class="mdi mdi-church font-18 align-middle me-2 pb-1"
@@ -176,7 +176,7 @@
                                         :class="[
                                             getCurrentTab == 'permissions' && route().current('internal_auditor.audits')
                                                 ? 'text-warning'
-                                                : 'text-secondary',
+                                                : 'text-gray-600',
                                         ]"
                                         ><i
                                             class="mdi mdi-hospital-box font-18 align-middle me-2 pb-1"
@@ -482,29 +482,29 @@
                     <ul id="side-menu">
                         <li class="menu-title">Navigation</li>
 
-                        <li>
+                        <li class="border-0 pt-0 uppercase text-gray-600">
                             <my-custom-link
                                 :href="route('bishop.dashboard')"
                                 :active="route().current('bishop.dashboard')"
                             >
-                                <v-icon>mdi-view-dashboard</v-icon>
-                                <span> Dashboard </span>
+                                <v-icon size="18">mdi-view-dashboard</v-icon>
+                                <span class="text-sm"> Dashboard </span>
                             </my-custom-link>
                         </li>
 
                         <li class="menu-title mt-2">Apps</li>
 
-                        <li @click="setTabFromBishopApproved">
+                        <li @click="setTabFromBishopApproved" class="border-0 pt-0 uppercase text-gray-600">
                             <my-custom-link :href="route('bishop.approves')"
                                 :active="
                                     route().current('bishop.approves')
                                 ">
                                 <v-icon size="22">mdi-account-tie</v-icon>
-                                <span> Approves </span>
+                                <span class="text-sm"> Approves </span>
                             </my-custom-link>
                         </li>
 
-                        <li>
+                        <li class="border-0 pt-0 uppercase text-gray-600">
                             <my-custom-link
                                 :href="route('bishop.internal_auditor')"
                                 :active="
@@ -512,7 +512,7 @@
                                 "
                             >
                                 <v-icon size="22">mdi-account-tie</v-icon>
-                                <span> Internal Auditor </span>
+                                <span class="text-sm"> Internal Auditor </span>
                             </my-custom-link>
 
                             <div class="ml-5 pl-5" v-show="route().current('bishop.internal_auditor')">
@@ -524,7 +524,7 @@
                                         :class="[
                                             getCurrentTab == 'allSchools' && route().current('bishop.internal_auditor')
                                                 ? 'text-warning'
-                                                : 'text-secondary',
+                                                : 'text-gray-600',
                                         ]"
                                         ><i
                                             class="mdi mdi-school font-18 align-middle me-2 pb-1"
@@ -536,7 +536,7 @@
                                         v-show="getSchoolView"
                                         @click="setSchoolView"
                                         href="#"
-                                        class="border-0 pt-0 text-xs font-semibold uppercase ml-6 pl-3 text-secondary"
+                                        class="border-0 pt-0 text-xs font-semibold uppercase ml-6 pl-3 text-gray-600"
                                     >
                                         Back
                                     </a>
@@ -546,7 +546,7 @@
                                     <div>
                                         <a
                                             href="#"
-                                            class="border-0 py-1 uppercase text-xs"
+                                            class="border-0 my-1 uppercase font-semibold text-xs"
                                             @click="
                                                 setSchoolDetailTab('allStaffs')
                                             "
@@ -554,10 +554,10 @@
                                                 getCurrentSchoolDetailTab ==
                                                 'allStaffs' && getCurrentTab == 'allSchools' 
                                                     ? 'text-warning'
-                                                    : 'text-secondary',
+                                                    : 'text-gray-600',
                                             ]"
                                             ><i
-                                                class="mdi mdi-account-group font-15 align-middle me-2"
+                                                class="mdi mdi-account-group font-18 align-middle me-2"
                                             ></i
                                             >Staffs</a
                                         >
@@ -566,7 +566,7 @@
                                     <div>
                                         <a
                                             href="#"
-                                            class="border-0 py-1 uppercase text-xs"
+                                            class="border-0 my-1 uppercase font-semibold text-xs"
                                             @click="
                                                 setSchoolDetailTab(
                                                     'allStudents'
@@ -576,10 +576,10 @@
                                                 getCurrentSchoolDetailTab ==
                                                 'allStudents' && getCurrentTab == 'allSchools'
                                                     ? 'text-warning'
-                                                    : 'text-secondary',
+                                                    : 'text-gray-600',
                                             ]"
                                             ><i
-                                                class="mdi mdi-school font-15 align-middle me-2 pb-1"
+                                                class="mdi mdi-school font-18 align-middle me-2 pb-1"
                                             ></i
                                             >Students
                                         </a>
@@ -588,16 +588,16 @@
                                     <div>
                                         <a
                                             href="#"
-                                            class="border-0 py-1 uppercase text-xs"
+                                            class="border-0 my-1 uppercase font-semibold text-xs"
                                             @click="setSchoolDetailTab('tools')"
                                             :class="[
                                                 getCurrentSchoolDetailTab ==
                                                 'tools' && getCurrentTab == 'allSchools'
                                                     ? 'text-warning'
-                                                    : 'text-secondary',
+                                                    : 'text-gray-600',
                                             ]"
                                             ><i
-                                                class="mdi mdi-tools font-15 align-middle me-2 pb-1"
+                                                class="mdi mdi-tools font-18 align-middle me-2 pb-1"
                                             ></i
                                             >Tool Details
                                         </a>
@@ -606,7 +606,7 @@
                                     <div>
                                         <a
                                             href="#"
-                                            class="border-0 py-1 uppercase text-xs"
+                                            class="border-0 py-1 uppercase font-semibold text-xs"
                                             @click="
                                                 setSchoolDetailTab('invoices')
                                             "
@@ -614,10 +614,10 @@
                                                 getCurrentSchoolDetailTab ==
                                                 'invoices' && getCurrentTab == 'allSchools'
                                                     ? 'text-warning'
-                                                    : 'text-secondary',
+                                                    : 'text-gray-600',
                                             ]"
                                             ><i
-                                                class="mdi mdi-cash-multiple font-15 align-middle me-2 pb-1"
+                                                class="mdi mdi-cash-multiple font-18 align-middle me-2 pb-1"
                                             ></i
                                             >Invoice Details
                                         </a>
@@ -638,7 +638,7 @@
                                             getCurrentTab == 'diocese' ||
                                             getCurrentTab == 'diocese-invoices' && route().current('bishop.internal_auditor')
                                                 ? 'text-warning'
-                                                : 'text-secondary',
+                                                : 'text-gray-600',
                                         ]"
                                         ><i
                                             class="mdi mdi-church font-18 align-middle me-2 pb-1"
@@ -654,7 +654,7 @@
                                         :class="[
                                             getCurrentTab == 'permissions' && route().current('bishop.internal_auditor')
                                                 ? 'text-warning'
-                                                : 'text-secondary',
+                                                : 'text-gray-600',
                                         ]"
                                         ><i
                                             class="mdi mdi-hospital-box font-18 align-middle me-2 pb-1"

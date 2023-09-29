@@ -44,7 +44,7 @@
                                                 "
                                                 @click="verifyInvoiceCreationBishop"
                                             >
-                                                Unapproved
+                                                Unapprove
                                             </span>
 
                                             <span
@@ -99,7 +99,7 @@
                                     <thead>
                                         <tr>
                                             <!-- <th>#</th> -->
-                                            <th style="width: 10%">Tool&Item</th>
+                                            <th style="width: 10%">Tool & Item</th>
                                             <!-- <th style="width: 10%">Quantity</th> -->
                                             <th style="width: 10%">Amount</th>
                                             <th
@@ -144,7 +144,7 @@
                     </div>
                     <!-- end row -->
 
-                    <div class="row text-xs">
+                    <div class="row text-xs mt-0">
                         <div class="col-sm-6">
                             <!-- <div class="clearfix pt-5">
                                 <h4 class="">

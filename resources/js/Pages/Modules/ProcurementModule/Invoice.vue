@@ -359,18 +359,18 @@
                             <div class="h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
-                                    <div v-show="getInvoiceGenerate && !getInvoiceView" key="1">
+                                    <div v-if="getInvoiceGenerate && !getInvoiceView" key="1">
                                         <invoice-generate></invoice-generate>
                                     </div>
 
-                                    <div v-show="getInvoiceView && !getInvoiceGenerate">
+                                    <div v-if="getInvoiceView && !getInvoiceGenerate">
                                         <view-invoices></view-invoices>
                                     </div>
-                                    <div v-show="!getInvoiceGenerate && !getInvoiceView" key="2">
-                                        <AllInvoices v-show="getCurrentTab == 'all'"></AllInvoices>
-                                        <starred-invoices v-show="getCurrentTab == 'starred'"></starred-invoices>
-                                        <trashed-invoices v-show="getCurrentTab == 'deleted'"></trashed-invoices>
-                                        <!-- <view-invoices v-show="getCurrentTab == 'view'"></view-invoices> -->
+                                    <div v-if="!getInvoiceGenerate && !getInvoiceView" key="2">
+                                        <AllInvoices v-if="getCurrentTab == 'all'"></AllInvoices>
+                                        <starred-invoices v-if="getCurrentTab == 'starred'"></starred-invoices>
+                                        <trashed-invoices v-if="getCurrentTab == 'deleted'"></trashed-invoices>
+                                        <!-- <view-invoices v-if="getCurrentTab == 'view'"></view-invoices> -->
                                     </div>
                                 <!-- <requisitions
                                     v-if="getCurrentTab == 'home'"

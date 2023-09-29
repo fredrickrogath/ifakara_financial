@@ -301,46 +301,46 @@
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
-                                <div v-show="getInvoiceView">
+                                <div v-if="getInvoiceView">
                                     <view-invoice></view-invoice>
                                 </div>
 
-                                <div v-show="!getInvoiceView">
+                                <div v-if="!getInvoiceView">
                                     <entries
-                                        v-show="
+                                        v-if="
                                             getCurrentTab == 'entries' &&
                                             getChartOfAcountForm == '' && !getInvoice
                                         "
                                     ></entries>
 
                                     <school-fee
-                                        v-show="
+                                        v-if="
                                             getCurrentTab == 'entries' &&
                                             getChartOfAcountForm !== '' && !getInvoice
                                         "
                                     ></school-fee>
 
                                     <invoice-create
-                                        v-show="getInvoice"
+                                        v-if="getInvoice"
                                     ></invoice-create>
 
                                     <div></div>
-                                    <invoice-creation v-show="getCurrentTab == 'invoices'"></invoice-creation>
-                                    <invoice-creation-deleted v-show="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
+                                    <invoice-creation v-if="getCurrentTab == 'invoices'"></invoice-creation>
+                                    <invoice-creation-deleted v-if="getCurrentTab == 'invoicesDeleted'"></invoice-creation-deleted>
                                     <requisitions
-                                        v-show="getCurrentTab == 'home' && !getInvoice"
+                                        v-if="getCurrentTab == 'home' && !getInvoice"
                                     ></requisitions>
                                     <accepted-requisitions
-                                        v-show="getCurrentTab == 'accepted' && !getInvoice"
+                                        v-if="getCurrentTab == 'accepted' && !getInvoice"
                                     ></accepted-requisitions>
                                     <deleted-requisitions
-                                        v-show="getCurrentTab == 'deleted' && !getInvoice"
+                                        v-if="getCurrentTab == 'deleted' && !getInvoice"
                                     ></deleted-requisitions>
                                     <starred-requisitions
-                                        v-show="getCurrentTab == 'starred' && !getInvoice"
+                                        v-if="getCurrentTab == 'starred' && !getInvoice"
                                     ></starred-requisitions>
                                     <rejected-requisitions
-                                        v-show="getCurrentTab == 'rejected' && !getInvoice"
+                                        v-if="getCurrentTab == 'rejected' && !getInvoice"
                                     ></rejected-requisitions>
                                 </div>
                                 <!-- </transition> -->

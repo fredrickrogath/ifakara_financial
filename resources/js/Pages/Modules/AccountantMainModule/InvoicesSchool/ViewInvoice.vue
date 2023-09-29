@@ -88,6 +88,12 @@
                                     <div>
                                         <span
                                             class="btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
+                                            :class="[
+                                                this.$page.props.role ==
+                                                'bishop'
+                                                    ? 'disabled'
+                                                    : '',
+                                            ]"
                                             v-if="
                                                 !this.invoice
                                                     .status_from_financial_accountant
@@ -98,16 +104,64 @@
 
                                         <span
                                             class="btn btn-sm btn-danger text-white btn-sm waves-effect waves-light px-1 py-0"
+                                            :class="[
+                                                this.$page.props.role ==
+                                                'bishop'
+                                                    ? 'disabled'
+                                                    : '',
+                                            ]"
                                             v-else
                                         >
                                             Unverify
                                         </span>
                                     </div>
-                                    <!-- <span class="float-end"
-                                        ><span class="badge bg-danger"
-                                            >Unpaid</span
-                                        ></span
-                                    > -->
+                                </span>
+
+                                <span class="d-flex justify-content-between">
+                                    <strong>Approve Status : </strong>
+                                    <div>
+                                        <span
+                                            class="btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
+                                            v-if="
+                                                !this.invoice
+                                                    .status_from_financial_bishop
+                                            "
+                                        >
+                                           Approve
+                                        </span>
+
+                                        <span
+                                            class="btn btn-sm btn-danger text-white btn-sm waves-effect waves-light px-1 py-0"
+                                            v-if="
+                                                this.invoice
+                                                    .status_from_financial_bishop
+                                            "
+                                        >
+                                        Unapprove
+                                        </span>
+
+                                        <span
+                                            class="disabled btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
+                                            v-else-if="
+                                                this.invoice
+                                                    .status_from_financial_bishop && this.$page.props.role !==
+                                                'bishop'
+                                            "
+                                        >
+                                            Unapproved
+                                        </span>
+
+                                        <span
+                                            class="disabled btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
+                                            v-else-if="
+                                                this.invoice
+                                                    .status_from_financial_bishop && this.$page.props.role !==
+                                                'bishop'
+                                            "
+                                        >
+                                            Unapproved
+                                        </span>
+                                    </div>
                                 </span>
                             </div>
                         </div>
@@ -258,6 +312,7 @@ export default {
 
     mounted() {
         this.showLoader = true;
+        this.getInvoiceView();
 
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
@@ -338,6 +393,7 @@ export default {
                         this.showLoader = false;
                         this.totalPrice(response.data.data);
                         this.invoice = response.data.data;
+                        console.log(response.data.data)
                         // this.sellerName(this.invoice);
                     }
                 });
@@ -373,16 +429,16 @@ export default {
         },
     },
 
-    watch: {
-        id(newVal, oldVal) {
-            if (newVal !== null) {
-                this.getInvoiceView();
-            }
-            console.log(
-                `The message has changed from "${oldVal}" to "${newVal}"`
-            );
-        },
-    },
+    // watch: {
+    //     id(newVal, oldVal) {
+    //         if (newVal !== null) {
+    //             this.getInvoiceView();
+    //         }
+    //         console.log(
+    //             `The message has changed from "${oldVal}" to "${newVal}"`
+    //         );
+    //     },
+    // },
 
     computed: {
         getInvoiceId() {
