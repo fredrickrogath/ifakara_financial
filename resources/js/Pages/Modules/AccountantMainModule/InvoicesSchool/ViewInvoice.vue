@@ -1,40 +1,19 @@
 <template>
     <div class="">
-        <div class="d-flex justify-content-between">
-            <a @click="setInvoiceView()" class="btn text-lg-700">
-                <strong class="text-danger" style="font-size: large"
+            <a @click="setInvoiceView()" class="ml-4 my-0 py-0">
+                <strong class="text-gray-600" style="font-size:large"
                     ><i class="fe-arrow-left"></i>
                 </strong>
             </a>
 
-            <!-- <form @submit.prevent="acceptInvoice">
-                <div class="d-flex justify-content-between my-1 px-1 mr-3">
-                    <button
-                        type="submit"
-                        class="btn btn-success text-white btn-sm waves-effect waves-light"
-                        v-if="!this.invoice.status_from_financial_accountant"
-                    >
-                        Verify
-                    </button>
+            <hr class="bg-gray-200 mb-1 mt-0" />
 
-                    <button
-                        type="submit"
-                        class="btn btn-danger text-white btn-sm waves-effect waves-light"
-                        v-else
-                    >
-                        Unverify
-                    </button>
-                </div>
-            </form> -->
-        </div>
-
-        <div class="col-12">
+        <div class="col-12 mt-0 pt-0">
             <div class="px-1">
                 <div class="">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mt-0">
-                                <!-- <strong>Procumerement</strong> -->
                                 <span
                                     v-for="(seller, index) in invoice.sellers"
                                     :key="seller.id"
@@ -79,11 +58,11 @@
                                     <strong>Invoice Date:</strong>
                                     <span class="float-end">
                                         &nbsp;&nbsp;&nbsp;&nbsp;
-                                        {{ currentDate | formatDate }}
+                                        {{ formattedDate(invoice.created_at) }}
                                     </span>
                                 </span>
 
-                                <span class="d-flex justify-content-between">
+                                <span class="d-flex justify-content-between mb-1">
                                     <strong>Invoice Status : </strong>
                                     <div>
                                         <span
@@ -169,9 +148,11 @@
                     </div>
                     <!-- end row -->
 
-                    <div class="row mt-0">
-                        <div class="col-sm-6">
-                            <h6>Invoice Address</h6>
+                    <hr class="bg-gray-200 mb-0 mt-1" />
+
+                    <!-- <div class="mt-0 bg-info py-0"> -->
+                        <div class="">
+                            <strong class="text-gray-500 font-bold">Invoice Address</strong>
                             <address>
                                 Procumerement<br />
                                 Diocese of Ifakara Cathedral<br />
@@ -182,13 +163,16 @@
                         </div>
                         <!-- end col -->
                         <!-- end col -->
-                    </div>
+                    <!-- </div> -->
+
+                    <hr class="bg-gray-200 mb-1 mt-0" />
+                    
                     <!-- end row -->
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table class="table table-centered">
-                                    <thead>
+                                <table class="table table-centered teble-sm table-condensed text-xs uppercase">
+                                    <thead class="table-condensed">
                                         <tr>
                                             <!-- <th>#</th> -->
                                             <th>Tool&Item</th>
@@ -208,13 +192,13 @@
                                             :key="data.id"
                                         >
                                             <!-- <td>1</td> -->
-                                            <td>
-                                                <b>{{ data.tool.name }}</b>
+                                            <td class="text-gray-600 font-semibold uppercase text-xs">
+                                                {{ data.tool.name }}
                                                 <br />
                                                 <!-- 2 Pages static website - my
                                                 website -->
                                             </td>
-                                            <td>{{ data.count }}</td>
+                                            <td class="text-gray-600 font-semibold uppercase text-xs">{{ data.count }}</td>
                                             <td>
                                                 {{
                                                     formattedPrice(
@@ -222,7 +206,7 @@
                                                     )
                                                 }}
                                             </td>
-                                            <td class="text-end">
+                                            <td class="text-end text-gray-600 font-semibold uppercase text-xs">
                                                 {{
                                                     formattedPrice(
                                                         data.count *
@@ -241,16 +225,17 @@
                     <!-- end row -->
 
                     <div class="row">
+                        <div class="row text-xs mt-0">
                         <div class="col-sm-6">
-                            <div class="clearfix pt-5">
+                            <!-- <div class="clearfix pt-5">
                                 <h4 class="">
                                     Total Amount of the Tools & Items
                                 </h4>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- end col -->
                         <div class="col-sm-6">
-                            <div class="float-end">
+                            <div class="float-end mr-2">
                                 <p>
                                     <b>Sub-total:</b>
                                     <span class="float-end">{{
@@ -266,16 +251,19 @@
                                         }}</span
                                     >
                                 </p>
-                                <h4 class="float-end">
+                                <b class="float-end">
+                                    <span>TOTAL</span>
                                     {{
                                         formattedPrice(
                                             total - total * (18 / 100)
                                         )
                                     }}
-                                </h4>
+                                </b>
                             </div>
                             <div class="clearfix"></div>
                         </div>
+                        <!-- end col -->
+                    </div>
                         <!-- end col -->
                     </div>
                     <!-- end row -->
@@ -335,7 +323,7 @@ export default {
             count: 0,
             id: null,
             sellerInfo: [],
-            currentDate: new Date(),
+            // currentDate: new Date(),
         };
     },
 
@@ -462,3 +450,9 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td{
+    padding: 7px;
+}
+</style>

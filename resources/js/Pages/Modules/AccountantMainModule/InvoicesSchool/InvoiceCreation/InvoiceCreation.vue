@@ -10,7 +10,6 @@
             <v-card-title class="px-0 pt-0 pb-1">
                     <div class="pl-2 pt-1 text-sm uppercase">Invoices<span class="d-none">{{ getSchoolId }}</span></div>
                     <v-spacer></v-spacer>
-                    <snackbar message="Task completed successfully"></snackbar>
 
                     <div class="flex col-3 p-0 pt-1 mr-2">
                         <input

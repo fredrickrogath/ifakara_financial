@@ -543,10 +543,10 @@
                                 </div>
 
                                 <div v-show="getSchoolView" class="ml-3 pl-3">
-                                    <div>
+                                    <div class="my-1">
                                         <a
                                             href="#"
-                                            class="border-0 my-1 uppercase font-semibold text-xs"
+                                            class="border-0 my-2 uppercase font-semibold text-xs"
                                             @click="
                                                 setSchoolDetailTab('allStaffs')
                                             "
@@ -566,7 +566,7 @@
                                     <div>
                                         <a
                                             href="#"
-                                            class="border-0 my-1 uppercase font-semibold text-xs"
+                                            class="border-0 my-2 uppercase font-semibold text-xs"
                                             @click="
                                                 setSchoolDetailTab(
                                                     'allStudents'
@@ -585,10 +585,10 @@
                                         </a>
                                     </div>
 
-                                    <div>
+                                    <div class="my-1">
                                         <a
                                             href="#"
-                                            class="border-0 my-1 uppercase font-semibold text-xs"
+                                            class="border-0 uppercase font-semibold text-xs"
                                             @click="setSchoolDetailTab('tools')"
                                             :class="[
                                                 getCurrentSchoolDetailTab ==
@@ -626,7 +626,7 @@
                             </div>
                             <div class="ml-3 pl-3" v-show="route().current('bishop.internal_auditor')">
 
-                                <div>
+                                <div class="my-1">
                                     <a
                                         href="#"
                                         class="list-group-item border-0 pt-1 text-xs font-semibold uppercase"

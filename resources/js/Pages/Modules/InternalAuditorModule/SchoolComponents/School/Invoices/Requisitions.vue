@@ -4,56 +4,6 @@
     <div class="">
         <spinner v-if="showLoader"></spinner>
 
-        <!-- <v-col v-else sm="12" md="12"> -->
-        <!-- <v-card flat :dark="isDark"> -->
-        <!-- <v-card elevation="0" data-app> -->
-
-        <!-- Warning Alert Modal -->
-        <div
-            id="warning-alert-modal"
-            class="modal fade"
-            tabindex="-1"
-            role="dialog"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-body p-2">
-                        <div class="text-center">
-                            <i class="dripicons-warning h1 text-warning"></i>
-                            <h4 class="mt-2 text-gray-500">
-                                Are you sure you want to delete this data ?
-                            </h4>
-                            <p class="mt-3">
-                                Do not worry, deleting this can be restored in
-                                your trash within 30 days.
-                            </p>
-                            <div class="flex justify-around">
-                                <button
-                                    type="button"
-                                    class="btn btn-sm btn-warning my-1 text-white"
-                                    data-bs-dismiss="modal"
-                                    @click="deleteInvoice()"
-                                >
-                                    Continue
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-sm btn-danger my-1 text-white"
-                                    data-bs-dismiss="modal"
-                                >
-                                    cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-
         <v-card-title class="px-0 pt-0 pb-1">
                     <div class="pl-2 pt-1 text-sm uppercase">Invoices <span class="d-none">{{ getSchoolId }}</span></div>
                     <v-spacer></v-spacer>
