@@ -26,7 +26,7 @@
             <!-- {{ $page.props.posts }} -->
 
             <v-data-table
-                :headers="determineHeader"
+                :headers="headers"
                 :items="invoices"
                 item-key="name"
                 :search="search"
@@ -39,7 +39,7 @@
                         <tr v-for="(item, idx, k) in items" :key="idx">
                             <td v-for="(header, key) in headers" :key="key">
                                 <v-icon
-                                    v-if="header.value == 'head' && $page.props.role === 'bishop'"
+                                    v-if="header.value == 'head'"
                                     :class="
                                         items[idx]['status_from_head'] ? 'text-danger' : ''
                                     "
@@ -66,6 +66,16 @@
                                     "
                                     size="20"
                                     @click="verifyInvoiceCreationBishop(items[idx]['id'], items[idx]['status_from_financial_bishop'])"
+                                >
+                                    {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.text == 'Approval' && $page.props.role !== 'bishop'"
+                                    :class="
+                                        items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
                                 >
                                     {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
                                 </v-icon>
@@ -215,21 +225,7 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                {
-                    text: "Total",
-                    value: "total",
-                },
-                {
-                    text: "Items",
-                    value: "invoice_items",
-                },
-                { text: "Date", value: "created_at" },
-                { text: "Head", value: "head" },
-                { text: "Finance", value: "finance" },
-            ],
-
-            headersBishop: [
-                {
+            {
                     text: "Total",
                     value: "total",
                 },
@@ -243,6 +239,22 @@ export default {
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
             ],
+
+            // headersBishop: [
+            //     {
+            //         text: "Total",
+            //         value: "total",
+            //     },
+            //     {
+            //         text: "Items",
+            //         value: "invoice_items",
+            //     },
+            //     { text: "Head", value: "head" },
+            //     { text: "Finance", value: "finance" },
+            //     { text: "Approval", value: "bishop" },
+            //     { text: "Date", value: "created_at" },
+            //     { text: "View", value: "view" },
+            // ],
 
             invoices: [],
 
@@ -268,9 +280,9 @@ export default {
             return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
 
-        determineHeader(){
-            return this.$page.props.role != 'bishop' ? this.headers : this.headersBishop;
-        }
+        // determineHeader(){
+        //     return this.$page.props.role != 'bishop' ? this.headers : this.headersBishop;
+        // }
     },
 
     watch: {

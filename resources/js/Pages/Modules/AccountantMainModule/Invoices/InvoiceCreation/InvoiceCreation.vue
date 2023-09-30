@@ -56,20 +56,22 @@
             </div>
             <!-- /.modal -->
 
-            <v-card-title class="px-1 pt-0">
-                Invoices
-                <v-spacer></v-spacer>
+            <v-card-title class="px-0 pt-0 pb-1">
+                    <div class="pl-2 pt-1 text-sm uppercase">Invoices</div>
+                    <v-spacer></v-spacer>
 
-                <snackbar message="Task completed successfully"></snackbar>
-                
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
-            </v-card-title>
+                    <div class="flex col-3 p-0 pt-1 mr-2">
+                        <input
+                        v-model="search"
+                            type="text"
+                            class="form-control form-control-sm"
+                        />
+                        <v-icon size="20" class="px-1"
+                            >mdi-magnify</v-icon
+                        >
+                    </div>
+                </v-card-title>
+                <hr class="bg-gray-200 mb-1 mt-0" />
             <!-- {{ $page.props.posts }} -->
 
             <v-data-table
@@ -79,6 +81,7 @@
                 :search="search"
                 class="elevation-1"
                 :items-per-page="11"
+                dense
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -96,9 +99,61 @@
                                 </v-icon>
 
                                 <v-icon
+                                    v-if="header.value == 'head'"
+                                    :class="
+                                        items[idx]['status_from_head'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                >
+                                    {{ items[idx]['status_from_head'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'finance' && $page.props.role !== 'bishop'"
+                                    :class="
+                                        !items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                    @click="verifyInvoiceCreation(items[idx]['id'], items[idx]['status_from_financial_accountant'])"
+                                >
+                                    {{ items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.text == 'Approval' && $page.props.role === 'bishop'"
+                                    :class="
+                                        items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                    @click="verifyInvoiceCreationBishop(items[idx]['id'], items[idx]['status_from_financial_bishop'])"
+                                >
+                                    {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.text == 'Approval' && $page.props.role !== 'bishop'"
+                                    :class="
+                                        items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                >
+                                    {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.value == 'finance' && $page.props.role === 'bishop'"
+                                    :class="
+                                        !items[idx]['status_from_financial_accountant'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                >
+                                    {{ !items[idx]['status_from_financial_accountant'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
                                     v-if="header.value == 'view'"
                                     size="22"
-                                    @click=" setInvoiceView(items[idx]['id'])"
+                                    @click="setInvoiceCreationView(items[idx]['id'])"
                                 >
                                     mdi-eye
                                 </v-icon>
@@ -121,13 +176,13 @@
                                 </v-icon>
 
                                 <span
-                                    class="text-green-500 italic font-semibold"
+                                    class="text-green-500 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'total'"
                                     >{{ formattedPrice(item[header.value]) }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -135,7 +190,7 @@
                                 >
 
                                 <!-- <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -143,7 +198,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'sellers'"
                                     >
                                     
@@ -179,7 +234,7 @@
                                 > -->
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'invoice_items'"
                                 >
                                     <div v-for="item in item[header.value]">
@@ -210,7 +265,7 @@
                                 </span>
 
                                 <!-- <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'invoice_items'"
                                 >
                                     <div v-for="item in item[header.value]">
@@ -221,7 +276,7 @@
                                 </span> -->
 
                                 <!-- <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
                                     {{ 
@@ -293,13 +348,7 @@ export default {
             showLoader: true,
             search: "",
             headers: [
-                // {
-                //     text: "Invoice #",
-                //     align: "start",
-                //     sortable: false,
-                //     value: "id",
-                // },
-                {
+            {
                     text: "Total",
                     value: "total",
                 },
@@ -307,15 +356,28 @@ export default {
                     text: "Items",
                     value: "invoice_items",
                 },
-                // {
-                //     text: "Total",
-                //     value: "tool_sum",
-                // },
-                // { text: "Starred", value: "starred" },
+                { text: "Head", value: "head" },
+                { text: "Finance", value: "finance" },
+                { text: "Approval", value: "bishop" },
                 { text: "Date", value: "created_at" },
-                { text: "Action", value: "delete" },
-                // { text: "Created At", value: "created_at" },
+                { text: "View", value: "view" },
             ],
+
+            // headersBishop: [
+            //     {
+            //         text: "Total",
+            //         value: "total",
+            //     },
+            //     {
+            //         text: "Items",
+            //         value: "invoice_items",
+            //     },
+            //     { text: "Head", value: "head" },
+            //     { text: "Finance", value: "finance" },
+            //     { text: "Approval", value: "bishop" },
+            //     { text: "Date", value: "created_at" },
+            //     { text: "View", value: "view" },
+            // ],
             invoices: [],
 
             idForAction: null,
@@ -355,6 +417,23 @@ export default {
 
         getSellerProfile(seller) {
             this.sellerInfo = seller
+        },
+
+        setInvoiceCreationView(id) {
+            this.$store.dispatch("AccountantInvoiceModule/setInvoiceCreationView", id);
+        },
+
+        async verifyInvoiceCreationBishop(id , status_from_financial_bishop) {
+            axios
+                .post("/accountant/verifyInvoiceCreationBishop", {
+                    id: id,
+                    status_from_financial_bishop: status_from_financial_bishop
+                })
+                .then((response) => {
+                    // this.students = response.data.data;
+                    // console.log(response.data.data);
+                });
+            // handle response here
         },
 
         getInvoices() {

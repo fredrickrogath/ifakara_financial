@@ -29,6 +29,11 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoicesCreation()]);
     }
 
+    public function getInvoiceCreation(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $invoiceService->getInvoiceCreation($request)]);
+    }
+
     public function getTrashedCreateInvoice(Request $request,InvoiceService $invoiceService){
         // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $invoiceService->getTrashedCreateInvoice($request)]);
@@ -141,6 +146,26 @@ class InvoiceController extends Controller
         return response()->json(['data' => $invoiceService->getInvoicesFinancial($request)]);
     }
 
+    public function verifyInvoiceCreation(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->verifyInvoiceCreation($request)]);
+    }
+
+    public function verifyInvoiceCreationBishop(Request $request, InvoiceService $invoiceService){
+        // $this->authorize('authorizeHead', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->verifyInvoiceCreationBishop($request)]);
+    }
+
+    public function verifyInvoiceBishop(Request $request ,InvoiceService $invoiceService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
+        return response()->json(['data' => $invoiceService->verifyInvoiceBishop($request)]);
+    }
+
+
+    
     // public function getInvoiceView(Request $request, InvoiceService $invoiceService){
     //     $this->authorize('authorizeAccountant', \App\Models\User::class); 
     //     return response()->json(['data' => $invoiceService->getInvoiceView($request)]);

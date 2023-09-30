@@ -128,6 +128,14 @@
                                     <requisitions
                                         v-if="getCurrentTab == 'home'"
                                     ></requisitions>
+
+                                    <invoice-creation-finance
+                                        v-if="getCurrentTab == 'diocese-invoices'"
+                                    ></invoice-creation-finance>
+
+                                    <requisitions-finance
+                                        v-if="getCurrentTab == 'diocese-home'"
+                                    ></requisitions-finance>
                                     <!-- <accepted-requisitions
                                         v-if="getCurrentTab == 'accepted'"
                                     ></accepted-requisitions>
@@ -170,6 +178,9 @@ import Requisitions from "./../AccountantMainModule/InvoicesSchool/Requisitions.
 import ViewInvoice from "./../AccountantMainModule/InvoicesSchool/ViewInvoice.vue";
 import InvoiceCreation from "./../AccountantMainModule/InvoicesSchool/InvoiceCreation/InvoiceCreation.vue";
 import InvoiceCreationView from "../AccountantMainModule/InvoicesSchool/InvoiceCreation/InvoiceCreationView.vue";
+import InvoiceCreationFinance from "./../AccountantMainModule/Invoices/InvoiceCreation/InvoiceCreation.vue";
+import InvoiceCreationFinanceView from "../AccountantMainModule/Invoices/InvoiceCreation/InvoiceCreationView.vue";
+import RequisitionsFinance from "../AccountantMainModule/Invoices/Requisitions.vue";
 // import InvoiceCreationView from "./InvoiceCreation/InvoiceCreationView.vue";
 // import InvoiceCreationDeleted from "./InvoiceCreation/InvoiceCreationDeleted.vue";
 
@@ -191,6 +202,11 @@ export default {
         ViewInvoice,
         InvoiceCreation,
         InvoiceCreationView,
+
+
+        InvoiceCreationFinance,
+        InvoiceCreationFinanceView,
+        RequisitionsFinance
         // InvoiceCreationView,
         // InvoiceCreationDeleted,
 

@@ -27,7 +27,7 @@
         <!-- {{ $page.props.posts }} -->
 
         <v-data-table
-            :headers="headers"
+            :headers="determineHeader"
             :items="invoices"
             item-key="name"
             :search="search"
@@ -66,6 +66,27 @@
                             >
                                 mdi-star
                             </v-icon>
+
+                            <v-icon
+                                    v-if="header.text == 'Approval' && $page.props.role === 'bishop'"
+                                    :class="
+                                        items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                    @click="verifyInvoiceBishop(items[idx]['id'], items[idx]['status_from_financial_bishop'])"
+                                >
+                                    {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.text == 'Approval' && $page.props.role !== 'bishop'"
+                                    :class="
+                                        items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                >
+                                    {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
 
                             <span
                                 class="text-gray-600 font-semibold uppercase text-xs"
@@ -247,6 +268,33 @@ export default {
                 { text: "View", value: "view" },
                 // { text: "Delete", value: "delete" },
             ],
+
+            headersBishop: [
+                // {
+                //     text: "Invoice #",
+                //     align: "start",
+                //     sortable: false,
+                //     value: "id",
+                // },
+                {
+                    text: "Suppliers",
+                    value: "sellers",
+                },
+                {
+                    text: "Tools",
+                    value: "tools",
+                },
+                {
+                    text: "Total",
+                    value: "tool_sum",
+                },
+                { text: "Starred", value: "starred" },
+                { text: "Approval", value: "bishop" },
+                { text: "Date", value: "created_at" },
+                { text: "View", value: "view" },
+                // { text: "Delete", value: "delete" },
+            ],
+
             invoices: [],
 
             idForAction: null,
@@ -271,6 +319,10 @@ export default {
         getMainUrl() {
             return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
+
+        determineHeader(){
+            return this.$page.props.role != 'bishop' ? this.headers : this.headersBishop;
+        }
     },
 
     watch: {
@@ -309,6 +361,26 @@ export default {
 
         getSellerProfile(seller) {
             this.sellerInfo = seller;
+        },
+
+        async verifyInvoiceBishop(id,status_from_financial_bishop ) {
+            axios
+                .post(
+                    // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
+                    this.getMainUrl + "accountant/verifyInvoiceBishop",
+                    {
+                        id: id,
+                        status_from_financial_bishop:
+                            status_from_financial_bishop,
+                        // invoice: this.objectData,
+                    }
+                )
+                .then((response) => {
+                    // this.showLoader = false;
+                    // Clear objectData
+                    // console.log(response.data.data);
+                    // console.log(this.objectData);
+                });
         },
 
         getInvoices() {

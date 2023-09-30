@@ -31,6 +31,10 @@ class InvoiceService
     public function getInvoicesCreation(){
         return \App\Models\AccountantInvoice::with('invoiceItems')->orderBy('created_at', 'desc')->get();
     }
+
+    public function getInvoiceCreation($request){
+        return \App\Models\AccountantInvoice::with('invoiceItems')->findOrFail($request->id);
+    }
     
     public function getInvoiceView($request){
         return \App\Models\Invoice::with('tools', 'sellers', 'toolSum', 'invoiceTool.tool')->where('id', $request->id)->orderBy('created_at', 'desc')->first();
@@ -129,6 +133,24 @@ foreach ($items as $item) {
             'accountantFinancial' => $accountantFinancial,
             'accountantFinancialCount' => $accountantFinancial->count(),
         ];
+    }
+
+    public function verifyInvoiceCreation($request){
+        return \App\Models\AccountantInvoice::find($request->id)->update([
+            'status_from_financial_accountant' => !$request->status_from_financial_accountant
+        ]);
+    }
+
+    public function verifyInvoiceCreationBishop($request){
+        return \App\Models\AccountantInvoice::find($request->id)->update([
+            'status_from_financial_bishop' => !$request->status_from_financial_bishop
+        ]);
+    }
+
+    public function verifyInvoiceBishop($request){
+        return \App\Models\Invoice::find($request->id)->update([
+            'status_from_financial_bishop' => !$request->status_from_financial_bishop
+        ]);
     }
 
 

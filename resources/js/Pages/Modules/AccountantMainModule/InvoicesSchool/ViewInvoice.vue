@@ -1,12 +1,12 @@
 <template>
     <div class="">
-            <a @click="setInvoiceView()" class="ml-4 my-0 py-0">
-                <strong class="text-gray-600" style="font-size:large"
-                    ><i class="fe-arrow-left"></i>
-                </strong>
-            </a>
+        <a @click="setInvoiceView()" class="ml-4 my-0 py-0 cursor-pointer">
+            <strong class="text-gray-600" style="font-size: large"
+                ><i class="fe-arrow-left"></i>
+            </strong>
+        </a>
 
-            <hr class="bg-gray-200 mb-1 mt-0" />
+        <hr class="bg-gray-200 mb-1 mt-0" />
 
         <div class="col-12 mt-0 pt-0">
             <div class="px-1">
@@ -54,18 +54,13 @@
                                     <strong> Invoice id : </strong
                                     ><span>{{ getInvoiceId }}</span>
                                 </span>
-                                <span>
-                                    <strong>Invoice Date:</strong>
-                                    <span class="float-end">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        {{ formattedDate(invoice.created_at) }}
-                                    </span>
-                                </span>
-
-                                <span class="d-flex justify-content-between mb-1">
-                                    <strong>Invoice Status : </strong>
-                                    <div>
-                                        <span
+                                
+                                <span
+                                class="d-flex justify-content-between mb-1"
+                                >
+                                <strong>Invoice Status : </strong>
+                                <div>
+                                    <span
                                             class="btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
                                             :class="[
                                                 this.$page.props.role ==
@@ -78,100 +73,115 @@
                                                     .status_from_financial_accountant
                                             "
                                         >
-                                            Verify
-                                        </span>
+                                        Verify
+                                    </span>
 
                                         <span
-                                            class="btn btn-sm btn-danger text-white btn-sm waves-effect waves-light px-1 py-0"
-                                            :class="[
+                                        class="btn btn-sm btn-danger text-white btn-sm waves-effect waves-light px-1 py-0"
+                                        :class="[
                                                 this.$page.props.role ==
                                                 'bishop'
-                                                    ? 'disabled'
+                                                ? 'disabled'
                                                     : '',
-                                            ]"
+                                                ]"
                                             v-else
-                                        >
+                                            >
                                             Unverify
                                         </span>
                                     </div>
                                 </span>
-
+                                
                                 <span class="d-flex justify-content-between">
                                     <strong>Approve Status : </strong>
                                     <div>
                                         <span
-                                            class="btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
-                                            v-if="
+                                        class="btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
+                                        v-if="
                                                 !this.invoice
                                                     .status_from_financial_bishop
                                             "
-                                        >
-                                           Approve
+                                            @click="verifyInvoiceBishop"
+                                            >
+                                            Approve
                                         </span>
-
+                                        
                                         <span
-                                            class="btn btn-sm btn-danger text-white btn-sm waves-effect waves-light px-1 py-0"
-                                            v-if="
+                                        class="btn btn-sm btn-danger text-white btn-sm waves-effect waves-light px-1 py-0"
+                                        v-if="
                                                 this.invoice
                                                     .status_from_financial_bishop
                                             "
-                                        >
-                                        Unapprove
+                                            @click="verifyInvoiceBishop"
+                                            >
+                                            Unapprove
                                         </span>
-
+                                        
                                         <span
                                             class="disabled btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
                                             v-else-if="
                                                 this.invoice
-                                                    .status_from_financial_bishop && this.$page.props.role !==
-                                                'bishop'
+                                                    .status_from_financial_bishop &&
+                                                this.$page.props.role !==
+                                                    'bishop'
                                             "
                                         >
-                                            Unapproved
-                                        </span>
-
-                                        <span
-                                            class="disabled btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
-                                            v-else-if="
+                                        Unapproved
+                                    </span>
+                                    
+                                    <span
+                                    class="disabled btn btn-sm btn-success text-white btn-sm waves-effect waves-light px-1 py-0"
+                                    v-else-if="
                                                 this.invoice
-                                                    .status_from_financial_bishop && this.$page.props.role !==
-                                                'bishop'
+                                                    .status_from_financial_bishop &&
+                                                this.$page.props.role !==
+                                                    'bishop'
                                             "
                                         >
-                                            Unapproved
-                                        </span>
-                                    </div>
+                                        Unapproved
+                                    </span>
+                                </div>
+                            </span>
+                            <span class="mt-1">
+                                <strong>Invoice Date:</strong>
+                                <span class="float-end">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    {{ formattedDate(invoice.created_at) }}
                                 </span>
-                            </div>
+                            </span>
                         </div>
-                        <!-- end col -->
+                    </div>
+                    <!-- end col -->
                     </div>
                     <!-- end row -->
 
                     <hr class="bg-gray-200 mb-0 mt-1" />
 
                     <!-- <div class="mt-0 bg-info py-0"> -->
-                        <div class="">
-                            <strong class="text-gray-500 font-bold">Invoice Address</strong>
-                            <address>
-                                Procumerement<br />
-                                Diocese of Ifakara Cathedral<br />
-                                Ifakara Morogoro <br />
-                                Tanzania<br />
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                            </address>
-                        </div>
-                        <!-- end col -->
-                        <!-- end col -->
+                    <div class="">
+                        <strong class="text-gray-500 font-bold"
+                            >Invoice Address</strong
+                        >
+                        <address>
+                            Procumerement<br />
+                            Diocese of Ifakara Cathedral<br />
+                            Ifakara Morogoro <br />
+                            Tanzania<br />
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </div>
+                    <!-- end col -->
+                    <!-- end col -->
                     <!-- </div> -->
 
                     <hr class="bg-gray-200 mb-1 mt-0" />
-                    
+
                     <!-- end row -->
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table class="table table-centered teble-sm table-condensed text-xs uppercase">
+                                <table
+                                    class="table table-centered teble-sm table-condensed text-xs uppercase"
+                                >
                                     <thead class="table-condensed">
                                         <tr>
                                             <!-- <th>#</th> -->
@@ -192,13 +202,19 @@
                                             :key="data.id"
                                         >
                                             <!-- <td>1</td> -->
-                                            <td class="text-gray-600 font-semibold uppercase text-xs">
+                                            <td
+                                                class="text-gray-600 font-semibold uppercase text-xs"
+                                            >
                                                 {{ data.tool.name }}
                                                 <br />
                                                 <!-- 2 Pages static website - my
                                                 website -->
                                             </td>
-                                            <td class="text-gray-600 font-semibold uppercase text-xs">{{ data.count }}</td>
+                                            <td
+                                                class="text-gray-600 font-semibold uppercase text-xs"
+                                            >
+                                                {{ data.count }}
+                                            </td>
                                             <td>
                                                 {{
                                                     formattedPrice(
@@ -206,7 +222,9 @@
                                                     )
                                                 }}
                                             </td>
-                                            <td class="text-end text-gray-600 font-semibold uppercase text-xs">
+                                            <td
+                                                class="text-end text-gray-600 font-semibold uppercase text-xs"
+                                            >
                                                 {{
                                                     formattedPrice(
                                                         data.count *
@@ -226,65 +244,45 @@
 
                     <div class="row">
                         <div class="row text-xs mt-0">
-                        <div class="col-sm-6">
-                            <!-- <div class="clearfix pt-5">
-                                <h4 class="">
-                                    Total Amount of the Tools & Items
-                                </h4>
-                            </div> -->
-                        </div>
-                        <!-- end col -->
-                        <div class="col-sm-6">
-                            <div class="float-end mr-2">
-                                <p>
-                                    <b>Sub-total:</b>
-                                    <span class="float-end">{{
-                                        formattedPrice(total)
-                                    }}</span>
-                                </p>
-                                <p>
-                                    <b>Discount (18%):</b>
-                                    <span class="float-end">
-                                        &nbsp;&nbsp;&nbsp;
+                            <div class="col-sm-6"></div>
+                            <!-- end col -->
+                            <div class="col-sm-6">
+                                <div class="float-end mr-2">
+                                    <p>
+                                        <b>Sub-total:</b>
+                                        <span class="float-end">{{
+                                            formattedPrice(total)
+                                        }}</span>
+                                    </p>
+                                    <p>
+                                        <b>Discount (18%):</b>
+                                        <span class="float-end">
+                                            &nbsp;&nbsp;&nbsp;
+                                            {{
+                                                formattedPrice(
+                                                    total * (18 / 100)
+                                                )
+                                            }}</span
+                                        >
+                                    </p>
+                                    <b class="float-end">
+                                        <span>TOTAL</span>
                                         {{
-                                            formattedPrice(total * (18 / 100))
-                                        }}</span
-                                    >
-                                </p>
-                                <b class="float-end">
-                                    <span>TOTAL</span>
-                                    {{
-                                        formattedPrice(
-                                            total - total * (18 / 100)
-                                        )
-                                    }}
-                                </b>
+                                            formattedPrice(
+                                                total - total * (18 / 100)
+                                            )
+                                        }}
+                                    </b>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="clearfix"></div>
+                            <!-- end col -->
                         </div>
-                        <!-- end col -->
-                    </div>
                         <!-- end col -->
 
                         <hr class="bg-gray-200 mb-2 mt-1" />
-                        
                     </div>
                     <!-- end row -->
-
-                    <!-- <div class="mt-4 mb-1">
-                        <div class="text-end d-print-none">
-                            <a
-                                href="javascript:window.print()"
-                                class="btn btn-primary waves-effect waves-light"
-                                ><i class="mdi mdi-printer me-1"></i> Print</a
-                            >
-                            <a
-                                href="#"
-                                class="btn btn-info waves-effect waves-light"
-                                >Submit</a
-                            >
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <!-- end card -->
@@ -375,7 +373,24 @@ export default {
         },
 
         async getInvoiceView() {
-            axios
+            if(this.getCurrentTab === 'diocese-home'){
+                axios
+                .post("/accountant/getInvoiceView", {
+                    id: this.getInvoiceId,
+                })
+                .then((response) => {
+                    if (response.data.data != null) {
+                        this.showLoader = false;
+                        this.totalPrice(response.data.data);
+                        this.invoice = response.data.data;
+                        // console.log(response.data.data);
+                        // this.sellerName(this.invoice);
+                    }
+                });
+            }
+
+            if(this.getCurrentTab === 'home'){
+                axios
                 .post(this.getMainUrl + "accountant/getInvoiceView", {
                     id: this.getInvoiceId,
                 })
@@ -384,40 +399,83 @@ export default {
                         this.showLoader = false;
                         this.totalPrice(response.data.data);
                         this.invoice = response.data.data;
-                        console.log(response.data.data)
+                        // console.log(response.data.data);
                         // this.sellerName(this.invoice);
                     }
                 });
+            }
         },
 
-        async invoiceFormation(data) {
-            this.objectData.push({
-                toolName: data.tool.name,
-                toolPrice: data.tool.price,
-                toolCount: data.count,
-            });
-            // console.log(this.objectData);
-        },
-
-        async acceptInvoice() {
-            axios
+        async verifyInvoiceBishop() {
+            if(this.getCurrentTab === 'diocese-home'){
+                axios
                 .post(
                     // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
-                    this.getMainUrl + "accountant/acceptInvoice",
+                    "/accountant/verifyInvoiceBishop",
                     {
                         id: this.invoice.id,
-                        status_from_financial_accountant:
-                            this.invoice.status_from_financial_accountant,
+                        status_from_financial_bishop:
+                            this.invoice.status_from_financial_bishop,
                         // invoice: this.objectData,
                     }
                 )
                 .then((response) => {
-                    this.showLoader = false;
+                    // this.showLoader = false;
                     // Clear objectData
                     // console.log(response.data.data);
                     // console.log(this.objectData);
                 });
+            }
+
+            if(this.getCurrentTab === 'home'){
+                axios
+                .post(
+                    // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
+                    this.getMainUrl + "accountant/verifyInvoiceBishop",
+                    {
+                        id: this.invoice.id,
+                        status_from_financial_bishop:
+                            this.invoice.status_from_financial_bishop,
+                        // invoice: this.objectData,
+                    }
+                )
+                .then((response) => {
+                    // this.showLoader = false;
+                    // Clear objectData
+                    // console.log(response.data.data);
+                    // console.log(this.objectData);
+                });
+            }
         },
+
+        // async invoiceFormation(data) {
+        //     this.objectData.push({
+        //         toolName: data.tool.name,
+        //         toolPrice: data.tool.price,
+        //         toolCount: data.count,
+        //     });
+        //     // console.log(this.objectData);
+        // },
+
+        // async acceptInvoice() {
+        //     axios
+        //         .post(
+        //             // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
+        //             this.getMainUrl + "accountant/acceptInvoice",
+        //             {
+        //                 id: this.invoice.id,
+        //                 status_from_financial_accountant:
+        //                     this.invoice.status_from_financial_accountant,
+        //                 // invoice: this.objectData,
+        //             }
+        //         )
+        //         .then((response) => {
+        //             this.showLoader = false;
+        //             // Clear objectData
+        //             // console.log(response.data.data);
+        //             // console.log(this.objectData);
+        //         });
+        // },
     },
 
     // watch: {
@@ -450,12 +508,21 @@ export default {
         getMainUrl() {
             return this.$store.getters["SystemConfigurationsModule/getMainUrl"];
         },
+
+        getCurrentTab() {
+            return this.$store.getters["AccountantInvoiceModule/getTab"];
+        },
     },
 };
 </script>
 
 <style scoped>
-.table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td{
+.table-condensed > thead > tr > th,
+.table-condensed > tbody > tr > th,
+.table-condensed > tfoot > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > td,
+.table-condensed > tfoot > tr > td {
     padding: 7px;
 }
 </style>

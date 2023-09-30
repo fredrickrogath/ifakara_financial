@@ -294,7 +294,24 @@ export default {
         // },
 
         async getInvoiceCreation() {
-            axios
+            if(this.getCurrentTab === 'diocese-invoices'){
+                axios
+                .post("/accountant/getInvoiceCreation", {
+                    id: this.getInvoiceCreationId,
+                })
+                .then((response) => {
+                    if (response.data.data != null) {
+                        // this.showLoader = false;
+                        this.totalPrice(response.data.data);
+                        // console.log(response.data.data)
+                        this.invoice = response.data.data;
+                        // this.sellerName(this.invoice);
+                    }
+                });
+            }
+
+            if(this.getCurrentTab === 'invoices'){
+                axios
                 .post(this.getMainUrl + "accountant/getInvoiceCreation", {
                     id: this.getInvoiceCreationId,
                 })
@@ -307,6 +324,7 @@ export default {
                         // this.sellerName(this.invoice);
                     }
                 });
+            }
         },
 
         // async invoiceFormation(data) {
@@ -323,7 +341,28 @@ export default {
         },
 
         async verifyInvoiceCreationBishop() {
-            axios
+            if(this.getCurrentTab === 'diocese-invoices'){
+                axios
+                .post(
+                    // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
+                    "/accountant/verifyInvoiceCreationBishop",
+                    {
+                        id: this.invoice.id,
+                        status_from_financial_bishop:
+                            this.invoice.status_from_financial_bishop,
+                        // invoice: this.objectData,
+                    }
+                )
+                .then((response) => {
+                    // this.showLoader = false;
+                    // Clear objectData
+                    // console.log(response.data.data);
+                    // console.log(this.objectData);
+                });
+            }
+
+            if(this.getCurrentTab === 'invoices'){
+                axios
                 .post(
                     // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
                     this.getMainUrl + "accountant/verifyInvoiceCreationBishop",
@@ -340,6 +379,7 @@ export default {
                     // console.log(response.data.data);
                     // console.log(this.objectData);
                 });
+            }
         },
     },
 
@@ -382,6 +422,10 @@ export default {
             return this.$store.getters[
                 "AccountantInvoiceModule/getInvoiceCreationView"
             ];
+        },
+
+        getCurrentTab() {
+            return this.$store.getters["AccountantInvoiceModule/getTab"];
         },
     },
 };

@@ -259,6 +259,12 @@ Route::middleware([
         Route::get('/rejectedInvoice', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'rejectedInvoice'])->name('rejectedInvoice');
         Route::get('/headDashboardGetInvoices', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'headDashboardGetInvoices'])->name('headDashboardGetInvoices');
 
+
+        Route::post('/verifyInvoiceBishop', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'verifyInvoiceBishop'])->name('verifyInvoiceBishop');
+        Route::post('/getInvoiceCreation', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'getInvoiceCreation'])->name('getInvoiceCreation');
+        Route::post('/verifyInvoiceCreation', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'verifyInvoiceCreation'])->name('verifyInvoiceCreation');
+        Route::post('/verifyInvoiceCreationBishop', [\App\Http\Controllers\Accountant\Invoice\InvoiceController::class, 'verifyInvoiceCreationBishop'])->name('verifyInvoiceCreationBishop');
+
         /*
         |--------------------------------------------------------------------------
         | ENTRIES

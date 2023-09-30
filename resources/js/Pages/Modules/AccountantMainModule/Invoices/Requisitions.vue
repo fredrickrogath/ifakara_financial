@@ -57,7 +57,7 @@
             <!-- /.modal -->
 
             <v-card-title class="px-0 pt-0 pb-1">
-                    <div class="pl-2 pt-1 text-sm uppercase">Invoices<span class="d-none">{{ getSchoolId }}</span></div>
+                    <div class="pl-2 pt-1 text-sm uppercase">Invoices</div>
                     <v-spacer></v-spacer>
                     <snackbar message="Task completed successfully"></snackbar>
 
@@ -83,6 +83,7 @@
                 :search="search"
                 class="elevation-1"
                 :items-per-page="11"
+                dense
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -124,14 +125,35 @@
                                     mdi-star
                                 </v-icon>
 
+                                <v-icon
+                                    v-if="header.text == 'Approval' && $page.props.role === 'bishop'"
+                                    :class="
+                                        items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                    @click="verifyInvoiceBishop(items[idx]['id'], items[idx]['status_from_financial_bishop'])"
+                                >
+                                    {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
+                                <v-icon
+                                    v-if="header.text == 'Approval' && $page.props.role !== 'bishop'"
+                                    :class="
+                                        items[idx]['status_from_financial_bishop'] ? 'text-danger' : ''
+                                    "
+                                    size="20"
+                                >
+                                    {{ items[idx]['status_from_financial_bishop'] ? 'mdi-cancel' : 'mdi-check-circle' }}
+                                </v-icon>
+
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'id'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'created_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -139,7 +161,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'updated_at'"
                                     >{{
                                         formattedDate(item[header.value])
@@ -147,7 +169,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'sellers'"
                                     >
                                     
@@ -183,7 +205,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'tools'"
                                 >
                                     <div v-for="tool in item[header.value]">
@@ -215,7 +237,7 @@
                                 </span>
 
                                 <span
-                                    class="text-gray-600 italic font-semibold"
+                                    class="text-gray-600 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'tool_sum'"
                                 >
                                     {{ 
@@ -305,6 +327,7 @@ export default {
                     text: "Total",
                     value: "tool_sum",
                 },
+                { text: "Approval", value: "bishop" },
                 // { text: "Starred", value: "starred" },
                 { text: "Date", value: "created_at" },
                 { text: "View", value: "view" },
@@ -319,8 +342,12 @@ export default {
     },
 
     computed: {
-        contentFullWidthWhenSideBarHidesComputed() {
-            return this.contentFullWidthWhenSideBarHides;
+        // contentFullWidthWhenSideBarHidesComputed() {
+        //     return this.contentFullWidthWhenSideBarHides;
+        // },
+
+        getCurrentTab() {
+            return this.$store.getters["AccountantInvoiceModule/getTab"];
         },
     },
 
@@ -351,11 +378,53 @@ export default {
             this.sellerInfo = seller
         },
 
+        async verifyInvoiceBishop(id,status_from_financial_bishop ) {
+            if(this.getCurrentTab === 'diocese-home'){
+                axios
+                .post(
+                    // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
+                    "/accountant/verifyInvoiceBishop",
+                    {
+                        id: id,
+                        status_from_financial_bishop:
+                            status_from_financial_bishop,
+                        // invoice: this.objectData,
+                    }
+                )
+                .then((response) => {
+                    // this.showLoader = false;
+                    // Clear objectData
+                    // console.log(response.data.data);
+                    // console.log(this.objectData);
+                });
+            }
+
+            if(this.getCurrentTab === 'home'){
+                axios
+                .post(
+                    // "http://127.0.0.1:8001/api/accountant/invoiceFromSchool",
+                    this.getMainUrl + "accountant/verifyInvoiceBishop",
+                    {
+                        id: id,
+                        status_from_financial_bishop:
+                            status_from_financial_bishop,
+                        // invoice: this.objectData,
+                    }
+                )
+                .then((response) => {
+                    // this.showLoader = false;
+                    // Clear objectData
+                    // console.log(response.data.data);
+                    // console.log(this.objectData);
+                });
+            }
+        },
+
         getInvoices() {
             axios.get("/accountant/getInvoices").then((response) => {
                 this.invoices = response.data.data;
                 this.showLoader = false;
-                console.log(response.data.data)
+                // console.log(response.data.data)
             });
         },
 
