@@ -250,11 +250,11 @@ export default {
         //     }
         // );
 
-        window.Echo.channel(
-            "school-staff-trigger-from-financial-secretary"
-        ).listen("Api\\Secretary\\StaffEvent", (e) => {
-            this.getStaffs();
-        });
+        // window.Echo.channel(
+        //     "school-staff-trigger-from-financial-secretary"
+        // ).listen("Api\\Secretary\\StaffEvent", (e) => {
+        //     this.getStaffs();
+        // });
     },
 
     data() {

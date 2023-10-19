@@ -1,11 +1,11 @@
 <template>
     <div data-app>
         <!-- Right modal content -->
-        <div class="row bg-white" v-if="false">
+        <div class="row" v-if="true">
             <!-- Right Sidebar -->
             <div class="col-12">
-                <div class="h-screen">
-                    <div class="mt-2">
+                <div class="h-screen card">
+                    <div class="">
                         <!-- Left sidebar -->
                         <div class="inbox-leftbar bg-white h-screen">
                             <!-- <div class="btn-group dropend d-block mb-2 mx-2">
@@ -271,6 +271,36 @@
                                     ></i
                                     >Portal Staffs
                                 </a>
+
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0 pt-1"
+                                    @click="setTab('portalapplicants')"
+                                    :class="[
+                                        getCurrentTab == 'portalapplicants'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                    ></i
+                                    >Portal Applicants
+                                </a>
+
+                                <a
+                                    href="#"
+                                    class="list-group-item border-0 pt-1"
+                                    @click="setTab('portalposts')"
+                                    :class="[
+                                        getCurrentTab == 'portalposts'
+                                            ? 'text-warning'
+                                            : '',
+                                    ]"
+                                    ><i
+                                        class="mdi mdi-school font-19 align-middle me-2 pb-1"
+                                    ></i
+                                    >Portal Posts
+                                </a>
                                     <a
                                     href="#"
                                     class="list-group-item border-0 pt-0"
@@ -353,23 +383,28 @@
                         </div>
                         <!-- End Left sidebar -->
 
-                        <div class="inbox-rightbar pt-0 px-0">
+                        <div class="inbox-rightbar pt-3 px-0">
                             <div class="h-screen">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition-group name="slide" mode="in-out"> -->
                                 <div
-                                    v-if="getAddStudent && !getSchoolView"
+                                    v-if="getAddStudent && !getApplicantView && !getSchoolView"
                                     key="1"
                                 >
                                     <add-staff></add-staff>
                                 </div>
 
-                                <div v-if="getSchoolView && !getAddStudent">
+                                <div v-if="getApplicantView && !getSchoolView && !getAddStudent">
+                                    <view-portal-applicant></view-portal-applicant>
+                                    
+                                </div>
+
+                                <div v-if="getSchoolView && !getApplicantView && !getAddStudent">
                                     <open-school></open-school>
                                     
                                 </div>
                                 <div
-                                    v-if="!getAddStudent && !getSchoolView"
+                                    v-if="!getAddStudent && !getSchoolView && !getApplicantView"
                                     key="2"
                                 >
                                 <all-invoices-vue v-if="getCurrentTab == 'invoices' && !getAddSchool"></all-invoices-vue>
@@ -380,6 +415,12 @@
                                     <all-staffs
                                         v-if="getCurrentTab == 'allStaffs'"
                                     ></all-staffs>
+                                    <portal-applicants
+                                        v-if="getCurrentTab == 'portalapplicants'"
+                                    ></portal-applicants>
+                                    <portal-posts
+                                        v-if="getCurrentTab == 'portalposts'"
+                                    ></portal-posts>
                                     <all-students
                                         v-if="getCurrentTab == 'allStudents'"
                                     ></all-students>
@@ -436,6 +477,11 @@ import AddSchool from "./SchoolComponents/School/AllSchools/AddSchool.vue";
 import Permissions from "./SchoolComponents/School/School/Permissions.vue";
 import PortalStaffs from "./SchoolComponents/PortalStaff.vue";
 import Comments from "./SchoolComponents/Comments.vue";
+import PortalApplicants from "./SchoolComponents/PortalApplicants.vue";
+import PortalPosts from "./SchoolComponents/PortalPosts.vue";
+
+// import ViewPortalPost from "./SchoolComponents/View/PortalPost.vue";
+import ViewPortalApplicant from "./SchoolComponents/View/PortalApplicant.vue";
 
 // import AllInvoices from "./AllInvoices.vue";
 
@@ -466,6 +512,10 @@ export default {
         AllInvoicesVue,
 
         PortalStaffs,
+        PortalPosts,
+        PortalApplicants,
+        // ViewPortalPost,
+        ViewPortalApplicant,
 
         Select2,
     },
@@ -542,6 +592,18 @@ export default {
 
         getCommentView() {
             return this.$store.getters["SecratarySchoolModule/getCommentView"];
+        },
+
+        getPostView() {
+            return this.$store.getters["SecretaryPortalModule/getPostView"];
+        },
+
+        getPostView() {
+            return this.$store.getters["SecretaryPortalModule/getApplicant"];
+        },
+        
+        getApplicantView() {
+            return this.$store.getters["SecretaryPortalModule/getApplicantView"];
         },
 
         getMainUrl() {

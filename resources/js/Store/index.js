@@ -12,6 +12,7 @@ import AccountantUpload from "../Store/accountant/Upload/index";
 import AccountantReport from "../Store/accountant/Report/index";
 import SecratarySchool from "../Store/secretary/school/index";
 import SecretarySchoolDetail from "../Store/secretary/schoolDetail/index";
+import SecretaryPortal from "../Store/secretary/portal/index";
 
 
 import Procurementinvoice from '../Store/Procurement/invoice/index';
@@ -37,6 +38,8 @@ const AccountantUploadModule = AccountantUpload;
 const SecratarySchoolModule = SecratarySchool;
 
 const SecretarySchoolDetailModule = SecretarySchoolDetail;
+
+const SecretaryPortalModule =  SecretaryPortal;
 
 const ProcurementInvoiceModule = Procurementinvoice;
 
@@ -66,6 +69,8 @@ const store = new Vuex.Store({
         SecratarySchoolModule: SecratarySchoolModule,
 
         SecretarySchoolDetailModule: SecretarySchoolDetailModule,
+
+        SecretaryPortalModule: SecretaryPortalModule,
 
         ProcurementInvoiceModule: ProcurementInvoiceModule,
 

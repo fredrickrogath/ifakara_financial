@@ -1,5 +1,5 @@
 <template>
-    <div class="card h-screen -mt-3">
+    <div class="card h-screen mt-1">
         <div>
             <v-card-title class="px-0 pt-0 pb-1">
                 <div class="pl-2 pt-1 text-sm uppercase">INVOICE REPORT <span class="d-none">{{ formattedDateRange }}</span>
