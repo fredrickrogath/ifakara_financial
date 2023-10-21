@@ -16,7 +16,7 @@
                         <!-- <img class="mx-auto h-52 w-52 rounded-lg border p-2 md:mt-0" src="https://i.imgur.com/FQS7fFC.png" alt="step" /> -->
                         <div>
                             <h1
-                                class="font-laonoto mt-4 text-center text-xl text-secondary font-bold"
+                                class="font-laonoto mt-4 text-center text-sm text-secondary font-bold"
                             >
                                 <span v-show="false">{{ getPaymentId }}</span>
                                 {{ student.first_name }}

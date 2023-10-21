@@ -148,14 +148,6 @@
                                                 formattedPrice(item.price)
                                             }}</span>
                                         </span>
-
-                                        <!-- <v-icon size="20" class="mb-1 px-1"
-                                            >mdi-hand-pointing-right</v-icon
-                                        >
-
-                                        <span>
-                                            Description {{ item.description }}
-                                        </span> -->
                                     </div>
                                 </span>
                             </td>
@@ -164,17 +156,12 @@
                 </template>
             </v-data-table>
         </div>
-
-        <!-- </v-col> -->
     </div>
-    <!-- </v-row>
-    </v-col> -->
 </template>
 
 <script>
 import moment from "moment";
 import Spinner from "../../../../Components/SpinnerLoader.vue";
-// import Snackbar from "../../../../Components/Snackbar";
 import SellerProfile from "../../../../Components/SellerProfile.vue";
 export default {
     components: {
