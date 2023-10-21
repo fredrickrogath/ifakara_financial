@@ -27,6 +27,8 @@
                 item-key="name"
                 :search="search"
                 class="elevation-1"
+                dense
+                :items-per-page="11"
             >
                 <template v-slot:body="{ items, headers }">
                     <tbody>
@@ -50,61 +52,26 @@
                                 >
                                     mdi-eye
                                 </v-icon>
-
-                                <!-- <v-icon
-                                    v-if="header.value == 'download'"
-                                    size="22"
-                                    :class="
-                                        item[header.value] ? 'text-warning' : ''
-                                    "
-                                    @click="
-                                        starredInvoice(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                >
-                                    mdi-download
-                                </v-icon> -->
-
-                                <!-- <a
-                                v-if="header.value == 'cv'"
-                                    class="text-gray-600 italic font-semibold"
-                                    :href="storagePath + item[header.value]"
-                                    target="_blank"
-                                >
-                                    <v-icon size="22" @click="">
-                                        mdi-download
-                                    </v-icon>
-                                </a> -->
-
-                                <!-- <span
-                                    class="text-gray-600 italic font-semibold"
-                                    v-else-if="header.value == 'basic_salary'"
-                                    >{{ item[header.value] }}</span
-                                > -->
-
                                 <span
-                                    class="text-gray-600 font-semibold"
+                                    class="text-gray-500 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'age_range'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 font-semibold uppercase"
+                                    class="text-gray-500 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'gender'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 font-semibold uppercase"
+                                    class="text-gray-500 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'vacant_name'"
                                     >{{ item[header.value] }}</span
                                 >
 
                                 <span
-                                    class="text-gray-600 font-semibold"
+                                    class="text-gray-500 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'education_level_id'"
                                     >{{
                                         item[header.value]
@@ -112,7 +79,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 font-semibold"
+                                    class="text-gray-500 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'end_date'"
                                     >{{
                                         item[header.value]
@@ -120,7 +87,7 @@
                                 >
 
                                 <span
-                                    class="text-gray-600 font-semibold"
+                                    class="text-gray-500 font-semibold uppercase text-xs"
                                     v-else-if="
                                         header.value == 'year_experience'
                                     "
@@ -130,20 +97,20 @@
                                 >
 
                                     <span
-                                        class="text-gray-600 font-semibold uppercase"
+                                        class="text-gray-500 font-semibold uppercase text-xs"
                                         v-else-if="header.value == 'institution_name'"
                                         >{{ item[header.value] }}</span
                                     >
 
                                 <span
-                                    class="text-gray-600 font-semibold lowercase"
+                                    class="text-gray-500 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'email'"
                                 >
                                     {{ item[header.value] }}
                                 </span>
 
                                 <span
-                                    class="text-gray-600 font-semibold uppercase"
+                                    class="text-gray-500 font-semibold uppercase text-xs"
                                     v-else-if="header.value == 'application_date'"
                                     >{{ item[header.value] }}</span
                                 >

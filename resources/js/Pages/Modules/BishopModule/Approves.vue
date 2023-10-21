@@ -97,7 +97,7 @@
                             <div class="">
                                 <!-- <h5 class="mb-3">Recent</h5> -->
                                 <!-- <transition name="fade"> -->
-                                <div v-if="getInvoiceView & !getInvoiceCreationView">
+                                <div v-if="getInvoiceView && !getInvoiceCreationView">
                                     <view-invoice></view-invoice>
                                 </div>
 

@@ -207,8 +207,8 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="finances"
-                                            :head="headDonghurt"
-                                            :content="contentDonghurt"
+                                            :head="headDonghurtFinancial"
+                                            :content="contentDonghurtFinancial"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -490,9 +490,13 @@ export default {
             finances: [],
             invoices: null,
             chartData: [],
-            headDonghurt: "3D New Tools vs Total Tools",
+            headDonghurt: "Representation of paid, unpaid and incomplete fees",
+            headDonghurtFinancial: "Financial Presentation",
             contentDonghurt:
                 "3D This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
+
+            contentDonghurtFinancial:
+                "This chart provides a comprehensive overview of financial health, categorizing key elements into four essential categories.",
             head: "Bar New Tools vs Total Tools",
             content:
                 "Bar This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
