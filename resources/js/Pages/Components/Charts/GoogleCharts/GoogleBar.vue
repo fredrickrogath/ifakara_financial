@@ -11,12 +11,9 @@
 
         <div>
             <div class="chart-description">
-                <h4>New Tools vs Total Tools</h4>
+                <h4> {{ head }} </h4>
                 <p>
-                    This chart shows the percentage of new tools compared to the
-                    total number of tools. The pie chart is divided into two
-                    sections: new tools and total tools. The chart provides a
-                    visual representation of the tool data.
+                    {{ content }}
                 </p>
             </div>
         </div>
@@ -37,6 +34,13 @@ export default {
         },
         YText: {
             type: String,
+            required: true,
+        },
+
+        head: {
+            required: true,
+        },
+        content: {
             required: true,
         },
     },

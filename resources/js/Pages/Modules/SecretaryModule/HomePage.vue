@@ -207,8 +207,8 @@
                                     <v-container fluid>
                                         <pie-chart3-d
                                             :data="finances"
-                                            :head="headDonghurt"
-                                            :content="contentDonghurt"
+                                            :head="headDonghurtFinancial"
+                                            :content="contentDonghurtFinancial"
                                         ></pie-chart3-d>
                                     </v-container>
                                 </v-tab-item>
@@ -221,210 +221,6 @@
                 </div>
                 <!-- end card -->
             </div>
-            <!-- end col-->
-
-            <!-- <div class="col-xl-6 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title mb-1">
-                            Recently Finance Reports
-                        </h4>
-
-                        <div class="table-responsive">
-                            <table
-                                class="table table-centered table-nowrap table-hover mb-0"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th class="border-top-0">Identity</th>
-                                        <th class="border-top-0">
-                                            Departiment
-                                        </th>
-                                        <th class="border-top-0">Title</th>
-                                        <th class="border-top-0">Published</th>
-                                        <th class="border-top-0">View</th>
-                                        <th class="border-top-0">Download</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-2.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Finance</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>27.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-3.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Procurement</span
-                                            >
-                                        </td>
-
-                                        <td>Finacial report of ...</td>
-
-                                        <td>28.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-1.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Procurement</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>28.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-4.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Finance</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>29.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-5.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Account</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>31.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-3.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Finance</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>28.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                src="assets/images/users/user-1.jpg"
-                                                alt="user-pic"
-                                                class="rounded-circle avatar-sm bx-shadow-lg"
-                                            />
-                                        </td>
-                                        <td>
-                                            <span class="text-center"
-                                                >Procurement</span
-                                            >
-                                        </td>
-                                        <td>Finacial report of ...</td>
-                                        <td>28.03.2018</td>
-                                        <td class="text-center">
-                                            <v-icon size="20">mdi-eye</v-icon>
-                                        </td>
-                                        <td class="text-center">
-                                            <v-icon size="22"
-                                                >mdi-download</v-icon
-                                            >
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- end col-->
-
             <div class="mb-0 pb-0 mr-1">
                 <div class="card">
                     <div class="card-body">
@@ -434,8 +230,8 @@
                             <google-bar
                                 :data="chartData"
                                 YText="Invoice Count"
-                                :head="head"
-                                :content="content"
+                                :head="headBar"
+                                :content="contentBar"
                             ></google-bar>
                         </div>
                     </div>
@@ -490,12 +286,14 @@ export default {
             finances: [],
             invoices: null,
             chartData: [],
-            headDonghurt: "3D New Tools vs Total Tools",
-            contentDonghurt:
-                "3D This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
-            head: "Bar New Tools vs Total Tools",
-            content:
-                "Bar This chart shows the percentage of new tools compared to the total number of tools. The pie chart is divided into two sections: new tools and total tools. The chart provides a visual representation of the tool data.",
+            headDonghurt: "Representation of paid, unpaid and incomplete fees",
+            headBar: "Procurement and Accounting Invoice Summary",
+            contentBar: "This graph showcases the invoice counts for procurement and accounting departments, offering a concise comparison of their respective processing volumes. It enables quick insights into departmental invoice management efficiency",
+            headDonghurtFinancial: "Financial Presentation",
+            contentDonghurtFinancial:
+                "This chart provides a comprehensive overview of financial health, categorizing key elements into four essential categories.",
+                contentDonghurt:
+                "Visualizes paid, unpaid, and incomplete fees for quick insights into financial statuses based on students school fees.",
         };
     },
     computed: {
