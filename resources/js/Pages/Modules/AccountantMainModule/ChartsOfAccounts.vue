@@ -423,141 +423,110 @@
 
             <div class="border-b border-6 mt-0 pt-0 border-gray-200"></div>
 
-            <v-layout column style="height: 150vh">
-                <v-flex md6 style="overflow: auto">
-                    <v-data-table
-                        :headers="headers"
-                        :items="chartOfAccounts"
-                        item-key="name"
-                        :search="search"
-                        class="elevation-1"
-                        :items-per-page="20"
-                        dense
-                    >
-                        <template v-slot:body="{ items, headers }">
-                            <tbody>
-                                <tr v-for="(item, idx, k) in items" :key="idx">
-                                    <td
-                                        v-for="(header, key) in headers"
-                                        :key="key"
+            <!-- <v-flex md6 style="overflow: auto"> -->
+            <v-data-table
+                :headers="headers"
+                :items="chartOfAccounts"
+                item-key="name"
+                :search="search"
+                class="elevation-1"
+                :items-per-page="20"
+                dense
+            >
+                <template v-slot:body="{ items, headers }">
+                    <tbody>
+                        <tr v-for="(item, idx, k) in items" :key="idx">
+                            <td v-for="(header, key) in headers" :key="key">
+                                <v-icon
+                                    v-if="header.value == 'view'"
+                                    size="22"
+                                    @click="studentDetails(items[idx]['id'])"
+                                >
+                                    mdi-eye
+                                </v-icon>
+
+                                <span
+                                    class="text-gray-600 font-semibold uppercase text-xs"
+                                    v-else-if="header.value == 'created_at'"
+                                    >{{
+                                        formattedDate(item[header.value])
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600"
+                                    v-else-if="header.value == 'updated_at'"
+                                    >{{
+                                        formattedDate(item[header.value])
+                                    }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 font-semibold uppercase text-xs"
+                                    v-else-if="header.value == 'Account_code'"
+                                    >{{ item[header.value] }}</span
+                                >
+
+                                <span
+                                    class="text-gray-600 font-semibold uppercase text-xs"
+                                    v-else-if="header.value == 'Account_name'"
+                                >
+                                    {{ item[header.value] }}
+                                </span>
+
+                                <span
+                                    class="text-gray-600 font-semibold uppercase text-xs"
+                                    v-else-if="header.value == 'Sub_accounts'"
+                                >
+                                    <span
+                                        v-for="subAccount in item[header.value]"
+                                        :key="subAccount.id"
                                     >
-                                        <v-icon
-                                            v-if="header.value == 'view'"
-                                            size="22"
-                                            @click="
-                                                studentDetails(items[idx]['id'])
-                                            "
-                                        >
-                                            mdi-eye
-                                        </v-icon>
+                                        <div>
+                                            {{ subAccount["Account code"] }}
+                                            <span class="mx-2"></span>
+                                            {{ subAccount["Account name"] }}
 
-                                        <span
-                                            class="text-gray-600 font-semibold uppercase text-xs"
-                                            v-else-if="
-                                                header.value == 'created_at'
-                                            "
-                                            >{{
-                                                formattedDate(
-                                                    item[header.value]
-                                                )
-                                            }}</span
-                                        >
-
-                                        <span
-                                            class="text-gray-600"
-                                            v-else-if="
-                                                header.value == 'updated_at'
-                                            "
-                                            >{{
-                                                formattedDate(
-                                                    item[header.value]
-                                                )
-                                            }}</span
-                                        >
-
-                                        <span
-                                            class="text-gray-600 font-semibold uppercase text-xs"
-                                            v-else-if="
-                                                header.value == 'Account_code'
-                                            "
-                                            >{{ item[header.value] }}</span
-                                        >
-
-                                        <span
-                                            class="text-gray-600 font-semibold uppercase text-xs"
-                                            v-else-if="
-                                                header.value == 'Account_name'
-                                            "
-                                        >
-                                            {{ item[header.value] }}
-                                        </span>
-
-                                        <span
-                                            class="text-gray-600 font-semibold uppercase text-xs"
-                                            v-else-if="
-                                                header.value == 'Sub_accounts'
-                                            "
-                                        >
                                             <span
-                                                v-for="subAccount in item[
-                                                    header.value
-                                                ]"
-                                                :key="subAccount.id"
+                                                class="d-flex flex-column float-right ml-10"
                                             >
-                                                {{ subAccount["Account code"] }}
-                                                <span class="mx-2"></span>
-                                                {{ subAccount["Account name"] }}
-
-                                                <span
-                                                    class="d-flex flex-column float-right ml-10"
+                                                <span class="pt-1"
+                                                    >Purposes</span
                                                 >
-                                                    <span class="pt-1"
-                                                        >Purposes</span
-                                                    >
-                                                    <span
-                                                        v-for="purpose in subAccount.Purposes"
-                                                        :key="purpose.id"
+                                                <span
+                                                    v-for="purpose in subAccount.Purposes"
+                                                    :key="purpose.id"
                                                     class="d-flex flex-column"
-                                                    >
-                                                        <span>
-                                                            {{
+                                                >
+                                                    <span>
+                                                        {{
                                                             purpose.Purpose_code
                                                         }}
-                                                        <span class="mx-1"></span>
+                                                        <span
+                                                            class="mx-1"
+                                                        ></span>
                                                         {{
                                                             purpose.Purpose_name
                                                         }}
-                                                        <span class="mx-1"></span>
+                                                        <span
+                                                            class="mx-1"
+                                                        ></span>
 
-                                                        {{
-                                                            purpose.Price
-                                                        }}
-                                                        </span>
-                                                        <!-- <span>
-                                                            {{
-                                                            purpose.Purpose_code
-                                                        }}
-                                                        <span class="mx-1"></span>
-                                                        {{
-                                                            purpose.Purpose_name
-                                                        }}
-                                                        <span class="mx-1"></span>
-
-                                                        {{
-                                                            purpose.Price
-                                                        }}
-                                                        </span> -->
+                                                        {{ purpose.Price }}
                                                     </span>
                                                 </span>
+
+                                                <!-- <span>hello</span> -->
                                             </span>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </template>
-                    </v-data-table>
-                </v-flex>
-            </v-layout>
+                                        </div>
+                                    </span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-data-table>
+            <!-- </v-flex> -->
         </div>
     </div>
 </template>
@@ -585,6 +554,8 @@ export default {
             (e) => {
                 // console.log('abc');
                 this.getChartOfAccounts();
+                this.getAccounts();
+                this.getSubAccounts();
             }
         );
     },
@@ -613,13 +584,14 @@ export default {
                     align: "left",
                     sortable: false,
                     value: "Account_code",
+                    width: "10%",
                 },
-                { text: "Account Name", value: "Account_name" },
-                { text: "Sub Accounts", value: "Sub_accounts" },
+                { text: "Account Name", value: "Account_name", width: "15%" },
+                { text: "Sub Accounts", value: "Sub_accounts", width: "60%" },
                 // { text: "Name", value: "name" },
                 // { text: "Description", value: "description" },
                 // { text: "Notes", value: "notes" },
-                { text: "Date", value: "created_at" },
+                { text: "Date", value: "created_at", width: "15%" },
                 // { text: "Action", value: "action" },
             ],
 
@@ -720,7 +692,7 @@ export default {
             axios.get("/accountant/getChartOfAccounts").then((response) => {
                 this.chartOfAccounts = response.data.data;
                 this.showLoader = false;
-                console.log(response.data.data);
+                // console.log(response.data.data);
             });
         },
 

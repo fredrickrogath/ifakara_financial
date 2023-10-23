@@ -87,16 +87,19 @@ class ChatOfAccountController extends Controller
 
     public function addAccount(Request $request ,ChatOfAccountService $chatOfAccountService){
         // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $chatOfAccountService->addAccount($request)]);
     }
 
     public function addSubAccount(Request $request ,ChatOfAccountService $chatOfAccountService){
         // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $chatOfAccountService->addSubAccount($request)]);
     }
 
     public function addPurpose(Request $request ,ChatOfAccountService $chatOfAccountService){
         // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        event(new \App\Events\NewPostPublished('created'));
         return response()->json(['data' => $chatOfAccountService->addPurpose($request)]);
     }
 
