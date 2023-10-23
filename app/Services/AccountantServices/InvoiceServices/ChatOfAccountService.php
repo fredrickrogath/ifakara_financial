@@ -13,7 +13,8 @@ class ChatOfAccountService
     }
 
     public function getChartOfAccounts(){
-        return \App\Models\ChartsOfAccount::orderBy('created_at', 'desc')->get();
+        // return \App\Models\ChartsOfAccount::orderBy('created_at', 'desc')->get();
+        return \App\Http\Resources\AccountResource::collection(\App\Models\Account::with("subAccounts.purposes")->orderBy('created_at', 'desc')->get());
     }
 
     public function entry($request){
@@ -128,5 +129,43 @@ class ChatOfAccountService
             'paidStudents' => $paidStudents,
             'unpaidStudents' => $unpaidStudents,
         ];
+    }
+
+    public function addAccount($request){
+        return \App\Models\Account::create([
+            'account_code' => $request->accountCode,
+            'account_name' => $request->account,
+            'account_category' => $request->accountCategory
+        ]);
+    }
+
+    public function addSubAccount($request){
+        return \App\Models\SubAccount::create([
+            'account_code' => $request->subAccountCode,
+            'account_name' => $request->subAccount,
+            'account_id' => $request->accountIdFromSubAccount
+        ]);
+    }
+
+    public function addPurpose($request){
+        return \App\Models\Purpose::create([
+            'purpose_code' => $request->purposeCode,
+            'purpose_name' => $request->purposeName,
+            'sub_account_id' => $request->subAccountIdFromPurpose,
+            'price' => $request->purposePrice,
+        ]);
+        return \App\Models\AccountRelation::create([
+            'account_id' => $request->accountIdFromPurpose,
+            'sub_account_id' => $request->subAccountIdFromPurpose,
+            'purpose_id' => $created->id,
+        ]);
+    }
+
+    public function getAccounts(){
+        return \App\Models\Account::get();
+    }
+
+    public function getSubAccounts(){
+        return \App\Models\SubAccount::get();
     }
 }

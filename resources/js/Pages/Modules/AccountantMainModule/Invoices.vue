@@ -1,10 +1,9 @@
 <template>
     <div data-app>
-        <v-row justify="center">
+        <!-- <v-row justify="center">
             <v-dialog v-model="dialog" scrollable width="auto">
                 <v-card>
-                    <h5 class="text-center">{{ dialogForm }} Form Fill</h5>
-                    <!-- <v-divider></v-divider> -->
+                    <h5 class="text-center bg-info">{{ dialogForm }} Form Fill</h5>
                     <div class="px-2">
                         <form>
                         <div class="mb-1">
@@ -58,18 +57,6 @@
                             />
                         </div>
 
-                        <!-- <div class="mb-1">
-                            <label for="example-palaceholder" class="form-label"
-                                >Placeholder</label
-                            >
-                            <input
-                                type="text"
-                                id="example-palaceholder"
-                                class="form-control form-control-sm"
-                                placeholder="placeholder"
-                            />
-                        </div> -->
-
                         <div class="mb-1">
                             <label for="example-textarea" class="form-label"
                                 >Naration</label
@@ -81,19 +68,6 @@
                             ></textarea>
                         </div>
 
-                        <!-- <div class="mb-1">
-                            <label for="example-readonly" class="form-label"
-                                >Readonly</label
-                            >
-                            <input
-                                type="text"
-                                id="example-readonly"
-                                class="form-control form-control-sm"
-                                readonly=""
-                                value="Readonly value"
-                            />
-                        </div> -->
-
                         <div class="d-flex justify-content-between my-1 mt-2">
                             <button type="button" class="btn btn-success waves-effect waves-light">Submit</button>
                             <button @click="dialog = false" type="button" class="btn btn-danger waves-effect waves-light">Cancel</button>
@@ -102,11 +76,11 @@
                     </div>
                 </v-card>
             </v-dialog>
-        </v-row>
+        </v-row> -->
 
         <!-- End of Right modal content -->
 
-        <div class="row pt-0">
+        <div class="row pt-0 mt-3">
             <!-- Right Sidebar -->
             <div class="col-12 pt-0">
                 <div class="h-screen mt-3">

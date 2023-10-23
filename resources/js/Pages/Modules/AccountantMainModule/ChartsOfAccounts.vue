@@ -1,7 +1,7 @@
 <template>
     <div data-app class="card p-0 h-screen -mt-3">
         <spinner v-if="showLoader"></spinner>
-        <div v-else class="h-screen card">
+        <div v-else class="h-screen">
             <!-- <v-card elevation=""> -->
 
             <!-- Warning Alert Modal -->
@@ -19,26 +19,29 @@
                                 <i
                                     class="dripicons-warning h1 text-warning"
                                 ></i>
-                                <h4 class="mt-2 text-gray-500">Are you sure you want to delete this data ?</h4>
+                                <h4 class="mt-2 text-gray-500">
+                                    Are you sure you want to delete this data ?
+                                </h4>
                                 <p class="mt-3">
-                                    Do not worry, deleting this can be restored in your trash within 30 days.
+                                    Do not worry, deleting this can be restored
+                                    in your trash within 30 days.
                                 </p>
                                 <div class="flex justify-around">
                                     <button
-                                    type="button"
-                                    class="btn btn-sm btn-warning my-1 text-white"
-                                    data-bs-dismiss="modal"
-                                    @click="deleteChartOfAccounts()"
-                                >
-                                    Continue
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-sm btn-danger my-1 text-white"
-                                    data-bs-dismiss="modal"
-                                >
-                                    cancel
-                                </button>
+                                        type="button"
+                                        class="btn btn-sm btn-warning my-1 text-white"
+                                        data-bs-dismiss="modal"
+                                        @click="deleteChartOfAccounts()"
+                                    >
+                                        Continue
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-danger my-1 text-white"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        cancel
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +70,7 @@
                             aria-label="Close"
                         ></button>
                     </div> -->
-                        <div class="modal-body">
+                        <div class="modal-body bg-white">
                             <div class="">
                                 <form @submit.prevent="addChartOfAccounts">
                                     <div class="mb-1 font-sm text-gray-600">
@@ -186,7 +189,7 @@
                                         <button
                                             data-bs-dismiss="modal"
                                             type="submit"
-                                            class="btn btn-success text-white btn-sm waves-effect waves-light"
+                                            class="btn btn-secondary text-white btn-sm waves-effect waves-light"
                                         >
                                             Submit
                                         </button>
@@ -208,121 +211,353 @@
             </div>
 
             <!-- End of Right modal content -->
+            <div class="bg-gray-100 h-3"></div>
 
-            <v-card-title class="px-1 pt-0">
-                
-                <div class="pl-2 pt-1 text-sm uppercase">Chart Of Accounts</div>
+            <v-card-title class="px-1 pt-0 my-1 pb-0">
+                <div class="d-flex">
+                    <div class="pl-2 pt-1 mr-4 text-sm uppercase">
+                        Chart Of Accounts
+                    </div>
+                    <div
+                        class="pl-2 pt-1 text-sm uppercase cursor-pointer bg-gray-200 pr-3 pb-1 rounded mr-2"
+                        @click="showAccountForm = true"
+                    >
+                        <v-icon size="20" class="px-1">mdi-plus-circle</v-icon>
+                        Add Account
+                    </div>
+                    <div
+                        class="pl-2 pt-1 text-sm uppercase cursor-pointer bg-gray-200 pr-3 pb-1 rounded mr-2"
+                        @click="showSubAccountForm = true"
+                    >
+                        <v-icon size="20" class="px-1">mdi-plus-circle</v-icon>
+                        Add sub account
+                    </div>
+
+                    <div
+                        class="pl-2 pt-1 text-sm uppercase cursor-pointer bg-gray-200 pr-3 pb-1 rounded mr-2"
+                        @click="showPurposeForm = true"
+                    >
+                        <v-icon size="20" class="px-1">mdi-plus-circle</v-icon>
+                        Add purpose
+                    </div>
+
+                    <div
+                        class="pl-2 pt-1 text-sm uppercase cursor-pointer bg-gray-200 pr-3 pb-1 rounded mr-2"
+                        @click="resetForms()"
+                        v-show="
+                            showAccountForm ||
+                            showSubAccountForm ||
+                            showPurposeForm
+                        "
+                    >
+                        <v-icon size="20" class="px-1">mdi-close-circle</v-icon>
+                        Close
+                    </div>
+                </div>
+
+                <div class="mt-4 z-10">
+                    <v-sheet
+                        width="300"
+                        class="mx-auto absolute top-14 left-12 bg-white"
+                        v-show="showAccountForm"
+                    >
+                        <v-form fast-fail @submit.prevent="addAccount">
+                            <v-text-field
+                                v-model="account"
+                                label="Account Name"
+                                :rules="accountRules"
+                            ></v-text-field>
+
+                            <v-text-field
+                                v-model="accountCode"
+                                label="Account Code"
+                                :rules="accountCodeRules"
+                            ></v-text-field>
+
+                            <select
+                                class="form-select"
+                                aria-label="Default select mb-4"
+                                v-model="accountCategory"
+                            >
+                                <option selected>Open this select menu</option>
+                                <option value="expense">Expenses</option>
+                                <option value="income">Income</option>
+                            </select>
+
+                            <div>
+                                <v-btn type="submit" block class="mt-2"
+                                    >Submit</v-btn
+                                >
+                            </div>
+                        </v-form>
+                    </v-sheet>
+
+                    <v-sheet
+                        width="300"
+                        class="mx-auto absolute top-14 left-12 bg-white"
+                        v-show="showSubAccountForm"
+                    >
+                        <v-form fast-fail @submit.prevent="addSubAccount">
+                            <v-text-field
+                                v-model="subAccount"
+                                label="Sub Account Name"
+                                :rules="subAccountRules"
+                            ></v-text-field>
+
+                            <v-text-field
+                                v-model="subAccountCode"
+                                label="Sub Account Code"
+                                :rules="subAccountCodeRules"
+                            ></v-text-field>
+
+                            <select
+                                class="form-select"
+                                aria-label="Default select mb-4"
+                                v-model="accountIdFromSubAccount"
+                            >
+                                <option selected>Open this select menu</option>
+                                <option
+                                    :value="account.id"
+                                    v-for="account in accounts"
+                                    :key="account.id"
+                                >
+                                    {{ account.account_code }}
+                                    {{ account.account_name }}
+                                </option>
+                            </select>
+
+                            <div>
+                                <v-btn type="submit" block class="mt-2"
+                                    >Submit</v-btn
+                                >
+                            </div>
+                        </v-form>
+                    </v-sheet>
+
+                    <v-sheet
+                        width="300"
+                        class="mx-auto absolute top-14 left-12 bg-white"
+                        v-show="showPurposeForm"
+                    >
+                        <v-form fast-fail @submit.prevent="addPurpose">
+                            <v-text-field
+                                v-model="purposePrice"
+                                label="Purpose Price"
+                                :rules="purposePriceRules"
+                            ></v-text-field>
+
+                            <v-text-field
+                                v-model="purposeCode"
+                                label="Purpose Code"
+                                :rules="purposeCodeRules"
+                            ></v-text-field>
+
+                            <v-text-field
+                                v-model="purposeName"
+                                label="Purpose Name"
+                                :rules="purposeNameRules"
+                            ></v-text-field>
+
+                            <select
+                                class="form-select"
+                                aria-label="Default select mb-4"
+                                v-model="accountIdFromPurpose"
+                            >
+                                <option selected>Open this select menu</option>
+                                <option
+                                    :value="account.id"
+                                    v-for="account in accounts"
+                                    :key="account.id"
+                                >
+                                    {{ account.account_code }}
+                                    {{ account.account_name }}
+                                </option>
+                            </select>
+
+                            <select
+                                class="form-select"
+                                aria-label="Default select mb-4"
+                                v-model="subAccountIdFromPurpose"
+                            >
+                                <option selected>Open this select menu</option>
+                                <option
+                                    :value="subAccount.id"
+                                    v-for="subAccount in subAccounts"
+                                    :key="subAccounts.id"
+                                >
+                                    {{ subAccount.account_code }}
+                                    {{ subAccount.account_name }}
+                                </option>
+                            </select>
+
+                            <div>
+                                <v-btn type="submit" block class="mt-2"
+                                    >Submit</v-btn
+                                >
+                            </div>
+                        </v-form>
+                    </v-sheet>
+                </div>
 
                 <v-spacer></v-spacer>
-                <div class="flex col-3 p-0 pt-1 mr-2">
-                        <input
+                <div class="flex col-3 p-0 mr-2">
+                    <input
                         v-model="search"
-                            type="text"
-                            class="form-control form-control-sm"
-                        />
-                        <v-icon size="20" class="px-1"
-                            >mdi-magnify</v-icon
-                        >
-                    </div>
+                        type="text"
+                        class="form-control form-control-sm"
+                    />
+                    <v-icon size="20" class="px-1">mdi-magnify</v-icon>
+                </div>
 
                 <v-icon
                     type="button"
                     data-bs-toggle="modal"
                     data-bs-target="#right-modal"
-                    class="ml-4 px-1 mt-3 mr-1 py-1"
+                    class="ml-4 mt-2 mr-1"
                     size="22"
                     @click=""
                 >
                     mdi-pen-plus
                 </v-icon>
             </v-card-title>
-            <hr class="bg-gray-200 mb-1 mt-0" />
 
-            <v-data-table
-                :headers="headers"
-                :items="chartOfAccounts"
-                item-key="name"
-                :search="search"
-                class="elevation-1"
-            >
-                <template v-slot:body="{ items, headers }">
-                    <tbody>
-                        <tr v-for="(item, idx, k) in items" :key="idx">
-                            <td v-for="(header, key) in headers" :key="key">
+            <div class="border-b border-6 mt-0 pt-0 border-gray-200"></div>
 
-                                <v-icon
-                                        v-if="header.value == 'action'"
-                                        size="22"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#warning-alert-modal"
-                                        @click="setIdForAction(items[idx]['id'])"
+            <v-layout column style="height: 150vh">
+                <v-flex md6 style="overflow: auto">
+                    <v-data-table
+                        :headers="headers"
+                        :items="chartOfAccounts"
+                        item-key="name"
+                        :search="search"
+                        class="elevation-1"
+                        :items-per-page="20"
+                        dense
+                    >
+                        <template v-slot:body="{ items, headers }">
+                            <tbody>
+                                <tr v-for="(item, idx, k) in items" :key="idx">
+                                    <td
+                                        v-for="(header, key) in headers"
+                                        :key="key"
                                     >
-                                        mdi-delete
-                                    </v-icon>
+                                        <v-icon
+                                            v-if="header.value == 'view'"
+                                            size="22"
+                                            @click="
+                                                studentDetails(items[idx]['id'])
+                                            "
+                                        >
+                                            mdi-eye
+                                        </v-icon>
 
-                                <v-edit-dialog
-                                v-else
-                                    :return-value.sync="item[header.value]"
-                                    @save="
-                                        save(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                    @cancel="cancel"
-                                    @open="open"
-                                    @close="close"
-                                    large
-                                >
-                                    <span
-                                        class="text-gray-600"
-                                        v-if="header.value == 'created_at'"
-                                        >{{
-                                            formattedDate(item[header.value])
-                                        }}</span
-                                    >
+                                        <span
+                                            class="text-gray-600 font-semibold uppercase text-xs"
+                                            v-else-if="
+                                                header.value == 'created_at'
+                                            "
+                                            >{{
+                                                formattedDate(
+                                                    item[header.value]
+                                                )
+                                            }}</span
+                                        >
 
-                                    <span
-                                        class="text-gray-600"
-                                        :class="
-                                            item[header.value] == null &&
-                                            header.value !== 'action' // header.value == 'level1'
-                                                ? 'bg-gray-100 italic rounded px-1'
-                                                : ''
-                                        "
-                                        v-else
-                                        >{{
-                                            item[header.value] !== null
-                                                ? header.value == "level1" ||
-                                                  header.value == "level2" ||
-                                                  header.value == "level3"
-                                                    ? formattedPrice(
-                                                          item[header.value]
-                                                      )
-                                                    : item[header.value]
-                                                : "Empty"
-                                        }}</span
-                                    >
+                                        <span
+                                            class="text-gray-600"
+                                            v-else-if="
+                                                header.value == 'updated_at'
+                                            "
+                                            >{{
+                                                formattedDate(
+                                                    item[header.value]
+                                                )
+                                            }}</span
+                                        >
 
-                                    <template
-                                        v-slot:input
-                                        v-if="header.value !== 'action'"
-                                    >
-                                        <v-text-field
-                                            v-model="item[header.value]"
-                                            label="Edit"
-                                            single-line
-                                        ></v-text-field>
-                                    </template>
-                                </v-edit-dialog>
-                            </td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-data-table>
-            <!-- </v-card> -->
+                                        <span
+                                            class="text-gray-600 font-semibold uppercase text-xs"
+                                            v-else-if="
+                                                header.value == 'Account_code'
+                                            "
+                                            >{{ item[header.value] }}</span
+                                        >
+
+                                        <span
+                                            class="text-gray-600 font-semibold uppercase text-xs"
+                                            v-else-if="
+                                                header.value == 'Account_name'
+                                            "
+                                        >
+                                            {{ item[header.value] }}
+                                        </span>
+
+                                        <span
+                                            class="text-gray-600 font-semibold uppercase text-xs"
+                                            v-else-if="
+                                                header.value == 'Sub_accounts'
+                                            "
+                                        >
+                                            <span
+                                                v-for="subAccount in item[
+                                                    header.value
+                                                ]"
+                                                :key="subAccount.id"
+                                            >
+                                                {{ subAccount["Account code"] }}
+                                                <span class="mx-2"></span>
+                                                {{ subAccount["Account name"] }}
+
+                                                <span
+                                                    class="d-flex flex-column float-right ml-10"
+                                                >
+                                                    <span class="pt-1"
+                                                        >Purposes</span
+                                                    >
+                                                    <span
+                                                        v-for="purpose in subAccount.Purposes"
+                                                        :key="purpose.id"
+                                                    class="d-flex flex-column"
+                                                    >
+                                                        <span>
+                                                            {{
+                                                            purpose.Purpose_code
+                                                        }}
+                                                        <span class="mx-1"></span>
+                                                        {{
+                                                            purpose.Purpose_name
+                                                        }}
+                                                        <span class="mx-1"></span>
+
+                                                        {{
+                                                            purpose.Price
+                                                        }}
+                                                        </span>
+                                                        <!-- <span>
+                                                            {{
+                                                            purpose.Purpose_code
+                                                        }}
+                                                        <span class="mx-1"></span>
+                                                        {{
+                                                            purpose.Purpose_name
+                                                        }}
+                                                        <span class="mx-1"></span>
+
+                                                        {{
+                                                            purpose.Price
+                                                        }}
+                                                        </span> -->
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </template>
+                    </v-data-table>
+                </v-flex>
+            </v-layout>
         </div>
     </div>
 </template>
@@ -340,6 +575,10 @@ export default {
 
         this.getChartOfAccounts();
 
+        this.getAccounts();
+
+        this.getSubAccounts();
+
         // Receiving broadicasting
         window.Echo.channel("EventTriggered").listen(
             "NewPostPublished",
@@ -353,25 +592,35 @@ export default {
     data() {
         return {
             showLoader: true,
+            showAccountForm: false,
+            showSubAccountForm: false,
+            showPurposeForm: false,
+
+            accounts: [],
+            subAccounts: [],
+            subAccounts: [],
+
+            accountIdFromSubAccount: null,
+
+            accountIdFromPurpose: null,
+            subAccountIdFromPurpose: null,
 
             search: "",
             chartOfAccounts: [],
             headers: [
                 {
-                    text: "Code",
+                    text: "Account Code",
                     align: "left",
                     sortable: false,
-                    value: "id",
+                    value: "Account_code",
                 },
-                { text: "Type", value: "account_type" },
-                { text: "Lev 1", value: "level1" },
-                { text: "Lev 2", value: "level2" },
-                { text: "Lev 3", value: "level3" },
-                { text: "Name", value: "name" },
-                { text: "Description", value: "description" },
-                { text: "Notes", value: "notes" },
+                { text: "Account Name", value: "Account_name" },
+                { text: "Sub Accounts", value: "Sub_accounts" },
+                // { text: "Name", value: "name" },
+                // { text: "Description", value: "description" },
+                // { text: "Notes", value: "notes" },
                 { text: "Date", value: "created_at" },
-                { text: "Action", value: "action" },
+                // { text: "Action", value: "action" },
             ],
 
             account_type: "Income",
@@ -383,9 +632,79 @@ export default {
             notes: null,
 
             idForAction: null,
+
+            account: "",
+            accountRules: [
+                (value) => {
+                    if (value?.length >= 3) return true;
+
+                    return "Account must be at least of 3.";
+                },
+            ],
+
+            accountCode: "",
+            accountCodeRules: [
+                (value) => {
+                    if (value?.length >= 3) return true;
+
+                    return "Account code must be at least of 3.";
+                },
+            ],
+
+            accountCategory: "",
+
+            subAccount: "",
+            subAccountRules: [
+                (value) => {
+                    if (value?.length >= 3) return true;
+
+                    return "Sub account must be at least 3 characters.";
+                },
+            ],
+            subAccountCode: "",
+            subAccountCodeRules: [
+                (value) => {
+                    if (/[^0-9]/.test(value)) return true;
+
+                    return "sub account code should be digits";
+                },
+            ],
+
+            purposePrice: "",
+            purposePriceRules: [
+                (value) => {
+                    if (value >= 0) return true;
+
+                    return "Purpose price must be at least 3 characters.";
+                },
+            ],
+
+            purposeCode: "",
+            purposeCodeRules: [
+                (value) => {
+                    if (value >= 0) return true;
+
+                    return "Purpose code must be at least 3 characters.";
+                },
+            ],
+
+            purposeName: "",
+            purposeNameRules: [
+                (value) => {
+                    if (value >= 0) return true;
+
+                    return "Purpose name must be at least 3 characters.";
+                },
+            ],
         };
+        purposeCode;
     },
     methods: {
+        resetForms() {
+            this.showAccountForm = false;
+            this.showSubAccountForm = false;
+            this.showPurposeForm = false;
+        },
         formattedPrice(amount) {
             return amount.toLocaleString("sw-TZ", {
                 style: "currency",
@@ -401,12 +720,107 @@ export default {
             axios.get("/accountant/getChartOfAccounts").then((response) => {
                 this.chartOfAccounts = response.data.data;
                 this.showLoader = false;
-                // console.log(response.data.data)
+                console.log(response.data.data);
             });
         },
 
-        async setIdForAction(id){
+        async setIdForAction(id) {
             this.idForAction = id;
+        },
+
+        async addAccount() {
+            if (this.account == "" || this.accountCode == "") {
+                return false;
+            }
+            axios
+                .post("/accountant/addAccount", {
+                    account: this.account,
+                    accountCode: this.accountCode,
+                    accountCategory: this.accountCategory,
+                })
+                .then((response) => {
+                    if (response.data.data) {
+                        this.account = "";
+                        this.accountCode = "";
+                        this.accountCategory = response.data.data;
+                        this.resetForms();
+                        // console.log(response.data.data)
+                    }
+                });
+        },
+
+        async addSubAccount() {
+            if (
+                this.subAccount == "" ||
+                this.subAccountCode == "" ||
+                this.accountIdFromSubAccount == null
+            ) {
+                return false;
+            }
+
+            axios
+                .post("/accountant/addSubAccount", {
+                    subAccount: this.subAccount,
+                    subAccountCode: this.subAccountCode,
+                    accountIdFromSubAccount: this.accountIdFromSubAccount,
+                })
+                .then((response) => {
+                    if (response.data.data) {
+                        this.subAccount = "";
+                        this.subAccountCode = "";
+                        this.accountIdFromSubAccount = null;
+                        this.resetForms();
+                    }
+                });
+        },
+
+        async addPurpose() {
+            if (
+                this.purposePrice == "" ||
+                this.purposeName == "" ||
+                this.purposeCode == "" ||
+                this.accountIdFromPurpose == "" ||
+                this.subAccountIdFromPurpose == null
+            ) {
+                return false;
+            }
+            // console.log(this.purposePrice, this.purposeCode , this.accountIdFromPurpose, this.subAccountIdFromPurpose)
+            axios
+                .post("/accountant/addPurpose", {
+                    purposePrice: this.purposePrice,
+                    purposeCode: this.purposeCode,
+                    purposeName: this.purposeName,
+                    accountIdFromPurpose: this.accountIdFromPurpose,
+                    subAccountIdFromPurpose: this.subAccountIdFromPurpose,
+                })
+                .then((response) => {
+                    if (response.data.data) {
+                        this.purposePrice = "";
+                        this.purposeCode = "";
+                        this.accountIdFromPurpose = null;
+                        this.subAccountIdFromPurpose = null;
+                        this.resetForms();
+                        // console.log(response.data.data)
+                    }
+                });
+        },
+
+        async getAccounts() {
+            axios.get("/accountant/getAccounts").then((response) => {
+                if (response.data.data) {
+                    this.accounts = response.data.data;
+                    // console.log(response.data.data)
+                }
+            });
+        },
+
+        async getSubAccounts() {
+            axios.get("/accountant/getSubAccounts").then((response) => {
+                if (response.data.data) {
+                    this.subAccounts = response.data.data;
+                    // console.log(response.data.data)
+                }
+            });
         },
 
         async addChartOfAccounts() {
@@ -443,7 +857,7 @@ export default {
                     // this.students = response.data.data;
                     // this.amount = "";
                     // this.narration = "";
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },
@@ -455,7 +869,7 @@ export default {
                 })
                 .then((response) => {
                     // this.students = response.data.data;
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
                 });
             // handle response here
         },

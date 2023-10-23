@@ -84,4 +84,29 @@ class ChatOfAccountController extends Controller
         // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $studentService->getSpecificStudent($request)]);
     }
+
+    public function addAccount(Request $request ,ChatOfAccountService $chatOfAccountService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $chatOfAccountService->addAccount($request)]);
+    }
+
+    public function addSubAccount(Request $request ,ChatOfAccountService $chatOfAccountService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $chatOfAccountService->addSubAccount($request)]);
+    }
+
+    public function addPurpose(Request $request ,ChatOfAccountService $chatOfAccountService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $chatOfAccountService->addPurpose($request)]);
+    }
+
+    public function getAccounts(ChatOfAccountService $chatOfAccountService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $chatOfAccountService->getAccounts()]);
+    }
+
+    public function getSubAccounts(ChatOfAccountService $chatOfAccountService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $chatOfAccountService->getSubAccounts()]);
+    }
 }

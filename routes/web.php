@@ -217,6 +217,11 @@ Route::middleware([
         Route::post('/updateChartOfAccount', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'updateChartOfAccount'])->name('updateChartOfAccount');
         Route::post('/deleteChartOfAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'deleteChartOfAccounts'])->name('deleteChartOfAccounts');
         Route::get('/headDashboardGetStudents', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'headDashboardGetStudents'])->name('headDashboardGetStudents');
+        Route::post('/addAccount', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'addAccount'])->name('addAccount');
+        Route::post('/addSubAccount', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'addSubAccount'])->name('addSubAccount');
+        Route::post('/addPurpose', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'addPurpose'])->name('addPurpose');
+        Route::get('/getAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getAccounts'])->name('getAccounts');
+        Route::get('/getSubAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSubAccounts'])->name('getSubAccounts');
 
         Route::get('/getStudentsNew', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getStudentsNew'])->name('getStudentsNew');
         Route::get('/getStudentPayments', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getStudentPayments'])->name('getStudentPayments');
@@ -446,6 +451,8 @@ Route::middleware([
 
     //Add fake users for testing
     Route::get('/add/users', function () {
+        // \App\Http\Resources\AccountResource::collection(\App\Models\Account::with("subAccounts.purposes")->get());
+
     // dd(\App\Models\User::with(['posts' => function($query) {
     //     // $query->orderBy('id','desc');
     // }])->get()->first());

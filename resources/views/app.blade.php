@@ -97,14 +97,14 @@
         body {
             /* width: 106%;
             height: 106%; */
-            /* zoom: 100%; */
+            /* zoom: 90%; */
             /* transform: scale(0.95);
             transform-origin: 0 0; */
         }
     </style>
 </head>
 
-<body class="font-sans antialiased font-sans">
+<body class="font-sans antialiased font-sans" onload="zoom()">
     @inertia
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
@@ -157,6 +157,11 @@
 
     <!-- App js-->
     <script src="assets/js/app.min.js"></script>
+    <script type="text/javascript">
+        function zoom() {
+            document.body.style.zoom = "90%" 
+        }
+</script>
 </body>
 
 </html>
