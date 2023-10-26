@@ -4,8 +4,8 @@ namespace App\Services\AccountantServices\InvoiceServices;
 
 class ChatOfAccountService
 {
-    public function getSpecificLegerEntries(){
-        return \App\Models\ChartsOfAccount::where('account_type' ,'=', 'Income')->get();
+    public function getSpecificLegerEntries($request){
+        return \App\Models\ChartsOfAccount::where('account_type' ,'=', $request->type)->get();
     }
 
     public function getLegerEntries(){
@@ -167,5 +167,9 @@ class ChatOfAccountService
 
     public function getSubAccounts(){
         return \App\Models\SubAccount::get();
+    }
+
+    public function getAccountsWithSubAccounts(){
+        return \App\Http\Resources\AccountResource::collection(\App\Models\Account::with("subAccounts.purposes")->get());
     }
 }

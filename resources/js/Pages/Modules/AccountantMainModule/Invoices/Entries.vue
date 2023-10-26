@@ -9,7 +9,7 @@
             <!-- <v-card elevation="0" data-app> -->
 
             <v-card-title class="px-0 pt-0 pb-1">
-                    <div class="pl-2 pt-1 text-sm uppercase">Transaction Entries <span class="d-none">{{ getSchoolId }}</span></div>
+                    <div class="pl-2 pt-1 text-sm uppercase">Transaction Entries</div>
                     <v-spacer></v-spacer>
 
                     <div class="flex col-3 p-0 pt-1 mr-2">

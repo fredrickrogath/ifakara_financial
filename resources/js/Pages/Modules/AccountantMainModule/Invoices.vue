@@ -99,12 +99,12 @@
                                 </button>
 
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">
+                                    <!-- <a class="dropdown-item" href="#">
                                         <v-icon size="18" class="me-1"
                                             >mdi-cart</v-icon
                                         >
                                         Sales</a
-                                    >
+                                    > -->
                                     <a
                                         class="dropdown-item font-semibold"
                                         href="#"
@@ -113,6 +113,9 @@
                                             setLegerEntry(
                                                 'Income Entry Selected'
                                             );
+                                            setAccountType('Income');
+                                            (dialog = true),
+                                                (dialogForm = 'Income')
                                         "
                                         ><v-icon size="16" class="me-1"
                                             >mdi-cash-multiple</v-icon
@@ -128,6 +131,9 @@
                                             setLegerEntry(
                                                 'Expense Entry Selected'
                                             );
+                                            setAccountType('Expense');
+                                            (dialog = true),
+                                                (dialogForm = 'Expense')
                                         "
                                         ><v-icon size="16" class="me-1"
                                             >mdi-cash-multiple</v-icon
@@ -135,7 +141,7 @@
                                         Expense</a
                                     >
 
-                                    <a
+                                    <!-- <a
                                         class="dropdown-item font-semibold"
                                         href="#"
                                         @click="
@@ -147,7 +153,7 @@
                                             >mdi-scale-balance</v-icon
                                         >
                                         Loans</a
-                                    >
+                                    > -->
                                 </div>
                             </div>
 
@@ -168,7 +174,7 @@
                                         :key="item.id"
                                         class="dropdown-item font-semibold"
                                         href="#"
-                                        @click="setChartOfAcountForm(item)"
+                                        @click="setChartOfAcountForm(item);setTab('entries')"
                                         ><i class="mdi mdi-cart me-1"></i>
                                         {{ item.name }}</a
                                     >
@@ -212,7 +218,7 @@
 
                             <div class="mail-list">
                                 <span class="text-center pl-3 mx-auto"
-                                    >From Leger Entry</span
+                                    >From Leger Entry <span class="d-none">{{getChartOfAcountForm}}</span></span
                                 >
 
                                 <a
@@ -494,6 +500,7 @@ export default {
             students: null,
 
             formType: "",
+            accountType: "",
         };
     },
     computed: {
@@ -559,6 +566,11 @@ export default {
                     this.legerEntries = response.data;
                     // console.log(response.data)
                 });
+        },
+
+        setAccountType(type) {
+            // unused
+            this.accountType = type;
         },
 
         setLegerEntry(entry) {

@@ -121,7 +121,7 @@
                                     ></i
                                     ><span
                                         class="text-xs uppercase font-semibold"
-                                        >All 876869896</span
+                                        >All</span
                                     >
                                 </a>
                                 <a
@@ -399,8 +399,8 @@ export default {
                     // this.students = response.data.data;
                     this.submitFormToMain();
                     this.amount = "";
-                    this.narration = "";
-                    console.log(response.data);
+                    // this.narration = "";
+                    // console.log(response.data);
                 });
             // handle response here
         },

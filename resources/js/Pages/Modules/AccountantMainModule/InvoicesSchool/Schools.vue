@@ -10,9 +10,9 @@
 
             <v-card-title class="px-0 pt-0">
                 
-                    <div class="pl-2 pt-1 text-sm uppercase">Schools<span class="d-none">{{ getSchoolId }}</span></div>
+                    <div class="pl-2 pt-1 text-sm uppercase">Schools</span></div>
                     <v-spacer></v-spacer>
-                    <snackbar message="Task completed successfully"></snackbar>
+                    <!-- <snackbar message="Task completed successfully"></snackbar> -->
 
                     <div class="flex col-3 p-0 pt-1 mr-2">
                         <input

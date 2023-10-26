@@ -17,6 +17,7 @@ class PurposeResource extends JsonResource
         // return parent::toArray($request);
 
         return [
+            "id" => $this->id,
             "Purpose_code" => $this->purpose_code,
             "Purpose_name" => $this->purpose_name,
             "Price" => $this->price,

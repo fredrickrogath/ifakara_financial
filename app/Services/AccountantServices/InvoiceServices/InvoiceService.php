@@ -50,9 +50,9 @@ class InvoiceService
 
 
 foreach ($items as $item) {
-    \App\Models\AccountantInvoiceItem::create([
+    \App\Models\AccountInvoiceItem::create([
         'name' => $item['name'],
-        'accountant_invoice_id' => $invoice->id,
+        'purpose_id' => $invoice->id,
         // 'school_id' => auth()->user()->school_id,
         'description' => $item['description'],
         'price' => $item['price'],

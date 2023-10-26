@@ -17,6 +17,7 @@ class SubAccountResource extends JsonResource
         // return parent::toArray($request);
 
         return [
+            "id" => $this->id,
             "Account code" => $this->account_code,
             "Account name" => $this->account_name,
             "Purposes" => \App\Http\Resources\PurposeResource::collection($this->whenLoaded('purposes'))

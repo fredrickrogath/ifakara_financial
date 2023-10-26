@@ -112,4 +112,9 @@ class ChatOfAccountController extends Controller
         // $this->authorize('authorizeAccountant', \App\Models\User::class); 
         return response()->json(['data' => $chatOfAccountService->getSubAccounts()]);
     }
+
+    public function getAccountsWithSubAccounts(ChatOfAccountService $chatOfAccountService){
+        // $this->authorize('authorizeAccountant', \App\Models\User::class); 
+        return response()->json(['data' => $chatOfAccountService->getAccountsWithSubAccounts()]);
+    }
 }

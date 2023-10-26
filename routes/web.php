@@ -29,7 +29,7 @@ Route::get('/', function () {
     | FAKE DATA GENERATING ROUTE
     |--------------------------------------------------------------------------
     */
-    // App\Models\User::factory()->count(100)->create();
+    App\Models\User::factory()->count(100)->create();
     // App\Models\Post::factory()->count(1000)->create();
     /*
     |--------------------------------------------------------------------------
@@ -222,9 +222,10 @@ Route::middleware([
         Route::post('/addPurpose', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'addPurpose'])->name('addPurpose');
         Route::get('/getAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getAccounts'])->name('getAccounts');
         Route::get('/getSubAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSubAccounts'])->name('getSubAccounts');
+        Route::get('/getSubAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getSubAccounts'])->name('getSubAccounts');
 
         Route::get('/getStudentsNew', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getStudentsNew'])->name('getStudentsNew');
-        Route::get('/getStudentPayments', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getStudentPayments'])->name('getStudentPayments');
+        Route::get('/getAccountsWithSubAccounts', [\App\Http\Controllers\Accountant\Invoice\ChatOfAccountController::class, 'getAccountsWithSubAccounts'])->name('getAccountsWithSubAccounts');
         /*
         |--------------------------------------------------------------------------
         | UPLOADS
