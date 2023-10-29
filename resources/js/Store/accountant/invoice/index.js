@@ -33,6 +33,8 @@ export default {
             paymentId: null,
 
             setInvoice: false,
+
+            accounts: [],
         };
     },
     mutations: mutations,

@@ -66,6 +66,10 @@ export default {
     getActivePayment(state){
         return state.activePayment;
     },
+
+    getAccounts(state){
+        return state.accounts;
+    },
     
     // finalCounter2(_, getters){
     //     // the dash is for the state

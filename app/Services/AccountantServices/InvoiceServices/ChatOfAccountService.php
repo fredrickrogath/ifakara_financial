@@ -5,7 +5,8 @@ namespace App\Services\AccountantServices\InvoiceServices;
 class ChatOfAccountService
 {
     public function getSpecificLegerEntries($request){
-        return \App\Models\ChartsOfAccount::where('account_type' ,'=', $request->type)->get();
+        return \App\Http\Resources\AccountResource::collection(\App\Models\Account::with("subAccounts.purposes")->where('account_category' ,'=', $request->type)->orderBy('created_at', 'desc')->get());
+        // return \App\Models\Account::where('account_category' ,'=', $request->type)->get();
     }
 
     public function getLegerEntries(){

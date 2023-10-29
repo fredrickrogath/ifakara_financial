@@ -176,7 +176,7 @@
                                         href="#"
                                         @click="setChartOfAcountForm(item);setTab('entries')"
                                         ><i class="mdi mdi-cart me-1"></i>
-                                        {{ item.name }}</a
+                                        {{ item.Account_name }}</a
                                     >
                                     <a
                                         v-if="legerEntriesListener == null"
@@ -549,7 +549,13 @@ export default {
             this.$store.dispatch("AccountantInvoiceModule/setInvoice");
         },
 
+        setAccounts(account) {
+            this.$store.dispatch("AccountantInvoiceModule/setAccounts", account);
+        },
+
         setChartOfAcountForm(tab) {
+            // console.log('hello : ',tab.Sub_accounts)
+            this.setAccounts(tab.Sub_accounts)
             this.$store.dispatch(
                 "AccountantInvoiceModule/setChartOfAcountForm",
                 tab

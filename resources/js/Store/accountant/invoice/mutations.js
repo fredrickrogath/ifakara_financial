@@ -50,4 +50,8 @@ export default {
     setActivePayment(state, activePayment){
         state.activePayment = activePayment;
     },
+
+    setAccounts(state, accounts){
+        state.accounts = accounts;
+    },
 };

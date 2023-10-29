@@ -47,6 +47,10 @@ export default {
 
     setActivePayment(context, activePayment){
         context.commit("setActivePayment", activePayment);
-    }
+    },
 
+    setAccounts(context, accounts){
+        context.commit("setAccounts", accounts);
+    }
+    
 };

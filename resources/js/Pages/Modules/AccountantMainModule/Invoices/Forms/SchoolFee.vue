@@ -18,30 +18,15 @@ v-if="getChartOfAcountForm.isSchoolFee"
                     ><i class="fe-arrow-left"></i>
                 </strong>
             </a>
+            <span class="d-none">
+                {{getStoredAccounts}}
+            </span>
         </div>
 
         <spinner v-if="showLoader"></spinner>
 
         <v-col v-else sm="12" md="12">
-            <!-- <snack-bar
-                message="The Requsition has sent successfully to accountant for futher process"
-            ></snack-bar> -->
-
-            <!-- <form @submit.prevent="addStudent"> -->
             <div class="d-flex justify-content-between py-1">
-                <div class="mb-3">
-                    <label for="simpleinput" class="form-label px-20"
-                        >Account</label
-                    >
-
-                    <Select2
-                        v-model="accountName"
-                        :options="accounts"
-                        :settings="{ width: '100%', height: '1060px' }"
-                        @change="myChangeEvent('account')"
-                        @select="mySelectEvent($event, 'account')"
-                    />
-                </div>
 
                 <div class="mb-3">
                     <label for="simpleinput" class="form-label px-16"
@@ -148,14 +133,6 @@ v-if="getChartOfAcountForm.isSchoolFee"
                             >
                         </p>
                         <p>
-                            <strong>Order Status : </strong>
-                            <span class="float-end"
-                                ><span class="badge bg-danger"
-                                    >Unpaid</span
-                                ></span
-                            >
-                        </p>
-                        <p>
                             <strong>Order No. : </strong>
                             <span class="float-end">000028 </span>
                         </p>
@@ -256,49 +233,6 @@ v-if="getChartOfAcountForm.isSchoolFee"
                                     v-else-if="header.value == 'description'"
                                     >{{ item[header.value] }}</span
                                 >
-
-                                <!-- <v-edit-dialog
-                                    v-else
-                                    :return-value.sync="item[header.value]"
-                                    @save="
-                                        save(
-                                            items[idx]['id'],
-                                            item[header.value],
-                                            header.value
-                                        )
-                                    "
-                                    @cancel="cancel"
-                                    @open="open"
-                                    @close="close"
-                                    large
-                                >
-                                    <span
-                                        class="text-gray-600"
-                                        :class="
-                                            item[header.value] == null &&
-                                            header.value !== 'action' // header.value == 'level1'
-                                                ? 'bg-gray-100 italic rounded px-1'
-                                                : ''
-                                        "
-                                        >{{
-                                            item[header.value] !== null
-                                                ? header.value == "price"
-                                                    ? formattedPrice(
-                                                          item[header.value]
-                                                      )
-                                                    : item[header.value]
-                                                : "Empty"
-                                        }}</span
-                                    >
-
-                                    <template v-slot:input>
-                                        <v-text-field
-                                            v-model="item[header.value]"
-                                            label="Edit"
-                                            single-line
-                                        ></v-text-field>
-                                    </template>
-                                </v-edit-dialog> -->
                             </td>
                         </tr>
                     </tbody>
@@ -329,22 +263,6 @@ v-if="getChartOfAcountForm.isSchoolFee"
                                 formattedPrice(totalPrice)
                             }}</span>
                         </p>
-                        <p>
-                            <b>Discount (18%):</b>
-                            <span class="float-end">
-                                &nbsp;&nbsp;&nbsp;
-                                {{
-                                    formattedPrice((totalPrice * 18) / 100)
-                                }}</span
-                            >
-                        </p>
-                        <h4>
-                            {{
-                                formattedPrice(
-                                    totalPrice - (totalPrice * 18) / 100
-                                )
-                            }}
-                        </h4>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -358,7 +276,7 @@ v-if="getChartOfAcountForm.isSchoolFee"
                             type="submit"
                             class="btn btn-success text-white btn-sm waves-effect waves-light"
                         >
-                            Submit to accountant
+                            Submit
                         </button>
                     </div>
                 </form>
@@ -442,6 +360,22 @@ export default {
             return moment(this.currentDate).format("MMM DD, YYYY");
         },
 
+        getStoredAccounts() {
+            this.account = this.$store.getters[
+                "AccountantInvoiceModule/getAccounts"
+            ];
+            
+                 this.subAccounts = this.account.map((account) => {
+                    return {
+                        id: account.id,
+                        text: account["Account name"],
+                        purposes: account.Purposes
+                    };
+                });
+
+            return this.account;
+        },
+        
         // selectedSuppliersList() {console.log(this.selectedSuppliers)
         //     // return this.selectedSuppliers.map((supplier) => {
         //     //     return {
@@ -522,6 +456,10 @@ export default {
             this.$store.dispatch("ProcurementInvoiceModule/setInvoiceGenerate");
         },
 
+        setAccounts() {
+            this.$store.dispatch("AccountantInvoiceModule/setAccounts", []);
+        },
+
         removeItem(item) {
             const index = this.items.indexOf(item);
             if (index !== -1) {
@@ -600,15 +538,15 @@ export default {
         },
 
         mySelectEvent(e, accountType) {
-            if (accountType === "account") {
-                this.subAccounts = e.subAccounts.map((account) => {
-                    return {
-                        id: account.id,
-                        text: account["Account name"],
-                        purposes: account.Purposes
-                    };
-                });
-            }
+            // if (accountType === "account") {
+            //     this.subAccounts = e.subAccounts.map((account) => {
+            //         return {
+            //             id: account.id,
+            //             text: account["Account name"],
+            //             purposes: account.Purposes
+            //         };
+            //     });
+            // }
             if (accountType === "subaccount") {
                 this.purposes = e.purposes.map((account) => {
                     return {
