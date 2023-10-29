@@ -29,7 +29,7 @@ Route::get('/', function () {
     | FAKE DATA GENERATING ROUTE
     |--------------------------------------------------------------------------
     */
-    App\Models\User::factory()->count(100)->create();
+    // App\Models\User::factory()->count(100)->create();
     // App\Models\Post::factory()->count(1000)->create();
     /*
     |--------------------------------------------------------------------------
