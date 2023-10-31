@@ -15,9 +15,11 @@ class CreateSubAccountsTable extends Migration
     {
         Schema::create('sub_accounts', function (Blueprint $table) {
             $table->id();
-            $table->integer('account_code')->unique();
             $table->string('account_name');
-            $table->foreignId('account_id')->constrained('accounts');
+            $table->integer('account_code')->unique();
+            $table->decimal('price', 10, 2)->nullable();
+            $table->foreignId('account_id')->nullable()->constrained('accounts');
+            $table->foreignId('sub_account_id')->nullable()->constrained('sub_accounts');
             $table->timestamps();
         });
     }
