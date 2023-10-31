@@ -31,6 +31,7 @@ Route::get('/', function () {
     */
     // App\Models\User::factory()->count(100)->create();
     // App\Models\Post::factory()->count(1000)->create();
+    //
     /*
     |--------------------------------------------------------------------------
     | END OF FAKE DATE GENERATING ROUTE
